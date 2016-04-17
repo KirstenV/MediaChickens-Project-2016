@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>
+	</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+	<link rel="stylesheet" href="css/base.css"> 
+	@yield('header')
+</head>
+<body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js">
+	</script>
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js">
+	</script>
+	<nav class="navbar navbar-default" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">Brand</a>
+			</div>
+			<div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
+				<ul class="nav navbar-nav">
+					<li class="">
+						<a href="#">log in</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<nav class="navbar navbar-inverse nav_bar_margin_top" role="navigation">
+		<div class="container">
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav">
+					<li class="">
+						<a href="{{  url('project_toevoegen') }}">Project toevoegen</a>
+					</li>
+					<li>
+						<a href="#">wijzig project </a>
+					</li>
+					<li>
+						<a href="#">verwijder project</a>
+					</li>
+					<li>
+						<a href="#">gegevens verzamelen </a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+		<div class="col-md-8">
+			<img src="https://s3.amazonaws.com/jetstrap-site/images/website/index/what_icon.png" width="600px" height="400px">
+		</div>
+		<div class="col-md-4">
+			@yield('content')
+		</div>
+		<div class="col-md-4" style="display: none;">
+			<h3>
+          Span 4
+        </h3>
+			<p>
+				Content
+			</p>
+		</div>
+	@yield('footer')
+</body>
+</html>
