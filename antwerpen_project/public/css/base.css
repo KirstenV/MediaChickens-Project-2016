@@ -4,3 +4,9 @@ body{
 .nav_bar_margin_top{
 	margin-top: -25px;
 }
+.margin_top_form_question{
+	margin-top: 50px;
+}
+.invalid{
+	border: red solid 1px;
+}

@@ -17,7 +17,7 @@ class projectController extends Controller
 		$vragen=Projecten::all();
 		return view('project_toevoegen');
 	}
-	public function add_project(){
-		return "add";
+	public function add_project(Request $request){
+		return $request->all();
 	}
 }
