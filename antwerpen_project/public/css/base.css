@@ -10,3 +10,7 @@ body{
 .invalid{
 	border: red solid 1px;
 }
+
+.delete{
+	color: #0078d7;
+}

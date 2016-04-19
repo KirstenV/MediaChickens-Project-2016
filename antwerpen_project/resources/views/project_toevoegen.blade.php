@@ -54,7 +54,7 @@
 	<div class="">
 		<h4 class="margin_top_form_question">Voeg vragen toe</h4>
 		<div class="form-group ">
-			<label for="vraag_type" class="">Kiez een soort vraag:</label>
+			<label for="vraag_type" class="">Kies een soort vraag:</label>
 			<select id="selected_vraag" class="form-control" name="vraag_categorie">
 				<option selected="selected" value="">kies een soort vraag...</option>
 				<option value="open_vragen">open vragen</option>
@@ -69,6 +69,7 @@
 			<button type="button" class="btn btn-primary" id="voeg_vraag_toe">Voeg vraag toe</button>
 			<div id="toegevoegde_vragen">
 			<h4 class="toegevoegde_vragen_header">Toegevoegde vragen</h4>
+			<div id="vragen_string"></div>
 			</div>
 		</div>
 	</div>
