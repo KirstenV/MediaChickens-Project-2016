@@ -39,7 +39,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'http://localhost/http://localhost/school/antwerpen_project_2016/MediaChickens-Project-2016/antwerpen_project/'),
 
     /*
     |--------------------------------------------------------------------------

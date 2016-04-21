@@ -21,5 +21,19 @@ Route::get('/', function () {
 Route::get('about', 'PagesController@about');
 
 Route::get('/', 'PagesController@home');
+
 Route::get('project_toevoegen', 'projectController@project_toevoegen');
-Route::post('project_toevoegen/add', 'projectController@add_project');
+
+Route::get('project/{id}/view', 'projectController@show_project');
+
+Route::get('project/{id}/edit', 'projectController@edit_project');
+
+Route::get('project/{id}/edit/api', 'projectController@json_project');
+
+Route::put('{tabel}/{id}', 'projectController@update_record');
+
+Route::get('fotos/{id}/edit/api', 'projectController@json_fotos');
+
+Route::get('vragen/{id}/edit/api', 'projectController@json_vragen');
+
+Route::put('{tabel}/api/add', 'projectController@add_project');

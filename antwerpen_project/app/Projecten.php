@@ -20,6 +20,10 @@ class Projecten extends Model
     {
         return $this->belongsToMany('App\Locatie');
     }
+	 public function show_vragen()
+    {
+         return $this->hasMany('App\Vragen');
+    }
 	
     //
 	protected $table = 'projecten';

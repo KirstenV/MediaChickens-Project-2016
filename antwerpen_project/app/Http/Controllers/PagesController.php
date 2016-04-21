@@ -12,6 +12,7 @@ use App\Http\Requests;
 class PagesController extends Controller
 {
    public function home(){
+	   
 	   //$projecten = \DB::table('projecten')->get();
 	   //$users = User::all();
 	  
@@ -32,9 +33,24 @@ class PagesController extends Controller
 	   //projecten ->many to many relationship locatie
 	   $locaties = Projecten::find($projecten_id)->show_locaties;
 	   
-	   return view('home')->with('projecten', $projecten);;
+	   return view('home')->with('projecten', $projecten);
 
    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	public function about(){

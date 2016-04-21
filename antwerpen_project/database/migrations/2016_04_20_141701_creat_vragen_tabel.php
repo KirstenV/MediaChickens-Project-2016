@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatVragenTable extends Migration
+class CreatVragenTabel extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class CreatVragenTable extends Migration
     public function up()
     {
         Schema::create('vragen', function (Blueprint $table) {
-            $table->increments('id');
+              $table->increments('id');
 			$table->enum('choices', array('open vragen','meerkeuzevragen','Gesloten vragen','Suggestieve vragen','Controlevragen'));
+			$table->text('vraag');
 			$table->text('mogelijke_antwoorden_1')->nullable();
 			$table->text('mogelijke_antwoorden_2')->nullable();
 			$table->text('mogelijke_antwoorden_3')->nullable();

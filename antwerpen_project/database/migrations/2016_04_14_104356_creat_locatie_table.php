@@ -17,6 +17,7 @@ class CreatLocatieTable extends Migration
 			$table->string('straat_naam');
 			$table->integer('poscode')->unsigned()->nullable();
 			$table->integer('huisnummer')->unsigned()->nullable();
+			$table->string('type')->unsigned()->nullable();
 			$table->double('position_latitude')->nullable();
 			$table->double('position_longitude')->nullable();
             $table->timestamps();

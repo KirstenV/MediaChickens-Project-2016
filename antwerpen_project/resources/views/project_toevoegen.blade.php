@@ -62,14 +62,13 @@
 				<option value="Gesloten_vragen">Gesloten vragen</option>
 				<option value="Suggestieve_vragen">Suggestieve vragen</option>
 			</select>
-			<div  class="col-md-12 vragen_content"> </div>
-	
+			<div class="col-md-12 vragen_content"> </div>
 
-			
-			<button type="button" class="btn btn-primary" id="voeg_vraag_toe">Voeg vraag toe</button>
+
+
 			<div id="toegevoegde_vragen">
-			<h4 class="toegevoegde_vragen_header">Toegevoegde vragen</h4>
-			<div id="vragen_string"></div>
+				<h4 class="toegevoegde_vragen_header">Toegevoegde vragen</h4>
+				<div id="vragen_string"></div>
 			</div>
 		</div>
 	</div>
@@ -77,23 +76,15 @@
 
 	<div id="voeg_niew_fase">
 		<h4 class="margin_top_form_question">Voeg fase toe</h4>
-		<div class="form-group">
-			<!--titel van project-->
-			<label for="titel_fase_1" class="control-label ">Titel van project:</label>
-			<input name="titel_fase_1" type="text" id="titel" class=" form-control">
-		</div>
-		<!--beschrijving van project-->
-		<div class="form-group">
-			<label for="beschrijving_fase_1" class="control-label ">Beschrijving:</label>
-			<textarea name="beschrijving_fase_1" class="form-control" rows="3"></textarea>
-		</div>
-		<!--fotos selecteren-->
-		<div class="form-group">
-			<label for="image_fase_1" class="control-label ">Selecter fotos:</label>
-			<input name="image_fase_1" type="file" class="">
-		</div>
-		<button type="button" class="btn btn-primary" id="voeg_fase_toe">Voeg fase toe</button>
+
+
+
 	</div>
+	<div class="alle_fases">
+		<h4 class="alle_fasen">Alle fasen</h4>
+	</div>
+
+
 
 	<div class="form-group">
 		<div class="pull-right">
