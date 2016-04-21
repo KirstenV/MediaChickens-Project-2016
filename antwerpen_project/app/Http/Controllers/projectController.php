@@ -15,9 +15,15 @@ use App\Http\Requests;
 
 class projectController extends Controller
 {
-    public function project_toevoegen(){
-		$vragen=Projecten::all();
-		return view('project_toevoegen');
+    public function project_toevoegen(Request $request){
+		
+		$project = new Projecten;
+		$project->titel = $request->titel;
+		$project->beschrijving ="klick op mij en pas mij aan voor de beschrijving";
+		$project->project_picture ="proef_proef.jpg";
+		$project->user_id = $request->admin;
+		$project->save();
+		return back();
 	}
 	
 	public function show_project($id){
@@ -59,17 +65,19 @@ class projectController extends Controller
 		return $project_vragen;
 	}
 	
-	public function add_project(Request $request){
-		/*
-		$project = new Projecten;
-		$project->titel = "proef";
-		$project->beschrijving ="proef proef";
-		$project->project_picture ="proef_proef.jpg";
-		$project->project_picture = 1;
-		$project->save();
-		*/
+	public function add_project($tabel,Request $request){
 		
-		return $request->all();
+		
+		$project = new Projecten;
+		$project->titel = $request->row_content;
+		$project->beschrijving ="klick op mij en pas mij aan voor de beschrijving";
+		$project->project_picture ="proef_proef.jpg";
+		$project->user_id = $request->admin;
+		$project->save();
+		
+		//Projecten::create(array('titel'=>'proef','beschrijving'=>"broef proef",'project_picture'=>'proef.jpg','project_picture'=>1));
+		
+		return  User::find($request->admin)->show_projecten->last();
 	}
 	
 }

@@ -3,8 +3,8 @@
 
 <h1>edit project</h1>
 <div class="alle_content">
-	<div class='project titel' data-update_status='init' data-titel='titel' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'  ></div>
-	<div class='project beschrijving' data-update_status='init' data-titel='beschrijving' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'></div>
+	<div class='project titel form-control' data-update_status='init' data-titel='titel' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'  ></div>
+	<div class='project beschrijving form-control' data-update_status='init' data-titel='beschrijving' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'></div>
 
 	{{ Form::open(array('url' => 'project_toevoegen/add','files' => true))}} {{ Form::close() }}
 

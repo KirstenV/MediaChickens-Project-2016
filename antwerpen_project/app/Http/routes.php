@@ -22,7 +22,7 @@ Route::get('about', 'PagesController@about');
 
 Route::get('/', 'PagesController@home');
 
-Route::get('project_toevoegen', 'projectController@project_toevoegen');
+Route::post('projecten/add', 'projectController@project_toevoegen');
 
 Route::get('project/{id}/view', 'projectController@show_project');
 
