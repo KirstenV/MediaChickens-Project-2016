@@ -56,11 +56,11 @@ public class CameraScript : MonoBehaviour
         int randomNrLane = Random.Range(2, 5); //1 left, 2 middle, 3 right
         //choosing random enemy object
         int randomNrEnemy = Random.Range(1, 4);
-        if(bigEnemiesOnLine == 2)
+        if(bigEnemiesOnLine == 2) //add smaller enemy so player can always pass
         {
             randomNrEnemy = 3;
         }
-        if(lanesUsed == randomNrLane)
+        if(lanesUsed == randomNrLane) //if selected lane already contains obstacle
         {
             if(lanesUsed != 4)
             {
@@ -71,7 +71,7 @@ public class CameraScript : MonoBehaviour
                 randomNrLane--;
             }
         }
-        if(lanesUsed >= 5)
+        if(lanesUsed >= 5) // fill last lane
         {
             if(lanesUsed == 5) // left and middle used (2+3)
             {
@@ -86,13 +86,13 @@ public class CameraScript : MonoBehaviour
                 randomNrLane = 2;
             }
         }
-        switch (randomNrEnemy)
+        switch (randomNrEnemy) //spawn lane from random number and enemy
         {
             case 1:
                 bigEnemiesOnLine++;
                 if (randomNrLane == 2)
                 {
-                    Instantiate(car, new Vector3(leftRoad, carYPos, enemySpawnDistance + distanceBetweenEnemies * enemySpawnCount), Quaternion.identity);
+                    Instantiate(car, new Vector3(leftRoad, carYPos, enemySpawnDistance + distanceBetweenEnemies * enemySpawnCount), Quaternion.identity); // z-axis: spawndistance so enemy spawns far away + distance in between enemies * row currently spawning at
                 }
                 else if (randomNrLane == 3)
                 {
@@ -133,7 +133,7 @@ public class CameraScript : MonoBehaviour
                 }
                 else if (randomNrLane == 4)
                 {
-                    Instantiate(roadBlock, new Vector3(rightRoad, roadblockYPos, enemySpawnDistance + distanceBetweenEnemies * enemySpawnCount), Quaternion.identity);
+                    Instantiate(roadBlock, new Vector3(rightRoad, roadblockYPos, enemySpawnDistance + distanceBetweenEnemies * enemySpawnCount), Quaternion.identity); 
                 }
                 else { Debug.Log("Couldn't spawn enemy in this lane: 3"); }
                 break;
@@ -143,9 +143,9 @@ public class CameraScript : MonoBehaviour
                 break;
 
         }
-        lanesUsed += randomNrLane;
+        lanesUsed += randomNrLane; 
         totalEnemiesOnLine++;
-        if (totalEnemiesOnLine == 3)
+        if (totalEnemiesOnLine == 3) // if 3 enemies have been added, the road is full, reset the counters and increase enemySpawnCount to spawn on the next row
         {
             totalEnemiesOnLine = 0;
             enemySpawnCount++;
