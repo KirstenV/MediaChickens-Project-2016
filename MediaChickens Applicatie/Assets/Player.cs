@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 
-public class swipe : MonoBehaviour {
+public class Player : MonoBehaviour {
     //variables for swipe
     private Touch initialTouchSwipe = new Touch();
     private float distanceSwipe = 0;
@@ -78,7 +78,7 @@ public class swipe : MonoBehaviour {
                     distanceSwipe = Mathf.Sqrt((deltaXSwipe * deltaXSwipe) + (deltaYSwipe * deltaYSwipe));
                     //direction
                     bool swipedSideways = Mathf.Abs(deltaXSwipe) > Mathf.Abs(deltaYSwipe); //swipe up and down or sideways
-                    if (distanceSwipe > 100f)
+                    if (distanceSwipe > 100)//100
                     {
                         if (swipedSideways && deltaXSwipe > 0) //swiped left
                         {
@@ -87,7 +87,6 @@ public class swipe : MonoBehaviour {
                             Physics.gravity = new Vector3(0, -30F, 0);
                             rb.AddForce(-forceSide, forceUp, 0, ForceMode.Force);
                             currentLane--;
-                                Debug.Log(this.transform.position.x);
                             }
                         }
                         else if (swipedSideways && deltaXSwipe <= 0) //swiped right
@@ -98,7 +97,6 @@ public class swipe : MonoBehaviour {
                             Physics.gravity = new Vector3(0, -30F, 0);
                             rb.AddForce(forceSide, forceUp, 0, ForceMode.Force);
                                 currentLane++;
-                                Debug.Log(this.transform.position.x);
                             }
                         }
                         else if (!swipedSideways && deltaYSwipe > 0) //swiped down
