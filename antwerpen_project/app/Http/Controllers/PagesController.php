@@ -23,15 +23,15 @@ class PagesController extends Controller
 	   
 	   //projecten -> on to many fases
 	   $projecten_id = 1;
-	   $fases = Projecten::find($projecten_id)->show_fases;
+	   //$fases = Projecten::find($projecten_id)->show_fases;
 	   
 	   
 	   //projecten -> on to many fotos
-	   $fotos = Projecten::find($projecten_id)->show_fotos;
+	   //$fotos = Projecten::find($projecten_id)->show_fotos;
 	   
 	   
 	   //projecten ->many to many relationship locatie
-	   $locaties = Projecten::find($projecten_id)->show_locaties;
+	   //$locaties = Projecten::find($projecten_id)->show_locaties;
 	   
 	   return view('home')->with('projecten', $projecten);
 
