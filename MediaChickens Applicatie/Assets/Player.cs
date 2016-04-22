@@ -27,7 +27,7 @@ public class Player : MonoBehaviour {
     private float forceUp = 7500;
     private float forceJump = 14000; 
 
-
+    
 
 
 
@@ -40,9 +40,9 @@ public class Player : MonoBehaviour {
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Environment"))
+        if (other.gameObject.CompareTag("Enemy"))
         {
-           // alive = false;
+         //   alive = false;
 
         }
     }
@@ -58,7 +58,7 @@ public class Player : MonoBehaviour {
             if ((score - levelUpTimer) >= 1000) //if the difference between the current score (= time) and the leveluptimer is bigger then 1000, he levels up 
             {
                 levelUpTimer = score;
-                speed += 0.05f;
+                speed += 0.06f;
             }
 
 
