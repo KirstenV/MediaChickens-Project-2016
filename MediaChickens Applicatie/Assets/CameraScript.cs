@@ -15,8 +15,10 @@ public class CameraScript : MonoBehaviour
     //how far the enemies are spawned
     private float enemySpawnDistance = 160;
     private float roadSpawnDistance = 230;
+    private float enemySpawnCount = 1;
     //random spawning different enemies
     private float bigEnemiesOnLine = 0; //number of bigger enemies being made on the same line  
+    private float totalEnemiesOnLine = 0;
     //coördinates for spawning
     private float roadblockYPos = 1.7f;
     private float carYPos = 0;
@@ -34,7 +36,7 @@ public class CameraScript : MonoBehaviour
         Instantiate(roadBlock, new Vector3(middleRoad, roadblockYPos, enemySpawnDistance - (enemySpawnDistance / 4)), Quaternion.identity);
         Instantiate(roadBlock, new Vector3(rightRoad, roadblockYPos, enemySpawnDistance - (enemySpawnDistance / 4)), Quaternion.identity);
         Instantiate(roadBlock, new Vector3(leftRoad, roadblockYPos, enemySpawnDistance), Quaternion.identity);
-        Instantiate(car, new Vector3(middleRoad, carYPos, enemySpawnDistance), Quaternion.identity);
+        Instantiate(car, new Vector3(middleRoad, carYPos, enemySpawnDistance + 5.6f), Quaternion.identity);
         Instantiate(roadBlock, new Vector3(rightRoad, roadblockYPos, enemySpawnDistance), Quaternion.identity);
     }
 
@@ -89,11 +91,11 @@ public class CameraScript : MonoBehaviour
                 }
                 else if (randomNrLane == 2)
                 {
-                    Instantiate(truck, new Vector3(middleRoad, truckYPos, this.transform.position.z + enemySpawnDistance), Quaternion.identity);
+                    Instantiate(truck, new Vector3(middleRoad, truckYPos, this.transform.position.z + enemySpawnDistance+10), Quaternion.identity);
                 }
                 else if (randomNrLane == 3)
                 {
-                    Instantiate(truck, new Vector3(rightRoad, truckYPos, this.transform.position.z + enemySpawnDistance), Quaternion.identity);
+                    Instantiate(truck, new Vector3(rightRoad, truckYPos, this.transform.position.z + enemySpawnDistance+10), Quaternion.identity);
                 }
                 else { Debug.Log("Couldn't spawn enemy in this lane: 2"); }
                 break;
@@ -105,11 +107,11 @@ public class CameraScript : MonoBehaviour
                 }
                 else if (randomNrLane == 2)
                 {
-                    Instantiate(roadBlock, new Vector3(middleRoad, roadblockYPos, this.transform.position.z + enemySpawnDistance), Quaternion.identity);
+                    Instantiate(roadBlock, new Vector3(middleRoad, roadblockYPos, this.transform.position.z + enemySpawnDistance+10), Quaternion.identity);
                 }
                 else if (randomNrLane == 3)
                 {
-                    Instantiate(roadBlock, new Vector3(rightRoad, roadblockYPos, this.transform.position.z + enemySpawnDistance), Quaternion.identity);
+                    Instantiate(roadBlock, new Vector3(rightRoad, roadblockYPos, this.transform.position.z + enemySpawnDistance+10), Quaternion.identity);
                 }
                 else { Debug.Log("Couldn't spawn enemy in this lane: 3"); }
                 break;
@@ -119,13 +121,13 @@ public class CameraScript : MonoBehaviour
                 break;
 
         }
-        Debug.Log("end of spawn");
     }
 
     void RoadSpawn()
     {
         Debug.Log("new road incoming");
-        Instantiate(road, new Vector3(35.2f, 0.002f, this.transform.position.z + 230), Quaternion.identity);
+        Instantiate(road, new Vector3(35.2f, 0.002f, this.transform.position.z + 690), Quaternion.identity);//230 35.2f
         Instantiate(roadTrigger, new Vector3(35.13f, 10, this.transform.position.z + 230), Quaternion.identity);
+        Debug.Log("spawned road");
     }
 }
