@@ -16,13 +16,18 @@ public class swipe : MonoBehaviour {
     private float score;
     public Text scoreText;
     //Speed + level up
-    private float speed = 0.7f;
+    private float speed = 0.3f;
     private float levelUpTimer = 0; 
     //lane in which player is running, only 3 lanes
     private byte currentLane;
     //height from which player can jump again
-    private float playerOnGroundJump = 5.3f;
- 
+    private float playerOnGroundJump = 1.2f;
+    //force to move player
+    private float forceSide = 7000;
+    private float forceUp = 7500;
+    private float forceJump = 14000; 
+
+
 
 
 
@@ -53,7 +58,7 @@ public class swipe : MonoBehaviour {
             if ((score - levelUpTimer) >= 1000) //if the difference between the current score (= time) and the leveluptimer is bigger then 1000, he levels up 
             {
                 levelUpTimer = score;
-                speed += 0.5f;
+                speed += 0.05f;
             }
 
 
@@ -80,8 +85,9 @@ public class swipe : MonoBehaviour {
                             if(currentLane != 0  && this.transform.position.y <= playerOnGroundJump) { 
                             //this.transform.position = this.transform.position + new Vector3(-15f, 0, 0);
                             Physics.gravity = new Vector3(0, -30F, 0);
-                            rb.AddForce(-50000f, 10000f, 0, ForceMode.Force);
+                            rb.AddForce(-forceSide, forceUp, 0, ForceMode.Force);
                             currentLane--;
+                                Debug.Log(this.transform.position.x);
                             }
                         }
                         else if (swipedSideways && deltaXSwipe <= 0) //swiped right
@@ -90,8 +96,9 @@ public class swipe : MonoBehaviour {
                             //   this.transform.Rotate(new Vector3(0, 15f, 0));
                             // this.transform.position = this.transform.position + new Vector3(15f, 0, 0);
                             Physics.gravity = new Vector3(0, -30F, 0);
-                            rb.AddForce(50000f, 10000f, 0, ForceMode.Force);
+                            rb.AddForce(forceSide, forceUp, 0, ForceMode.Force);
                                 currentLane++;
+                                Debug.Log(this.transform.position.x);
                             }
                         }
                         else if (!swipedSideways && deltaYSwipe > 0) //swiped down
@@ -102,7 +109,7 @@ public class swipe : MonoBehaviour {
                         else if (!swipedSideways && deltaYSwipe <= 0 && this.transform.position.y <= playerOnGroundJump) //swiped up
                         {
                             Physics.gravity = new Vector3(0, -50F, 0);
-                            rb.AddForce(0, 28000f, 0, ForceMode.Force); //20000f
+                            rb.AddForce(0, forceJump, 0, ForceMode.Force); 
                             
                         }
                         hasSwiped = true;

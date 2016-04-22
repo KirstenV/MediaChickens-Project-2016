@@ -3,63 +3,111 @@ using System.Collections;
 
 public class CameraScript : MonoBehaviour
 {
-    private byte obstaclesInGame = 1;
     public GameObject roadBlock;
-    
-    private float leftRoad = -33.3f;
-    private float middleRoad = 35.6f;
-    private float rightRoad = 104.4f;
+    public GameObject car;
+    public GameObject truck;
+    //position of the player on the lanes
+    private float leftRoad = 28;
+    private float middleRoad = 36;
+    private float rightRoad = 44;
+    //how far the enemies are spawned
+    private float spawnDistance = 160;
+    //random spawning different enemies
+    private float bigEnemiesOnLine = 0; //number of bigger enemies being made on the same line  
+    //height for spawning
+    private float roadblockYPos = 1.7f;
+    private float carYPos = 0f;
+    private float truckYPos = 1;
     // Use this for initialization
     void Start()
     {
-
+        //making first enemies, always the same ones
+        Instantiate(roadBlock, new Vector3(leftRoad, roadblockYPos, spawnDistance/2), Quaternion.identity);
+        Instantiate(roadBlock, new Vector3(middleRoad, roadblockYPos, spawnDistance/2), Quaternion.identity);
+        Instantiate(roadBlock, new Vector3(rightRoad, roadblockYPos, spawnDistance/2), Quaternion.identity);
+        Instantiate(roadBlock, new Vector3(leftRoad, roadblockYPos, spawnDistance - (spawnDistance/4)), Quaternion.identity);
+        Instantiate(roadBlock, new Vector3(middleRoad, roadblockYPos, spawnDistance - (spawnDistance / 4)), Quaternion.identity);
+        Instantiate(roadBlock, new Vector3(rightRoad, roadblockYPos, spawnDistance - (spawnDistance / 4)), Quaternion.identity);
+        Instantiate(roadBlock, new Vector3(leftRoad, roadblockYPos, spawnDistance), Quaternion.identity);
+        Instantiate(car, new Vector3(middleRoad, roadblockYPos, spawnDistance), Quaternion.identity);
+        Instantiate(roadBlock, new Vector3(rightRoad, roadblockYPos, spawnDistance), Quaternion.identity);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    void FixedUpdate()
-    {
-        EnemySpawn();
-
-    }
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
             Destroy(other.gameObject);
-            obstaclesInGame--;
+            EnemySpawn();
+        }
+        if(other.gameObject.CompareTag("EnemyTrigger"))
+        {
+            Destroy(other.gameObject);
+            EnemySpawn();
+            EnemySpawn();
         }
     }
     void EnemySpawn()
     {
-        if (obstaclesInGame < 2)
+        //choosing random lane for enemy
+        int randomNrLane = Random.Range(1, 4); //1 left, 2 middle, 3 right
+        //choosing random enemy object
+        int randomNrEnemy = Random.Range(1, 4);
+        switch (randomNrEnemy)
         {
+            case 1:
+                if (randomNrLane == 1)
+                {
+                    Instantiate(car, new Vector3(leftRoad, carYPos, this.transform.position.z + spawnDistance), Quaternion.identity);
+                }
+                else if (randomNrLane == 2)
+                {
+                    Instantiate(car, new Vector3(middleRoad, carYPos, this.transform.position.z + spawnDistance), Quaternion.identity);
+                }
+                else if(randomNrLane == 3)
+                {
+                    Instantiate(car, new Vector3(rightRoad, carYPos, this.transform.position.z + spawnDistance), Quaternion.identity);
+                }
+                else { Debug.Log("Couldn't spawn enemy in this lane: 1"); }
+                break;
+                
+            case 2:
+                if (randomNrLane == 1)
+                {
+                    Instantiate(truck, new Vector3(leftRoad, truckYPos, this.transform.position.z + spawnDistance), Quaternion.identity);
+                }
+                else if (randomNrLane == 2)
+                {
+                    Instantiate(truck, new Vector3(middleRoad, truckYPos, this.transform.position.z + spawnDistance), Quaternion.identity);
+                }
+                else if (randomNrLane == 3)
+                {
+                    Instantiate(truck, new Vector3(rightRoad, truckYPos, this.transform.position.z + spawnDistance), Quaternion.identity);
+                }
+                else { Debug.Log("Couldn't spawn enemy in this lane: 2"); }
+                break;
 
-            
-            obstaclesInGame++;
-            int randomNr = Random.Range(1, 4);
-            switch (randomNr)
-            {
-                case 1:
-                    Debug.Log("left Road");
-                    Instantiate(roadBlock, new Vector3(leftRoad, 9f, this.transform.position.z + 100), Quaternion.identity);
-                    break;
-                case 2:
-                    Debug.Log("middle Road");
-                    Instantiate(roadBlock, new Vector3(middleRoad, 9f, this.transform.position.z + 100), Quaternion.identity);
-                    break;
-                case 3:
-                    Debug.Log("right Road");
-                    Instantiate(roadBlock, new Vector3(rightRoad, 9f, this.transform.position.z + 100), Quaternion.identity);
-                    break;
-                default:
-                    Debug.Log("couldn't spawn enemy");
-                    break;
+            case 3:
+                if (randomNrLane == 1)
+                {
+                    Instantiate(roadBlock, new Vector3(leftRoad, roadblockYPos, this.transform.position.z + spawnDistance), Quaternion.identity);
+                }
+                else if (randomNrLane == 2)
+                {
+                    Instantiate(roadBlock, new Vector3(middleRoad, roadblockYPos, this.transform.position.z + spawnDistance), Quaternion.identity);
+                }
+                else if (randomNrLane == 3)
+                {
+                    Instantiate(roadBlock, new Vector3(rightRoad, roadblockYPos, this.transform.position.z + spawnDistance), Quaternion.identity);
+                }
+                else { Debug.Log("Couldn't spawn enemy in this lane: 3"); }
+                break;
 
-            }
+            default:
+                Debug.Log("Couldn't spawn this type of enemy");
+                break;
+
         }
+        Debug.Log("end of spawn");
     }
 }
