@@ -10,7 +10,7 @@
 	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
 	
-	<!--<link rel="stylesheet" href="css/base.css"> -->
+	<link rel="stylesheet" href="{{Request::root()}}/css/base.css">
 	
 	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
@@ -57,10 +57,10 @@
 			</div>
 		</div>
 	</nav>
-		<div class="col-md-4">
+		<div class="col-md-6">
 			<img src="http://i.stack.imgur.com/yEshb.gif" width="600px" height="400px">
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-6">
 			@yield('content')
 		</div>
 		<div class="col-md-8" style="display: none;">
