@@ -38,14 +38,14 @@ Route::get('vragen/{id}/edit/api', 'projectController@json_vragen');
 
 Route::put('{tabel}/api/add', 'projectController@add_project');
 
-<<<<<<< HEAD
+
 Route::get('kaart/{id}/api/get_locations', 'kaartController@json_projects');
 
 Route::get('kaart/api/get_locations', 'kaartController@json_locations');
-=======
+
 Route::get('javascript_main',function(){
 	return view('javascript');
 });
 
 Route::get('al_projects/api/get', 'projectController@json_al_projects');
->>>>>>> ca6146487714e5077481ae931f4bf0bf7b6e6955
+
