@@ -37,3 +37,9 @@ Route::get('fotos/{id}/edit/api', 'projectController@json_fotos');
 Route::get('vragen/{id}/edit/api', 'projectController@json_vragen');
 
 Route::put('{tabel}/api/add', 'projectController@add_project');
+
+Route::get('javascript_main',function(){
+	return view('javascript');
+});
+
+Route::get('al_projects/api/get', 'projectController@json_al_projects');

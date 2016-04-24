@@ -70,6 +70,8 @@ class projectController extends Controller
 		
 		$project = new Projecten;
 		$project->titel = $request->row_content;
+		$project->begin_datum="niet ingevuld";
+		$project->eind_datum="niet ingevuld";
 		$project->beschrijving ="klick op mij en pas mij aan voor de beschrijving";
 		$project->project_picture ="proef_proef.jpg";
 		$project->user_id = $request->admin;
@@ -78,6 +80,10 @@ class projectController extends Controller
 		//Projecten::create(array('titel'=>'proef','beschrijving'=>"broef proef",'project_picture'=>'proef.jpg','project_picture'=>1));
 		
 		return  User::find($request->admin)->show_projecten->last();
+	}
+	
+	public function json_al_projects(){
+		return response()->json( Projecten::all());
 	}
 	
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="antwerpen_project">
 <head>
 	<meta charset="utf-8">
 	<title>
@@ -12,21 +12,21 @@
 	
 	<link rel="stylesheet" href="{{Request::root()}}/css/base.css">
 	
-	
+	<script src="{{Request::root()}}/javascript_main"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js">
-	</script>
-	
+	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+	<script  type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
 	<script src="{{Request::root()}}/js/base.js"></script>
+	
 	@yield('header')
 </head>
-<body>
+<body >
 	
 	
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="container">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="http://localhost/school/antwerpen_project_2016/MediaChickens-Project-2016/antwerpen_project/public">HOME</a>
+				<a class="navbar-brand" href="{{Request::root()}}/">HOME</a>
 			</div>
 			<div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
 				<ul class="nav navbar-nav">
@@ -58,9 +58,9 @@
 		</div>
 	</nav>
 		<div class="col-md-6">
-			<img src="http://i.stack.imgur.com/yEshb.gif" width="600px" height="400px">
+			
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-6"  >
 			@yield('content')
 		</div>
 		<div class="col-md-8" style="display: none;">

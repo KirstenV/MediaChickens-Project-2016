@@ -32,7 +32,7 @@
 		//project edit vragen
 
 		$.ajax({
-			url: "http://localhost/school/antwerpen_project_2016/MediaChickens-Project-2016/antwerpen_project/public/vragen/{{$id}}/edit/api",
+			url: root+"/vragen/{{$id}}/edit/api",
 			success: function (data) {
 				$.each(data, function (key, val) {
 					$.each(val, function (index, value) {
@@ -59,7 +59,7 @@
 		//project edite titel
 
 		$.ajax({
-			url: "http://localhost/school/antwerpen_project_2016/MediaChickens-Project-2016/antwerpen_project/public/project/{{$id}}/edit/api",
+			url: root+"/project/{{$id}}/edit/api",
 			success: function (data) {
 				//console.log(data);
 				$.each(data, function (key, val) {
@@ -97,7 +97,7 @@
 			console.log(token);
 			$.ajax({
 					method: "POST",
-					url: "http://localhost/school/antwerpen_project_2016/MediaChickens-Project-2016/antwerpen_project/public/" + tabele + "/" + id,
+					url:root+"/" + tabele + "/" + id,
 					data: {
 						row_name: veldnaam,
 						row_content: content,

@@ -1,5 +1,5 @@
 body{
-background-color: aqua;
+
 }
 .nav_bar_margin_top{
 	margin-top: -25px;
@@ -13,4 +13,10 @@ background-color: aqua;
 
 .delete{
 	color: #0078d7;
+}
+
+[contenteditable]:focus {
+    border-style: dashed;
+    border-color: black;
+    border-width: 3px;
 }
