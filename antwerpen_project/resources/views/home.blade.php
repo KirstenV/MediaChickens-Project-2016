@@ -1,24 +1,32 @@
 @extends('layout') @section('content')
-<h1>Hier kommen categorien van projecten</h1>
+<div ng-controller="projectController">
+
+	<h1><i>@{{$index}}</i><a>@{{project.titel}}</a> </h1>
+	<div></div>
 
 
-<div class="alle_projecten">
-	@foreach ($projecten as $project)
+	<div class="alle_projecten">
+		<div class="project" ng-repeat="project in projects">
 
-	<h1><i>{{$project->id}}</i> <a href="project/{{$project->id}}/view">{{$project->titel}}</a> <a href="project/{{$project->id}}/edit">edit</a> <a href="project/{{$project->id}}/delete">delet</a></h1> @endforeach
-</div>
 
-<h4 class="nieuw_project form-control" contenteditable='true'>Pas mij aan om nieuw project aan te maken</h4>
+			<h1><i>@{{$index}}</i> <a href="project/@{{project.id}}/view">@{{project.titel}}</a>  </h1>
 
-{{ Form::open(array('url' => 'projecten/add'))}}
-<div class="form-group">
-	<input hidden="true" name="admin" value="{{1}}">
-	<input class="form-control" name="titel" placeholder="vul naam van de project in press enter">
-	<input name="submit" type="submit" class="btn btn-primary">
-</div>
+			<div class="edit_home_page"><a href="project/@{{project.id}}/edit">aanpasen</a></div>
+			<div class="delete_home_page"><a href="project/@{{project.id}}/delete">verwijderen</a></div>
+			<div class="begien_datum_home_page">@{{project.begin_datum}}</a>
+			</div>
+			<div class="eind_datum_home_page">@{{project.eind_datum}}</a>
+			</div>
+
+		</div>
+		{{ Form::open(array('url' => 'projecten/add'))}}
 {{ Form::close() }}
+	</div>
 
 
+	<h4 id="add_project" class="nieuw_project" contenteditable='true'>Pas mij aan om nieuw project aan te maken</h4>
+
+</div>
 <script>
 	$(document).ready(function () {
 		console.log("ready!");
@@ -26,16 +34,13 @@
 
 		$(".nieuw_project").click(function () {
 			$(this).text("");
-
 		})
 
 		$(".nieuw_project").on("focusout", function (event) {
 			var content = $(this).text();
 			if (content != "") {
-				var admin = 1;
-				UpdateProjecten("projecten", "titel", content, admin);
-				console.log();
-				
+				var token = $("input[name='_token']").val();
+				angular.element(document.getElementById('add_project')).scope().add_project(content,token,1);
 			}
 			$(this).text("Pas mij aan om nieuw project aan te maken");
 		});
@@ -45,25 +50,6 @@
 				$(this).blur();
 			}
 		});
-
-		function UpdateProjecten(tabele, veldnaam, content, admin) {
-			var token = $("input[name='_token']").val();
-			$.ajax({
-					method: "POST",
-					url: "http://localhost/school/antwerpen_project_2016/MediaChickens-Project-2016/antwerpen_project/public/" + tabele + "/api/add",
-					data: {
-						row_name: veldnaam,
-						row_content: content,
-						admin: admin,
-						_method: "PUT",
-						_token: token
-
-					}
-				})
-				.done(function (data) {
-					$("<h1><i>" + data.id + " </i> <a href='project/" + data.id + "/view'>" + data.titel + "</a><a href='project/" + data.id + "/edit'> edit </a><a href='project/" + data.id + "/delete'> delet </a></h1>").appendTo(".alle_projecten");
-				});
-		}
 
 	});
 </script>

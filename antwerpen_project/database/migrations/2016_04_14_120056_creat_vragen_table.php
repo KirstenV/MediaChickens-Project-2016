@@ -15,6 +15,7 @@ class CreatVragenTable extends Migration
         Schema::create('vragen', function (Blueprint $table) {
             $table->increments('id');
 			$table->enum('choices', array('open vragen','meerkeuzevragen','Gesloten vragen','Suggestieve vragen','Controlevragen'));
+			$table->text('vraag');
 			$table->text('mogelijke_antwoorden_1')->nullable();
 			$table->text('mogelijke_antwoorden_2')->nullable();
 			$table->text('mogelijke_antwoorden_3')->nullable();
