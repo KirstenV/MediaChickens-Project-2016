@@ -37,3 +37,7 @@ Route::get('fotos/{id}/edit/api', 'projectController@json_fotos');
 Route::get('vragen/{id}/edit/api', 'projectController@json_vragen');
 
 Route::put('{tabel}/api/add', 'projectController@add_project');
+
+Route::get('kaart/{id}/api/get_locations', 'kaartController@json_projects');
+
+Route::get('kaart/api/get_locations', 'kaartController@json_locations');
