@@ -60,7 +60,7 @@
 		<div class="col-md-6">
 			
 		</div>
-		<div class="col-md-6"  >
+		<div class="col-md-6" >
 			@yield('content')
 		</div>
 		<div class="col-md-8" style="display: none;">

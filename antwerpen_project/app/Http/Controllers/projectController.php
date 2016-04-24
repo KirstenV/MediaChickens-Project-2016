@@ -44,13 +44,13 @@ class projectController extends Controller
 		return $project_data;
 	}
 	
-	
+	//uneversel controller can adite diferend tabels and id
 	public function update_record($table,$id, Request $request){
-		$status = "succes";
 		DB::table($table)->where('id', $id)->update(array($request->input('row_name') => $request->input('row_content')));
+		$usser_updatet = Projecten::find($id);
 		
 		
-		return $status;
+		return $usser_updatet;
 	}
 	
 	public function json_fotos($id){
