@@ -52,6 +52,7 @@
 		});
 
 	});
+	load();
 </script>
 @stop
 
