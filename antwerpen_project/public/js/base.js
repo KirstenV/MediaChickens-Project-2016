@@ -20,16 +20,10 @@
 				_token: token
 			};
 
-
-			$http.post(root+"/projecten/api/add", data).success(function (data, status) {
-                console.log(data);
-
-
 			$http.post(root + "/projecten/api/add", data).success(function (data, status) {
-
 				$scope.projects.push(data);
 			});
-		})
+	
 		$scope.set_id = function (id) {
 			$http.get(root + "/al_projects/api/get")
 				.success(function (data) {

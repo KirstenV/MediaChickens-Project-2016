@@ -1,29 +1,42 @@
 @extends('layout') @section('content')
 <div ng-controller="edit_projectController" ng-init="initializetion({{$id}})">
 
-<div id="add_project"></div>
+	<div id="add_project" class="container">
+		<div class="row">
+			<h1>edit project</h1>
+			<div class="alle_content">
+				<div class='project titel' data-update_status='init' data-titel='titel' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.titel}}</div>
+				<div class='project beschrijving ' data-update_status='init' data-titel='beschrijving' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.beschrijving}}</div>
+				<div class='project begin_datum ' data-update_status='init' data-titel='begin_datum' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.begin_datum}}</div>
+				<div class='project eind_datum ' data-update_status='init' data-titel='eind_datum' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.eind_datum}}</div>
 
-	<h1>edit project</h1>
-	<div class="alle_content">
-		<div class='project titel' data-update_status='init' data-titel='titel' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.titel}}</div>
-		<div class='project beschrijving ' data-update_status='init' data-titel='beschrijving' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.beschrijving}}</div>
-		<div class='project begin_datum ' data-update_status='init' data-titel='begin_datum' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.begin_datum}}</div>
-		<div class='project eind_datum ' data-update_status='init' data-titel='eind_datum' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.eind_datum}}</div>
+				{{ Form::open(array('url' => 'project_toevoegen/add','files' => true))}} {{ Form::close() }}
 
-		{{ Form::open(array('url' => 'project_toevoegen/add','files' => true))}} {{ Form::close() }}
-
-		<div class="alle_vragen ">
-			<div class="vragen_overzicht">
-			</div>
-			<div class="vraag_toevoegen">
-				<button class="vraag_toevoegen_button">Voeg vraag toe</button>
+				<div class="alle_vragen ">
+					<div class="vragen_overzicht">
+					</div>
+					<div class="vraag_toevoegen">
+						<button class="vraag_toevoegen_button">Voeg vraag toe</button>
+					</div>
+				</div>
+				<div class="alle_fases">
+				</div>
 			</div>
 		</div>
-		<div class="alle_fases">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="col-md-2">
+					<select id="selected_vraag" class="form-control" name="vraag_categorie">
+						<option selected="selected" value="">kies een soort vraag...</option>
+						<option value="open_vragen">open vragen</option>
+						<option value="meerkeuzevragen">meerkeuzevragen</option>
+						<option value="Gesloten_vragen">Gesloten vragen</option>
+						<option value="Suggestieve_vragen">Suggestieve vragen</option>
+					</select>
+				</div>
+			</div>
 		</div>
-
 	</div>
-
 </div>
 <script>
 	$(document).ready(function () {
@@ -36,7 +49,7 @@
 			var tabel = $(this).attr("data-tabel");
 			var row_id = $(this).attr("data-id");
 			angular.element(document.get)
-			angular.element(document.getElementById('add_project')).scope().edit_project(tabel,row_id, row_name, row_content, token);
+			angular.element(document.getElementById('add_project')).scope().edit_project(tabel, row_id, row_name, row_content, token);
 			//UpdateProjecten(tabel, row_name, row_content, token);
 		});
 
