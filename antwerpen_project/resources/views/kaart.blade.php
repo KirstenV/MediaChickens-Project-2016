@@ -1,9 +1,4 @@
-<html>
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <script src="http://maps.google.com/maps/api/js?sensor=false"
-            type="text/javascript"></script>
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+@extends('home') @section('map')
     <script type="text/javascript">
 	
     //<![CDATA[
@@ -86,12 +81,8 @@
       });
     }
     
-    function doNothing() {}
-    //]]>
+    load();
   </script>
-  </head>
-
-  <body onload="load()">
+ 
     <div id="map" style="width: 50%; bottom: 0%; top:15%; left:0%; position: absolute"></div>
-  </body>
-</html>
+@stop

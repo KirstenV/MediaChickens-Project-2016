@@ -4,11 +4,13 @@
 	<meta charset="utf-8">
 	<title>
 	</title>
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="description" content="">
 	<meta name="author" content="">
 	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
 	
 	<link rel="stylesheet" href="{{Request::root()}}/css/base.css">
 	
@@ -17,27 +19,52 @@
 	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 	<script  type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
 	<script src="{{Request::root()}}/js/base.js"></script>
+	<script src="http://maps.google.com/maps/api/js?sensor=false"
+            type="text/javascript"></script>
 	
-	@yield('header')
+	
+	
 </head>
-<body >
+<body onload="load()">
 	
 	
 	<nav class="navbar navbar-default" role="navigation">
-		<div class="container">
+		
 			<div class="navbar-header">
-				<a class="navbar-brand" href="{{Request::root()}}/">HOME</a>
+				<a class="navbar-brand" href="{{Request::root()}}/" title="home">
+				
+					<img src="svg/A_logo_485_RGB_POS.png" alt="logo"/>
+					
+				</a>
+				
+			</div>
+			<div class="navbar-search">
+			
+				<form>
+					<input class="textbox" type="text" value="zoeken"></input>
+					<a href="" title="zoeken">
+						<i class="fa fa-search" aria-hidden="true"></i>
+					
+					</a>
+					
+
+				</form>
+				
 			</div>
 			<div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
 				<ul class="nav navbar-nav">
-					<li class="">
-						<a href="#">log in</a>
+				
+					<li>
+						<a href="#" title="log in">
+							<i class="fa fa-user" aria-hidden="true"></i>
+						</a>
 					</li>
+				
 				</ul>
 			</div>
-		</div>
+		
 	</nav>
-	<nav class="navbar navbar-inverse nav_bar_margin_top" role="navigation">
+<!--	<nav class="navbar navbar-inverse nav_bar_margin_top" role="navigation">
 		<div class="container">
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
@@ -57,10 +84,11 @@
 			</div>
 		</div>
 	</nav>
+-->
 		<div class="col-md-6">
-			
+			@yield('map')
 		</div>
-		<div class="col-md-6"  >
+		<div id="container" class="col-md-6"  >
 			@yield('content')
 		</div>
 		<div class="col-md-8" style="display: none;">

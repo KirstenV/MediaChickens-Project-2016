@@ -22,6 +22,7 @@
 			
 
 			$http.post(root+"/projecten/api/add", data).success(function (data, status) {
+                console.log(data);
 				$scope.projects.push(data);
 			})
 		}
