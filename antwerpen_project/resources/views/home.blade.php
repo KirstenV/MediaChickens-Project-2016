@@ -1,16 +1,23 @@
 @extends('layout') @section('content')
 <div ng-controller="projectController">
 
+	<h1><i>@{{$index}}</i><a>@{{project.titel}}</a> </h1>
+	<div></div>
+
 
 	<div class="alle_projecten">
 		<div class="project" ng-repeat="project in projects">
+
+
 			<h1><i>@{{$index}}</i> <a href="project/@{{project.id}}/view">@{{project.titel}}</a>  </h1>
+
 			<div class="edit_home_page"><a href="project/@{{project.id}}/edit">aanpasen</a></div>
 			<div class="delete_home_page"><a href="project/@{{project.id}}/delete">verwijderen</a></div>
 			<div class="begien_datum_home_page">@{{project.begin_datum}}</a>
 			</div>
 			<div class="eind_datum_home_page">@{{project.eind_datum}}</a>
 			</div>
+
 		</div>
 		{{ Form::open(array('url' => 'projecten/add'))}}
 {{ Form::close() }}
@@ -23,6 +30,7 @@
 <script>
 	$(document).ready(function () {
 		console.log("ready!");
+
 
 		$(".nieuw_project").click(function () {
 			$(this).text("");
@@ -42,6 +50,7 @@
 				$(this).blur();
 			}
 		});
+
 	});
 </script>
 @stop
@@ -71,7 +80,7 @@
       // Change this depending on the name of your PHP file
 	  
 	  
-	  $.ajax({url: "http://project.local/antwerpen_project/public/kaart/api/get_locations", success: function(data){
+	  $.ajax({url: root+"/kaart/api/get_locations", success: function(data){
         
 		data.unshift("null");
 		console.log(data);
@@ -93,7 +102,7 @@
 			//var j = i+1;
 			
 			//console.log(j);
-			$.ajax({url: "http://project.local/antwerpen_project/public/kaart/" + locatie_id + "/api/get_locations", success: function(data2){
+			$.ajax({url: root+"/kaart/" + locatie_id + "/api/get_locations", success: function(data2){
 			
 			
 			console.log(data2);
