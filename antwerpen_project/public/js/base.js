@@ -20,16 +20,16 @@
 				_token: token
 			};
 
-<<<<<<< HEAD
+
 			$http.post(root+"/projecten/api/add", data).success(function (data, status) {
                 console.log(data);
-=======
+
 
 			$http.post(root + "/projecten/api/add", data).success(function (data, status) {
->>>>>>> 24d192b5d58edbc577bbbca417a78ceaecffccb7
+
 				$scope.projects.push(data);
 			});
-		}
+		})
 		$scope.set_id = function (id) {
 			$http.get(root + "/al_projects/api/get")
 				.success(function (data) {
@@ -37,6 +37,7 @@
 					console.log(data);
 				});
 
+		};
 		};
 	}]);
 
