@@ -88,7 +88,11 @@
 		<div class="col-md-6">
 			@yield('map')
 		</div>
+<<<<<<< HEAD
 		<div id="container" class="col-md-6"  >
+=======
+		<div class="col-md-6" >
+>>>>>>> 24d192b5d58edbc577bbbca417a78ceaecffccb7
 			@yield('content')
 		</div>
 		<div class="col-md-8" style="display: none;">
