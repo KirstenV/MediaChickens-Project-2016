@@ -72,6 +72,7 @@ body { font-family: MyWebfont, Verdana, sans-serif; }
 	top: 70px;
 	background-color:#fff;
 	height:60px;
+	box-shadow: -1px 1px 5px #888888;
 }
 
 #add_project{

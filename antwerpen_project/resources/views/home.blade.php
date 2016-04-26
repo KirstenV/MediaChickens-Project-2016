@@ -5,7 +5,7 @@
 <div id="projectContainer" ng-controller="projectController">
 
 	<div id="editable">
-		<h4 id="add_project" class="nieuw_project" contenteditable='true'>Pas mij aan om nieuw project aan te maken</h4>
+		<h4 id="add_project" class="nieuw_project" contenteditable='true'>Pas mij aan om een nieuw project aan te maken</h4>
 	</div>
 	
 	
