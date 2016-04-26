@@ -19,6 +19,7 @@ class CreatLocatieTable extends Migration
 			$table->integer('huisnummer')->unsigned()->nullable();
 			$table->double('position_latitude')->nullable();
 			$table->double('position_longitude')->nullable();
+			$table->softDeletes();
             $table->timestamps();
         });
     }

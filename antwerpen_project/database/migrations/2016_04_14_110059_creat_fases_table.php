@@ -20,6 +20,7 @@ class CreatFasesTable extends Migration
 			$table->string('fases_picture')->nullable()->default('fases_picture_default.jpg');
 			$table->integer('projecten_id')->unsigned();
 			$table->foreign('projecten_id')->references('id')->on('projecten');
+			$table->softDeletes();
             $table->timestamps();
         });
     }

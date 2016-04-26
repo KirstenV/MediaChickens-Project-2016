@@ -21,7 +21,7 @@ class CreatProjectenTable extends Migration
 			$table->string('project_picture')->nullable()->default('project_picture_default.jpg');
 			$table->integer('user_id')->unsigned();
 			$table->foreign('user_id')->references('id')->on('users');
-			
+			$table->softDeletes();
             $table->timestamps();
         });
     }

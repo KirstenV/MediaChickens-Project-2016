@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
 			$table->boolean('is_adm')->default(false);
 			$table->integer('high_score')->unsigned()->nullable();
             $table->rememberToken();
+			$table->softDeletes();
             $table->timestamps();
         });
     }

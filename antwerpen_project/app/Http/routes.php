@@ -43,6 +43,10 @@ Route::get('kaart/{id}/api/get_locations', 'kaartController@json_projects');
 
 Route::get('kaart/api/get_locations', 'kaartController@json_locations');
 
+
+Route::put('{tabel}/api/add_dependency', 'projectController@add_project_dependency');
+
+
 Route::get('javascript_main',function(){
 	return view('javascript');
 });

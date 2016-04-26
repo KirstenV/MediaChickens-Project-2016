@@ -18,6 +18,7 @@ class CreateLocatieProjetenTable extends Migration
 			$table->foreign('projecten_id')->references('id')->on('projecten');
 			$table->integer('locatie_id')->unsigned();
 			$table->foreign('locatie_id')->references('id')->on('locatie');
+			$table->softDeletes();
             $table->timestamps();
         });
     }

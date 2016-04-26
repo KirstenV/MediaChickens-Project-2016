@@ -22,6 +22,7 @@ class CreatVragenTable extends Migration
 			$table->text('mogelijke_antwoorden_4')->nullable();
 			$table->integer('projecten_id')->unsigned();
 			$table->foreign('projecten_id')->references('id')->on('projecten');
+			$table->softDeletes();
             $table->timestamps();
         });
     }

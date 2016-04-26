@@ -17,8 +17,8 @@ class PagesController extends Controller
 	   //$users = User::all();
 	  
 	   //user -> on to many werkt! 
-	   $user_id = 1;
-	   $projecten = User::find($user_id)->show_projecten;
+	 // $user_id = 1;
+	   //$projecten = User::find($user_id)->show_projecten;
 	   
 	   
 	   //projecten -> on to many fases
@@ -33,7 +33,8 @@ class PagesController extends Controller
 	   //projecten ->many to many relationship locatie
 	   //$locaties = Projecten::find($projecten_id)->show_locaties;
 	   
-	   return view('home')->with('projecten', $projecten);
+	  
+	   return view('home');
 
    }
 	

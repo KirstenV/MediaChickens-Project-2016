@@ -86,4 +86,27 @@ class projectController extends Controller
 		return response()->json( Projecten::all());
 	}
 	
+	
+	
+	public function add_project_dependency($tabel,Request $request){
+		if($tabel == "Vragen"){
+		$question = new Vragen;
+		$question->choices = $request->question_type;
+		$question->vraag   ="Voer hier je vraag in";
+		$question->mogelijke_antwoorden_1="geef hier mogelijke aantwoord";
+		$question->mogelijke_antwoorden_2 ="geef hier mogelijke aantwoord";
+		$question->mogelijke_antwoorden_3 ="geef hier mogelijke aantwoord";
+		$question->mogelijke_antwoorden_4 = "geef hier mogelijke aantwoord";
+		$question->projecten_id = $request->project_id;
+		$question->save();
+			
+		$latste_vraag =	Projecten::find( $request->project_id)->show_vragen->last();
+			
+			
+			return $latste_vraag;
+			}else{
+			return "Er is iets mis gegaan";
+		}
+	}
+	
 }

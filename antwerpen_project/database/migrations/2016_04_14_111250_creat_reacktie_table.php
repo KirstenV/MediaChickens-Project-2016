@@ -20,6 +20,7 @@ class CreatReacktieTable extends Migration
 			$table->foreign('user_id')->references('id')->on('users');
 			$table->integer('projecten_id')->unsigned();
 			$table->foreign('projecten_id')->references('id')->on('projecten');
+			$table->softDeletes();
             $table->timestamps();
         });
     }

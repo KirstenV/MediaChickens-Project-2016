@@ -19,6 +19,7 @@ class CreatAntwoordenTable extends Migration
 			$table->foreign('vragen_id')->references('id')->on('vragen');
 			$table->integer('user_id')->unsigned();
 			$table->foreign('user_id')->references('id')->on('users');
+			$table->softDeletes();
             $table->timestamps();
         });
     }

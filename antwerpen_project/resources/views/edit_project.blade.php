@@ -5,11 +5,16 @@
 		<div class="row">
 			<h1>edit project</h1>
 			<div class="alle_content">
-				<div class='project titel' data-update_status='init' data-titel='titel' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.titel}}</div>
-				<div class='project beschrijving ' data-update_status='init' data-titel='beschrijving' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.beschrijving}}</div>
-				<div class='project begin_datum ' data-update_status='init' data-titel='begin_datum' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.begin_datum}}</div>
-				<div class='project eind_datum ' data-update_status='init' data-titel='eind_datum' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.eind_datum}}</div>
-
+				<div class="col-md-2">Titel</div>
+				<div class='project titel col-md-10' data-update_status='init' data-titel='titel' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.titel}}</div>
+				<div class="col-md-2">Titel</div>
+				<div class='project beschrijving col-md-10' data-update_status='init' data-titel='beschrijving' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.beschrijving}}</div>
+				<div class="col-md-2">Titel</div>
+				<div class='project begin_datum col-md-10' data-update_status='init' data-titel='begin_datum' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.begin_datum}}</div>
+				<div class="col-md-2">Titel</div>
+				<div class='project eind_datum col-md-10' data-update_status='init' data-titel='eind_datum' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.eind_datum}}</div>
+			</div>
+			<div class="row">
 				{{ Form::open(array('url' => 'project_toevoegen/add','files' => true))}} {{ Form::close() }}
 
 				<div class="alle_vragen ">
@@ -19,20 +24,50 @@
 						<button class="vraag_toevoegen_button">Voeg vraag toe</button>
 					</div>
 				</div>
+			</div>
+			<div class="row">
 				<div class="alle_fases">
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="col-md-2">
-					<select id="selected_vraag" class="form-control" name="vraag_categorie">
-						<option selected="selected" value="">kies een soort vraag...</option>
-						<option value="open_vragen">open vragen</option>
-						<option value="meerkeuzevragen">meerkeuzevragen</option>
-						<option value="Gesloten_vragen">Gesloten vragen</option>
-						<option value="Suggestieve_vragen">Suggestieve vragen</option>
-					</select>
+
+			<div class="row">
+
+
+				<div class="col-md-12">
+					<div class="btn-group " role="group" aria-label="...">
+						<div class="btn-group " role="group">
+							<button type="button" class="btn btn-default" ng-click="add_question('open vragen')">open vragen</button>
+						</div>
+						<div class="btn-group" role="group">
+							<button type="button" class="btn btn-default" ng-click="add_question('meerkeuzevragen')">meerkeuzevragen</button>
+						</div>
+						<div class="btn-group" role="group">
+							<button type="button" class="btn btn-default" ng-click="add_question('Gesloten vragen')">Gesloten vragen</button>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-12">
+					<div class="col-md-4" ng-repeat="vraag in alle_vragen">
+						<div ng-show="vraag.choices == 'open vragen'">
+							<h4>@{{vraag.choices}}</h4>
+							<h5 class='vraag project titel col-md-12' data-update_status='init' data-titel='vraag' data-tabel='Vragen' data-id='@{{vraag.id}}' contenteditable='true'>@{{vraag.vraag}}</h5>
+						</div>
+						<div ng-show="vraag.choices == 'meerkeuzevragen'">
+							<h4>@{{vraag.choices}}</h4>
+							<h5 class='vraag project titel col-md-12' data-update_status='init' data-titel='vraag' data-tabel='Vragen' data-id='@{{vraag.id}}' contenteditable='true'>@{{vraag.vraag}}</h5>
+							<h5 class='vraag project titel col-md-12' data-update_status='init' data-titel='mogelijke_antwoorden_1' data-tabel='Vragen' data-id='@{{vraag.id}}' contenteditable='true'> @{{vraag.mogelijke_antwoorden_1}}</h5>
+							<h5 class='vraag project titel col-md-12' data-update_status='init' data-titel='mogelijke_antwoorden_2' data-tabel='Vragen' data-id='@{{vraag.id}}' contenteditable='true'> @{{vraag.mogelijke_antwoorden_2}}</h5>
+							<h5 class='vraag project titel col-md-12' data-update_status='init' data-titel='mogelijke_antwoorden_3' data-tabel='Vragen' data-id='@{{vraag.id}}' contenteditable='true'> @{{vraag.mogelijke_antwoorden_3}}</h5>
+							<h5 class='vraag project titel col-md-12' data-update_status='init' data-titel='mogelijke_antwoorden_4' data-tabel='Vragen' data-id='@{{vraag.id}}' contenteditable='true'> @{{vraag.mogelijke_antwoorden_4}}</h5>
+						</div>
+						<div ng-show="vraag.choices == 'Gesloten vragen'">
+							<h4>@{{vraag.choices}}</h4>
+							<h5 class='vraag project titel col-md-12' data-update_status='init' data-titel='vraag' data-tabel='Vragen' data-id='@{{vraag.id}}' contenteditable='true'>@{{vraag.vraag}}</h5>
+							<h5 class='vraag project titel col-md-12' data-update_status='init' data-titel='mogelijke_antwoorden_1' data-tabel='Vragen' data-id='@{{vraag.id}}' contenteditable='true'><i class="glyphicon glyphicon-unchecked"></i> @{{vraag.mogelijke_antwoorden_1}}</h5>
+							<h5 class='vraag project titel col-md-12' data-update_status='init' data-titel='mogelijke_antwoorden_2' data-tabel='Vragen' data-id='@{{vraag.id}}' contenteditable='true'><i class="glyphicon glyphicon-unchecked"></i> @{{vraag.mogelijke_antwoorden_2}}</h5>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -41,8 +76,10 @@
 <script>
 	$(document).ready(function () {
 
-		$(".project").on("focusout", function (event) {
+		$(document).on("focusout", ".project", function () {
+
 			console.log("focus out");
+
 			var token = $("input[name='_token']").val();
 			var row_name = $(this).attr("data-titel");
 			var row_content = $(this).text();
@@ -51,7 +88,10 @@
 			angular.element(document.get)
 			angular.element(document.getElementById('add_project')).scope().edit_project(tabel, row_id, row_name, row_content, token);
 			//UpdateProjecten(tabel, row_name, row_content, token);
+
 		});
+
+	
 
 
 		/*
