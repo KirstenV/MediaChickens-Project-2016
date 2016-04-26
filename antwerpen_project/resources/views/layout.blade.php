@@ -33,7 +33,7 @@
 			<div class="navbar-header">
 				<a class="navbar-brand" href="{{Request::root()}}/" title="home">
 				
-					<img src="svg/A_logo_485_RGB_POS.png" alt="logo"/>
+					<img src="{{Request::root()}}/svg/A_logo_485_RGB_POS.png" alt="logo"/>
 					
 				</a>
 				
@@ -90,9 +90,9 @@
 		</div>
 
 		<div id="container" class="col-md-6"  >
-		<div class="col-md-6" >
+		
 			@yield('content')
-		</div>
+		
 		<div class="col-md-8" style="display: none;">
 			<h3>
           Span 4
