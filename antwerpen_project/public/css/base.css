@@ -113,13 +113,13 @@ body { font-family: MyWebfont, Verdana, sans-serif; }
 	height:100%;
 	position:absolute;
 	top:0%;
-	left:10%;
+	left:5%;
 	
 }
 
 .navbar-search{
 	position:absolute;
-	left:50%;
+	left:65%;
 	top:30%;
 	
 }
