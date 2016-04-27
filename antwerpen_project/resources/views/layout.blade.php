@@ -25,7 +25,7 @@
 	
 	
 </head>
-<body onload="load()">
+<body>
 	
 	
 	<nav class="navbar navbar-default" role="navigation">
