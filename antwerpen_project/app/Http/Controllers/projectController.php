@@ -9,6 +9,9 @@ use App\User;
 use App\Fase;
 Use App\Project_foto;
 use App\Vragen;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Input;
+use Validator;
 
 
 use App\Http\Requests;
@@ -107,6 +110,64 @@ class projectController extends Controller
 			}else{
 			return "Er is iets mis gegaan";
 		}
+	}
+
+	public function upload_form(Request $request){
+
+		/*
+		 *
+		 $return="";
+		if($request->hasFile('project_photo')){
+			$file = $request->file('project_photo');
+			$return .= $file->getMimeType()."\t";
+			$return .= $file->getExtension()."\t";
+			$return .= $file->guessExtension()."\t";
+			if($file->isValid()){
+				$return .="isValid=true";
+				//return $request->file('project_photo')->getClientOriginalName();
+			}else{
+				$return .="isValid=false";
+			}
+			//return $request->file('project_photo')->getClientOriginalName();
+			return $return;
+		}
+		*/
+		/*
+                $headers="";
+                foreach (getallheaders() as $name => $value) {
+                    $headers += "$name: $value\n";
+                }
+                return $headers;
+                //return "<pre>".print_r($request->input(),true)."</pre>";
+                //$file = Input::file('file');
+                //return $file;
+                //return $request;
+                //return $input->all();
+                //return $request->allFiles();
+                //return "succes";
+        */
+
+
+		$image = Input::file('project_photo');
+
+		//$validator = Validator::make([$image], ['image' => 'required|image|mimes:gif,jpg,jpeg,bmp,png']);
+		$validator = Validator::make([$image], ['mimes:gif,jpg,jpeg,bmp,png','image.required']);
+		//$validator = Validator::make([$image], ['project_photo','required']);
+		//$validator->errors();
+		//return var_dump($validator->errors());
+
+		if ($validator->fails()) {
+			return response()->json(['error' => 'bestan moet een extensie :gif,jpg,jpeg,bmp,png hebben '], 200);
+			//return $validator->errors();
+		}
+		$destinationPath = storage_path() . '/uploads';
+
+		if(!$image->move($destinationPath, $image->getClientOriginalName())) {
+
+			return $validator->errors(['message' => 'Error saving the file.', 'code' => 400]);
+		}
+		return response()->json(['success' => true], 200);
+		//
 	}
 	
 }

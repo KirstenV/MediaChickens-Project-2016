@@ -1,4 +1,24 @@
-@extends('layout') @section('content')
+
+
+
+@extends('layout') 
+@section('header')
+
+@stop
+
+
+@section('content')
+
+	<style>
+		.thumb {
+			width: 24px;
+			height: 24px;
+			float: none;
+			position: relative;
+			top: 7px;
+		}
+	</style>
+
 <div ng-controller="edit_projectController" ng-init="initializetion({{$id}})">
 
 	<div id="add_project" class="container">
@@ -14,14 +34,26 @@
 				<div class="col-md-2">Titel</div>
 				<div class='project eind_datum col-md-10' data-update_status='init' data-titel='eind_datum' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.eind_datum}}</div>
 			</div>
-			<div class="row">
+			<div class="row" ng-controller="file_uplodController" ng-init="initializetion_foto({{$id}})">
 				{{ Form::open(array('url' => 'project_toevoegen/add','files' => true))}} {{ Form::close() }}
 
-				<div class="alle_vragen ">
-					<div class="vragen_overzicht">
+				<div class="alle_fotos ">
+					<div class="show_fotos">
 					</div>
-					<div class="vraag_toevoegen">
-						<button class="vraag_toevoegen_button">Voeg vraag toe</button>
+					<div class="add_fotos"  >
+
+						<h4>Upload on file select</h4>
+
+						<button ngf-select="uploadFiles($files, $invalidFiles)" multiple
+								accept="image/*" ngf-max-height="1000" ngf-accept="'image/*'" ngf-max-size="1MB">
+							Select Files</button>
+						<br><br>
+						Files:
+						<ul>
+							<li ng-repeat="f in errFiles" style="font:smaller">@{{f.name}} @{{f.$error}} @{{f.$errorParam}}
+							</li>
+						</ul>
+						@{{errorMsg}}
 					</div>
 				</div>
 			</div>

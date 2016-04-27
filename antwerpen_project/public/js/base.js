@@ -1,5 +1,5 @@
 (function () {
-	var app = angular.module('antwerpen_project', []);
+	var app = angular.module('antwerpen_project', ['ngFileUpload']);
 
 	app.controller('projectController', ['$http', "$scope", function ($http, $scope) {
 
@@ -39,7 +39,7 @@
 		console.log("controller is klaar");
 		
 		$scope.initializetion = function (id) {
-			console.log("project id is geintializeerd");
+			console.log("project is geintializeerd");
 			$scope.project_id = id;
 			//console.log($scope.project_id);
 			
@@ -77,9 +77,6 @@
 		};
 
 
-
-
-
 		$scope.add_question = function (question) {
 			console.log(question);
 			var data = {
@@ -93,5 +90,103 @@
 			});
 		}
 
-		}])
+		}]);
+
+
+
+	app.controller('file_uplodController', ['$scope', 'Upload', '$timeout', '$http', function ($scope, Upload, $timeout,$http) {
+
+		$scope.initializetion_foto = function (id) {
+			console.log("fotos  zijn geintializeerd");
+			$scope.project_id = id;
+			//console.log($scope.project_id);
+/*
+			//haal alle informatie ui projecten database
+			$http.get(root + "/project/" + $scope.project_id + "/edit/api")
+				.success(function (data) {
+					$scope.project = data;
+					//console.log("project data is binnen");
+					console.log(data);
+				});
+*/
+
+
+		}
+
+		$scope.uploadFiles = function(files, errFiles) {
+			$scope.files = files;
+			$scope.errFiles = errFiles;
+			$scope.errorMsg = " ";
+			angular.forEach(files, function(file) {
+
+				console.log($scope);
+				file.upload = Upload.upload({
+					url: root+ '/upload_form',
+					data: {project_photo: file},
+					method: "POST",
+					_token: '{{csrf_token()}}'
+				});
+				file.upload.then(function (response) {
+					$timeout(function () {
+						file.result = response.data;
+						if(response.data.error){
+							$scope.errorMsg = response.data.error;
+						}
+
+						console.log(file.result);
+					});
+				}, function (response) {
+					console.log("respons functie");
+					console.log(response);
+					if (response.status > 0){
+
+						$scope.errorMsg = response.status + ': ' + response.data;
+					}
+				}, function (evt) {
+					file.progress = Math.min(100, parseInt(100.0 *
+						evt.loaded / evt.total));
+				});
+			});
+		}
+	}]);
+
+/*
+	app.controller('MyCtrl', ['$scope', 'Upload', '$timeout', function ($scope, Upload, $timeout) {
+		$scope.uploadFiles = function(files, errFiles) {
+			$scope.files = files;
+			$scope.errFiles = errFiles;
+			$scope.errorMsg = " ";
+			angular.forEach(files, function(file) {
+
+				console.log($scope);
+				file.upload = Upload.upload({
+					url: root+ '/upload_form',
+					data: {project_photo: file},
+					method: "POST",
+					_token: '{{csrf_token()}}'
+				});
+				file.upload.then(function (response) {
+					$timeout(function () {
+						file.result = response.data;
+						if(response.data.error){
+							$scope.errorMsg = response.data.error;
+						}
+
+						console.log(file.result);
+					});
+				}, function (response) {
+					console.log("respons functie");
+					console.log(response);
+					if (response.status > 0){
+
+						$scope.errorMsg = response.status + ': ' + response.data;
+					}
+				}, function (evt) {
+					file.progress = Math.min(100, parseInt(100.0 *
+						evt.loaded / evt.total));
+				});
+			});
+		}
+	}]);
+*/
 })();

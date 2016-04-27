@@ -52,4 +52,5 @@ Route::get('javascript_main',function(){
 });
 
 Route::get('al_projects/api/get', 'projectController@json_al_projects');
+Route::post('upload_form','projectController@upload_form');
 
