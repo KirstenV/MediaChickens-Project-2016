@@ -53,7 +53,7 @@
 
 				</form>
 				
-			</div>
+			</div> <!-- END DIV NAVBAR-SEARCH -->
 			<div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
 				<ul class="nav navbar-nav">
 				
