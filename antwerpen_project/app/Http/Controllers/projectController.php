@@ -12,6 +12,8 @@ use App\Vragen;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use Validator;
+use Intervention\Image\ImageManagerStatic as Image;
+
 
 
 use App\Http\Requests;
@@ -170,27 +172,50 @@ class projectController extends Controller
 			return response()->json(['error' => 'bestan moet een extensie :gif,jpg,jpeg,bmp,png hebben '], 200);
 			//return $validator->errors();
 		}
-		$destinationPath = base_path('public/img/original');
-		$image_name = $image->getClientOriginalName();
-
-		$img_string = 'public/img/original'.$image_name;
-		// open an image file
-		$img = Image::make($img_string);
-
-// now you are able to resize the instance
-		$img->resize(800, 600);
-
-// finally we save the image as a new file
-		$img->save(base_path('public/img/project'));
+		$destinationPath = 'img/original';
 
 
 
-		if(!$image->move($destinationPath,$image_name)) {
+
+
+		if(!$image->move($destinationPath,$image->getClientOriginalName())) {
 
 			return $validator->errors(['message' => 'Error saving the file.', 'code' => 400]);
 		}
-		return response()->json(['success' => true,'src_image' => $image_name], 200);
+
+		$image_name = $image->getClientOriginalName();
+		$img_url = $destinationPath."/".$image_name;
+
+
+
+
+		$img = Image::make($img_url);
+// now you are able to resize the instance
+		$img->resize(1024, 768);
+// finally we save the image as a new file
+		$img->save('img/project/'.$image_name);
+
+
+		$img = Image::make($img_url);
+// now you are able to resize the instance
+
+		$img->resize(400, 300, function ($constraint) {
+			$constraint->upsize();
+		});
+// finally we save the image as a new file
+		$img->save('img/project/small_'.$image_name);
+
+		return response()->json(['success' => true,'src_image' => $image->getClientOriginalName()], 200);
 		//
 	}
+	/*
+	public  function resize_img($from, $to,$width,$higth){
+		$img = Image::make($from);
+// now you are able to resize the instance
+		$img->resize($width, $higth);
+// finally we save the image as a new file
+		$img->save($to);
+		return "susses";
+	}*/
 	
 }

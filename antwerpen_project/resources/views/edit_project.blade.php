@@ -41,7 +41,7 @@
 				<div class="alle_fotos " class="row" ng-controller="file_uplodController" ng-init="initializetion_foto({{$id}})">
 
 					<div class="show_fotos" ng-repeat="foto in show_fotos">
-						<img ng-src="{{Request::root()}}/img/project/@{{ foto.project_picture }}" alt="@{{ foto.project_picture }}">
+						<img ng-src="{{Request::root()}}/img/project/small_@{{ foto.project_picture }}" alt="@{{ foto.project_picture }}">
 
 					</div><!--end of foto galerij-->
 					<div class="add_fotos"  >
@@ -50,14 +50,13 @@
 
 						<button ngf-select="uploadFiles($files, $invalidFiles)" multiple
 								accept="image/*" ngf-max-height="1000" ngf-accept="'image/*'" ngf-max-size="1MB">
-							Select Files</button>
+							Select Files</button><img  ngf-thumbnail="picFile" class="thumb">
 						<br><br>
-						Files:
 						<ul>
 							<li ng-repeat="f in errFiles" style="font:smaller">@{{f.name}} @{{f.$error}} @{{f.$errorParam}}
 							</li>
 						</ul>
-						@{{errorMsg}}
+						<!--@{{errorMsg}}-->
 					</div>
 				</div><!--end of file_upload Conroller-->
 			</div>
