@@ -7,12 +7,12 @@
 		$http.get(root + "/al_projects/api/get")
 			.success(function (data) {
 				$scope.projects = data;
-				console.log(data);
+				//console.log(data);
 			});
 
 		//vers
 		$scope.add_project = function (content, token, admin) {
-			console.log(name, token, admin);
+			//console.log(name, token, admin);
 			var data = {
 				row_content: content,
 				admin: admin,
@@ -32,7 +32,7 @@
 				$http.get(root + "/al_projects/api/get")
 					.success(function (data) {
 						$scope.projects = data;
-						console.log(data);
+						//console.log(data);
 					});
 
 			};
@@ -46,10 +46,10 @@
 	}]);
 
 	app.controller('edit_projectController', ['$scope', '$http', function ($scope, $http) {
-		console.log("controller is klaar");
+		//console.log("controller is klaar");
 		
 		$scope.initializetion = function (id) {
-			console.log("project is geintializeerd");
+			//console.log("project is geintializeerd");
 			$scope.project_id = id;
 			//console.log($scope.project_id);
 			
@@ -58,7 +58,7 @@
 				.success(function (data) {
 					$scope.project = data;
 				//console.log("project data is binnen");
-				console.log(data);
+				//console.log(data);
 				});
 
 			//haal alle vragen uit behorende project
@@ -66,7 +66,7 @@
 				.success(function (data) {
 				$scope.alle_vragen = data;
 				//console.log("vragen data is binnen");
-				console.log(data);
+				//console.log(data);
 				});
 			
 		}
@@ -88,7 +88,7 @@
 
 
 		$scope.add_question = function (question) {
-			console.log(question);
+			//console.log(question);
 			var data = {
 				question_type: question,
 				project_id: $scope.project_id,
@@ -109,16 +109,16 @@
 		$scope.initializetion_foto = function (id) {
 			console.log("fotos  zijn geintializeerd");
 			$scope.project_id = id;
-			//console.log($scope.project_id);
-/*
-			//haal alle informatie ui projecten database
-			$http.get(root + "/project/" + $scope.project_id + "/edit/api")
+			console.log($scope.project_id);
+
+			//haal alle informatie ui fotos database
+			$http.get(root + "/fotos/" + $scope.project_id + "/edit/api")
 				.success(function (data) {
-					$scope.project = data;
+					$scope.show_fotos = data;
 					//console.log("project data is binnen");
-					console.log(data);
+					console.log($scope.show_fotos);
 				});
-*/
+
 
 
 		}
@@ -138,9 +138,26 @@
 				});
 				file.upload.then(function (response) {
 					$timeout(function () {
+
 						file.result = response.data;
 						if(response.data.error){
 							$scope.errorMsg = response.data.error;
+						}
+						console.log(response.data.success);
+						console.log(response.data.src_image);
+						if(response.data.success){
+							var data = {
+								project_id: $scope.project_id,
+								row_content: response.data.src_image,
+								_method: "PUT",
+							};
+
+							$http.post(root + "/Project_foto/add_foto/api", data).success(function (data) {
+								//$scope.project = data;
+								$scope.show_fotos.push(data);
+								console.log($scope.show_fotos);
+							});
+
 						}
 
 						console.log(file.result);

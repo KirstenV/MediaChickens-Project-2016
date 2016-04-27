@@ -61,6 +61,16 @@ class projectController extends Controller
 		//return view('edit_project')->with('project_data',$project_data);
 		return $fotos;
 	}
+	public function add_foto(Request $request){
+		$foto = new Project_foto;
+		$foto->project_picture = $request->row_content;
+		$foto->projecten_id = $request->project_id;
+		$foto->save();
+
+		$foto = Projecten::find($request->project_id)->show_fotos->last();
+		return $foto;
+
+	}
 	
 	public function json_vragen($id){
 		$project_vragen = Projecten::find($id)->show_vragen;
@@ -160,13 +170,26 @@ class projectController extends Controller
 			return response()->json(['error' => 'bestan moet een extensie :gif,jpg,jpeg,bmp,png hebben '], 200);
 			//return $validator->errors();
 		}
-		$destinationPath = storage_path() . '/uploads';
+		$destinationPath = base_path('public/img/original');
+		$image_name = $image->getClientOriginalName();
 
-		if(!$image->move($destinationPath, $image->getClientOriginalName())) {
+		$img_string = 'public/img/original'.$image_name;
+		// open an image file
+		$img = Image::make($img_string);
+
+// now you are able to resize the instance
+		$img->resize(800, 600);
+
+// finally we save the image as a new file
+		$img->save(base_path('public/img/project'));
+
+
+
+		if(!$image->move($destinationPath,$image_name)) {
 
 			return $validator->errors(['message' => 'Error saving the file.', 'code' => 400]);
 		}
-		return response()->json(['success' => true], 200);
+		return response()->json(['success' => true,'src_image' => $image_name], 200);
 		//
 	}
 	

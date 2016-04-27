@@ -34,13 +34,16 @@
 				<div class="col-md-2">Titel</div>
 				<div class='project eind_datum col-md-10' data-update_status='init' data-titel='eind_datum' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.eind_datum}}</div>
 			</div>
-			<div >
+
 				{{ Form::open(array('url' => 'project_toevoegen/add','files' => true))}} {{ Form::close() }}
 
-				<!--
+			<div >
 				<div class="alle_fotos " class="row" ng-controller="file_uplodController" ng-init="initializetion_foto({{$id}})">
-					<div class="show_fotos">
-					</div>
+
+					<div class="show_fotos" ng-repeat="foto in show_fotos">
+						<img ng-src="{{Request::root()}}/img/project/@{{ foto.project_picture }}" alt="@{{ foto.project_picture }}">
+
+					</div><!--end of foto galerij-->
 					<div class="add_fotos"  >
 
 						<h4>Upload on file select</h4>
@@ -56,9 +59,9 @@
 						</ul>
 						@{{errorMsg}}
 					</div>
-				</div>
+				</div><!--end of file_upload Conroller-->
 			</div>
-			-->
+
 			<div class="row">
 				<div class="alle_fases">
 				</div>
@@ -84,10 +87,12 @@
 				<div class="col-md-12">
 					<div class="col-md-4" ng-repeat="vraag in alle_vragen">
 						<div ng-show="vraag.choices == 'open vragen'">
+							<div>@{{ $index }}</div>
 							<h4>@{{vraag.choices}}</h4>
 							<h5 class='vraag project titel col-md-12' data-update_status='init' data-titel='vraag' data-tabel='Vragen' data-id='@{{vraag.id}}' contenteditable='true'>@{{vraag.vraag}}</h5>
 						</div>
 						<div ng-show="vraag.choices == 'meerkeuzevragen'">
+							<div>@{{ $index }}</div>
 							<h4>@{{vraag.choices}}</h4>
 							<h5 class='vraag project titel col-md-12' data-update_status='init' data-titel='vraag' data-tabel='Vragen' data-id='@{{vraag.id}}' contenteditable='true'>@{{vraag.vraag}}</h5>
 							<h5 class='vraag project titel col-md-12' data-update_status='init' data-titel='mogelijke_antwoorden_1' data-tabel='Vragen' data-id='@{{vraag.id}}' contenteditable='true'> @{{vraag.mogelijke_antwoorden_1}}</h5>
@@ -96,13 +101,14 @@
 							<h5 class='vraag project titel col-md-12' data-update_status='init' data-titel='mogelijke_antwoorden_4' data-tabel='Vragen' data-id='@{{vraag.id}}' contenteditable='true'> @{{vraag.mogelijke_antwoorden_4}}</h5>
 						</div>
 						<div ng-show="vraag.choices == 'Gesloten vragen'">
+							<div>@{{ $index }}</div>
 							<h4>@{{vraag.choices}}</h4>
 							<h5 class='vraag project titel col-md-12' data-update_status='init' data-titel='vraag' data-tabel='Vragen' data-id='@{{vraag.id}}' contenteditable='true'>@{{vraag.vraag}}</h5>
 							<h5 class='vraag project titel col-md-12' data-update_status='init' data-titel='mogelijke_antwoorden_1' data-tabel='Vragen' data-id='@{{vraag.id}}' contenteditable='true'><i class="glyphicon glyphicon-unchecked"></i> @{{vraag.mogelijke_antwoorden_1}}</h5>
 							<h5 class='vraag project titel col-md-12' data-update_status='init' data-titel='mogelijke_antwoorden_2' data-tabel='Vragen' data-id='@{{vraag.id}}' contenteditable='true'><i class="glyphicon glyphicon-unchecked"></i> @{{vraag.mogelijke_antwoorden_2}}</h5>
 						</div>
 					</div>
-				</div>
+				</div><!--end of vragen div-->
 			</div>
 		</div>
 	</div>

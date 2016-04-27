@@ -45,7 +45,7 @@ Route::get('kaart/api/get_locations', 'kaartController@json_locations');
 
 
 Route::put('{tabel}/api/add_dependency', 'projectController@add_project_dependency');
-
+Route::put('Project_foto/add_foto/api', 'projectController@add_foto');
 
 Route::get('javascript_main',function(){
 	return view('javascript');
