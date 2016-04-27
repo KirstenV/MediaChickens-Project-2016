@@ -1,7 +1,10 @@
+@font-face { font-family: MyWebfont; src: url("SunAntwerpen_500.woff") format(”woff”); }
 
-body{
-	
-}
+@font-face { font-family: MyWebfont; src: url("SunAntwerpen_500.eot"); }
+
+@font-face { font-family: MyWebfont; src: url("SunAntwerpen_500.svg#SunAntwerpen_500") format("svg"); }
+
+body { font-family: MyWebfont, Verdana, sans-serif; } 
 
 
 .nav_bar_margin_top{
@@ -24,13 +27,31 @@ body{
     border-width: 3px;
 }
 
+#projectContainer{
+	position:fixed;
+	width:50vw;
+	left:50%;
+	top: 0;
+    bottom:0;
+    padding: 70px 0px 50px 0px;
+    overflow-y:scroll;
+    overflow-x:hidden;
+}
+
+.panel-heading{
+	
+	background-color:#f5f5f5;
+}
+
 #container{
 	top:0%;
-	position:relative;
+	position:absolute;
 	padding-top: 70px;
-	padding-left: 50px;
 	padding-bottom: 50px;
-
+	padding-left:0px;
+	width:50%;
+	right:0%;
+	
 }
 
 .navbar-default{
@@ -42,6 +63,30 @@ body{
 }
 
 
+#editable{
+	position:fixed;
+	width:50%;
+	text-align:center;
+	margin: 0 auto;
+	z-index:999;
+	top: 70px;
+	background-color:#fff;
+	height:60px;
+	box-shadow: -1px 1px 5px #888888;
+}
+
+#add_project{
+	border-radius:50px;
+	border:dashed #888888;
+	color: #888888;
+	position:relative;
+	width:70%;
+	height: 35px;
+	margin: 0 auto;
+	top: 30%;
+	padding: 5px;
+}
+
 .navbar-collapse{
 	position:absolute;
 	height:100%;
@@ -49,11 +94,19 @@ body{
 	top:10%;
 }
 
-
+.panel-body{
+	
+	padding: 5px 10px 5px 40px;
+}
 
 .fa-user{
 	transform:scale(2);
 	color:#DA291C;
+}
+
+.fa-pencil{
+	
+	color:#3498db;
 }
 
 .navbar-header img{
@@ -77,6 +130,42 @@ body{
 	margin-left:10px;
 }
 
+.fa-angle-double-right, .fa-angle-double-down{
+	transform:scale(1.5);
+	color:#DA291C;
+	right:10%;
+	position:absolute;
+}
+
+#accordion a{
+	color:#000;
+	text-decoration:none;
+	
+}
+
+.accordion-toggle:focus{outline: none;}
+#accordion{
+	position:absolute;
+	top:130px;
+	width:100%;
+	
+}
+
+#accordion a:hover{
+	color:#DA291C;
+	text-decoration:none;
+	
+}
+
+#div-inline{
+	display:inline;
+	
+}
+
+
+.fa-trash{
+	color:#DA291C;
+}
 .textbox { 
     border: 1px solid #848484; 
     -webkit-border-radius: 30px; 
