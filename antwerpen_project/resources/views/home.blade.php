@@ -42,21 +42,29 @@
 	</a>
 -->
     <div id="collapse1" class="panel-collapse collapse in">
-      <div class="panel-body" ng-repeat="project in projects">
-	  
+      <div class="panel-body" ng-repeat="project in projects"  ng-class="is_tru_id(project.id,highlight_class)">
+
 	  	<h1 id="div-inline"><a href="project/@{{project.id}}/view">@{{project.titel}}</a>  </h1>
-		<div id="div-inline" class="edit_home_page"><a href="project/@{{project.id}}/edit"title="pas project aan"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>
-		<div id="div-inline" class="delete_home_page"><a href="project/@{{project.id}}/delete" title="verwijder project"><i class="fa fa-trash" aria-hidden="true"></i></a></div>
+		<div id="div-inline" class="project_icons">
+			<div  class="col-md-6">	
+				<div id="div-inline" class="edit_home_page"><a href="project/@{{project.id}}/edit"title="pas project aan"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>
+			</div> <!-- END DIV COL-MD-6 -->	
+			<div class="col-md-6">	
+				<div id="div-inline" class="delete_home_page"><a href="project/@{{project.id}}/delete" title="verwijder project"><i class="fa fa-trash" aria-hidden="true"></i></a></div>
+			</div> <!-- END DIV COL-MD-6 -->
+		</div> <!-- END DIV PROJECT_ICONS -->
+		
 <!--		<br><small><div id="div-inline"  class="begien_datum_home_page"><strong>Begindatum: </strong>@{{project.begin_datum}}</a></div></small> -->
 <!--		<small><div id="div-inline"  class="eind_datum_home_page"><strong>Einddatum: </strong>@{{project.eind_datum}}</a></div></small> -->
 <!--		<br><div id="div-inline"  class="begien_datum_home_page"><strong>Beschrijving: </strong>@{{project.beschrijving}}</a></div> -->
 	  	<hr>
-	  </div> <!-- END DIV -->
-    </div>
-  </div>
-  
+
+	  </div> <!-- END DIV PANEL-BODY -->
+    </div><!-- END DIV COLLAPSE1 -->
+  </div> <!-- END DIV PANEL PANEL-DEFAULT -->
+<!-- 
   <div class="panel panel-default">
- <!--
+
     <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapse2">
 		<div class="panel-heading">
 	      <h4 class="panel-title">
@@ -88,13 +96,13 @@
       commodo consequat.</div>
     </div>
   </div>
--->
-</div> 
 
+</div> 
+-->
 
 	
 
-</div>
+</div> <!-- END DIV ACCORDION -->
 
 @stop
 

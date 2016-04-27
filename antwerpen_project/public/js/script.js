@@ -11,8 +11,16 @@ $(document).ready(function () {
 			if (content != "") {
 				var token = $("input[name='_token']").val();
 				angular.element(document.getElementById('add_project')).scope().add_project(content,token,1);
+				
+				$('#projectContainer').animate({scrollTop:$('#accordion').height()}, 'slow');
+				
+				
+
+				
 			}
-			$(this).text("Pas mij aan om nieuw project aan te maken");
+			$(this).text("Pas mij aan om een nieuw project aan te maken");
+			
+
 		});
 
 		$('.nieuw_project').keypress(function (e) {
@@ -21,7 +29,10 @@ $(document).ready(function () {
 			}
 		});
 
-		
+	
+
+
+
 		
 		
 		
@@ -117,11 +128,11 @@ $(document).ready(function () {
 		
 
 		
-		$('.collapse').on('shown.bs.collapse', function(){
-			$(this).parent().find(".fa-angle-double-right").removeClass("fa-angle-double-right").addClass("fa-angle-double-down");
-		}).on('hidden.bs.collapse', function(){
-			$(this).parent().find(".fa-angle-double-down").removeClass("fa-angle-double-down").addClass("fa-angle-double-right");
-		});
+//		$('.collapse').on('shown.bs.collapse', function(){
+//			$(this).parent().find(".fa-angle-double-right").removeClass("fa-angle-double-right").addClass("fa-angle-double-down");
+//		}).on('hidden.bs.collapse', function(){
+//			$(this).parent().find(".fa-angle-double-down").removeClass("fa-angle-double-down").addClass("fa-angle-double-right");
+//		});
 		
 		
 		

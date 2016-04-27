@@ -22,6 +22,10 @@
 
 			$http.post(root + "/projecten/api/add", data).success(function (data, status) {
 				$scope.projects.push(data);
+                console.log("data");
+                console.log(data);
+                $scope.highlight_class= data.id;
+                
 			});
 
 			$scope.set_id = function (id) {
@@ -33,6 +37,12 @@
 
 			};
 		};
+        
+        $scope.is_tru_id =function (variabel1,variabel2){
+         if(variabel1 == variabel2){
+            return "highlight_class";
+         }
+        }
 	}]);
 
 	app.controller('edit_projectController', ['$scope', '$http', function ($scope, $http) {
