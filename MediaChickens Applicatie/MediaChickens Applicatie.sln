@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 2013
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MediaChickens Applicatie.CSharp", "MediaChickens Applicatie.CSharp.csproj", "{DB811AEA-106D-13BC-9A04-DC965E5545C8}"
 EndProject
 Global
