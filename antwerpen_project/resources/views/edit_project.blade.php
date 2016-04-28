@@ -39,7 +39,18 @@
 						</div>
 						
 					</div>
-
+					
+					<hr>
+					
+					<div class="locatieleft">
+						<h3>Selecteer locatie</h3>
+					</div>
+					
+					<div class="locatieright">
+						<div id="map-container2">
+							<div id="map"></div>
+						</div>
+					</div>
 						{{ Form::open(array('url' => 'project_toevoegen/add','files' => true))}} {{ Form::close() }}
 					<hr>
 					<div id="edit_foto">
