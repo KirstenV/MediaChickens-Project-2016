@@ -22,8 +22,8 @@ public class CameraScript : MonoBehaviour
     private float totalEnemiesOnLine = 0;
     //coördinates for spawning
     private float roadblockYPos = 1.7f;
-    private float carYPos = 3.57f;
-    private float truckYPos = 0;
+    private float carYPos = 3.56f;
+    private float truckYPos = 3.17f;
     private float carOffsetSideWays = -2.3f;
     private float truckOffsetSideways = 0;
     private float roadblockOffsetSideways = 0;
@@ -113,15 +113,15 @@ public class CameraScript : MonoBehaviour
                 bigEnemiesOnLine++;
                 if (randomNrLane == 2)
                 {
-                    Instantiate(truck, new Vector3(leftRoad + truckOffsetSideways, truckYPos, enemySpawnDistance + distanceBetweenEnemies * enemySpawnCount), Quaternion.identity);
+                    Instantiate(truck, new Vector3(leftRoad + truckOffsetSideways, truckYPos, enemySpawnDistance + distanceBetweenEnemies * enemySpawnCount), Quaternion.Euler(new Vector3(0, 90, 0)));
                 }
                 else if (randomNrLane == 3)
                 {
-                    Instantiate(truck, new Vector3(middleRoad + truckOffsetSideways, truckYPos, enemySpawnDistance + distanceBetweenEnemies * enemySpawnCount), Quaternion.identity);
+                    Instantiate(truck, new Vector3(middleRoad + truckOffsetSideways, truckYPos, enemySpawnDistance + distanceBetweenEnemies * enemySpawnCount), Quaternion.Euler(new Vector3(0, 90, 0)));
                 }
                 else if (randomNrLane == 4)
                 {
-                    Instantiate(truck, new Vector3(rightRoad + truckOffsetSideways, truckYPos, enemySpawnDistance + distanceBetweenEnemies * enemySpawnCount), Quaternion.identity);
+                    Instantiate(truck, new Vector3(rightRoad + truckOffsetSideways, truckYPos, enemySpawnDistance + distanceBetweenEnemies * enemySpawnCount), Quaternion.Euler(new Vector3(0, 90, 0)));
                 }
                 else { Debug.Log("Couldn't spawn enemy in this lane: 2"); }
                 break;

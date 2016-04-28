@@ -1,15 +1,20 @@
 fileFormatVersion: 2
-guid: c17ee3f77a385324e8746a066b8aab10
-timeCreated: 1461867068
+guid: 8619046ba3de4064ba6db32817b7c908
+timeCreated: 1461868450
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Wheels
     400000: //RootNode
+    400002: Wheels
     2300000: //RootNode
+    2300002: Wheels
     3300000: //RootNode
-    4300000: Connect
+    3300002: Wheels
+    4300000: Truck
+    4300002: Wheels
   materials:
     importMaterials: 1
     materialName: 0

@@ -21,7 +21,7 @@ public class Player : MonoBehaviour {
     //lane in which player is running, only 3 lanes
     private byte currentLane;
     //height from which player can jump again
-    private float playerOnGroundJump = 1.2f;
+    private float playerOnGroundJump = 0.1f;
     //force to move player
     private float forceSide = 7000;
     private float forceUp = 7800;
@@ -55,7 +55,7 @@ public class Player : MonoBehaviour {
             
             score = Mathf.Round(Time.fixedTime * 100);
             scoreText.text = score.ToString();
-            if ((score - levelUpTimer) >= 1000) //if the difference between the current score (= time) and the leveluptimer is bigger then 1000, he levels up 
+            if ((score - levelUpTimer) >= 5000) //if the difference between the current score (= time) and the leveluptimer is bigger then 1000, he levels up 
             {
                 levelUpTimer = score;
                 speed += 0.05f;
