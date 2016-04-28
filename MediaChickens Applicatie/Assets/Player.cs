@@ -16,7 +16,7 @@ public class Player : MonoBehaviour {
     private float score;
     public Text scoreText;
     //Speed + level up
-    private float speed = 0.3f;
+    private float speed = 0.35f;
     private float levelUpTimer = 0; 
     //lane in which player is running, only 3 lanes
     private byte currentLane;
@@ -24,7 +24,7 @@ public class Player : MonoBehaviour {
     private float playerOnGroundJump = 1.2f;
     //force to move player
     private float forceSide = 7000;
-    private float forceUp = 7500;
+    private float forceUp = 7800;
     private float forceJump = 14000; 
 
     
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour {
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-         //   alive = false;
+            alive = false;
 
         }
     }
@@ -58,7 +58,7 @@ public class Player : MonoBehaviour {
             if ((score - levelUpTimer) >= 1000) //if the difference between the current score (= time) and the leveluptimer is bigger then 1000, he levels up 
             {
                 levelUpTimer = score;
-                speed += 0.06f;
+                speed += 0.05f;
             }
 
 
