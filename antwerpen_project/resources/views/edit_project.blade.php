@@ -108,6 +108,23 @@
 						</div>
 					</div>
 				</div><!--end of vragen div-->
+
+
+				<div class="all_fases" ng-controller="add_fase_and_filleController" ng-init="initializetion_fase({{$id}})">
+					<div class="show_allfases">
+						<div ng-repeat="fase in show_fases">
+							<div>@{{ $index }}</div>
+							<div class='project titel col-md-10' data-update_status='init' data-titel='titel' data-tabel='fases' data-id='@{{fase.id}}' contenteditable='true'>@{{  fase.titel}}</div>
+							<div class='project titel col-md-10' data-update_status='init' data-titel='beschrijving' data-tabel='fases' data-id='@{{fase.id}}' contenteditable='true'>@{{  fase.beschrijving}}</div>
+							<div>@{{  fase.fases}}</div>
+							<div class="glyphicon glyphicon-edit" ngf-select="uploadFiles($files, $invalidFiles, fase.id )"
+								 accept="image/*" ngf-max-height="1000" ngf-accept="'image/*'" ngf-max-size="1MB"></div><img ng-src="{{Request::root()}}/img/project/@{{ fase.fases_picture }}" alt="@{{ fase.fases_picture }}">
+						</div>
+					</div>
+					<div class="add_fase">
+						<div class="glyphicon glyphicon-plus-sign" ng-click="add_fase()"></div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -57,3 +57,14 @@ Route::post('upload_form','projectController@upload_form');
 //delete roots
 Route::post('project/{id}/delete/api','projectController@delte_projeten');
 
+
+//fase
+
+Route::get('fase/get_fase/{id}/api',"projectController@get_fase");
+Route::post('fase/add_fase/api',"projectController@add_fase");
+Route::put('Project_fase/update_fase_img/api',"projectController@update_fase_img");
+
+
+//test
+Route::get('test',"projectController@test");
+
