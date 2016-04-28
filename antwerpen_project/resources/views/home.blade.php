@@ -50,7 +50,7 @@
 				<div id="div-inline" class="edit_home_page"><a href="project/@{{project.id}}/edit"title="pas project aan"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>
 			</div> <!-- END DIV COL-MD-6 -->	
 			<div class="col-md-6">	
-				<div id="div-inline" class="delete_home_page"><a href="project/@{{project.id}}/delete" title="verwijder project"><i class="fa fa-trash" aria-hidden="true"></i></a></div>
+				<div id="div-inline" class="delete_home_page" ng-click="delete_project(project.id)"><a href=""><i class="fa fa-trash" aria-hidden="true"></i></a></div>
 			</div> <!-- END DIV COL-MD-6 -->
 		</div> <!-- END DIV PROJECT_ICONS -->
 		

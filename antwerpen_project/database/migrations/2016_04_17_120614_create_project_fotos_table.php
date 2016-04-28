@@ -16,7 +16,7 @@ class CreateProjectFotosTable extends Migration
            $table->increments('id');
 			$table->string('project_picture');
 			$table->integer('projecten_id')->unsigned();
-			$table->foreign('projecten_id')->references('id')->on('projecten');
+			$table->foreign('projecten_id')->references('id')->on('projecten')->onDelete('cascade');
 			$table->softDeletes();
             $table->timestamps();
         });

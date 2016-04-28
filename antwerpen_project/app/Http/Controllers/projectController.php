@@ -21,7 +21,7 @@ use App\Http\Requests;
 class projectController extends Controller
 {
     public function project_toevoegen(Request $request){
-		
+
 		$project = new Projecten;
 		$project->titel = $request->titel;
 		$project->beschrijving ="klick op mij en pas mij aan voor de beschrijving";
@@ -217,5 +217,20 @@ class projectController extends Controller
 		$img->save($to);
 		return "susses";
 	}*/
-	
+
+
+
+	// deltenig apis
+
+	public  function  delte_projeten($id){
+		//$project = Projecten::find($id);
+		//$project->destroy();
+		$project = Projecten::find($id);
+		$project->delete();
+		//$deleted_item = Projecten::withTrashed()->where('id', $id)->get();
+		return $project;
+
+
+	}
+
 }

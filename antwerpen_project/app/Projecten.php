@@ -3,9 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Projecten extends Model
 {
+    use SoftDeletes;
 	 public function show_fases()
     {
         return $this->hasMany('App\Fase');
@@ -26,5 +28,7 @@ class Projecten extends Model
     }
 	
     //
-	protected $table = 'projecten';
+    protected $table = 'projecten';
+    protected $dates = ['deleted_at'];
+
 }

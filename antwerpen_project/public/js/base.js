@@ -22,8 +22,8 @@
 
 			$http.post(root + "/projecten/api/add", data).success(function (data, status) {
 				$scope.projects.push(data);
-                console.log("data");
-                console.log(data);
+                //console.log("data");
+                //console.log(data);
                 $scope.highlight_class= data.id;
                 
 			});
@@ -43,6 +43,31 @@
             return "highlight_class";
          }
         }
+
+		$scope.delete_project = function ($id) {
+
+			console.log($id);
+
+			var data = {
+				_method: "POST",
+			};
+
+			$http.post(root + "/project/"+$id+"/delete/api", data).success(function (data) {
+				//$scope.projects = data;
+				//$scope.project.indexOf(data);
+				console.log("data");
+				for(var i=0; i< $scope.projects.length; i++){
+					if($scope.projects[i].id == data.id){
+						delete $scope.projects[i];
+						break;
+					}
+				}
+				console.log($scope.projects);
+				console.log(data);
+			});
+
+		}
+
 	}]);
 
 	app.controller('edit_projectController', ['$scope', '$http', function ($scope, $http) {

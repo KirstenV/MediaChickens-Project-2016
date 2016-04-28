@@ -54,3 +54,6 @@ Route::get('javascript_main',function(){
 Route::get('al_projects/api/get', 'projectController@json_al_projects');
 Route::post('upload_form','projectController@upload_form');
 
+//delete roots
+Route::post('project/{id}/delete/api','projectController@delte_projeten');
+
