@@ -89,13 +89,23 @@
 		</div>
 	</nav>
 -->
-		<div class="col-md-6">
-			@yield('map')
-		</div>
-
-		<div id="container" class="col-md-6"  >
 		
-			@yield('content')
+			@yield('map')
+		
+
+		
+		
+			@yield('homeContent')
+		
+		
+		
+		
+		
+			@yield('editContent')
+	
+		
+		
+		
 		
 		<div class="col-md-8" style="display: none;">
 			<h3>
