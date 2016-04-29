@@ -45,7 +45,7 @@
 	    <div id="collapse1" class="panel-collapse collapse in">
 	      <div class="panel-body" ng-repeat="project in projects"  ng-class="is_tru_id(project.id,highlight_class)">
 			  <div ng-show="project.id">
-				<h1 id="div-inline"><a href="project/@{{project.id}}/view">@{{project.titel}}</a>  </h1>
+				<h4 id="div-inline"><a href="project/@{{project.id}}/view">@{{project.titel}}</a>  </h4>
 				<div id="div-inline" class="project_icons">
 					<div  class="col-md-6">
 						<div id="div-inline" class="edit_home_page"><a href="project/@{{project.id}}/edit"title="wijzig project"><i class="fa fa-pencil" aria-hidden="true"></i></a></div>

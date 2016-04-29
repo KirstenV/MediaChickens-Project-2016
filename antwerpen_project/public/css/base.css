@@ -301,8 +301,52 @@ body { font-family: MyWebfont, Verdana, sans-serif; }
 
 }
 
+.edit_foto_add_button{
+	
+	height:150px;
+	width:150px;
+	background-color:lightgrey;
+	opacity:0.7;
+	font-size:2.5em;
+	border: 1px dashed;
+	text-align:center;
+	padding-top:50px;
+	margin-top:20px;
+}
 
+.edit_foto_add_button:hover{
+	border: 1px dashed #DA291C;
+	color:#DA291C;
+	opacity:1;
+	cursor: hand;
+	cursor: pointer; 
+}
 
+.edit_foto_add_button_small{
+	top: -26px;
+	position: relative;
+	font-size:0.5em;
+}
+
+.edit_foto_add_button_small_maxsize{
+		top: -60px;
+	position: relative;
+	font-size:0.3em;
+	opacity:0.8;
+	
+	
+}
+
+.title_red{
+	
+	color:#DA291C;
+	
+}
+
+.thumbnail{
+	margin-top:20px;
+	height:150px;
+}
 #map-container{
 	
 	width:50%;
