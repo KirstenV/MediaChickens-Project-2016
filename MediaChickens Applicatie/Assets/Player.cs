@@ -44,6 +44,14 @@ public class Player : MonoBehaviour {
         {
             alive = false;
 
+
+        }
+    }
+    void Update()
+    {
+        if((Input.GetKeyDown(KeyCode.Escape)) && (alive = false))
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("swipeWorks");
         }
     }
     void FixedUpdate() //always being called
