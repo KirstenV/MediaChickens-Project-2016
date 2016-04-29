@@ -12,7 +12,7 @@ public class BtnRestart : MonoBehaviour {
 	void Update () {
 	
 	}
-    void OnClick()
+    public void OnClick()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("swipeWorks");
     }

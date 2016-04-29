@@ -15,12 +15,6 @@ public class Enemy : MonoBehaviour {
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("MainCamera"))
-        {
-            // alive = false;
-            
-            Debug.Log("enemy out of sight");
 
-        }
     }
 }

@@ -32,12 +32,14 @@ public class Player : MonoBehaviour {
     private float health = 10;
     private float maxHealth = 10;
 
+    public Button btnRestart;
+
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        btnRestart.gameObject.SetActive(false);
         score = 0;
         currentLane = 1; //0 links, 1 midden,2 rechts
 
@@ -50,6 +52,7 @@ public class Player : MonoBehaviour {
             if(health < maxHealth) { 
             
             isAlive = false;
+            btnRestart.gameObject.SetActive(true);
             }
             else
             {
@@ -76,7 +79,6 @@ public class Player : MonoBehaviour {
             {
                 health += 0.01f;
                 healthbarChange(health);
-                Debug.Log(health);
             }
             score = Mathf.Round(Time.timeSinceLevelLoad * 100);
             scoreText.text = score.ToString();
