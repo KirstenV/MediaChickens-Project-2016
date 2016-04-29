@@ -301,6 +301,8 @@ body { font-family: MyWebfont, Verdana, sans-serif; }
 
 }
 
+
+
 #map-container{
 	
 	width:50%;
@@ -310,4 +312,22 @@ body { font-family: MyWebfont, Verdana, sans-serif; }
 	left:0%;
 	
 	position: fixed;
+}
+
+#map-container2{
+	
+	width:400px;
+	height:300px;
+	position:relative;
+	
+}
+
+.locatieleft{
+	width:45%;
+	display:inline;
+}
+
+.locatieright{
+	width:45%;
+	display:inline;
 }

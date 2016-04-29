@@ -19,7 +19,7 @@ $(document).ready(function () {
 				
 			}
 			$(this).text("Pas mij aan om een nieuw project aan te maken");
-
+			
 
 		});
 
