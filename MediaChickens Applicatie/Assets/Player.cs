@@ -9,7 +9,7 @@ public class Player : MonoBehaviour {
     private Touch initialTouchSwipe = new Touch();
     private float distanceSwipe = 0;
     private bool hasSwiped = false;
-    private bool alive = true;
+    private bool isAlive = true;
     //rigidbody for movement with force
     public Rigidbody rb;
     //score + label
@@ -25,31 +25,43 @@ public class Player : MonoBehaviour {
     //force to move player
     private float forceSide = 7000;
     private float forceUp = 7800;
-    private float forceJump = 14000; 
-
-    
+    private float forceJump = 14000;
+    public Texture2D textureHealthRed;
+    public Texture2D textureHealthOrange;
+    public GameObject healthBar;
+    private float health = 10;
+    private float maxHealth = 10;
 
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
         score = 0;
         currentLane = 1; //0 links, 1 midden,2 rechts
-        
-    }
+
+}
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            alive = false;
-
+            
+            if(health < maxHealth) { 
+            
+            isAlive = false;
+            }
+            else
+            {
+                health = 0.1f;
+                healthbarChange(health);
+            }
 
         }
     }
     void Update()
     {
-        if((Input.GetKeyDown(KeyCode.Escape)) && (alive = false))
+        if(Input.GetKeyDown(KeyCode.Escape))
         {
             UnityEngine.SceneManagement.SceneManager.LoadScene("swipeWorks");
         }
@@ -58,10 +70,15 @@ public class Player : MonoBehaviour {
     {
         
        
-        if (alive)
+        if (isAlive)
         {
-            
-            score = Mathf.Round(Time.fixedTime * 100);
+            if(health < maxHealth)
+            {
+                health += 0.01f;
+                healthbarChange(health);
+                Debug.Log(health);
+            }
+            score = Mathf.Round(Time.timeSinceLevelLoad * 100);
             scoreText.text = score.ToString();
             if ((score - levelUpTimer) >= 5000) //if the difference between the current score (= time) and the leveluptimer is bigger then 1000, he levels up 
             {
@@ -137,7 +154,21 @@ public class Player : MonoBehaviour {
         }
     }
 
+    void OnGUI()
+    {
+        //drawing the health bar
+        //draw the background (red, only visible if empty)
+      //  GUI.BeginGroup(new Rect(100, 10, 1000, 1000));
+        //GUI.Box(new Rect(0, 0, 1000, 1000), textureHealthRed);
 
+
+        //GUI.EndGroup();
+    }
+    void healthbarChange(float currentHealth)
+    {
+        currentHealth = currentHealth / 10;
+        healthBar.transform.localScale = new Vector3(currentHealth, healthBar.transform.localScale.y, healthBar.transform.localScale.z);
+    }
     } 
 
     
