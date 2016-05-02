@@ -71,7 +71,6 @@
   <ItemGroup>
     <Compile Include="Assets\BtnRestart.cs" />
     <Compile Include="Assets\CameraScript.cs" />
-    <Compile Include="Assets\Enemy.cs" />
     <Compile Include="Assets\Player.cs" />
     <Compile Include="Assets\roadSpawn.cs" />
   </ItemGroup>
