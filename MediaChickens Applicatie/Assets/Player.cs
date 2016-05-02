@@ -5,6 +5,12 @@ using System.Collections;
 
 
 public class Player : MonoBehaviour {
+    //variables for middle of roads
+    private float leftRoad = 28;
+    private float middleRoad = 36;
+    private float rightRoad = 44;
+
+
     //variables for swipe
     private Touch initialTouchSwipe = new Touch();
     private float distanceSwipe = 0;
@@ -20,8 +26,16 @@ public class Player : MonoBehaviour {
     private float forceUp = 7800;
     private float forceJump = 14000;
     private float speed = 0.35f;
+    //if the player has chosen the project and is 'playing the game'
+    private bool isPlaying = false;
+    //rigidbodys for turning on the townsquare
+    public Rigidbody road1;
 
+
+
+    //button to restart the game --> only for demo
     public Button btnRestart;
+
 
 
 
@@ -30,15 +44,28 @@ public class Player : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         btnRestart.gameObject.SetActive(false);
-        currentLane = 1; //0 links, 1 midden,2 rechts
-
+        currentLane = 1; //0links, 1 midden,2 rechts
+        road1.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePosition ;
+        road1.centerOfMass = new Vector3(0, 0, 0);
 }
     void OnTriggerEnter(Collider other)
     {
-        
+        if (other.gameObject.tag == "AnswerA")
+        {
+            Debug.Log("answered A");
+        }
+        else if (other.gameObject.tag == "AnswerB")
+        {
+            Debug.Log("answered B");
+        }
+        else if (other.gameObject.tag == "AnswerC")
+        {
+            Debug.Log("answered C");
+        }
     }
     void FixedUpdate() //always being called
     {
+        if (isPlaying) { 
             this.transform.position = this.transform.position + new Vector3(0, 0, speed);
             foreach (Touch t in Input.touches)
             {
@@ -98,11 +125,63 @@ public class Player : MonoBehaviour {
 
 
             }
-
-
-
-
         }
+        else
+        {
+            foreach (Touch t in Input.touches)
+            {
+                if (t.phase == TouchPhase.Began)
+                {
+                    initialTouchSwipe = t;
+                }
+                else if (t.phase == TouchPhase.Moved && !hasSwiped)
+                {
+                    //distance formula
+                    float deltaXSwipe = initialTouchSwipe.position.x - t.position.x;
+                    float deltaYSwipe = initialTouchSwipe.position.y - t.position.y;
+                    distanceSwipe = Mathf.Sqrt((deltaXSwipe * deltaXSwipe) + (deltaYSwipe * deltaYSwipe));
+                    //direction
+                    bool swipedSideways = Mathf.Abs(deltaXSwipe) > Mathf.Abs(deltaYSwipe); //swipe up and down or sideways
+                    if (distanceSwipe > 100)//100
+                    {
+                        if (swipedSideways && deltaXSwipe > 0) //swiped left
+                        {
+                            Debug.Log("swiped Left");
+                            road1.AddTorque(new Vector3(0, -20, 0));
+                        }
+                        else if (swipedSideways && deltaXSwipe <= 0) //swiped right
+                        {
+                            Debug.Log("swiped Right");
+                            road1.AddTorque(new Vector3(0, 20, 0));
+                        }
+                        else if (!swipedSideways && deltaYSwipe > 0) //swiped down
+                        {
+
+
+                        }
+                        else if (!swipedSideways && deltaYSwipe <= 0 && this.transform.position.y <= playerOnGroundJump) //swiped up
+                        {
+                            isPlaying = true;
+
+                        }
+                        hasSwiped = true;
+                    }
+
+                }
+                else if (t.phase == TouchPhase.Ended)
+                {
+                    initialTouchSwipe = new Touch(); //reset touch
+                    hasSwiped = false;
+                }
+
+
+            }
+        }
+
+
+
+
+    }
     
     } 
 
