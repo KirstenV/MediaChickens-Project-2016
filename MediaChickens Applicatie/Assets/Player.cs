@@ -37,8 +37,11 @@ public class Player : MonoBehaviour {
     Queue<char> playerAnswers = new Queue<char>();
     byte maxAnswers = 5;
 
-    //button to restart the game --> only for demo
+    //button to restart the game + background on canvas
     public Button btnRestart;
+    public Image bgEndScreen;
+    public RawImage logoEndScreen;
+    public Text txtAnswered;
 
 
 
@@ -48,6 +51,9 @@ public class Player : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         btnRestart.gameObject.SetActive(false);
+        bgEndScreen.gameObject.SetActive(false);
+        txtAnswered.gameObject.SetActive(false);
+        logoEndScreen.gameObject.SetActive(false);
         currentLane = 1; //0links, 1 midden,2 rechts
         road1.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePosition ;
         road1.centerOfMass = new Vector3(0, 0, 0);
@@ -85,7 +91,10 @@ public class Player : MonoBehaviour {
             {
                 isPlaying = false;
                 isRunning = false;
-                Debug.Log("stopped playing");
+                bgEndScreen.gameObject.SetActive(true);
+                btnRestart.gameObject.SetActive(true);
+                txtAnswered.gameObject.SetActive(true);
+                logoEndScreen.gameObject.SetActive(true);
             }
         }
     }
