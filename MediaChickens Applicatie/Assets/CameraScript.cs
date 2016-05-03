@@ -13,4 +13,11 @@ public class CameraScript : MonoBehaviour
 
         
     }
+    void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.tag == "Environment")
+        {
+            Destroy(other.gameObject);
+        }
+    }
 }

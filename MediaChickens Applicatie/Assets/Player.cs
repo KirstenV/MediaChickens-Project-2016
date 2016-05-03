@@ -30,6 +30,9 @@ public class Player : MonoBehaviour {
     private bool isPlaying = false;
     //rigidbodys for turning on the townsquare
     public Rigidbody road1;
+    //if player has chosen answer
+    bool hasSwipedUp = false;
+    bool isRunning = false;
 
 
 
@@ -62,18 +65,35 @@ public class Player : MonoBehaviour {
         {
             Debug.Log("answered C");
         }
+        if(other.gameObject.tag == "Tunnel")
+        {
+            if (!hasSwipedUp)
+            {
+                isRunning = false;
+            }
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if(other.gameObject.tag == "Tunnel")
+        {
+            hasSwipedUp = false;
+        }
     }
     void FixedUpdate() //always being called
     {
-        if (isPlaying) { 
-            this.transform.position = this.transform.position + new Vector3(0, 0, speed);
+        if (isPlaying) {
+
+            if (isRunning) { 
+                this.transform.position = this.transform.position + new Vector3(0, 0, speed);
+            }
             foreach (Touch t in Input.touches)
             {
                 if (t.phase == TouchPhase.Began)
                 {
                     initialTouchSwipe = t;
                 }
-                else if (t.phase == TouchPhase.Moved && !hasSwiped)
+                else if (t.phase == TouchPhase.Moved && !hasSwiped && !hasSwipedUp)
                 {
                     //distance formula
                     float deltaXSwipe = initialTouchSwipe.position.x - t.position.x;
@@ -109,9 +129,8 @@ public class Player : MonoBehaviour {
                         }
                         else if (!swipedSideways && deltaYSwipe <= 0 && this.transform.position.y <= playerOnGroundJump) //swiped up
                         {
-                            Physics.gravity = new Vector3(0, -50F, 0);
-                            rb.AddForce(0, forceJump, 0, ForceMode.Force); 
-                            
+                            isRunning = true;
+                            hasSwipedUp = true;
                         }
                         hasSwiped = true;
                     }
@@ -156,13 +175,15 @@ public class Player : MonoBehaviour {
                         }
                         else if (!swipedSideways && deltaYSwipe > 0) //swiped down
                         {
-
+                            Debug.Log("swiped down");
 
                         }
                         else if (!swipedSideways && deltaYSwipe <= 0 && this.transform.position.y <= playerOnGroundJump) //swiped up
                         {
+                            Debug.Log("started game");
                             isPlaying = true;
-
+                            isRunning = true;
+                            
                         }
                         hasSwiped = true;
                     }
