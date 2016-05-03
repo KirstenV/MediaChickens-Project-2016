@@ -42,24 +42,34 @@ public class Player : MonoBehaviour {
     public Image bgEndScreen;
     public RawImage logoEndScreen;
     public Text txtAnswered;
-
+    public Button btnPause;
+    public Button btnContinue;
+    public Text txtPause;
 
 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        btnPause.GetComponent<Button>();
+        btnContinue.GetComponent<Button>();
+        btnPause.onClick.AddListener(() => { BtnPauseClicked();});
+        btnContinue.onClick.AddListener(() => { BtnContinueClicked(); });
         rb.constraints = RigidbodyConstraints.FreezeRotation;
         btnRestart.gameObject.SetActive(false);
         bgEndScreen.gameObject.SetActive(false);
         txtAnswered.gameObject.SetActive(false);
         logoEndScreen.gameObject.SetActive(false);
+        btnContinue.gameObject.SetActive(false);
+        txtPause.gameObject.SetActive(false);
+        btnPause.gameObject.SetActive(true);
         currentLane = 1; //0links, 1 midden,2 rechts
         road1.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePosition ;
         road1.centerOfMass = new Vector3(0, 0, 0);
 }
     void OnTriggerEnter(Collider other)
     {
+        
         if (other.gameObject.tag == "AnswerA")
         {
             playerAnswers.Enqueue('A');
@@ -177,6 +187,30 @@ public class Player : MonoBehaviour {
                 }
             }
         }
+    void BtnPauseClicked()
+    {
+        isPlaying = false;
+        isRunning = false;
+        bgEndScreen.gameObject.SetActive(true);
+        btnRestart.gameObject.SetActive(true);
+        txtAnswered.gameObject.SetActive(false);
+        logoEndScreen.gameObject.SetActive(true);
+        btnPause.gameObject.SetActive(false);
+        btnContinue.gameObject.SetActive(true);
+        txtPause.gameObject.SetActive(true);
+    }
+    void BtnContinueClicked()
+    {
+        isPlaying = true;
+        isRunning = true;
+        bgEndScreen.gameObject.SetActive(false);
+        btnRestart.gameObject.SetActive(false);
+        txtAnswered.gameObject.SetActive(false);
+        logoEndScreen.gameObject.SetActive(false);
+        btnPause.gameObject.SetActive(true);
+        btnContinue.gameObject.SetActive(false);
+        txtPause.gameObject.SetActive(false);
+    }
     } 
 
     
