@@ -13,9 +13,11 @@
 	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
 	
 	<link rel="stylesheet" href="{{Request::root()}}/css/base.css">
+    <link rel="stylesheet" href="{{Request::root()}}/css/bootstrap-datepicker3.min.css">
 	
 	<script src="{{Request::root()}}/javascript_main"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 	<script  type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
 	<script src="{{Request::root()}}/js/ng_file_upload/ng-file-upload-shim.min.js"></script>
@@ -23,6 +25,8 @@
 	<script src="{{Request::root()}}/js/edit.js"></script>
 	<script src="{{Request::root()}}/js/base.js"></script>
 	<script src="{{Request::root()}}/js/script.js"></script>
+    <script src="{{Request::root()}}/js/bootstrap-datepicker.min.js"></script>
+    <script src="{{Request::root()}}/js/bootstrap-datepicker.nl-BE.min.js"></script>
 	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrmTkGoBzp--pRgO5vRXIsbXPrk3VMp_w&libraries=places" type="text/javascript"></script>
 
 	
