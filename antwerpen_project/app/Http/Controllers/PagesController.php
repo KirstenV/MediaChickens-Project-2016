@@ -37,8 +37,10 @@ class PagesController extends Controller
 	   return view('home');
 
    }
-	
-	
+
+	public function json_al_projects(){
+		return response()->json( Projecten::all());
+	}
 	
 	
 	

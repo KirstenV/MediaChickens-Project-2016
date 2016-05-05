@@ -10,9 +10,9 @@ class Authenticate
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string|null  $guard
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
+     * @param  string|null $guard
      * @return mixed
      */
     public function handle($request, Closure $next, $guard = null)
@@ -23,8 +23,13 @@ class Authenticate
             } else {
                 return redirect()->guest('login');
             }
+        } else {
+            if (Auth::user()->is_adm) {
+                return $next($request);
+            } else {
+                return redirect()->guest('/');
+            }
         }
 
-        return $next($request);
     }
 }

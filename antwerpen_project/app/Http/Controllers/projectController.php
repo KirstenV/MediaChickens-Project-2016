@@ -20,7 +20,18 @@ use App\Http\Requests;
 
 class projectController extends Controller
 {
-    public function project_toevoegen(Request $request){
+	public function __construct()
+	{
+		$this->middleware('auth',['except'=>['index']]);
+//		if(Auth::check){
+//			if(!Auth::is_adm && \Request::route()->getName() == '/'){
+//				return redirect()->route('login');
+//			}
+//		}
+		
+	}
+
+	public function project_toevoegen(Request $request){
 
 		$project = new Projecten;
 		$project->titel = $request->titel;
@@ -97,9 +108,7 @@ class projectController extends Controller
 		return  User::find($request->admin)->show_projecten->last();
 	}
 	
-	public function json_al_projects(){
-		return response()->json( Projecten::all());
-	}
+	
 	
 	
 	

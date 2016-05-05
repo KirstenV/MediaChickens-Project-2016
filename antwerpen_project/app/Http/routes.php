@@ -51,9 +51,25 @@ Route::get('javascript_main',function(){
 	return view('javascript');
 });
 
-Route::get('al_projects/api/get', 'projectController@json_al_projects');
+Route::get('al_projects/api/get', 'PagesController@json_al_projects');
 Route::post('upload_form','projectController@upload_form');
 
 //delete roots
 Route::post('project/{id}/delete/api','projectController@delte_projeten');
 
+Route::get('login', 'Auth\AuthController@getLogin');
+Route::post('auth/login', 'Auth\AuthController@postLogin');
+//Route::get('auth/logout', 'Auth\AuthController@getLogout');
+Route::get('auth/logout', 'Auth\AuthController@logout');
+
+// Registration routes...
+Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::post('auth/register', 'Auth\AuthController@postRegister');
+
+
+
+//ingeloogd test
+Route::get('ingeloogd', function(){
+	$user = Auth::user();
+	return $user;
+});
