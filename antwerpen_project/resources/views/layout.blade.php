@@ -23,8 +23,8 @@
 	<script src="{{Request::root()}}/js/edit.js"></script>
 	<script src="{{Request::root()}}/js/base.js"></script>
 	<script src="{{Request::root()}}/js/script.js"></script>
-	<script src="http://maps.google.com/maps/api/js?sensor=false"
-            type="text/javascript"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrmTkGoBzp--pRgO5vRXIsbXPrk3VMp_w&libraries=places" type="text/javascript"></script>
+
 	
 	@yield('header')
 	
