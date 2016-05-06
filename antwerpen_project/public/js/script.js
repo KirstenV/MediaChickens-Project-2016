@@ -165,10 +165,11 @@ $(document).ready(function () {
             , success: function (data) {
 
 
+                var myLat = data["results"][0]["geometry"]["location"]["lat"];
+                var myLng = data["results"][0]["geometry"]["location"]["lng"];
                 
                 
-                
-                var myLatLng = {lat: data["results"][0]["geometry"]["location"]["lat"], lng: data["results"][0]["geometry"]["location"]["lng"]};
+                var myLatLng = {lat: myLat, lng: myLng};
                 placeMarker(myLatLng);
             }
         });
@@ -209,11 +210,25 @@ $(document).ready(function () {
     }
 
 
+    
+    
+    $('.input-daterange').datepicker({
+        todayBtn: "linked",
+        clearBtn: true,
+        language: "nl-BE",
+        daysOfWeekHighlighted: "0,6",
+        todayHighlight: true
+    });
 
+$('[data-toggle="tooltip"]').tooltip(); 
 
-
-
-
+$("#foto-delete").hide();
+    
+    $("#thumbs").mouseover(function(){
+        
+        $("#foto-delete").show();
+        
+    })
 
 
     //		$('.collapse').on('shown.bs.collapse', function(){
