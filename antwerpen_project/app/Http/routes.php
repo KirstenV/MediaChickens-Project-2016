@@ -68,8 +68,16 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 
 
+//voor unity json objecten
+Route::get('unity/vragen/{id}/api', 'unityController@get_vragen_by_id');
+Route::get('unity/al_projecten/api', 'unityController@get_projects');
+
 //ingeloogd test
 Route::get('ingeloogd', function(){
 	$user = Auth::user();
 	return $user;
 });
+
+
+//get all cotente of project
+Route::get('project/{id}/api}', 'PagesController@get_al_info_from_project');

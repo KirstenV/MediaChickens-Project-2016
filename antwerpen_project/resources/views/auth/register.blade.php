@@ -1,6 +1,6 @@
 <!-- resources/views/auth/register.blade.php -->
 
-<form method="POST" action="/auth/register">
+<form method="POST" action="{{Request::root()}}/auth/register">
     {!! csrf_field() !!}
 
     <div>

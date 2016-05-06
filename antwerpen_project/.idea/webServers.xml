@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="b3794654-e9d2-4f66-bc82-4d8fefbba334" name="antwerpen_project_sftp" url="http://mediachickens.multimediatechnology.be">
+        <fileTransfer explicitFtps="false" host="websites.kdg.be" port="21" password="dfdcdfc6df92dfc6dfeedf99df8cdf99" username="mediachickens">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" />
+          </advancedOptions>
+          <option name="port" value="21" />
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>

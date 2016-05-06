@@ -41,7 +41,13 @@ class PagesController extends Controller
 	public function json_al_projects(){
 		return response()->json( Projecten::all());
 	}
-	
+
+
+	public function get_al_info_from_project($id){
+		
+		
+
+	}
 	
 	
 	
