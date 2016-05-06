@@ -13,10 +13,10 @@ return [
     |
     */
 
-    'password' => 'Passwords must be at least six characters and match the confirmation.',
-    'reset' => 'Your password has been reset!',
-    'sent' => 'We have e-mailed your password reset link!',
-    'token' => 'This password reset token is invalid.',
-    'user' => "We can't find a user with that e-mail address.",
+    'password' => 'Wachtwoord moet minimaal zes tekens lang zijn en de wachtwoorden moeten overeenkomen.',
+    'reset'    => 'Het wachtwoord van uw account is gewijzigd.',
+    'sent'     => 'We hebben een e-mail verstuurd met instructies om een nieuw wachtwoord in te stellen.',
+    'token'    => 'Dit wachtwoordresettoken is niet geldig.',
+    'user'     => 'Geen gebruiker bekend met dat e-mailadres.',
 
 ];

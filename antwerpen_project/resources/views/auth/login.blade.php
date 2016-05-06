@@ -22,3 +22,6 @@
         <button type="submit">Login</button>
     </div>
 </form>
+@foreach ($errors->all() as $error)
+    <li>{{ $error }}</li>
+@endforeach
