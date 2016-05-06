@@ -56,12 +56,20 @@ body { font-family: MyWebfont, Verdana, sans-serif; }
 }
 
 #editContainer{
-
-	margin: 0 auto;
+    position: absolute;
+    right: 0;
 	width:75%;
 	padding-top: 60px;
 }
 
+
+#map-container-editpage{
+    
+    width: 25%;
+    height: 100%;
+    position: fixed;
+    padding-top: 75px;
+}
 
 #edit_header{
 	text-align:center;
@@ -301,6 +309,14 @@ body { font-family: MyWebfont, Verdana, sans-serif; }
 
 }
 
+
+#locatie, #locatie input{
+    
+    width: 100%;
+    
+    
+}
+
 .edit_foto_add_button{
 	
 	height:150px;
@@ -358,20 +374,5 @@ body { font-family: MyWebfont, Verdana, sans-serif; }
 	position: fixed;
 }
 
-#map-container2{
-	
-	width:400px;
-	height:300px;
-	position:relative;
-	
-}
 
-.locatieleft{
-	width:45%;
-	display:inline;
-}
 
-.locatieright{
-	width:45%;
-	display:inline;
-}
