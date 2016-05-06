@@ -32,7 +32,7 @@
 	
 	@yield('header')
 	
->>>>>>> origin/master
+
 </head>
 <body>
 

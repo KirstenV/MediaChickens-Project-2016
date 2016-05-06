@@ -6,12 +6,14 @@
 
     <div id="homeContainer" class="col-md-6">
         <div id="projectContainer" ng-controller="projectController">
-
+            @if(Auth::check())
+                @if(Auth::user()->is_adm)
             <div id="editable">
                 <h4 id="add_project" class="nieuw_project" contenteditable='true'>Pas mij aan om een nieuw project aan
                     te maken</h4>
             </div> <!-- END DIV EDITABLE -->
-
+            @endif
+                @endif
 
             <div class="alle_projecten">
                 <div class="project">
@@ -45,9 +47,6 @@
 
 
                                 @if(Auth::check())
-                                    <script>
-                                        console.log("gegeven van de gebreuker","{{Auth::user()->is_adm}}");
-                                    </script>
                                     @if(Auth::user()->is_adm)
 
 
