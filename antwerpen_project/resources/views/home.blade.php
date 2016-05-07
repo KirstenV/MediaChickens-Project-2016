@@ -15,14 +15,16 @@
             @endif
                 @endif
 
+
+
+
             <div class="alle_projecten">
                 <div class="project">
-
-
                 </div> <!-- END DIV PROJECT -->
                 {{ Form::open(array('url' => 'projecten/add'))}}
                 {{ Form::close() }}
             </div> <!-- END DIV ALLE_PROJECTEN -->
+
 
 
             <div class="panel-group" id="accordion">
@@ -39,17 +41,14 @@
                             </div>
                         </a>
                     -->
-                    <div id="collapse1" class="panel-collapse collapse in">
+
+                    <div id="collapse1" class="panel-collapse collapse in" ng-hide="project">
                         <div class="panel-body" ng-repeat="project in projects"
                              ng-class="is_tru_id(project.id,highlight_class)">
                             <div ng-show="project.id">
-                                <h4 id="div-inline"><a href="project/@{{project.id}}/view">@{{project.titel}}</a></h4>
-
-
+                                <h4 id="div-inline" ng-click="show_project_info(project.id)"><!--<a href="project/@{{project.id}}/view">-->@{{project.titel}}<!--</a>--></h4>
                                 @if(Auth::check())
                                     @if(Auth::user()->is_adm)
-
-
                                         <div id="div-inline" class="project_icons">
                                             <div class="col-md-6">
                                                 <div id="div-inline" class="edit_home_page"><a
@@ -72,7 +71,32 @@
                             </div>
                         </div> <!-- END DIV PANEL-BODY -->
                     </div><!-- END DIV COLLAPSE1 -->
-                </div> <!-- END DIV PANEL PANEL-DEFAULT -->
+
+                    <div class="hole_project" ng-show="project">
+                        <div ng-click="show_projects()">terug naar overzicht van projecten</div>
+                        @{{ project.project.id }}
+                        @{{ project.project.begin_datum }}
+                        @{{ project.project.eind_datum }}
+                        @{{ project.project.beschrijving }}
+
+                        <div ng-repeat="foto in project.fotos">
+                            <div>@{{ $index }}</div>
+                            <img ng-src="{{Request::root()}}/img/project/small_@{{ foto.project_picture }}">
+                        </div>
+
+                        <div ng-repeat="vraag in project.vragen">
+                            <div>@{{ $index }}</div>
+                            <div>@{{ vraag}}</div>
+                        </div>
+
+                        <div ng-repeat="vraag in project.vragen">
+                            <div>@{{ $index }}</div>
+                            <div>@{{ vraag}}</div>
+                        </div>
+                    </div><!--end div evreting obout project-->
+
+
+                    </div> <!-- END DIV PANEL PANEL-DEFAULT -->
                 <!--
                   <div class="panel panel-default">
 

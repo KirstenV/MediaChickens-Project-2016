@@ -44,9 +44,13 @@ class PagesController extends Controller
 
 
 	public function get_al_info_from_project($id){
-		
-		
-
+		$project = Projecten::find($id);
+		$project_information = array('project' => $project);
+		$project_information = array_add($project_information, 'locaties',$project->show_locaties);
+		$project_information = array_add($project_information, 'fotos',$project->show_fotos);
+		$project_information = array_add($project_information, 'fases',$project->show_fases);
+		$project_information = array_add($project_information, 'vragen',$project->show_vragen);
+		return $project_information;
 	}
 	
 	

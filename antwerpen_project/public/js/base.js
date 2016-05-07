@@ -2,6 +2,8 @@
     var app = angular.module('antwerpen_project', ['ngFileUpload']);
 
     app.controller('projectController', ['$http', "$scope", function ($http, $scope) {
+        $scope.project;
+
 
         // home page haal alle projecten
         $http.get(root + "/al_projects/api/get")
@@ -10,6 +12,18 @@
                 //console.log(data);
             });
 
+        $scope.show_project_info = function ($id_project) {
+            console.log("id van de gelickte project is = ",$id_project);
+            $http.get(root + "/project/"+$id_project+"/api")
+                .success(function (data) {
+                    $scope.project = data;
+                    console.log(data);
+                });
+        }
+        $scope.show_projects =function () {
+            console.log("Er is gedrukt op het terug keren naar projecten");
+            $scope.project="";
+        }
         //vers
         $scope.add_project = function (content, token, admin) {
             //console.log(name, token, admin);
