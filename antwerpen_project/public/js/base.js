@@ -104,6 +104,7 @@
 
     app.controller('edit_projectController', ['$scope', '$http', function ($scope, $http) {
         //console.log("controller is klaar");
+        
 
         $scope.initializetion = function (id) {
             //console.log("project is geintializeerd");
@@ -130,19 +131,43 @@
 
         $scope.edit_project = function (tabel, id, veldnaam, content, token) {
             var data = {
-                row_name: veldnaam,
-                row_content: content,
+                rij_naam: veldnaam,
+                invul_veld: content,
                 _method: "PUT",
                 _token: token
             };
 
             $http.post(root + "/" + tabel + "/" + id, data).success(function (data, status) {
                 //$scope.project = data;
+                console.log("validation of input from server", data);
+                $scope.server_controle_input_veld = "";
+                $scope.server_controle_input_veld_succes = "";
+                if(data.$errors){
+                    $scope.server_controle_input_veld = data.rij_naam;
+                    $scope.server_controle_fout = data.$errors.invul_veld;
+                    console.log("error messeg afte validation =" ,$scope.server_controle_fout);
+                    console.log("validatiion er gien iets fout");
+                }
+                if(data.$succes){
+                    $scope.server_controle_input_veld_succes =data.rij_naam;
+                    $scope.server_controller_error = data.$succes;
+                    console.log("validatiion alles is goed opgeslagen");
+                }
             });
 
 
         };
 
+        $scope.toon_fout_melding = function ($tabele) {
+            if($scope.server_controle_input_veld == $tabele){
+                return true;
+            }
+        }
+        $scope.toon_succes_melding = function ($tabele) {
+            if( $scope.server_controle_input_veld_succes == $tabele){
+                return true;
+            }
+        }
 
         $scope.add_question = function (question) {
             //console.log(question);
