@@ -27,13 +27,13 @@
                                 <h4 class="title_red">Titel</h4>
                                 <div class="col-md-12">
 
-                                    <p ng-class="{'invalid': toon_fout_melding('titel')}" class="col-md-11 project titel" data-toggle="tooltip" ng-model="inhoud" data-placement="left"
+                                    <p ng-class="{'invalid': toon_fout_melding('titel',project.id)}" class="col-md-11 project titel" data-toggle="tooltip" ng-model="inhoud" data-placement="left"
                                        title="Klik om aan te passen" data-update_status='init' data-titel='titel'
                                        data-tabel='projecten' data-id='{{$id}}'
                                        contenteditable='true'>@{{project.titel}}</p>
                                     <div class="col-md-1 pull-right glyphicon glyphicon-saved "
-                                         ng-show="toon_succes_melding('titel')"></div>
-                                    <div class="col-md-11 invalid" ng-show="toon_fout_melding('titel')">@{{ server_controle_fout[0] }}</div>
+                                         ng-show="toon_succes_melding('titel',project.id)"></div>
+                                    <div class="col-md-11 invalid" ng-show="toon_fout_melding('titel',project.id)">@{{ server_controle_fout[0] }}</div>
                                 </div>
                             </div><!--einde row titel-->
                             <hr>
@@ -89,13 +89,13 @@
 
                             <div class="row">
                             <h4 class="title_red">Beschrijving</h4>
-                            <p ng-class="{'invalid': toon_fout_melding('beschrijving')}" data-toggle="tooltip" data-placement="left" title="Klik om aan te passen"
+                            <p ng-class="{'invalid': toon_fout_melding('beschrijving',project.id)}" data-toggle="tooltip" data-placement="left" title="Klik om aan te passen"
                                class="col-md-11 project beschrijving" data-update_status='init' data-titel='beschrijving'
                                data-tabel='projecten' data-id='{{$id}}'
                                contenteditable='true'>@{{project.beschrijving}}</p>
                             <div class="col-md-1 pull-right glyphicon glyphicon-saved "
-                                 ng-show="toon_succes_melding('beschrijving')"></div>
-                            <div class="col-md-11 invalid" ng-show="toon_fout_melding('beschrijving')">@{{ server_controle_fout[0] }}</div>
+                                 ng-show="toon_succes_melding('beschrijving',project.id)"></div>
+                            <div class="col-md-11 invalid" ng-show="toon_fout_melding('beschrijving',project.id)">@{{ server_controle_fout[0] }}</div>
                         </div>
                         </div><!--einde diw beschrijving-->
                             <hr>
@@ -134,8 +134,6 @@
                         </div>
 
                         <div class="row">
-
-
                             <div class="col-md-12">
                                 <div class="btn-group " role="group" aria-label="...">
                                     <div class="btn-group " role="group">
@@ -209,6 +207,44 @@
                             </div>
                             <!--end of vragen div-->
                         </div>
+
+                    <div class="row">
+                        <div class="all_fases" ng-controller="add_fase_and_filleController" ng-init="initializetion_fase({{$id}})">
+                            <div class="show_allfases">
+                                <div ng-repeat="fase in show_fases">
+                                    <div>@{{ $index }}</div>
+                                    <div ng-class="{'invalid': toon_fout_melding('fase_titel',fase.id)}" class='col-md-11 project titel col-md-10' data-update_status='init' data-titel='fase_titel' data-tabel='fases' data-id='@{{fase.id}}' contenteditable='true'>@{{  fase.fase_titel}}</div>
+                                    <div class="col-md-1 pull-right glyphicon glyphicon-saved "
+                                         ng-show="toon_succes_melding('fase_titel',fase.id)"></div>
+                                    <div class="col-md-11 invalid" ng-show="toon_fout_melding('fase_titel',fase.id)">@{{ server_controle_fout[0] }}</div>
+
+                                    <div ng-class="{'invalid': toon_fout_melding('fase_beschrijving',fase.id)}" class='col-md-11 project titel col-md-10' data-update_status='init' data-titel='fase_beschrijving' data-tabel='fases' data-id='@{{fase.id}}' contenteditable='true'>@{{  fase.fase_beschrijving}}</div>
+                                    <div class="col-md-1 pull-right glyphicon glyphicon-saved "
+                                         ng-show="toon_succes_melding('fase_beschrijving',fase.id)"></div>
+                                    <div class="col-md-11 invalid" ng-show="toon_fout_melding('fase_beschrijving',fase.id)">@{{ server_controle_fout[0] }}</div>
+
+
+
+                                    <div>@{{  fase.fases}}</div>
+                                    <div ng-click="get_fase_id($index)" class="glyphicon glyphicon-edit" ngf-select="uploadFiles($files, $invalidFiles, fase.id )"
+                                         accept="image/*" ngf-max-height="1000" ngf-accept="'image/*'" ngf-max-size="1MB"><img ng-src="{{Request::root()}}/img/project/@{{ fase.fases_picture }}" alt="@{{ fase.fases_picture }}">
+                                    </div>
+                                    <br>
+                                    <br>
+                                    <ul>
+                                        <li ng-repeat="f in errFiles" style="font:smaller">
+                                            @{{f.name}} @{{f.$error}} @{{f.$errorParam}}
+                                        </li>
+                                    </ul>
+                                    <br>
+                                    <br>
+                                </div>
+                            </div>
+                            <div class="add_fase">
+                                <div class="glyphicon glyphicon-plus-sign" ng-click="add_fase()"></div>
+                            </div>
+                        </div>
+                    </div>
                     </div>
                     <!-- END DIV EDIT_CONTENT -->
                 </div>

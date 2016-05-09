@@ -68,6 +68,7 @@ class projectController extends Controller
     {
         $project_information = array('$table' => $table);
         $project_information = array('rij_naam' => $request->rij_naam);
+        $project_information = array_add($project_information, 'id', $id);
 
         switch ($request->rij_naam) {
             case "titel":
@@ -115,10 +116,26 @@ class projectController extends Controller
                     'invul_veld' => 'required|max:1000',
                 ]);
                 break;
+            case "fase_titel" :
+                $validator = Validator::make($request->all(), [
+                    'invul_veld' => 'required|max:250',
+                ]);
+                break;
+            case "fase_beschrijving" :
+                $validator = Validator::make($request->all(), [
+                    'invul_veld' => 'required|max:500',
+                ]);
+                break;
+            case "fases_picture" :
+                $validator = Validator::make($request->all(), [
+                    'invul_veld' => 'required|max:250',
+                ]);
+                $project_information = array_add($project_information, 'fases_picture', Fase::find($id)->fases_picture);
+                break;
 
             default:
                 $validator = Validator::make($request->all(), [
-                    'invul_veld' => 'required|max: 5',
+                    'invul_veld' => 'required|max: 250',
                 ]);
         }
 
@@ -132,6 +149,7 @@ class projectController extends Controller
         $usser_updatet = Projecten::find($id);
 
         $project_information = array_add($project_information, '$succes', "alles s opgeslagen");
+
         return $project_information;
     }
 
@@ -204,52 +222,12 @@ class projectController extends Controller
 
     public function upload_form(Request $request)
     {
-
-        /*
-         *
-         $return="";
-        if($request->hasFile('project_photo')){
-            $file = $request->file('project_photo');
-            $return .= $file->getMimeType()."\t";
-            $return .= $file->getExtension()."\t";
-            $return .= $file->guessExtension()."\t";
-            if($file->isValid()){
-                $return .="isValid=true";
-                //return $request->file('project_photo')->getClientOriginalName();
-            }else{
-                $return .="isValid=false";
-            }
-            //return $request->file('project_photo')->getClientOriginalName();
-            return $return;
-        }
-        */
-        /*
-                $headers="";
-                foreach (getallheaders() as $name => $value) {
-                    $headers += "$name: $value\n";
-                }
-                return $headers;
-                //return "<pre>".print_r($request->input(),true)."</pre>";
-                //$file = Input::file('file');
-                //return $file;
-                //return $request;
-                //return $input->all();
-                //return $request->allFiles();
-                //return "succes";
-        */
-
-
         $image = Input::file('project_photo');
 
-        //$validator = Validator::make([$image], ['image' => 'required|image|mimes:gif,jpg,jpeg,bmp,png']);
         $validator = Validator::make([$image], ['mimes:gif,jpg,jpeg,bmp,png', 'image.required']);
-        //$validator = Validator::make([$image], ['project_photo','required']);
-        //$validator->errors();
-        //return var_dump($validator->errors());
 
         if ($validator->fails()) {
             return response()->json(['error' => 'bestan moet een extensie :gif,jpg,jpeg,bmp,png hebben '], 200);
-            //return $validator->errors();
         }
         $destinationPath = 'img/original';
 
@@ -282,18 +260,9 @@ class projectController extends Controller
         return response()->json(['success' => true, 'src_image' => $image->getClientOriginalName()], 200);
         //
     }
-    /*
-    public  function resize_img($from, $to,$width,$higth){
-        $img = Image::make($from);
-// now you are able to resize the instance
-        $img->resize($width, $higth);
-// finally we save the image as a new file
-        $img->save($to);
-        return "susses";
-    }*/
 
 
-    // deltenig apis
+    // delete api
 
     public function delte_projeten($id)
     {
@@ -305,6 +274,66 @@ class projectController extends Controller
         return $project;
 
 
+    }
+
+
+    //get fase update post fase
+    public function add_fase(Request $request)
+    {
+
+        $fase = new Fase;
+        $fase->fase_titel = "Voer hier titel in van de fase";
+        $fase->fase_beschrijving = "Voer hier je vraag in van de fase";
+        $fase->fases = "welke fase ";
+        $fase->fases_picture = "fases_picture_default.jpg";
+        $fase->projecten_id = $request->project_id;
+        $fase->save();
+
+        $latste_fase = Projecten::find($request->project_id)->show_fases->last();
+        return $latste_fase;
+
+    }
+
+    public function get_fase($project_id)
+    {
+        $all_fases = Projecten::find($project_id)->show_fases;
+        return $all_fases;
+    }
+    public function  update_fase_img(Request $request){
+      
+    }
+
+    public function post_fase_img(Request $request)
+    {
+        
+        $image = Input::file('fase_photo');
+
+        $validator = Validator::make([$image], ['mimes:gif,jpg,jpeg,bmp,png', 'image.required']);
+
+        if ($validator->fails()) {
+            return response()->json(['error' => 'bestan moet een extensie :gif,jpg,jpeg,bmp,png hebben '], 200);
+        }
+        $destinationPath = 'img/original';
+
+
+        if (!$image->move($destinationPath, $image->getClientOriginalName())) {
+
+            return $validator->errors(['message' => 'Error saving the file.', 'code' => 400]);
+        }
+
+        $image_name = $image->getClientOriginalName();
+        $img_url = $destinationPath . "/" . $image_name;
+
+
+        $img = Image::make($img_url);
+// now you are able to resize the instance
+        $img->resize(400, 300);
+// finally we save the image as a new file
+        $img->save('img/project/' . $image_name);
+
+
+        return response()->json(['success' => true, 'src_image' => $image->getClientOriginalName()], 200);
+        
     }
 
 }

@@ -14,8 +14,8 @@ class CreatFasesTable extends Migration
     {
         Schema::create('fases', function (Blueprint $table) {
             $table->increments('id');
-			$table->string('titel');
-			$table->text('beschrijving')->nullable();
+			$table->string('fase_titel');
+			$table->text('fase_beschrijving')->nullable();
 			$table->enum('fases', array('open fase','in progress','fase afgesloten'));
 			$table->string('fases_picture')->nullable()->default('fases_picture_default.jpg');
 			$table->integer('projecten_id')->unsigned();

@@ -81,3 +81,12 @@ Route::get('ingeloogd', function(){
 
 //get all cotente of project
 Route::get('project/{id}/api', 'PagesController@get_al_info_from_project');
+
+
+
+//fase
+
+Route::get('fase/get_fase/{id}/api',"projectController@get_fase");
+Route::post('fase/add_fase/api',"projectController@add_fase");
+Route::post('Project_fase/update_fase_img/api',"projectController@post_fase_img");
+Route::put('Project_fase/update_fase_img/api', 'projectController@update_fase_img');
