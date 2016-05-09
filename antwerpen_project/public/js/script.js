@@ -118,7 +118,7 @@ $(document).ready(function () {
             url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat_lng + "&key=AIzaSyChcI5yCog1780Of_wshHhIZ6yeLrMhkQM"
             , success: function (data) {
 
-                $("#map-locatie").append('<br>' + '<a href="" style="text-decoration:none" title="verwijder"><i class="fa fa-times inline" aria-hidden="true"></i></a>' + "  " + data["results"][0]["formatted_address"] + "<br>");
+                $("#map-locatie").append('<br>' + data["results"][0]["formatted_address"] + "  " + '<a href="" style="text-decoration:none" title="verwijder"><i class="fa fa-times inline" aria-hidden="true"></i></a>' + "<br>");
 
 
             }
@@ -158,7 +158,7 @@ $(document).ready(function () {
         // Get the place details from the autocomplete object.
         var place = autocomplete.getPlace();
 
-        $("#map-locatie").append('<br>' + '<a href="" style="text-decoration:none" title="verwijder"><i class="fa fa-times inline" aria-hidden="true"></i></a>' + "  " + place["formatted_address"] + "<br>");
+        $("#map-locatie").append('<br>' + place["formatted_address"] + "  " + '<a href="" style="text-decoration:none" title="verwijder"><i class="fa fa-times inline" aria-hidden="true"></i></a>' + "<br>");
         
         $.ajax({
             url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + place["formatted_address"] + "&key=AIzaSyChcI5yCog1780Of_wshHhIZ6yeLrMhkQM"
