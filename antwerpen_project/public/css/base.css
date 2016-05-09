@@ -47,6 +47,15 @@ body { font-family: MyWebfont, Verdana, sans-serif; }
     
 }
 
+.no-padding{
+    padding: 0px;
+}
+
+.inline{
+    
+    display: inline;
+}
+
 #foto-delete{
     
     position: absolute;
@@ -371,6 +380,47 @@ body { font-family: MyWebfont, Verdana, sans-serif; }
 }
 
 .edit_foto_add_button:hover{
+	border: 1px dashed #DA291C;
+	color:#DA291C;
+	opacity:1;
+	cursor: hand;
+	cursor: pointer; 
+}
+
+.vraag_add_button{
+	
+	height:150px;
+	width:150px;
+	background-color:lightgrey;
+	opacity:0.7;
+	font-size:2.5em;
+	border: 1px dashed;
+	text-align:center;
+	margin-top:20px;
+    padding: 0;
+}
+
+.btn-group .btn + .btn{
+	
+	width: 100%;
+    margin-left: 0px;
+}
+
+.mybutton{
+    width: 100%;
+}
+
+
+.pop-up{
+    border: 1px solid #3498db;
+border-radius: 10px;
+background-color: #3498db;
+position: absolute;
+right: 0%;
+padding: 7px;
+color: white;
+}
+.vraag_add_button:hover{
 	border: 1px dashed #DA291C;
 	color:#DA291C;
 	opacity:1;

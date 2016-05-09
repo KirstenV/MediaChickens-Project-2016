@@ -25,7 +25,7 @@
       <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
+            <state relative-caret-position="391">
               <caret line="32" column="59" selection-start-line="32" selection-start-column="46" selection-end-line="32" selection-end-column="59" />
               <folding />
             </state>
@@ -35,9 +35,15 @@
       <file leaf-file-name="edit_project.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/edit_project.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="346">
-              <caret line="220" column="108" selection-start-line="220" selection-start-column="108" selection-end-line="220" selection-end-column="108" />
-              <folding />
+            <state relative-caret-position="374">
+              <caret line="96" column="34" selection-start-line="96" selection-start-column="34" selection-end-line="106" selection-end-column="57" />
+              <folding>
+                <element signature="e#4057#4077#0#HTML" expanded="true" />
+                <element signature="e#10264#10292#0#HTML" expanded="true" />
+                <element signature="e#10954#10982#0#HTML" expanded="true" />
+                <element signature="e#13264#13292#0#HTML" expanded="true" />
+                <element signature="e#18480#18500#0#HTML" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -45,7 +51,7 @@
       <file leaf-file-name="base.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/base.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="952">
+            <state relative-caret-position="2788">
               <caret line="164" column="114" selection-start-line="164" selection-start-column="114" selection-end-line="164" selection-end-column="114" />
               <folding />
             </state>
@@ -65,7 +71,7 @@
       <file leaf-file-name="projectController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/projectController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="431">
+            <state relative-caret-position="969">
               <caret line="70" column="72" selection-start-line="70" selection-start-column="72" selection-end-line="70" selection-end-column="72" />
               <folding>
                 <element signature="e#40#68#0#PHP" expanded="true" />
@@ -150,7 +156,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1936" />
+    <option name="width" value="1932" />
     <option name="height" value="1066" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -178,6 +184,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -366,8 +374,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -438,18 +444,19 @@
       <workItem from="1462726538873" duration="9387000" />
       <workItem from="1462737833977" duration="1318000" />
       <workItem from="1462815834047" duration="12649000" />
+      <workItem from="1462831463774" duration="452000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="119355000" />
+    <option name="totallyTimeSpent" value="119807000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
+    <frame x="-8" y="-8" width="1932" height="1066" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.275" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27453026" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.093096234" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -823,7 +830,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="425">
           <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -839,7 +845,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
+        <state relative-caret-position="391">
           <caret line="32" column="59" selection-start-line="32" selection-start-column="46" selection-end-line="32" selection-end-column="59" />
           <folding />
         </state>
@@ -855,7 +861,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/projectController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="431">
+        <state relative-caret-position="969">
           <caret line="70" column="72" selection-start-line="70" selection-start-column="72" selection-end-line="70" selection-end-column="72" />
           <folding>
             <element signature="e#40#68#0#PHP" expanded="true" />
@@ -865,7 +871,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/base.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="952">
+        <state relative-caret-position="2788">
           <caret line="164" column="114" selection-start-line="164" selection-start-column="114" selection-end-line="164" selection-end-column="114" />
           <folding />
         </state>
@@ -873,9 +879,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/edit_project.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="220" column="108" selection-start-line="220" selection-start-column="108" selection-end-line="220" selection-end-column="108" />
-          <folding />
+        <state relative-caret-position="374">
+          <caret line="96" column="34" selection-start-line="96" selection-start-column="34" selection-end-line="106" selection-end-column="57" />
+          <folding>
+            <element signature="e#4057#4077#0#HTML" expanded="true" />
+            <element signature="e#10264#10292#0#HTML" expanded="true" />
+            <element signature="e#10954#10982#0#HTML" expanded="true" />
+            <element signature="e#13264#13292#0#HTML" expanded="true" />
+            <element signature="e#18480#18500#0#HTML" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
