@@ -71,6 +71,12 @@
 
                             <br>
                             <br>
+
+
+
+                    </div>
+                        
+                        <div id="error-messages">
                             @foreach ($errors->all() as $error)
                             <li class="title_red error-message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>  {{ $error }}</li>
                             @endforeach 
@@ -80,9 +86,7 @@
                                 $('#loginModal').modal('show');
                             </script>
                             @endif
-
-
-                    </div>
+                        </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuleer</button>
@@ -139,16 +143,21 @@
 
 
 
+
+                    </div>
+                        
+                        <div id="error-messages">
                             @foreach ($errors->all() as $error)
                             <li class="title_red error-message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>  {{ $error }}</li>
-                            @endforeach
+                            @endforeach 
                             
                             @if ($errors->all())
                             <script>
                                 $('#registerModal').modal('show');
                             </script>
                             @endif
-                    </div>
+                        </div>
+                        
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuleer</button>
