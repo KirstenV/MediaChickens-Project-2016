@@ -53,6 +53,17 @@ body {
     color: #DA291C;
 }
 
+
+.title_red.error-message {
+    list-style-type: none;
+    border: 1px solid;
+    border-radius: 8px;
+    padding: 10px;
+    color: white;
+    background-color: #DA291C;
+}
+
+
 .no-padding {
     padding: 0px;
 }
@@ -303,7 +314,7 @@ body {
 }
 
 .modal-dialog {
-    width: 350px;
+    width: 400px;
 }
 
 .modal-body {

@@ -223,6 +223,17 @@ $(document).ready(function () {
 $('[data-toggle="tooltip"]').tooltip(); 
 
 
+    
+        // Fill modal with content from link href
+        $(".openModal").on("click", function(e) {
+            var link = $(this).data("href");
+        $('#myModal').modal("show");
+        $('#myModal .modal-content').load(link );
+
+        });
+    
+    
+    
 
     //		$('.collapse').on('shown.bs.collapse', function(){
     //			$(this).parent().find(".fa-angle-double-right").removeClass("fa-angle-double-right").addClass("fa-angle-double-down");

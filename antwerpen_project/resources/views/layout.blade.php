@@ -48,7 +48,6 @@
                 </div>
                 <div class="modal-body">
 
-
                     <div class="modal-body-center">
                         <form method="POST" action="{{Request::root()}}/auth/login">
                             {!! csrf_field() !!}
@@ -70,22 +69,31 @@
                             </div>
 
 
-                            <br> @foreach ($errors->all() as $error)
-                            <li class="title_red">{{ $error }}</li>
-                            @endforeach
+                            <br>
+                            <br>
+                            @foreach ($errors->all() as $error)
+                            <li class="title_red error-message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>  {{ $error }}</li>
+                            @endforeach 
+                            
+                            @if ($errors->all())
+                            <script>
+                                $('#loginModal').modal('show');
+                            </script>
+                            @endif
+
 
                     </div>
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuleer</button>
-                    <button type="submit" class="btn btn-primary">Log in</button>
+                    <button id="btn-sign-in" name="submit" type="submit" class="btn btn-primary">Log in</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
+
 
 
 
@@ -101,8 +109,6 @@
                     <h4 class="modal-title" id="myModalLabel">Registreer</h4>
                 </div>
                 <div class="modal-body">
-
-
                     <div class="modal-body-center">
                         <form method="POST" action="{{Request::root()}}/auth/register">
                             {!! csrf_field() !!}
@@ -125,7 +131,7 @@
                                 <input class="textbox" type="password" name="password">
                             </div>
                             <br>
-                            <div>
+                            <div style="margin-bottom:25px">
                                 <label>Bevestig wachtwoord</label>
                                 <br>
                                 <input class="textbox" type="password" name="password_confirmation">
@@ -134,23 +140,27 @@
 
 
                             @foreach ($errors->all() as $error)
-                            <li class="title_red">{{ $error }}</li>
+                            <li class="title_red error-message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>  {{ $error }}</li>
                             @endforeach
-
+                            
+                            @if ($errors->all())
+                            <script>
+                                $('#registerModal').modal('show');
+                            </script>
+                            @endif
                     </div>
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuleer</button>
-                    <button type="submit" class="btn btn-primary">Registreer</button>
+                    <button id="btn-register" name="submit" type="submit" class="btn btn-primary">Registreer</button>
                     </form>
                 </div>
+
+
+
             </div>
         </div>
     </div>
-
-
 
 
 
