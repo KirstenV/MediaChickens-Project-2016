@@ -59,43 +59,11 @@
         }
 
         $scope.delete_project = function ($id, $index) {
-            console.log("project om te verwijderen: " + $id + " index in de repeat: " + $index);
-            console.log("project om te verwijderen: " + $id);
-
             var data = {
                 _method: "POST",
             };
             $http.post(root + "/project/" + $id + "/delete/api", data).success(function (data) {
-                //$scope.projects = data;
-                //$scope.project.indexOf(data);
                 $scope.projects.splice($index, 1);
-
-                console.log("projecten in de lijst: " + $scope.projects.length);
-
-                /*
-                 angular.forEach($scope.projects, function(value, key) {
-                 if(value.id == data.id){
-                 delete $scope.projects[key];
-                 console.log("project met id "+ key + " vervijderd!");
-                 this.break;
-                 }
-                 });*/
-
-
-                /*
-                 for(var i=0; i< $scope.projects.length; i++){
-                 console.log("cheking id: "+i);
-                 if($scope.projects[i].id == data.id){
-                 delete $scope.projects[i];
-                 $scope.projects.length--;
-                 console.log("verwijder id: "+i);
-                 break;
-                 }
-                 }*/
-                console.log("projecten in de lijst: " + $scope.projects.length + " na verwijder actie.");
-                console.log("projects scope na verwijderen: ", $scope.projects);
-                //console.log(data);
-
             });
 
         }
