@@ -167,6 +167,7 @@
             }
         }
         $scope.toon_succes_melding = function ($tabele, $id) {
+            console.log("toon succes meldin =" , $scope.server_controle_input_veld_succes , $tabele , $scope.server_controle_veld__id, $id);
             if( $scope.server_controle_input_veld_succes == $tabele &&   $scope.server_controle_veld__id == $id){
                 return true;
             }
@@ -263,16 +264,67 @@
 
     app.controller('add_fase_and_filleController', ['$scope', 'Upload', '$timeout', '$http', function ($scope, Upload, $timeout, $http) {
 
+        $scope.fase_choice =[];
+
+
+        
+        $scope.fase_update = function ($index,$fase_id) {
+            //$scope.fase_choice=event.target.value;
+            //console.log( $scope.fase_choice);
+
+            console.log("update fase =" , $scope.fase_choice[$index]);
+
+            var data = {
+                rij_naam: "fases",
+                invul_veld:  $scope.fase_choice[$index],
+                _method: "PUT"
+            };
+            $http.post(root + "/fases/" + $fase_id, data).success(function (data, status) {
+                //$scope.project = data;
+                console.log("validation of input from server", data);
+                $scope.fases_server_controle_input_veld = "";
+                $scope.fases_server_controle_input_veld_succes = "";
+                $scope.fases_server_controle_veld__id =data.id;
+                if(data.$errors){
+                    $scope.fases_server_controle_input_veld = data.rij_naam;
+                    $scope.fases_server_controle_fout = data.$errors.invul_veld;
+                    console.log("validatiion er gien iets fout --- in api cal -- fase --> type fase");
+                }
+                if(data.$succes){
+                    $scope.fases_server_controle_input_veld_succes =data.rij_naam;
+                    $scope.fases_server_controller_error = data.$succes;
+                    console.log("validatiion alles is goed opgeslagen--- in api call -- fase --> type fase");
+                }
+            });
+        }
+
+        $scope.type_fase_saved = function ($tabele,$id) {
+            //console.log("validation of fase type ==> " ,$scope.fases_server_controle_input_veld_succes, $tabele,$scope.fases_server_controle_veld__id, $id);
+            if( $scope.fases_server_controle_input_veld_succes == $tabele &&   $scope.fases_server_controle_veld__id == $id){
+                //console.log("er is een overeencomst in fase type ")
+                return true;
+            }
+        }
+        
+        $scope.fase_delected =function ($value,$fase_type) {
+            if( $value == $fase_type && $fase_type != undefined ){
+                //console.log("er is een overeenkomst bij het dropdown selct option = ", $value, $fase_type)
+                return true;
+            }
+            //console.log("drop down select option =",$value,$fase_type);
+        }
+
+
         $scope.initializetion_fase = function (id) {
             $scope.project_id = id;
-            console.log("project id is =",$scope.project_id);
+            //console.log("project id is =",$scope.project_id);
 
             //haal alle informatie ui fotos database
             $http.get(root + "/fase/get_fase/" + $scope.project_id + "/api")
                 .success(function (data) {
                     $scope.show_fases = data;
                     //console.log("project data is binnen");
-                    console.log("overziecht van alle fases = ",$scope.show_fases);
+                    //console.log("overziecht van alle fases = ",$scope.show_fases);
                 });
         }
 
@@ -315,12 +367,6 @@
                         console.log(response.data);
                         
                         if (response.data.success) {
-
-
-
-
-
-
                             var data = {
                                 rij_naam: "fases_picture",
                                 invul_veld: response.data.src_image,

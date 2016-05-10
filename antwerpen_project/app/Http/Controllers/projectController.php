@@ -284,7 +284,7 @@ class projectController extends Controller
         $fase = new Fase;
         $fase->fase_titel = "Voer hier titel in van de fase";
         $fase->fase_beschrijving = "Voer hier je vraag in van de fase";
-        $fase->fases = "welke fase ";
+        $fase->fases = "open fase";
         $fase->fases_picture = "fases_picture_default.jpg";
         $fase->projecten_id = $request->project_id;
         $fase->save();
