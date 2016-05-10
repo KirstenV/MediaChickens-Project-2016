@@ -4,7 +4,7 @@
     {!! csrf_field() !!}
 
     <div>
-        Name
+        Naam
         <input type="text" name="name" value="{{ old('name') }}">
     </div>
 
@@ -14,17 +14,17 @@
     </div>
 
     <div>
-        Password
+        Wachtwoord
         <input type="password" name="password">
     </div>
 
     <div>
-        Confirm Password
+        Bevestig wachtwoord
         <input type="password" name="password_confirmation">
     </div>
 
     <div>
-        <button type="submit">Register</button>
+        <button type="submit">Registreer</button>
     </div>
 </form>
 @foreach ($errors->all() as $error)

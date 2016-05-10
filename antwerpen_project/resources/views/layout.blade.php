@@ -1,101 +1,228 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="antwerpen_project">
+
 <head>
-	<meta charset="utf-8">
-	<title>
-	</title>
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-	<link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-	<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
-	
-	<link rel="stylesheet" href="{{Request::root()}}/css/base.css">
+    <meta charset="utf-8">
+    <title>
+    </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{Request::root()}}/css/base.css">
     <link rel="stylesheet" href="{{Request::root()}}/css/bootstrap-datepicker3.min.css">
-	
-	<script src="{{Request::root()}}/javascript_main"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+
+    <script src="{{Request::root()}}/javascript_main"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-	<script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-	<script  type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
-	<script src="{{Request::root()}}/js/ng_file_upload/ng-file-upload-shim.min.js"></script>
-	<script src="{{Request::root()}}/js/ng_file_upload/ng-file-upload.min.js"></script>
-	<script src="{{Request::root()}}/js/edit.js"></script>
-	<script src="{{Request::root()}}/js/base.js"></script>
-	<script src="{{Request::root()}}/js/script.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="{{Request::root()}}/js/ng_file_upload/ng-file-upload-shim.min.js"></script>
+    <script src="{{Request::root()}}/js/ng_file_upload/ng-file-upload.min.js"></script>
+    <script src="{{Request::root()}}/js/edit.js"></script>
+    <script src="{{Request::root()}}/js/base.js"></script>
+    <script src="{{Request::root()}}/js/script.js"></script>
     <script src="{{Request::root()}}/js/bootstrap-datepicker.min.js"></script>
     <script src="{{Request::root()}}/js/bootstrap-datepicker.nl-BE.min.js"></script>
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrmTkGoBzp--pRgO5vRXIsbXPrk3VMp_w&libraries=places" type="text/javascript"></script>
-   <!-- <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
-	
-	@yield('header')
-	
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrmTkGoBzp--pRgO5vRXIsbXPrk3VMp_w&libraries=places" type="text/javascript"></script>
+    <!-- <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
+
+    @yield('header')
+
 
 </head>
+
 <body>
 
 
-<nav class="navbar navbar-default" role="navigation">
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Log in</h4>
+                </div>
+                <div class="modal-body">
 
-    <div class="navbar-header">
-        <a class="navbar-brand" href="{{Request::root()}}/" title="home">
 
-            <img src="{{Request::root()}}/svg/A_logo_485_RGB_POS.png" alt="logo"/>
+                    <div class="modal-body-center">
+                        <form method="POST" action="{{Request::root()}}/auth/login">
+                            {!! csrf_field() !!}
 
-        </a>
+                            <div>
+                                <label>Email</label>
+                                <br>
+                                <input class="textbox" type="email" name="email" value="{{ old('email') }}">
+                            </div>
+                            <br>
+                            <div>
+                                <label>Wachtwoord</label>
+                                <br>
+                                <input class="textbox" type="password" name="password" id="password">
+                            </div>
+                            <br>
+                            <div>
+                                <input type="checkbox" name="remember"> Onthoud mij
+                            </div>
 
+
+                            <br> @foreach ($errors->all() as $error)
+                            <li class="title_red">{{ $error }}</li>
+                            @endforeach
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuleer</button>
+                    <button type="submit" class="btn btn-primary">Log in</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="navbar-search">
 
-        <form>
-            <input class="textbox" type="text" value="zoeken">
-            <a href="" title="zoeken">
-                <i class="fa fa-search" aria-hidden="true"></i>
+
+
+
+
+
+
+    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Registreer</h4>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="modal-body-center">
+                        <form method="POST" action="{{Request::root()}}/auth/register">
+                            {!! csrf_field() !!}
+
+                            <div>
+                                <label>Naam</label>
+                                <br>
+                                <input class="textbox" type="text" name="name" value="{{ old('name') }}">
+                            </div>
+                            <br>
+                            <div>
+                                <label>Email</label>
+                                <br>
+                                <input class="textbox" type="email" name="email" value="{{ old('email') }}">
+                            </div>
+                            <br>
+                            <div>
+                                <label>Wachtwoord</label>
+                                <br>
+                                <input class="textbox" type="password" name="password">
+                            </div>
+                            <br>
+                            <div>
+                                <label>Bevestig wachtwoord</label>
+                                <br>
+                                <input class="textbox" type="password" name="password_confirmation">
+                            </div>
+
+
+
+                            @foreach ($errors->all() as $error)
+                            <li class="title_red">{{ $error }}</li>
+                            @endforeach
+
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuleer</button>
+                    <button type="submit" class="btn btn-primary">Registreer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <nav class="navbar navbar-default" role="navigation">
+
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{{Request::root()}}/" title="home">
+
+                <img src="{{Request::root()}}/svg/A_logo_485_RGB_POS.png" alt="logo" />
 
             </a>
 
+        </div>
+        <div class="navbar-search">
 
-        </form>
+            <form>
+                <input class="textbox" type="text" placeholder="Typ hier om te zoeken">
+                <a href="" title="zoeken">
+                    <i class="fa fa-search" aria-hidden="true"></i>
 
-    </div> <!-- END DIV NAVBAR-SEARCH -->
-    <div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
-        <ul class="nav navbar-nav">
+                </a>
 
-            <li>
+
+            </form>
+
+        </div>
+        <!-- END DIV NAVBAR-SEARCH -->
+        <div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
+            <ul class="nav navbar-nav">
+
+
                 @if(Auth::check())
-                    <a href="{{Request::root()}}/login" title="log in">
-                        <p>{{Auth::user()->name}} <i>{{Auth::user()->is_adm}}</i> <i>{{Auth::user()->email}}</i></p>
+                <li>
+                    <a href="{{Request::root()}}/login" title="mijn account">
+                        <i class="fa fa-user" aria-hidden="true"></i>
 
                     </a>
-                @else
-                    <a href="{{Request::root()}}/login" title="log in">
-                        <i class="fa fa-user" aria-hidden="true"></i>
+                </li>
+                <li>
+                    <a href="{{Request::root()}}/auth/logout" title="log uit">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
                     </a>
+                </li>
+                @else
+                <li>
+                    <a href="" title="log in" data-toggle="modal" data-target="#loginModal">
+                        <i class="fa fa-sign-in" aria-hidden="true"></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="" title="registreer" data-toggle="modal" data-target="#registerModal">
+                        <i class="fa fa-user-plus" aria-hidden="true"></i>
+                    </a>
+
+
+                </li>
                 @endif
 
-            </li>
-            <li>
-                <a href="{{Request::root()}}/auth/logout">
-                    <i>afmelden</i>
-                </a>
 
 
-            </li>
-            <li>
-                <a href="{{Request::root()}}/auth/register">
-                    <i>registreren</i>
-                </a>
 
+            </ul>
+        </div>
 
-            </li>
-        </ul>
-    </div>
+    </nav>
 
-</nav>
-
-<!--	<nav class="navbar navbar-inverse nav_bar_margin_top" role="navigation">
+    <!--	<nav class="navbar navbar-inverse nav_bar_margin_top" role="navigation">
 		<div class="container">
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
@@ -117,31 +244,19 @@
 	</nav>
 -->
 
-@yield('map')
+    @yield('map') @yield('homeContent') @yield('editContent')
 
 
-
-
-@yield('homeContent')
-
-
-
-
-
-@yield('editContent')
-
-
-<div class="col-md-8" style="display: none;">
-    <h3>
+    <div class="col-md-8" style="display: none;">
+        <h3>
         Span 4
     </h3>
-    <p>
-        Content
-    </p>
-</div>
+        <p>
+            Content
+        </p>
+    </div>
 
-@yield('footer')
+    @yield('footer')
 </body>
+
 </html>
-
-

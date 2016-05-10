@@ -10,12 +10,12 @@
     </div>
 
     <div>
-        Password
+        Wachtwoord
         <input type="password" name="password" id="password">
     </div>
 
     <div>
-        <input type="checkbox" name="remember"> Remember Me
+        <input type="checkbox" name="remember"> Onthoud mij
     </div>
 
     <div>
