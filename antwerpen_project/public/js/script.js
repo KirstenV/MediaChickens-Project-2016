@@ -108,11 +108,11 @@ $(document).ready(function () {
 
 
     google.maps.event.addListener(map, 'click', function (event) {
-        
+
         placeMarker(event.latLng);
 
         var lat_lng = event.latLng.lat() + "," + event.latLng.lng();
-        
+
 
 
 
@@ -136,13 +136,9 @@ $(document).ready(function () {
 
 
 
-    
-
-
-
     // Create the autocomplete object, restricting the search to geographical
     // location types.
-        var autocomplete = new google.maps.places.Autocomplete(
+    var autocomplete = new google.maps.places.Autocomplete(
         /** @type {!HTMLInputElement} */
         (document.getElementById('autocomplete')), {
             types: ['geocode']
@@ -161,7 +157,7 @@ $(document).ready(function () {
         var place = autocomplete.getPlace();
 
         $("#map-locatie").append('<br>' + place["formatted_address"] + "  " + '<a href="" style="text-decoration:none" title="verwijder"><i class="fa fa-times inline" aria-hidden="true"></i></a>' + "<br>");
-        
+
         $.ajax({
             url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + place["formatted_address"] + "&key=AIzaSyChcI5yCog1780Of_wshHhIZ6yeLrMhkQM"
             , success: function (data) {
@@ -169,27 +165,30 @@ $(document).ready(function () {
 
                 var myLat = data["results"][0]["geometry"]["location"]["lat"];
                 var myLng = data["results"][0]["geometry"]["location"]["lng"];
-                
-                
-                var myLatLng = {lat: myLat, lng: myLng};
+
+
+                var myLatLng = {
+                    lat: myLat
+                    , lng: myLng
+                };
                 placeMarker(myLatLng);
             }
         });
-        
+
     }
 
 
     function placeMarker(location) {
 
         var marker = new google.maps.Marker({
-            position: location,
-            map: map
+            position: location
+            , map: map
         });
 
     }
 
-    
-    
+
+
     $("#autocomplete").on("click", function () {
 
         $(this).val("");
@@ -212,32 +211,43 @@ $(document).ready(function () {
     }
 
 
-    
-    
+
+
     $('#datepicker input').datepicker({
-        format: "dd/mm/yyyy",
-        weekStart: 1,
-        todayBtn: "linked",
-        clearBtn: true,
-        language: "nl-BE",
-        daysOfWeekHighlighted: "0,6",
-        todayHighlight: true
+        format: "yyyy-mm-dd"
+        , weekStart: 1
+        , todayBtn: "linked"
+        , clearBtn: true
+        , language: "nl-BE"
+        , daysOfWeekHighlighted: "0,6"
+        , todayHighlight: true
     });
 
-$('[data-toggle="tooltip"]').tooltip(); 
+    $('[data-toggle="tooltip"]').tooltip();
 
 
-    
-        // Fill modal with content from link href
-        $(".openModal").on("click", function(e) {
-            var link = $(this).data("href");
-        $('#myModal').modal("show");
-        $('#myModal .modal-content').load(link );
 
-        });
-    
-    
-    
+
+
+
+    $(document).on("click", ".delete_home_page", function () {
+
+        
+
+        $(".panel-body-child").addClass("move-in");
+
+
+    });
+
+    $(document).on("click", ".cancel-btn", function () {
+
+
+        console.log('hello');
+        $(".panel-body-child").removeClass("move-in").addClass("move-out");
+
+    });
+
+
 
     //		$('.collapse').on('shown.bs.collapse', function(){
     //			$(this).parent().find(".fa-angle-double-right").removeClass("fa-angle-double-right").addClass("fa-angle-double-down");

@@ -65,7 +65,7 @@
                             </div>
                             <br>
                             <div>
-                                <input type="checkbox" name="remember"> Onthoud mij
+                                <label><input type="checkbox" name="remember"> Onthoud mij</label>
                             </div>
 
 
@@ -75,18 +75,16 @@
 
 
                     </div>
-                        
-                        <div id="error-messages">
-                            @foreach ($errors->all() as $error)
-                            <li class="title_red error-message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>  {{ $error }}</li>
-                            @endforeach 
-                            
-                            @if ($errors->all())
-                            <script>
-                                $('#loginModal').modal('show');
-                            </script>
-                            @endif
-                        </div>
+
+                    <div id="error-messages">
+                        @foreach ($errors->all() as $error)
+                        <li class="title_red error-message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ $error }}</li>
+                        @endforeach @if ($errors->all())
+                        <script>
+                            $('#loginModal').modal('show');
+                        </script>
+                        @endif
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuleer</button>
@@ -145,19 +143,17 @@
 
 
                     </div>
-                        
-                        <div id="error-messages">
-                            @foreach ($errors->all() as $error)
-                            <li class="title_red error-message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i>  {{ $error }}</li>
-                            @endforeach 
-                            
-                            @if ($errors->all())
-                            <script>
-                                $('#registerModal').modal('show');
-                            </script>
-                            @endif
-                        </div>
-                        
+
+                    <div id="error-messages">
+                        @foreach ($errors->all() as $error)
+                        <li class="title_red error-message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ $error }}</li>
+                        @endforeach @if ($errors->all())
+                        <script>
+                            $('#registerModal').modal('show');
+                        </script>
+                        @endif
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Annuleer</button>
@@ -207,6 +203,12 @@
 
 
                 @if(Auth::check())
+
+
+
+                <li>
+                    Welkom, {{Auth::user()->name}}!
+                </li>
                 <li>
                     <a href="{{Request::root()}}/login" title="mijn account">
                         <i class="fa fa-user" aria-hidden="true"></i>
@@ -276,6 +278,7 @@
     </div>
 
     @yield('footer')
+    
 </body>
 
 </html>
