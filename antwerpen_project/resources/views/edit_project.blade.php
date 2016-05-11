@@ -54,7 +54,8 @@
                                             <div id="thumbs" class="col-xs-6 col-md-3">
 
                                                 <a href="" id="foto-delete" data-toggle="tooltip" data-placement="top"
-                                                   title="Verwijder foto"><i class="fa fa-times" aria-hidden="true" ng-click="delete_elemets_on_edit_page_fotos(foto.id,$index,'foto','show_fotos')"></i></a>
+                                                   title="Verwijder foto"><i class="fa fa-times" aria-hidden="true"
+                                                                             ng-click="delete_elemets_on_edit_page_fotos(foto.id,$index,'foto','show_fotos')"></i></a>
                                                 <a href="#" class="thumbnail">
                                                     <img ng-src="{{Request::root()}}/img/project/small_@{{ foto.project_picture }}"
                                                          alt="@{{ foto.project_picture }}"/>
@@ -82,8 +83,6 @@
                                         </ul>
                                     </div>
                                     <!-- DIV END ROW -->
-
-
                                     <!--@{{errorMsg}}-->
 
                                 </div>
@@ -108,15 +107,13 @@
                         <hr>
 
                         <h4 class="title_red">Begin -en einddatum</h4>
+
                         <div id="datepicker">
-                            
+
                             <span class="input-group-addon inline">van</span>
-                                <input type="text" class="inline">
+                            <input type="text" class="inline">
                             <span class="input-group-addon inline">tot</span>
-                                <input type="text" class="inline">
-
-
-
+                            <input type="text" class="inline">
                         </div>
 
 
@@ -126,10 +123,21 @@
 
                     <div id="locatie">
                         <h4 class="title_red">Locatie</h4>
+                        <div ng-show="locations_errors">
+                            @{{ locations_errors }}
+                        </div>
                         <input id="autocomplete" type="text" class="textbox"
                                placeholder="Typ een adres of klik op de kaart">
                         <br>
-                        <p id="map-locatie"></p>
+                        <div ng-repeat="location in locations">
+                            <div class="row">
+                                <i class="col-md-1">@{{ $index }}</i>
+                                <p class="col-md-10" id="map-locatie">@{{ location.straat_naam }}</p>
+                                <a href="" style="text-decoration:none" title="verwijder"><i
+                                            class="fa fa-times inline col-md-1" aria-hidden="true" ng-click="delete_elemets_on_edit_page_locatie(location.id,$index,'locations')"></i></a>
+                            </div>
+                        </div>
+
 
                     </div>
 
@@ -170,10 +178,12 @@
 
 
                                 <a href="" id="vragen-delete" data-toggle="tooltip" data-placement="top"
-                                   title="Verwijder foto"><i class="fa fa-times" aria-hidden="true" ng-click="delete_elemets_on_edit_page_vragen(vraag.id,$index,'vragen')"></i></a>
+                                   title="Verwijder foto"><i class="fa fa-times" aria-hidden="true"
+                                                             ng-click="delete_elemets_on_edit_page_vragen(vraag.id,$index,'vragen')"></i></a>
                                 <div>@{{ $index }}</div>
                                 <h4 class="title_red">@{{vraag.choices}}</h4>
-                                <h5 ng-class="{'invalid': toon_fout_melding('vraag',vraag.id)}" class='vraag project titel col-md-12' data-update_status='init'
+                                <h5 ng-class="{'invalid': toon_fout_melding('vraag',vraag.id)}"
+                                    class='vraag project titel col-md-12' data-update_status='init'
                                     data-titel='vraag' data-tabel='Vragen' data-id='@{{vraag.id}}'
                                     contenteditable='true'>@{{vraag.vraag}}</h5>
                                 <!--feedback validatie-->
@@ -186,7 +196,8 @@
 
 
                                 <div ng-show="vraag.choices == 'meerkeuzevragen'">
-                                    <h5 ng-class="{'invalid': toon_fout_melding('mogelijke_antwoorden_1',vraag.id)}" class='vraag project titel col-md-12' data-update_status='init'
+                                    <h5 ng-class="{'invalid': toon_fout_melding('mogelijke_antwoorden_1',vraag.id)}"
+                                        class='vraag project titel col-md-12' data-update_status='init'
                                         data-titel='mogelijke_antwoorden_1' data-tabel='Vragen'
                                         data-id='@{{vraag.id}}' contenteditable='true'><i
                                                 class="fa fa-square-o"></i> @{{vraag.mogelijke_antwoorden_1}}</h5>
@@ -199,7 +210,8 @@
                                     </div><!--end feedback-->
 
 
-                                    <h5 ng-class="{'invalid': toon_fout_melding('mogelijke_antwoorden_2',vraag.id)}" class='vraag project titel col-md-12' data-update_status='init'
+                                    <h5 ng-class="{'invalid': toon_fout_melding('mogelijke_antwoorden_2',vraag.id)}"
+                                        class='vraag project titel col-md-12' data-update_status='init'
                                         data-titel='mogelijke_antwoorden_2' data-tabel='Vragen'
                                         data-id='@{{vraag.id}}' contenteditable='true'><i
                                                 class="fa fa-square-o"></i> @{{vraag.mogelijke_antwoorden_2}}</h5>
@@ -212,7 +224,8 @@
                                     </div><!--end feedback-->
 
 
-                                    <h5 ng-class="{'invalid': toon_fout_melding('mogelijke_antwoorden_3',vraag.id)}" class='vraag project titel col-md-12' data-update_status='init'
+                                    <h5 ng-class="{'invalid': toon_fout_melding('mogelijke_antwoorden_3',vraag.id)}"
+                                        class='vraag project titel col-md-12' data-update_status='init'
                                         data-titel='mogelijke_antwoorden_3' data-tabel='Vragen'
                                         data-id='@{{vraag.id}}' contenteditable='true'><i
                                                 class="fa fa-square-o"></i> @{{vraag.mogelijke_antwoorden_3}}</h5>
@@ -224,7 +237,8 @@
                                          ng-show="toon_fout_melding('mogelijke_antwoorden_3',vraag.id)">@{{ server_controle_fout[0] }}
                                     </div><!--end feedback-->
 
-                                    <h5 ng-class="{'invalid': toon_fout_melding('mogelijke_antwoorden_4',vraag.id)}" class='vraag project titel col-md-12' data-update_status='init'
+                                    <h5 ng-class="{'invalid': toon_fout_melding('mogelijke_antwoorden_4',vraag.id)}"
+                                        class='vraag project titel col-md-12' data-update_status='init'
                                         data-titel='mogelijke_antwoorden_4' data-tabel='Vragen'
                                         data-id='@{{vraag.id}}' contenteditable='true'><i
                                                 class="fa fa-square-o"></i> @{{vraag.mogelijke_antwoorden_4}}</h5>
@@ -237,7 +251,8 @@
                                     </div><!--end feedback-->
                                 </div>
                                 <div ng-show="vraag.choices == 'Gesloten vragen'">
-                                    <h5 ng-class="{'invalid': toon_fout_melding('mogelijke_antwoorden_1',vraag.id)}" class='vraag project titel col-md-12' data-update_status='init'
+                                    <h5 ng-class="{'invalid': toon_fout_melding('mogelijke_antwoorden_1',vraag.id)}"
+                                        class='vraag project titel col-md-12' data-update_status='init'
                                         data-titel='mogelijke_antwoorden_1' data-tabel='Vragen'
                                         data-id='@{{vraag.id}}' contenteditable='true'><i
                                                 class="fa fa-circle-thin"></i> @{{vraag.mogelijke_antwoorden_1}}
@@ -251,7 +266,8 @@
                                     </div><!--end feedback-->
 
 
-                                    <h5 ng-class="{'invalid': toon_fout_melding('mogelijke_antwoorden_2',vraag.id)}" class='vraag project titel col-md-12' data-update_status='init'
+                                    <h5 ng-class="{'invalid': toon_fout_melding('mogelijke_antwoorden_2',vraag.id)}"
+                                        class='vraag project titel col-md-12' data-update_status='init'
                                         data-titel='mogelijke_antwoorden_2' data-tabel='Vragen'
                                         data-id='@{{vraag.id}}' contenteditable='true'><i
                                                 class="fa fa-circle-thin"></i> @{{vraag.mogelijke_antwoorden_2}}
@@ -265,9 +281,9 @@
                                     </div><!--end feedback-->
                                 </div>
 
-                        </div>
+                            </div>
 
-                    </div>
+                        </div>
                         <!--end of vragen div-->
                     </div>
 
@@ -282,11 +298,9 @@
 
 
                                         <a href="" id="vragen-delete" data-toggle="tooltip" data-placement="top"
-                                           title="Verwijder foto"><i class="fa fa-times" aria-hidden="true" ng-click="delete_elemets_on_edit_page_fase(fase.id,$index,'fases')"></i></a>
+                                           title="Verwijder foto"><i class="fa fa-times" aria-hidden="true"
+                                                                     ng-click="delete_elemets_on_edit_page_fase(fase.id,$index,'fases')"></i></a>
                                         <div>@{{ $index }}</div>
-
-
-
 
 
                                         <div ng-class="{'invalid': toon_fout_melding('fase_titel',fase.id)}"
@@ -316,10 +330,17 @@
                                         <div class="col-md-11">
                                             <p>status van de fase</p>
                                             <p>@{{ fase.fases }}</p>
-                                            <select ng-change="fase_update($index,fase.id);" ng-model="fase_choice[$index]">
-                                                <option ng-selected="'open fase'=== show_fases[$index].fases" value="open fase">Open</option>
-                                                <option ng-selected="'in progress' === show_fases[$index].fases" value="in progress">Bezich</option>
-                                                <option ng-selected="'fase afgesloten' === show_fases[$index].fases" value="fase afgesloten">Afgesloten</option>
+                                            <select ng-change="fase_update($index,fase.id);"
+                                                    ng-model="fase_choice[$index]">
+                                                <option ng-selected="'open fase'=== show_fases[$index].fases"
+                                                        value="open fase">Open
+                                                </option>
+                                                <option ng-selected="'in progress' === show_fases[$index].fases"
+                                                        value="in progress">Bezich
+                                                </option>
+                                                <option ng-selected="'fase afgesloten' === show_fases[$index].fases"
+                                                        value="fase afgesloten">Afgesloten
+                                                </option>
                                             </select>
                                         </div>
 
@@ -343,22 +364,22 @@
                                                 alt="@{{ fase.fases_picture }}">
                                     </div>
                                     <ul>
-                                        <li ng-repeat="f in errFiles_fase" >
+                                        <li ng-repeat="f in errFiles_fase">
                                             @{{f.name}} @{{f.$error}} @{{f.$errorParam}}
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="add_fase">
-                                <div class="glyphicon glyphicon-plus-sign"  ng-click="add_fase()"></div>
+                                <div class="glyphicon glyphicon-plus-sign" ng-click="add_fase()"></div>
                             </div>
                         </div>
                     </div>
 
-                <!-- END DIV EDIT_CONTENT -->
+                    <!-- END DIV EDIT_CONTENT -->
+                </div>
             </div>
         </div>
-    </div>
 
     </div>
 @stop

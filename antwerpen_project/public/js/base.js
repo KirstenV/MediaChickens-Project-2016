@@ -76,6 +76,47 @@
     app.controller('edit_projectController', ['$scope', '$http', function ($scope, $http) {
         //console.log("controller is klaar");
 
+        $scope.google_maps_controller_error_catsher=function($error){
+            $scope.locations_errors = $error;
+        }
+        $scope.google_maps_controller = function (lat,lng,adress) {
+            //console.log("gegevens van de goole maps zij",lat,lng,adress);
+
+            var data = {
+                lat: lat,
+                lng: lng,
+                address: adress,
+                _method: "POST"
+            };
+
+            $http.post(root + "/locatie/toevoegen/"+ $scope.project_id+"/api", data).success(function (data) {
+                //console.log('locaties zijn toegevoegd via google maps controller voor project =', $scope.project_id,data);
+                $scope.locations_errors="";
+                if(data.$succes) {
+                    $scope.locations.push(data.$location);
+                }else {
+                    if(data.$errors){
+                        $scope.locations_errors = data.$errors;
+                    }
+                    $scope.locations_errors = "Oeps, weet je zeker dat alles is goed ingevuld !";
+                }
+
+            });
+        }
+        
+$scope.delete_elemets_on_edit_page_locatie = function ($id, $index, $tabele) {
+    console.log("deleted varagen click with following parameters ==>", $id, $index);
+    var data = {
+        _method: "POST",
+    };
+    $http.post(root + "/edit/" + $tabele + "/" + $id + "/delete/api", data).success(function (data) {
+        if (data != "error") {
+            $scope.locations.splice($index, 1);
+
+        }
+        console.log(data);
+    });
+}
 
         $scope.initializetion = function (id) {
             //console.log("project is geintializeerd");
@@ -94,6 +135,13 @@
             $http.get(root + "/vragen/" + $scope.project_id + "/edit/api")
                 .success(function (data) {
                     $scope.alle_vragen = data;
+                    //console.log("vragen data is binnen");
+                    //console.log(data);
+                });
+
+            $http.get(root + "/locaties/" + $scope.project_id + "/edit/api")
+                .success(function (data) {
+                    $scope.locations = data;
                     //console.log("vragen data is binnen");
                     //console.log(data);
                 });

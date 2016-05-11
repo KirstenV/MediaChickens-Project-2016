@@ -9,6 +9,8 @@ use App\User;
 use App\Fase;
 Use App\Project_foto;
 use App\Vragen;
+use App\Locatie;
+use App\Locatie_projecten;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use Validator;
@@ -270,34 +272,40 @@ class projectController extends Controller
     {
         //$project = Projecten::find($id);
         //$project->destroy();
-        $massege ="error";
+        $massege = "error";
         $project = Projecten::find($id);
         $project->delete();
         //$deleted_item = Projecten::withTrashed()->where('id', $id)->get();
-        $massege ="succes";
+        $massege = "succes";
         return $massege;
 
 
     }
 
-    public function delte_edit_page($tabele,$id){
-        $massege ="error";
-        if($tabele == 'foto'){
+    public function delte_edit_page($tabele, $id)
+    {
+        $massege = "error";
+        if ($tabele == 'foto') {
             $project = Project_foto::find($id);
             $project->delete();
-            $massege =" foto is succes vol verwijderd";
+            $massege = " foto is succes vol verwijderd";
         }
 
-        if($tabele == 'vragen'){
+        if ($tabele == 'vragen') {
             $project = Vragen::find($id);
             $project->delete();
-            $massege =" vraag is succes vol verwijderd";
+            $massege = " vraag is succes vol verwijderd";
         }
 
-        if($tabele == 'fases'){
+        if ($tabele == 'fases') {
             $project = Fase::find($id);
             $project->delete();
-            $massege =" fase is succes vol verwijderd";
+            $massege = " fase is succes vol verwijderd";
+        }
+        if($tabele == "locations"){
+            $project = Locatie::find($id);
+            $project->delete();
+            $massege = " fase is succes vol verwijderd";
         }
 
         //$deleted_item = Projecten::withTrashed()->where('id', $id)->get();
@@ -327,7 +335,9 @@ class projectController extends Controller
         $all_fases = Projecten::find($project_id)->show_fases;
         return $all_fases;
     }
-    public function  update_fase_img(Request $request){
+
+    public function update_fase_img(Request $request)
+    {
 
     }
 
@@ -362,6 +372,51 @@ class projectController extends Controller
 
         return response()->json(['success' => true, 'src_image' => $image->getClientOriginalName()], 200);
 
+    }
+
+    //add nieuw location wor project
+    public function add_location($project_id, Request $request)
+    {
+        $project_information = array('$table' => "locaties");
+
+        $validator = Validator::make($request->all(), [
+            'address' => 'required|max: 1000',
+            'lat' => 'required|max: 250',
+            'lng' => 'required|max: 250',
+        ]);
+        if(!$project_id){
+            $project_information = array_add($project_information, '$errors',"Oeps, er ging iets fout! Refresh je pagina!");
+            return $project_information;
+        }
+
+
+        if ($validator->fails()) {
+            $project_information = array_add($project_information, '$errors', $validator->errors());
+            return $project_information;
+        }
+
+
+        $locatie = new Locatie;
+        $locatie->straat_naam = $request->address;
+        //$locatie->poscode = "klick op mij en pas mij aan voor de beschrijving";
+        //$locatie->huisnummer = "proef_proef.jpg";
+        $locatie->position_latitude = $request->lat;
+        $locatie->position_longitude = $request->lng;
+        $locatie->save();
+
+        $bridge_locatie_project = new Locatie_projecten;
+        $bridge_locatie_project->projecten_id = $project_id;
+        $bridge_locatie_project->locatie_id = $locatie->id;
+        $bridge_locatie_project->save();
+        $project_information = array_add($project_information, '$succes',"alles is opgeslagen" );
+        $project_information = array_add($project_information, '$location',$locatie );
+
+        return  $project_information;
+    }
+
+    public function json_locaties($project_id){
+        $locaties = Projecten::find($project_id)->show_locaties;
+        return $locaties;
     }
 
 }
