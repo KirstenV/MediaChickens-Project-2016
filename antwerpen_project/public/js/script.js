@@ -17,8 +17,6 @@ $(document).ready(function () {
             }, 'slow');
 
 
-
-
         }
         $(this).text("Pas mij aan om een nieuw project aan te maken");
 
@@ -32,20 +30,12 @@ $(document).ready(function () {
     });
 
 
-
-
-
-
-
-
-
     var map = new google.maps.Map(document.getElementById("map"), {
         center: new google.maps.LatLng(51.21945, 4.40246)
         , zoom: 14
         , mapTypeId: 'roadmap'
     });
     var infoWindow = new google.maps.InfoWindow;
-
 
 
     $.ajax({
@@ -96,9 +86,6 @@ $(document).ready(function () {
                     });
 
 
-
-
-
                 }
             } else {
                 console.log("geen locaties");
@@ -109,31 +96,27 @@ $(document).ready(function () {
 
     google.maps.event.addListener(map, 'click', function (event) {
 
+
         placeMarker(event.latLng);
 
         var lat_lng = event.latLng.lat() + "," + event.latLng.lng();
-
-
 
 
         $.ajax({
             url: "https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat_lng + "&key=AIzaSyChcI5yCog1780Of_wshHhIZ6yeLrMhkQM"
             , success: function (data) {
 
-                $("#map-locatie").append('<br>' + data["results"][0]["formatted_address"] + "  " + '<a href="" style="text-decoration:none" title="verwijder"><i class="fa fa-times inline" aria-hidden="true"></i></a>' + "<br>");
-
+                //$("#map-locatie").append('<br>' + data["results"][0]["formatted_address"] + "  " + '<a href="" style="text-decoration:none" title="verwijder"><i class="fa fa-times inline" aria-hidden="true"></i></a>' + "<br>");
+                if (data["results"][0]["geometry"]["location"] !== undefined) {
+                    angular.element(document.getElementById('edit_project')).scope().google_maps_controller(event.latLng.lat(), event.latLng.lng(), data["results"][0]["formatted_address"]);
+                }else{
+                    angular.element(document.getElementById('edit_project')).scope().google_maps_controller_error_catsher("Oeps, dit adres bestaat niet");
+                }
 
             }
         });
 
     });
-
-
-
-
-
-
-
 
 
     // Create the autocomplete object, restricting the search to geographical
@@ -156,22 +139,26 @@ $(document).ready(function () {
         // Get the place details from the autocomplete object.
         var place = autocomplete.getPlace();
 
-        $("#map-locatie").append('<br>' + place["formatted_address"] + "  " + '<a href="" style="text-decoration:none" title="verwijder"><i class="fa fa-times inline" aria-hidden="true"></i></a>' + "<br>");
+        //$("#map-locatie").append('<br>' + place["formatted_address"] + "  " + '<a href="" style="text-decoration:none" title="verwijder"><i class="fa fa-times inline" aria-hidden="true"></i></a>' + "<br>");
 
         $.ajax({
             url: "https://maps.googleapis.com/maps/api/geocode/json?address=" + place["formatted_address"] + "&key=AIzaSyChcI5yCog1780Of_wshHhIZ6yeLrMhkQM"
             , success: function (data) {
 
-
-                var myLat = data["results"][0]["geometry"]["location"]["lat"];
-                var myLng = data["results"][0]["geometry"]["location"]["lng"];
+                if (data["results"][0]["geometry"]["location"] !== undefined) {
 
 
-                var myLatLng = {
-                    lat: myLat
-                    , lng: myLng
-                };
-                placeMarker(myLatLng);
+                    var myLat = data["results"][0]["geometry"]["location"]["lat"];
+                    var myLng = data["results"][0]["geometry"]["location"]["lng"];
+
+
+                    var myLatLng = {lat: myLat, lng: myLng};
+                    console.log("platsen van de marker gegevens: ", data);
+                    placeMarker(myLatLng);
+                    angular.element(document.getElementById('edit_project')).scope().google_maps_controller(myLat, myLng, place["formatted_address"]);
+                }else{
+                    angular.element(document.getElementById('edit_project')).scope().google_maps_controller_error_catsher("Oeps, dit adres bestaat niet");
+                }
             }
         });
 
@@ -181,12 +168,11 @@ $(document).ready(function () {
     function placeMarker(location) {
 
         var marker = new google.maps.Marker({
-            position: location
-            , map: map
+            position: location,
+            map: map
         });
 
     }
-
 
 
     $("#autocomplete").on("click", function () {
@@ -194,10 +180,6 @@ $(document).ready(function () {
         $(this).val("");
 
     });
-
-
-
-
 
 
     function bindInfoWindow(marker, map, infoWindow, html) {
@@ -211,42 +193,26 @@ $(document).ready(function () {
     }
 
 
-
-
     $('#datepicker input').datepicker({
-        format: "yyyy-mm-dd"
-        , weekStart: 1
-        , todayBtn: "linked"
-        , clearBtn: true
-        , language: "nl-BE"
-        , daysOfWeekHighlighted: "0,6"
-        , todayHighlight: true
+        format: "dd/mm/yyyy",
+        weekStart: 1,
+        todayBtn: "linked",
+        clearBtn: true,
+        language: "nl-BE",
+        daysOfWeekHighlighted: "0,6",
+        todayHighlight: true
     });
 
     $('[data-toggle="tooltip"]').tooltip();
 
 
-
-
-
-
-    $(document).on("click", ".delete_home_page", function () {
-
-        
-
-        $(".panel-body-child").addClass("move-in");
-
+    // Fill modal with content from link href
+    $(".openModal").on("click", function (e) {
+        var link = $(this).data("href");
+        $('#myModal').modal("show");
+        $('#myModal .modal-content').load(link);
 
     });
-
-    $(document).on("click", ".cancel-btn", function () {
-
-
-        console.log('hello');
-        $(".panel-body-child").removeClass("move-in").addClass("move-out");
-
-    });
-
 
 
     //		$('.collapse').on('shown.bs.collapse', function(){
@@ -254,7 +220,6 @@ $(document).ready(function () {
     //		}).on('hidden.bs.collapse', function(){
     //			$(this).parent().find(".fa-angle-double-down").removeClass("fa-angle-double-down").addClass("fa-angle-double-right");
     //		});
-
 
 
 });
