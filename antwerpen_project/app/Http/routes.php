@@ -54,8 +54,7 @@ Route::get('javascript_main',function(){
 Route::get('al_projects/api/get', 'PagesController@json_al_projects');
 Route::post('upload_form','projectController@upload_form');
 
-//delete roots
-Route::post('project/{id}/delete/api','projectController@delte_projeten');
+
 
 Route::get('login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
@@ -90,3 +89,13 @@ Route::get('fase/get_fase/{id}/api',"projectController@get_fase");
 Route::post('fase/add_fase/api',"projectController@add_fase");
 Route::post('Project_fase/update_fase_img/api',"projectController@post_fase_img");
 Route::put('Project_fase/update_fase_img/api', 'projectController@update_fase_img');
+
+
+
+
+
+
+//delete roots => project
+Route::post('project/{id}/delete/api','projectController@delte_projeten');
+//delete roots => edit page
+Route::post('edit/{tabele}/{id}/delete/api','projectController@delte_edit_page');

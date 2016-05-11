@@ -81,14 +81,16 @@ class projectController extends Controller
                     'invul_veld' => 'required|max:5000',
                 ]);
                 break;
+
             case "begin_datum":
+
                 $validator = Validator::make($request->all(), [
-                    'invul_veld' => 'date_format:Y/m/d',
+                    'invul_veld' => 'date_format:Y-m-d',
                 ]);
                 break;
             case "eind_datum":
                 $validator = Validator::make($request->all(), [
-                    'invul_veld' => 'date_format:Y/m/d',
+                    'invul_veld' => 'date_format:Y-m-d',
                 ]);
                 break;
             case "vraag":
@@ -268,12 +270,38 @@ class projectController extends Controller
     {
         //$project = Projecten::find($id);
         //$project->destroy();
+        $massege ="error";
         $project = Projecten::find($id);
         $project->delete();
         //$deleted_item = Projecten::withTrashed()->where('id', $id)->get();
-        return $project;
+        $massege ="succes";
+        return $massege;
 
 
+    }
+
+    public function delte_edit_page($tabele,$id){
+        $massege ="error";
+        if($tabele == 'foto'){
+            $project = Project_foto::find($id);
+            $project->delete();
+            $massege =" foto is succes vol verwijderd";
+        }
+
+        if($tabele == 'vragen'){
+            $project = Vragen::find($id);
+            $project->delete();
+            $massege =" vraag is succes vol verwijderd";
+        }
+
+        if($tabele == 'fases'){
+            $project = Fase::find($id);
+            $project->delete();
+            $massege =" fase is succes vol verwijderd";
+        }
+
+        //$deleted_item = Projecten::withTrashed()->where('id', $id)->get();
+        return $massege;
     }
 
 
@@ -300,12 +328,12 @@ class projectController extends Controller
         return $all_fases;
     }
     public function  update_fase_img(Request $request){
-      
+
     }
 
     public function post_fase_img(Request $request)
     {
-        
+
         $image = Input::file('fase_photo');
 
         $validator = Validator::make([$image], ['mimes:gif,jpg,jpeg,bmp,png', 'image.required']);
@@ -329,11 +357,11 @@ class projectController extends Controller
 // now you are able to resize the instance
         $img->resize(400, 300);
 // finally we save the image as a new file
-        $img->save('img/project/' . $image_name);
+        $img->save('img/fase/' . $image_name);
 
 
         return response()->json(['success' => true, 'src_image' => $image->getClientOriginalName()], 200);
-        
+
     }
 
 }

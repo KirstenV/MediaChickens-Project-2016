@@ -54,7 +54,7 @@
                                             <div id="thumbs" class="col-xs-6 col-md-3">
 
                                                 <a href="" id="foto-delete" data-toggle="tooltip" data-placement="top"
-                                                   title="Verwijder foto"><i class="fa fa-times" aria-hidden="true"></i></a>
+                                                   title="Verwijder foto"><i class="fa fa-times" aria-hidden="true" ng-click="delete_elemets_on_edit_page_fotos(foto.id,$index,'foto','show_fotos')"></i></a>
                                                 <a href="#" class="thumbnail">
                                                     <img ng-src="{{Request::root()}}/img/project/small_@{{ foto.project_picture }}"
                                                          alt="@{{ foto.project_picture }}"/>
@@ -110,9 +110,24 @@
                         <h4 class="title_red">Begin -en einddatum</h4>
                         <div class="input-daterange input-group" id="datepicker">
                             <span class="input-group-addon">van</span>
+
+                            <!--
                             <input type="text" class="input-sm form-control" name="start"/>
                             <span class="input-group-addon">tot</span>
                             <input type="text" class="input-sm form-control" name="end"/>
+                            -->
+
+                            <input data-update_status='init'
+                                   data-titel='begin_datum' data-tabel='projecten' data-id='{{$id}}'
+                                   type="text" class="input-sm form-control project begin_datum datum" name="start"
+                                   ng-model="project.begin_datum"/>
+                            <span class="input-group-addon">tot</span>
+                            <input  data-update_status='init'
+                                    data-titel='eind_datum' data-tabel='projecten' data-id='{{$id}}' type="text"
+                                    class="input-sm form-control project begin_datum datum" name="end" ng-model="project.eind_datum"/>
+
+
+
                         </div>
 
 
@@ -163,36 +178,25 @@
 
                         <div class="col-md-12">
                             <div class="col-md-4" ng-repeat="vraag in alle_vragen">
-                                <div ng-show="vraag.choices == 'open vragen'">
-                                    <div>@{{ $index }}</div>
-                                    <h4 class="title_red">@{{vraag.choices}}</h4>
-                                    <h5 ng-class="{'invalid': toon_fout_melding('vraag',vraag.id)}" class='vraag project titel col-md-12' data-update_status='init'
-                                        data-titel='vraag' data-tabel='Vragen' data-id='@{{vraag.id}}'
-                                        contenteditable='true'>@{{vraag.vraag}}</h5>
-                                    <!--feedback validatie-->
-                                    <div class="col-md-1 pull-right glyphicon glyphicon-saved "
-                                         ng-show="toon_succes_melding('vraag',vraag.id)">
-                                    </div>
-                                    <div class="col-md-11 invalid"
-                                         ng-show="toon_fout_melding('vraag',vraag.id)">@{{ server_controle_fout[0] }}
-                                    </div><!--end feedback-->
+
+
+                                <a href="" id="vragen-delete" data-toggle="tooltip" data-placement="top"
+                                   title="Verwijder foto"><i class="fa fa-times" aria-hidden="true" ng-click="delete_elemets_on_edit_page_vragen(vraag.id,$index,'vragen')"></i></a>
+                                <div>@{{ $index }}</div>
+                                <h4 class="title_red">@{{vraag.choices}}</h4>
+                                <h5 ng-class="{'invalid': toon_fout_melding('vraag',vraag.id)}" class='vraag project titel col-md-12' data-update_status='init'
+                                    data-titel='vraag' data-tabel='Vragen' data-id='@{{vraag.id}}'
+                                    contenteditable='true'>@{{vraag.vraag}}</h5>
+                                <!--feedback validatie-->
+                                <div class="col-md-1 pull-right glyphicon glyphicon-saved "
+                                     ng-show="toon_succes_melding('vraag',vraag.id)">
                                 </div>
+                                <div class="col-md-11 invalid"
+                                     ng-show="toon_fout_melding('vraag',vraag.id)">@{{ server_controle_fout[0] }}
+                                </div><!--end feedback-->
 
 
                                 <div ng-show="vraag.choices == 'meerkeuzevragen'">
-                                    <div>@{{ $index }}</div>
-                                    <h4 class="title_red">@{{vraag.choices}}</h4>
-                                    <h5 ng-class="{'invalid': toon_fout_melding('vraag',vraag.id)}" class='vraag project titel col-md-12' data-update_status='init'
-                                        data-titel='vraag' data-tabel='Vragen' data-id='@{{vraag.id}}'
-                                        contenteditable='true'>@{{vraag.vraag}}</h5>
-                                    <!--feedback validatie-->
-                                    <div class="col-md-1 pull-right glyphicon glyphicon-saved "
-                                         ng-show="toon_succes_melding('vraag',vraag.id)">
-                                    </div>
-                                    <div class="col-md-11 invalid"
-                                         ng-show="toon_fout_melding('vraag',vraag.id)">@{{ server_controle_fout[0] }}
-                                    </div><!--end feedback-->
-
                                     <h5 ng-class="{'invalid': toon_fout_melding('mogelijke_antwoorden_1',vraag.id)}" class='vraag project titel col-md-12' data-update_status='init'
                                         data-titel='mogelijke_antwoorden_1' data-tabel='Vragen'
                                         data-id='@{{vraag.id}}' contenteditable='true'><i
@@ -204,8 +208,6 @@
                                     <div class="col-md-11 invalid"
                                          ng-show="toon_fout_melding('mogelijke_antwoorden_1',vraag.id)">@{{ server_controle_fout[0] }}
                                     </div><!--end feedback-->
-
-
 
 
                                     <h5 ng-class="{'invalid': toon_fout_melding('mogelijke_antwoorden_2',vraag.id)}" class='vraag project titel col-md-12' data-update_status='init'
@@ -233,8 +235,6 @@
                                          ng-show="toon_fout_melding('mogelijke_antwoorden_3',vraag.id)">@{{ server_controle_fout[0] }}
                                     </div><!--end feedback-->
 
-
-
                                     <h5 ng-class="{'invalid': toon_fout_melding('mogelijke_antwoorden_4',vraag.id)}" class='vraag project titel col-md-12' data-update_status='init'
                                         data-titel='mogelijke_antwoorden_4' data-tabel='Vragen'
                                         data-id='@{{vraag.id}}' contenteditable='true'><i
@@ -247,24 +247,7 @@
                                          ng-show="toon_fout_melding('mogelijke_antwoorden_4',vraag.id)">@{{ server_controle_fout[0] }}
                                     </div><!--end feedback-->
                                 </div>
-
-
                                 <div ng-show="vraag.choices == 'Gesloten vragen'">
-                                    <div>@{{ $index }}</div>
-                                    <h4 class="title_red">@{{vraag.choices}}</h4>
-                                    <h5 ng-class="{'invalid': toon_fout_melding('vraag',vraag.id)}" class='vraag project titel col-md-12' data-update_status='init'
-                                        data-titel='vraag' data-tabel='Vragen' data-id='@{{vraag.id}}'
-                                        contenteditable='true'>@{{vraag.vraag}}</h5>
-                                    <!--feedback validatie-->
-                                    <div class="col-md-1 pull-right glyphicon glyphicon-saved "
-                                         ng-show="toon_succes_melding('vraag',vraag.id)">
-                                    </div>
-                                    <div class="col-md-11 invalid"
-                                         ng-show="toon_fout_melding('vraag',vraag.id)">@{{ server_controle_fout[0] }}
-                                    </div><!--end feedback-->
-
-
-
                                     <h5 ng-class="{'invalid': toon_fout_melding('mogelijke_antwoorden_1',vraag.id)}" class='vraag project titel col-md-12' data-update_status='init'
                                         data-titel='mogelijke_antwoorden_1' data-tabel='Vragen'
                                         data-id='@{{vraag.id}}' contenteditable='true'><i
@@ -305,8 +288,18 @@
                             <div class="show_allfases">
                                 <div ng-repeat="fase in show_fases">
 
-                                    <div>@{{ $index }}</div>
+
                                     <div class="row">
+
+
+                                        <a href="" id="vragen-delete" data-toggle="tooltip" data-placement="top"
+                                           title="Verwijder foto"><i class="fa fa-times" aria-hidden="true" ng-click="delete_elemets_on_edit_page_fase(fase.id,$index,'fases')"></i></a>
+                                        <div>@{{ $index }}</div>
+
+
+
+
+
                                         <div ng-class="{'invalid': toon_fout_melding('fase_titel',fase.id)}"
                                              class='col-md-11 project titel col-md-10' data-update_status='init'
                                              data-titel='fase_titel' data-tabel='fases' data-id='@{{fase.id}}'
@@ -357,17 +350,14 @@
                                          ngf-select="uploadFiles($files, $invalidFiles, fase.id )"
                                          accept="image/*" ngf-max-height="1000" ngf-accept="'image/*'"
                                          ngf-max-size="1MB"><img
-                                                ng-src="{{Request::root()}}/img/project/@{{ fase.fases_picture }}"
+                                                ng-src="{{Request::root()}}/img/fase/@{{ fase.fases_picture }}"
                                                 alt="@{{ fase.fases_picture }}">
                                     </div>
-
                                     <ul>
-                                        <li ng-repeat="f in errFiles" style="font:smaller">
+                                        <li ng-repeat="f in errFiles_fase" >
                                             @{{f.name}} @{{f.$error}} @{{f.$errorParam}}
                                         </li>
                                     </ul>
-                                    <br>
-                                    <br>
                                 </div>
                             </div>
                             <div class="add_fase">
