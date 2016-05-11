@@ -106,7 +106,9 @@ $(document).ready(function () {
         }
     });
 
+
     google.maps.event.addListener(map, 'click', function (event) {
+        
         placeMarker(event.latLng);
 
         var lat_lng = event.latLng.lat() + "," + event.latLng.lng();
@@ -212,7 +214,9 @@ $(document).ready(function () {
 
     
     
-    $('.input-daterange').datepicker({
+    $('#datepicker input').datepicker({
+        format: "dd/mm/yyyy",
+        weekStart: 1,
         todayBtn: "linked",
         clearBtn: true,
         language: "nl-BE",

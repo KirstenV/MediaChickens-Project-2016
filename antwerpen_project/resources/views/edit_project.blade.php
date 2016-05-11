@@ -108,23 +108,12 @@
                         <hr>
 
                         <h4 class="title_red">Begin -en einddatum</h4>
-                        <div class="input-daterange input-group" id="datepicker">
-                            <span class="input-group-addon">van</span>
-
-                            <!--
-                            <input type="text" class="input-sm form-control" name="start"/>
-                            <span class="input-group-addon">tot</span>
-                            <input type="text" class="input-sm form-control" name="end"/>
-                            -->
-
-                            <input data-update_status='init'
-                                   data-titel='begin_datum' data-tabel='projecten' data-id='{{$id}}'
-                                   type="text" class="input-sm form-control project begin_datum datum" name="start"
-                                   ng-model="project.begin_datum"/>
-                            <span class="input-group-addon">tot</span>
-                            <input  data-update_status='init'
-                                    data-titel='eind_datum' data-tabel='projecten' data-id='{{$id}}' type="text"
-                                    class="input-sm form-control project begin_datum datum" name="end" ng-model="project.eind_datum"/>
+                        <div id="datepicker">
+                            
+                            <span class="input-group-addon inline">van</span>
+                                <input type="text" class="inline">
+                            <span class="input-group-addon inline">tot</span>
+                                <input type="text" class="inline">
 
 
 
@@ -361,7 +350,7 @@
                                 </div>
                             </div>
                             <div class="add_fase">
-                                <div class="glyphicon glyphicon-plus-sign" ng-click="add_fase()"></div>
+                                <div class="glyphicon glyphicon-plus-sign"  ng-click="add_fase()"></div>
                             </div>
                         </div>
                     </div>
