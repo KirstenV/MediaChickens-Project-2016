@@ -102,9 +102,17 @@
 
                         <span class="input-group-addon inline">van</span>
                         <input data-update_status='init' data-titel='begin_datum' data-tabel='projecten' data-id='{{$id}}' type="text" class="inline  begin_datum datum textbox" name="start" ng-model="project.begin_datum" />
+                        <div class="col-md-1 pull-right glyphicon glyphicon-saved " ng-show="toon_succes_melding('begin_datum',project.id)">
+                        </div>
+                        <div class="col-md-11 invalid" ng-show="toon_fout_melding('begin_datum',project.id)">@{{ server_controle_fout[0] }}
+                        </div>
+
                         <span class="input-group-addon inline">tot</span>
                         <input data-update_status='init' data-titel='eind_datum' data-tabel='projecten' data-id='{{$id}}' type="text" class="inline  begin_datum datum textbox" name="end" ng-model="project.eind_datum" />
-
+                        <div class="col-md-1 pull-right glyphicon glyphicon-saved " ng-show="toon_succes_melding('eind_datum',project.id)">
+                        </div>
+                        <div class="col-md-11 invalid" ng-show="toon_fout_melding('eind_datum',project.id)">@{{ server_controle_fout[0] }}
+                        </div>
 
 
 
@@ -309,11 +317,10 @@
 
                                             <div ng-class="{'invalid': toon_fout_melding('fase_beschrijving',fase.id)}" class='col-md-11 project titel col-md-10' data-update_status='init' data-titel='fase_beschrijving' data-tabel='fases' data-id='@{{fase.id}}' contenteditable='true'>@{{ fase.fase_beschrijving}}</div>
 
-                                            <div class="col-md-1 pull-right glyphicon glyphicon-saved "
-                                                 ng-show="toon_succes_melding('titel',project.id)"></div>
-                                            <div class="col-md-11 invalid"
-                                                 ng-show="toon_fout_melding('titel',project.id)">@{{ server_controle_fout[0] }}</div>
-                                        </div>
+                                            <div class="col-md-1 pull-right glyphicon glyphicon-saved " ng-show="toon_succes_melding('fase_beschrijving',fase.id)">
+                                            </div>
+                                            <div class="col-md-11 invalid" ng-show="toon_fout_melding('fase_beschrijving',fase.id)">@{{ server_controle_fout[0] }}
+                                            </div>
 
                                             <br>
                                             <br>

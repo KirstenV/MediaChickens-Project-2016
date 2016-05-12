@@ -55,8 +55,8 @@
       <file leaf-file-name="edit_project.blade.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/resources/views/edit_project.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="567">
-              <caret line="209" column="113" selection-start-line="209" selection-start-column="109" selection-end-line="209" selection-end-column="113" />
+            <state relative-caret-position="431">
+              <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -151,9 +151,9 @@
         <option value="$PROJECT_DIR$/public/js/edit.js" />
         <option value="$PROJECT_DIR$/public/js/script.js" />
         <option value="$PROJECT_DIR$/resources/views/layout.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/edit_project.blade.php" />
         <option value="$PROJECT_DIR$/public/js/base.js" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/projectController.php" />
+        <option value="$PROJECT_DIR$/resources/views/edit_project.blade.php" />
       </list>
     </option>
   </component>
@@ -451,16 +451,16 @@
       <workItem from="1463057372805" duration="1902000" />
       <workItem from="1463061161371" duration="2541000" />
       <workItem from="1463064142284" duration="297000" />
-      <workItem from="1463086052550" duration="615000" />
+      <workItem from="1463086052550" duration="1330000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="182306000" />
+    <option name="totallyTimeSpent" value="183021000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Gulp" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.106770836" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -893,8 +893,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/views/edit_project.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="567">
-          <caret line="209" column="113" selection-start-line="209" selection-start-column="109" selection-end-line="209" selection-end-column="113" />
+        <state relative-caret-position="431">
+          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
           <folding />
         </state>
       </provider>
