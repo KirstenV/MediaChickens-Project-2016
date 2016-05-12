@@ -76,14 +76,18 @@
 
                                         <br>
                                         <br>
-                                        <ul>
-                                            <li ng-repeat="f in errFiles" style="font:smaller">
+                                        <ul><!-- START OF ERRORS -->
+                                            <!--front end erors-->
+                                            <li ng-repeat="f in errFiles_fase" style="font:smaller">
                                                 @{{f.name}} @{{f.$error}} @{{f.$errorParam}}
+
                                             </li>
-                                        </ul>
+                                            <!--back end end erors -> deze moet nog goed testen zo dat er geen secuirity issius zijn-->
+                                            <li ng-show="errorMsg">@{{errorMsg}}</li>
+                                        </ul>  <!-- END OF ERRORS -->
                                     </div>
                                     <!-- DIV END ROW -->
-                                    <!--@{{errorMsg}}-->
+
 
                                 </div>
                                 <!--end of file_upload Conroller-->
@@ -111,9 +115,20 @@
                         <div id="datepicker">
 
                             <span class="input-group-addon inline">van</span>
-                            <input type="text" class="inline">
+                            <input data-update_status='init'
+                                   data-titel='begin_datum' data-tabel='projecten' data-id='{{$id}}'
+                                   type="text" class="inline  begin_datum datum" name="start"
+                                   ng-model="project.begin_datum"/>
                             <span class="input-group-addon inline">tot</span>
-                            <input type="text" class="inline">
+                            <input  data-update_status='init'
+                                    data-titel='eind_datum' data-tabel='projecten' data-id='{{$id}}' type="text"
+                                    class="inline  begin_datum datum" name="end" ng-model="project.eind_datum"/>
+
+
+
+
+
+
                         </div>
 
 
@@ -329,7 +344,6 @@
                                     <div class="row">
                                         <div class="col-md-11">
                                             <p>status van de fase</p>
-                                            <p>@{{ fase.fases }}</p>
                                             <select ng-change="fase_update($index,fase.id);"
                                                     ng-model="fase_choice[$index]">
                                                 <option ng-selected="'open fase'=== show_fases[$index].fases"
@@ -356,17 +370,20 @@
                                     </div>
 
 
-                                    <div ng-click="get_fase_id($index)" class="glyphicon glyphicon-edit"
-                                         ngf-select="uploadFiles($files, $invalidFiles, fase.id )"
-                                         accept="image/*" ngf-max-height="1000" ngf-accept="'image/*'"
-                                         ngf-max-size="1MB"><img
+                                    <div ng-click="get_fase_id($index)" class="glyphicon glyphicon-edit" ngf-select="uploadFiles($files, $invalidFiles, fase.id,$index )"  accept="image/*"
+                                         ngf-max-height="1000" ngf-accept="'image/*'" ngf-max-size="1MB">
+
+
+                                        <img
                                                 ng-src="{{Request::root()}}/img/fase/@{{ fase.fases_picture }}"
                                                 alt="@{{ fase.fases_picture }}">
                                     </div>
-                                    <ul>
-                                        <li ng-repeat="f in errFiles_fase">
+
+                                    <ul><!--verander deze errors met  errors van boven het zijn twee verschilende conrollers-->
+                                        <li ng-repeat="f in errFiles">
                                             @{{f.name}} @{{f.$error}} @{{f.$errorParam}}
                                         </li>
+                                        <li ng-show="errorMsg">@{{errorMsg}}</li>
                                     </ul>
                                 </div>
                             </div>

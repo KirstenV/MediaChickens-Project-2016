@@ -76,10 +76,10 @@
     app.controller('edit_projectController', ['$scope', '$http', function ($scope, $http) {
         //console.log("controller is klaar");
 
-        $scope.google_maps_controller_error_catsher=function($error){
+        $scope.google_maps_controller_error_catsher = function ($error) {
             $scope.locations_errors = $error;
         }
-        $scope.google_maps_controller = function (lat,lng,adress) {
+        $scope.google_maps_controller = function (lat, lng, adress) {
             //console.log("gegevens van de goole maps zij",lat,lng,adress);
 
             var data = {
@@ -89,13 +89,13 @@
                 _method: "POST"
             };
 
-            $http.post(root + "/locatie/toevoegen/"+ $scope.project_id+"/api", data).success(function (data) {
+            $http.post(root + "/locatie/toevoegen/" + $scope.project_id + "/api", data).success(function (data) {
                 //console.log('locaties zijn toegevoegd via google maps controller voor project =', $scope.project_id,data);
-                $scope.locations_errors="";
-                if(data.$succes) {
+                $scope.locations_errors = "";
+                if (data.$succes) {
                     $scope.locations.push(data.$location);
-                }else {
-                    if(data.$errors){
+                } else {
+                    if (data.$errors) {
                         $scope.locations_errors = data.$errors;
                     }
                     $scope.locations_errors = "Oeps, weet je zeker dat alles is goed ingevuld !";
@@ -103,20 +103,20 @@
 
             });
         }
-        
-$scope.delete_elemets_on_edit_page_locatie = function ($id, $index, $tabele) {
-    console.log("deleted varagen click with following parameters ==>", $id, $index);
-    var data = {
-        _method: "POST",
-    };
-    $http.post(root + "/edit/" + $tabele + "/" + $id + "/delete/api", data).success(function (data) {
-        if (data != "error") {
-            $scope.locations.splice($index, 1);
 
+        $scope.delete_elemets_on_edit_page_locatie = function ($id, $index, $tabele) {
+            console.log("deleted varagen click with following parameters ==>", $id, $index);
+            var data = {
+                _method: "POST",
+            };
+            $http.post(root + "/edit/" + $tabele + "/" + $id + "/delete/api", data).success(function (data) {
+                if (data != "error") {
+                    $scope.locations.splice($index, 1);
+
+                }
+                console.log(data);
+            });
         }
-        console.log(data);
-    });
-}
 
         $scope.initializetion = function (id) {
             //console.log("project is geintializeerd");
@@ -169,10 +169,10 @@ $scope.delete_elemets_on_edit_page_locatie = function ($id, $index, $tabele) {
                 _method: "PUT",
                 _token: token
             };
-            console.log("edit gegevens voor dat ze verzonden worden: ",data);
+            console.log("edit gegevens voor dat ze verzonden worden: ", data);
             $http.post(root + "/" + tabel + "/" + id, data).success(function (data, status) {
 
-                console.log("edit gegevens na dat ze verzonden worden: ",data);
+                console.log("edit gegevens na dat ze verzonden worden: ", data);
                 //$scope.project = data;
                 console.log("validation of input from server", data);
                 $scope.server_controle_input_veld = "";
@@ -260,53 +260,55 @@ $scope.delete_elemets_on_edit_page_locatie = function ($id, $index, $tabele) {
         $scope.uploadFiles = function (files, errFiles) {
             $scope.files = files;
             $scope.errFiles_fase = errFiles;
+            console.log("debug error files upload van fotos: ", $scope.errFiles_fase);
             $scope.errorMsg = " ";
             angular.forEach(files, function (file) {
 
-                console.log($scope);
-                file.upload = Upload.upload({
-                    url: root + '/upload_form',
-                    data: {project_photo: file},
-                    method: "POST",
-                    _token: '{{csrf_token()}}'
-                });
-                file.upload.then(function (response) {
-                    $timeout(function () {
-
-                        file.result = response.data;
-                        if (response.data.error) {
-                            $scope.errorMsg = response.data.error;
-                        }
-                        console.log(response.data.success);
-                        console.log(response.data.src_image);
-                        if (response.data.success) {
-                            var data = {
-                                project_id: $scope.project_id,
-                                row_content: response.data.src_image,
-                                _method: "PUT",
-                            };
-
-                            $http.post(root + "/Project_foto/add_foto/api", data).success(function (data) {
-                                //$scope.project = data;
-                                $scope.show_fotos.push(data);
-                                console.log($scope.show_fotos);
-                            });
-
-                        }
-
-                        console.log(file.result);
+                if ($scope.errFiles_fase.length == 0) {
+                    file.upload = Upload.upload({
+                        url: root + '/upload_form',
+                        data: {project_photo: file},
+                        method: "POST",
+                        _token: '{{csrf_token()}}'
                     });
-                }, function (response) {
-                    console.log("respons functie");
-                    console.log(response);
-                    if (response.status > 0) {
+                    file.upload.then(function (response) {
+                        $timeout(function () {
 
-                        $scope.errorMsg = response.status + ': ' + response.data;
-                    }
-                }, function (evt) {
-                    file.progress = Math.min(100, parseInt(100.0 *
-                        evt.loaded / evt.total));
-                });
+                            file.result = response.data;
+                            if (response.data.error) {
+                                $scope.errorMsg = response.data.error;
+                            }
+                            console.log(response.data.success);
+                            console.log(response.data.src_image);
+                            if (response.data.success) {
+                                var data = {
+                                    project_id: $scope.project_id,
+                                    row_content: response.data.src_image,
+                                    _method: "PUT",
+                                };
+
+                                $http.post(root + "/Project_foto/add_foto/api", data).success(function (data) {
+                                    //$scope.project = data;
+                                    $scope.show_fotos.push(data);
+                                    console.log($scope.show_fotos);
+                                });
+
+                            }
+
+                            console.log(file.result);
+                        });
+                    }, function (response) {
+                        console.log("respons functie");
+                        console.log(response);
+                        if (response.status > 0) {
+                            $scope.errorMsg = "Oeps, er ging iets verkeerd";
+                            //$scope.errorMsg = response.status + ': ' + response.data;
+                        }
+                    }, function (evt) {
+                        file.progress = Math.min(100, parseInt(100.0 *
+                            evt.loaded / evt.total));
+                    });
+                }
             });
         }
     }]);
@@ -398,69 +400,78 @@ $scope.delete_elemets_on_edit_page_locatie = function ($id, $index, $tabele) {
             $scope.fase_id = $fase_id;
         }
 
-        $scope.uploadFiles = function (files, errFiles, $fase_id) {
-            console.log("fase id id gekozen via fill upload =", $fase_id);
+        $scope.uploadFiles = function (files, errFiles, $fase_id, $index) {
+
+            console.log("error files bij file upload", errFiles);
             //$scope.files = files;
-            //$scope.errFiles = errFiles;
-            //$scope.errorMsg = " ";
-            angular.forEach(files, function (file) {
-                file.upload = Upload.upload({
-                    url: root + '/Project_fase/update_fase_img/api',
-                    data: {fase_photo: file},
-                    method: "POST",
-                    _token: '{{csrf_token()}}'
-                });
-                file.upload.then(function (response) {
-                    $timeout(function () {
+            $scope.errFiles = errFiles;
 
-                        file.result = response.data;
-                        if (response.data.error) {
-                            $scope.error_massage_server = response.data.error;
-                        }
-                        console.log(response.data);
-
-                        if (response.data.success) {
-                            var data = {
-                                rij_naam: "fases_picture",
-                                invul_veld: response.data.src_image,
-                                _method: "PUT"
-                            };
-
-                            $http.post(root + "/fases/" + $fase_id, data).success(function (data, status) {
-                                //$scope.project = data;
-                                console.log("validation of input from server", data);
-                                $scope.server_controle_input_veld = "";
-                                $scope.server_controle_input_veld_succes = "";
-                                if (data.$errors) {
-                                    $scope.server_controle_input_veld = data.rij_naam;
-                                    $scope.server_controle_fout = data.$errors.invul_veld;
-                                    // console.log("error messeg afte validation =" ,$scope.server_controle_fout);
-                                    //console.log("validatiion er gien iets fout --- in api cal -- fase");
-                                }
-                                if (data.$succes) {
-                                    console.log("src voor verandering = ", $scope.show_fases[$scope.fase_id].fases_picture);
-                                    $scope.show_fases[$scope.fase_id].project_picture = data.fases_picture ;
-                                    console.log("after update of img src wy gate = ", $scope.show_fases[$scope.fase_id].project_picture);
-
-                                    $scope.server_controle_input_veld_succes = data.rij_naam;
-                                    $scope.server_controller_error = data.$succes;
-                                    // console.log("validatiion alles is goed opgeslagen--- in api call -- fase ");
-                                }
-                            });
-                        }
+            $scope.errorMsg = " ";
+            if ($scope.errFiles.length == 0) {
+                angular.forEach(files, function (file) {
+                    file.upload = Upload.upload({
+                        url: root + '/Project_fase/update_fase_img/api',
+                        data: {fase_photo: file},
+                        method: "POST",
+                        _token: '{{csrf_token()}}'
                     });
-                }, function (response) {
-                    console.log("respons functie");
-                    console.log(response);
-                    if (response.status > 0) {
+                    file.upload.then(function (response) {
+                        $timeout(function () {
 
-                        $scope.errorMsg = response.status + ': ' + response.data;
-                    }
-                }, function (evt) {
-                    file.progress = Math.min(100, parseInt(100.0 *
-                        evt.loaded / evt.total));
+
+                            file.result = response.data;
+                            if (response.data.error) {
+                                $scope.error_massage_server = response.data.error;
+                                $scope.errorMsg = response.data.error;
+                            }
+                            console.log(response.data);
+
+                            if (response.data.success) {
+                                var data = {
+                                    rij_naam: "fases_picture",
+                                    invul_veld: response.data.src_image,
+                                    _method: "PUT"
+                                };
+
+                                $http.post(root + "/fases/" + $fase_id, data).success(function (data, status) {
+                                    //$scope.project = data;
+                                    console.log("validation of input from server", data);
+                                    $scope.server_controle_input_veld = "";
+                                    $scope.server_controle_input_veld_succes = "";
+                                    if (data.$errors) {
+                                        $scope.server_controle_input_veld = data.rij_naam;
+                                        $scope.server_controle_fout = data.$errors.invul_veld;
+                                        // console.log("error messeg afte validation =" ,$scope.server_controle_fout);
+                                        //console.log("validatiion er gien iets fout --- in api cal -- fase");
+                                    }
+                                    if (data.$succes) {
+                                        console.log("src voor verandering = ", $scope.show_fases[$scope.fase_id].fases_picture);
+                                        console.log("src voor verandering ", data.fases_picture);
+                                        $scope.show_fases[$index].fases_picture = data.fases_picture + '?decache=' + Math.random();
+                                        ;
+                                        console.log("after update of img src wy gate = ", $scope.show_fases[$scope.fase_id].project_picture);
+                                        console.log("index van de fase is ", $index, $scope.show_fases[$index])
+
+                                        $scope.server_controle_input_veld_succes = data.rij_naam;
+                                        $scope.server_controller_error = data.$succes;
+                                        // console.log("validatiion alles is goed opgeslagen--- in api call -- fase ");
+                                    }
+                                });
+                            }
+                        });
+                    }, function (response) {
+                        console.log("respons functie");
+                        console.log(response);
+                        if (response.status > 0) {
+                            $scope.errorMsg = "Oeps, er ging iets verkeerd";
+                            //$scope.errorMsg = response.status + ': ' + response.data;
+                        }
+                    }, function (evt) {
+                        file.progress = Math.min(100, parseInt(100.0 *
+                            evt.loaded / evt.total));
+                    });
                 });
-            });
+            }
         }
 
 

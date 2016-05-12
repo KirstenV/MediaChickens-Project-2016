@@ -15,15 +15,18 @@ $(document).ready(function () {
 
     });
 
-    $(document).on("change", ".datum", function () {
+    $(document).on("focusout", ".datum", function () {
 
-        console.log("focus out");
+
+
         var token = $("input[name='_token']").val();
         var row_name = $(this).attr("data-titel");
         var row_content = $(this).val();
         var tabel = $(this).attr("data-tabel");
         var row_id = $(this).attr("data-id");
         angular.element(document.get)
+
+
 
         angular.element(document.getElementById('edit_project')).scope().edit_project(tabel, row_id, row_name, row_content, token);
         //UpdateProjecten(tabel, row_name, row_content, token);

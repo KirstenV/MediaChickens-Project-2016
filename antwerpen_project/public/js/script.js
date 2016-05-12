@@ -194,7 +194,7 @@ $(document).ready(function () {
 
 
     $('#datepicker input').datepicker({
-        format: "dd/mm/yyyy",
+        format: "yyyy-mm-dd",
         weekStart: 1,
         todayBtn: "linked",
         clearBtn: true,
