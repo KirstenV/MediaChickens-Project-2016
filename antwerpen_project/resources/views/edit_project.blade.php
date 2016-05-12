@@ -309,10 +309,11 @@
 
                                             <div ng-class="{'invalid': toon_fout_melding('fase_beschrijving',fase.id)}" class='col-md-11 project titel col-md-10' data-update_status='init' data-titel='fase_beschrijving' data-tabel='fases' data-id='@{{fase.id}}' contenteditable='true'>@{{ fase.fase_beschrijving}}</div>
 
-                                            <div class="col-md-1 pull-right glyphicon glyphicon-saved " ng-show="toon_succes_melding('fase_beschrijving',fase.id)">
-                                            </div>
-                                            <div class="col-md-11 invalid" ng-show="toon_fout_melding('fase_beschrijving',fase.id)">@{{ server_controle_fout[0] }}
-                                            </div>
+                                            <div class="col-md-1 pull-right glyphicon glyphicon-saved "
+                                                 ng-show="toon_succes_melding('titel',project.id)"></div>
+                                            <div class="col-md-11 invalid"
+                                                 ng-show="toon_fout_melding('titel',project.id)">@{{ server_controle_fout[0] }}</div>
+                                        </div>
 
                                             <br>
                                             <br>

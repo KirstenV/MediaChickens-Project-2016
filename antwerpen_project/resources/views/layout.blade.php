@@ -28,7 +28,8 @@
     <script src="{{Request::root()}}/js/script.js"></script>
     <script src="{{Request::root()}}/js/bootstrap-datepicker.min.js"></script>
     <script src="{{Request::root()}}/js/bootstrap-datepicker.nl-BE.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrmTkGoBzp--pRgO5vRXIsbXPrk3VMp_w&libraries=places" type="text/javascript"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrmTkGoBzp--pRgO5vRXIsbXPrk3VMp_w&libraries=places"
+            type="text/javascript"></script>
     <!-- <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
 
     @yield('header')
@@ -39,170 +40,158 @@
 <body>
 
 
-    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Log in</h4>
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Log in</h4>
+            </div>
+            <div class="modal-body">
+
+                <div class="modal-body-center">
+                    <form method="POST" action="{{Request::root()}}/auth/login">
+                        {!! csrf_field() !!}
+
+                        <div>
+                            <label>Email</label>
+                            <br>
+                            <input class="textbox" type="email" name="email" value="{{ old('email') }}">
+                        </div>
+                        <br>
+                        <div>
+                            <label>Wachtwoord</label>
+                            <br>
+                            <input class="textbox" type="password" name="password" id="password">
+                        </div>
+                        <br>
+                        <div>
+                            <label><input type="checkbox" name="remember"> Onthoud mij</label>
+                        </div>
+
+
+                        <br>
+                        <br>
+
+
+
                 </div>
-                <div class="modal-body">
 
-                    <div class="modal-body-center">
-                        <form method="POST" action="{{Request::root()}}/auth/login">
-                            {!! csrf_field() !!}
-
-                            <div>
-                                <label>Email</label>
-                                <br>
-                                <input class="textbox" type="email" name="email" value="{{ old('email') }}">
-                            </div>
-                            <br>
-                            <div>
-                                <label>Wachtwoord</label>
-                                <br>
-                                <input class="textbox" type="password" name="password" id="password">
-                            </div>
-                            <br>
-                            <div>
-                                <label><input type="checkbox" name="remember"> Onthoud mij</label>
-                            </div>
-
-
-                            <br>
-                            <br>
-
-
-
-                    </div>
-
-                    <div id="error-messages">
-                        @foreach ($errors->all() as $error)
-                        <li class="title_red error-message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ $error }}</li>
-                        @endforeach @if ($errors->all())
+                <div id="error-messages">
+                    @foreach ($errors->all() as $error)
+                        <li class="title_red error-message"><i class="fa fa-exclamation-triangle"
+                                                               aria-hidden="true"></i> {{ $error }}</li>
+                    @endforeach @if ($errors->all())
                         <script>
                             $('#loginModal').modal('show');
                         </script>
-                        @endif
-                    </div>
+                    @endif
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuleer</button>
-                    <button id="btn-sign-in" name="submit" type="submit" class="btn btn-primary">Log in</button>
-                    </form>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuleer</button>
+                <button id="btn-sign-in" name="submit" type="submit" class="btn btn-primary">Log in</button>
+                </form>
             </div>
         </div>
     </div>
+</div>
 
 
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Registreer</h4>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body-center">
+                    <form method="POST" action="{{Request::root()}}/auth/register">
+                        {!! csrf_field() !!}
+
+                        <div>
+                            <label>Naam</label>
+                            <br>
+                            <input class="textbox" type="text" name="name" value="{{ old('name') }}">
+                        </div>
+                        <br>
+                        <div>
+                            <label>Email</label>
+                            <br>
+                            <input class="textbox" type="email" name="email" value="{{ old('email') }}">
+                        </div>
+                        <br>
+                        <div>
+                            <label>Wachtwoord</label>
+                            <br>
+                            <input class="textbox" type="password" name="password">
+                        </div>
+                        <br>
+                        <div style="margin-bottom:25px">
+                            <label>Bevestig wachtwoord</label>
+                            <br>
+                            <input class="textbox" type="password" name="password_confirmation">
+                        </div>
 
 
-
-
-
-
-
-    <div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">Registreer</h4>
                 </div>
-                <div class="modal-body">
-                    <div class="modal-body-center">
-                        <form method="POST" action="{{Request::root()}}/auth/register">
-                            {!! csrf_field() !!}
 
-                            <div>
-                                <label>Naam</label>
-                                <br>
-                                <input class="textbox" type="text" name="name" value="{{ old('name') }}">
-                            </div>
-                            <br>
-                            <div>
-                                <label>Email</label>
-                                <br>
-                                <input class="textbox" type="email" name="email" value="{{ old('email') }}">
-                            </div>
-                            <br>
-                            <div>
-                                <label>Wachtwoord</label>
-                                <br>
-                                <input class="textbox" type="password" name="password">
-                            </div>
-                            <br>
-                            <div style="margin-bottom:25px">
-                                <label>Bevestig wachtwoord</label>
-                                <br>
-                                <input class="textbox" type="password" name="password_confirmation">
-                            </div>
-
-
-
-
-                    </div>
-
-                    <div id="error-messages">
-                        @foreach ($errors->all() as $error)
-                        <li class="title_red error-message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ $error }}</li>
-                        @endforeach @if ($errors->all())
+                <div id="error-messages">
+                    @foreach ($errors->all() as $error)
+                        <li class="title_red error-message"><i class="fa fa-exclamation-triangle"
+                                                               aria-hidden="true"></i> {{ $error }}</li>
+                    @endforeach @if ($errors->all())
                         <script>
                             $('#registerModal').modal('show');
                         </script>
-                        @endif
-                    </div>
-
+                    @endif
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuleer</button>
-                    <button id="btn-register" name="submit" type="submit" class="btn btn-primary">Registreer</button>
-                    </form>
-                </div>
-
-
 
             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuleer</button>
+                <button id="btn-register" name="submit" type="submit" class="btn btn-primary">Registreer</button>
+                </form>
+            </div>
+
+
         </div>
     </div>
+</div>
 
 
+<nav class="navbar navbar-default" role="navigation">
 
+    <div class="navbar-header">
+        <a class="navbar-brand" href="{{Request::root()}}/" title="home">
 
+            <img src="{{Request::root()}}/svg/A_logo_485_RGB_POS.png" alt="logo"/>
 
+        </a>
 
+    </div>
+    <div class="navbar-search">
 
-
-    <nav class="navbar navbar-default" role="navigation">
-
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{{Request::root()}}/" title="home">
-
-                <img src="{{Request::root()}}/svg/A_logo_485_RGB_POS.png" alt="logo" />
+        <form>
+            <input class="textbox" type="text" placeholder="Typ hier om te zoeken">
+            <a href="" title="zoeken">
+                <i class="fa fa-search" aria-hidden="true"></i>
 
             </a>
 
-        </div>
-        <div class="navbar-search">
 
-            <form>
-                <input class="textbox" type="text" placeholder="Typ hier om te zoeken">
-                <a href="" title="zoeken">
-                    <i class="fa fa-search" aria-hidden="true"></i>
+        </form>
 
-                </a>
+    </div>
+    <!-- END DIV NAVBAR-SEARCH -->
+    <div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
+        <ul class="nav navbar-nav">
 
 
-            </form>
-
-        </div>
-        <!-- END DIV NAVBAR-SEARCH -->
-        <div class="collapse navbar-collapse navbar-ex1-collapse pull-right">
-            <ul class="nav navbar-nav">
-
-
-                @if(Auth::check())
+            @if(Auth::check())
 
 
 
@@ -220,7 +209,7 @@
                         <i class="fa fa-sign-out" aria-hidden="true"></i>
                     </a>
                 </li>
-                @else
+            @else
                 <li>
                     <a href="" title="log in" data-toggle="modal" data-target="#loginModal">
                         <i class="fa fa-sign-in" aria-hidden="true"></i>
@@ -233,17 +222,15 @@
 
 
                 </li>
-                @endif
+            @endif
 
 
+        </ul>
+    </div>
 
+</nav>
 
-            </ul>
-        </div>
-
-    </nav>
-
-    <!--	<nav class="navbar navbar-inverse nav_bar_margin_top" role="navigation">
+<!--	<nav class="navbar navbar-inverse nav_bar_margin_top" role="navigation">
 		<div class="container">
 			<div class="collapse navbar-collapse navbar-ex1-collapse">
 				<ul class="nav navbar-nav">
@@ -265,20 +252,20 @@
 	</nav>
 -->
 
-    @yield('map') @yield('homeContent') @yield('editContent')
+@yield('map') @yield('homeContent') @yield('editContent')
 
 
-    <div class="col-md-8" style="display: none;">
-        <h3>
+<div class="col-md-8" style="display: none;">
+    <h3>
         Span 4
     </h3>
-        <p>
-            Content
-        </p>
-    </div>
+    <p>
+        Content
+    </p>
+</div>
 
-    @yield('footer')
-    
+@yield('footer')
+
 </body>
 
 </html>

@@ -150,7 +150,10 @@ class projectController extends Controller
         }
 
         DB::table($table)->where('id', $id)->update(array($request->input('rij_naam') => $request->input('invul_veld')));
-        $project_information = array_add($project_information, 'fases_picture', Fase::find($id)->fases_picture);
+        if($request->rij_naam=='fases_picture'){
+            $project_information = array_add($project_information, 'fases_picture', Fase::find($id)->fases_picture);
+        }
+
         $usser_updatet = Projecten::find($id);
 
         $project_information = array_add($project_information, '$succes', "alles s opgeslagen");

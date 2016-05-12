@@ -202,7 +202,7 @@
             }
         }
         $scope.toon_succes_melding = function ($tabele, $id) {
-            //console.log("toon succes meldin =" , $scope.server_controle_input_veld_succes , $tabele , $scope.server_controle_veld__id, $id);
+            console.log("toon succes meldin =" , $scope.server_controle_input_veld_succes , $tabele , $scope.server_controle_veld__id, $id);
             if ($scope.server_controle_input_veld_succes == $tabele && $scope.server_controle_veld__id == $id) {
                 return true;
             }
