@@ -241,12 +241,11 @@ body {
     top: 70px;
     background-color: #fff;
     height: 60px;
-    //box-shadow: -1px 1px 5px #888888;
 }
 
 #add_project {
     border-radius: 50px;
-    border: dashed #888888;
+    border: 1px solid #888888;
     color: #888888;
     position: relative;
     width: 70%;
