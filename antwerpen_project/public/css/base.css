@@ -579,15 +579,7 @@ body {
     width: 100%;
 }
 
-.pop-up {
-    border: 1px solid #3498db;
-    border-radius: 10px;
-    background-color: #3498db;
-    position: absolute;
-    right: 0%;
-    padding: 7px;
-    color: white;
-}
+
 
 .vraag_add_button:hover {
     border: 1px dashed #DA291C;

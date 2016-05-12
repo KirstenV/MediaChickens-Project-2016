@@ -29,7 +29,7 @@
 
                                 <p ng-class="{'invalid': toon_fout_melding('titel',project.id)}" class="col-md-11 project titel" data-toggle="tooltip" ng-model="inhoud" data-placement="left" title="Klik om aan te passen" data-update_status='init' data-titel='titel' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.titel}}</p>
 
-                                <div class="pop-up pull-right" ng-show="toon_succes_melding('titel',project.id)">Opgeslagen <i class="fa fa-check" aria-hidden="true"></i></div>
+                                 <div class="col-md-1 pull-right glyphicon glyphicon-saved " ng-show="toon_succes_melding('titel',project.id)"></div>
                                 <div class="col-md-11 invalid" ng-show="toon_fout_melding('titel',project.id)">@{{ server_controle_fout[0] }}</div>
                             </div>
                         </div>
@@ -89,7 +89,7 @@
                         <div class="row col-md-12 no-padding">
                             <h4 class="title_red  col-md-12">Beschrijving</h4>
                             <p ng-class="{'invalid': toon_fout_melding('beschrijving',project.id)}" data-toggle="tooltip" data-placement="left" title="Klik om aan te passen" class="col-md-11 project beschrijving" data-update_status='init' data-titel='beschrijving' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.beschrijving}}</p>
-                            <div class="pop-up pull-right" ng-show="toon_succes_melding('beschrijving',project.id)">Opgeslagen <i class="fa fa-check" aria-hidden="true"></i></div>
+                             <div class="col-md-1 pull-right glyphicon glyphicon-saved "  ng-show="toon_succes_melding('beschrijving',project.id)"></div>
                             <div class="col-md-11 invalid" ng-show="toon_fout_melding('beschrijving',project.id)">@{{ server_controle_fout[0] }}</div>
                         </div>
                     </div>
