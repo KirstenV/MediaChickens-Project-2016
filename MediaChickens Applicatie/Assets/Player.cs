@@ -47,11 +47,10 @@ public class Player : MonoBehaviour {
     public Text txtPause;
 
     //variables for database connection
-    string url = "http://mediachickens.multimediatechnology.be/unity/al_projecten/api"; //url of json to be decoded
-    string questionsUrl; //145 vervangen door id project
+    string urlProjects = "http://mediachickens.multimediatechnology.be/unity/al_projecten/api"; //url of json to be decoded
 
 
-    IEnumerator Start() //IEnumerator for json
+    void Start() //IEnumerator for json
     {
 
         rb = GetComponent<Rigidbody>();
@@ -71,20 +70,8 @@ public class Player : MonoBehaviour {
         road1.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePosition ;
         road1.centerOfMass = new Vector3(0, 0, 0);
         //JSon 
-        WWW wwwQuestions = new WWW(getQuestions("10")); //nr checken!!!
-        WWW wwwProjects = new WWW(url);
+        StartCoroutine(getProjectsFromURL(urlProjects)); //getting projects from url
 
-        yield return wwwProjects;
-        yield return wwwQuestions;
-        if (wwwProjects.error == null)
-        {
-            objectJSON[] arrProjects = getProjects(wwwProjects.text);
-        }
-        else
-        {
-            Debug.Log("ERROR: " + wwwProjects.error);
-        }
-        
 
     }
     void OnTriggerEnter(Collider other)
@@ -195,7 +182,9 @@ public class Player : MonoBehaviour {
                             {
                                 isPlaying = true;
                                 isRunning = true;
-                            }
+                                StartCoroutine(getQuestionsFromURL(getQuestionsUrl("0")));
+                                
+                        }
                         }   
                         hasSwiped = true;
                     }
@@ -232,11 +221,11 @@ public class Player : MonoBehaviour {
         txtPause.gameObject.SetActive(false);
     }
 
-    public class objectJSON
+    public class ObjectJSONProjects
     {
         string jID;
-        public objectJSON() { }
-        public objectJSON(string tID)
+        public ObjectJSONProjects() { }
+        public ObjectJSONProjects(string tID)
         {
             jID = tID;
         }
@@ -250,26 +239,8 @@ public class Player : MonoBehaviour {
         }
     }
 
-    private objectJSON[] getProjects(string jsonString) // jsonstring
-    {
-        
-       JsonData jsonvale = JsonMapper.ToObject(jsonString);
-        objectJSON[] arrProjectsTemp = new objectJSON[jsonvale.Count];
-        for (int i = 0; i < jsonvale.Count; i++)
-        {
-            
-            arrProjectsTemp[i] = new objectJSON(jsonvale[i]["id"].ToString()); // json object oproepen door (id)
-            Debug.Log(arrProjectsTemp[i].id);
-        }
-        return arrProjectsTemp;
-       /* parseJSON parsejson;
-        parsejson = new parseJSON();
-      //  parsejson.title = jsonvale["title"].ToString();
-        parsejson.id = jsonvale["id"].ToString();
-       */
-       
-    }
-    private string getQuestions(string projectID)
+
+    private string getQuestionsUrl(string projectID)
     {
         
        string urlPart1 = "http://mediachickens.multimediatechnology.be/unity/vragen/";
@@ -278,12 +249,61 @@ public class Player : MonoBehaviour {
 
 
     }
-    IEnumerator getJSONFromURL()
+   public IEnumerator getProjectsFromURL(string projectUrl)
     {
+     //   WWW wwwQuestions = new WWW(getQuestionsUrl("10")); //nr checken!!!
+        WWW wwwProjects = new WWW(projectUrl);
+
+        yield return wwwProjects;
+       // yield return wwwQuestions;
+        if (wwwProjects.error == null)
+        {
+            ObjectJSONProjects[] arrProjects = addProjectsToArray(wwwProjects.text);
+        }
+        else
+        {
+            Debug.Log("ERROR: " + wwwProjects.error);
+        }
+    }
+    IEnumerator getQuestionsFromURL(string urlQuestions)
+    {
+        WWW wwwQuestions = new WWW(urlQuestions);
+
+        yield return wwwQuestions;
+        // yield return wwwQuestions;
+        if (wwwQuestions.error == null)
+        {
+            ObjectJSONProjects[] arrQuestions = addQuestionsToArray(wwwQuestions.text);
+        }
+        else
+        {
+            Debug.Log("ERROR: " + wwwQuestions.error);
+        }
+    }
+    private ObjectJSONProjects[] addProjectsToArray(string jsonString) // jsonstring
+    {
+
+        JsonData jsonvale = JsonMapper.ToObject(jsonString);
+        ObjectJSONProjects[] arrProjectsTemp = new ObjectJSONProjects[jsonvale.Count];
+        for (int i = 0; i < jsonvale.Count; i++)
+        {
+            arrProjectsTemp[i] = new ObjectJSONProjects(jsonvale[i]["id"].ToString()); // json object oproepen door (id)
+        }
+        return arrProjectsTemp;
 
     }
 
+    private ObjectJSONProjects[] addQuestionsToArray(string jsonString) // jsonstring
+    {
 
+        JsonData jsonvale = JsonMapper.ToObject(jsonString);
+        ObjectJSONProjects[] arrProjectsTemp = new ObjectJSONProjects[jsonvale.Count];
+        for (int i = 0; i < jsonvale.Count; i++)
+        {
+            arrProjectsTemp[i] = new ObjectJSONProjects(jsonvale[i]["id"].ToString()); // json object oproepen door (id)
+        }
+        return arrProjectsTemp;
+    }
 } 
 
     
