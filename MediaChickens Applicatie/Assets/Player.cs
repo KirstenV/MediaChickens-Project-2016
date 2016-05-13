@@ -72,9 +72,7 @@ public class Player : MonoBehaviour {
         road1.centerOfMass = new Vector3(0, 0, 0);
         //JSon 
         StartCoroutine(getProjectsFromURL(urlProjects)); //getting projects from url
-        StartCoroutine(getQuestionsFromURL(getQuestionsUrl("11")));
-        Debug.Log("projects test" + arrProjects[0].id);
-        Debug.Log("questions test" + arrQuestions[0].id);
+        StartCoroutine(getQuestionsFromURL(getQuestionsUrl("10")));
 
     }
     void OnTriggerEnter(Collider other)
@@ -226,7 +224,14 @@ public class Player : MonoBehaviour {
 
     public class ObjectJSONProjects //type of objects with info for projects
     {
+        //{"id":10,"titel":"W<CW<C","beschrijving":"klick op mij en pas mij aan voor de beschrijving",
+        //"begin_datum":"0000-00-00","eind_datum":"0000-00-00","project_picture":"proef_proef.jpg",
+        //"user_id":"1","deleted_at":null,"created_at":"2016-05-13 07:40:35","updated_at":"2016-05-13 07:40:35"}
         string jID;
+        string projectTitle;
+        string projectDescription;
+        
+
         public ObjectJSONProjects() { } //empty for default
         public ObjectJSONProjects(string tID)
         {
@@ -242,19 +247,70 @@ public class Player : MonoBehaviour {
         }
     }
 
-    public class ObjectJSONQuestions //type of objects with info for questions
+    public class ObjectJSONQuestions //objects with info for questions
     {
         string qID;
+        string typeOfQuestion;
+        string qQuestion;
+        string possibleAnswers1, possibleAnswers2, possibleAnswers3, possibleAnswers4;
         public ObjectJSONQuestions() { } //empty for default
-        public ObjectJSONQuestions(string tID)
+        public ObjectJSONQuestions(string tID, string tType, string tQuestion, string tPossibleAnswers1, string tPossibleAnswers2, string tPossibleAnswers3, string tPossibleAnswers4)
         {
             qID = tID;
+            typeOfQuestion = tType;
+            qQuestion = tQuestion;
+            possibleAnswers1 = tPossibleAnswers1;
+            possibleAnswers2 = tPossibleAnswers2;
+            possibleAnswers3 = tPossibleAnswers3;
+            possibleAnswers4 = tPossibleAnswers4;
         }
         public string id
         {
             get
             {
                 return qID;
+            }
+        }
+        public string type
+        {
+            get
+            {
+                return typeOfQuestion;
+            }
+        }
+        public string question
+        {
+            get
+            {
+                return qQuestion;
+            }
+        }
+        public string possibility1
+        {
+            get
+            {
+                return possibleAnswers1;
+            }
+        }
+        public string possibility2
+        {
+            get
+            {
+                return possibleAnswers2;
+            }
+        }
+        public string possibility3
+        {
+            get
+            {
+                return possibleAnswers3;
+            }
+        }
+        public string possibility4
+        {
+            get
+            {
+                return possibleAnswers4;
             }
         }
     }
@@ -271,14 +327,12 @@ public class Player : MonoBehaviour {
 
    public IEnumerator getProjectsFromURL(string projectUrl)
     {
-     //   WWW wwwQuestions = new WWW(getQuestionsUrl("10")); //nr checken!!!
         WWW wwwProjects = new WWW(projectUrl);
 
         yield return wwwProjects;
-       // yield return wwwQuestions;
         if (wwwProjects.error == null)
         {
-            arrProjects = addProjectsToArray(wwwProjects.text);
+            addProjectsToArray(wwwProjects.text);
         }
         else
         {
@@ -287,14 +341,13 @@ public class Player : MonoBehaviour {
     }
     IEnumerator getQuestionsFromURL(string urlQuestions)
     {
-        Debug.Log("url questions " + urlQuestions);
         WWW wwwQuestions = new WWW(urlQuestions);
 
         yield return wwwQuestions;
         // yield return wwwQuestions;
         if (wwwQuestions.error == null)
         {
-          ObjectJSONQuestions[] arrQuestionsTest = addQuestionsToArray(wwwQuestions.text);
+          addQuestionsToArray(wwwQuestions.text);
         }
         else
         {
@@ -305,27 +358,42 @@ public class Player : MonoBehaviour {
     private void addProjectsToArray(string jsonString) // jsonstring
     {
 
-        JsonData jsonvale = JsonMapper.ToObject(jsonString);
-        ObjectJSONProjects[] arrProjectsTemp = new ObjectJSONProjects[jsonvale.Count];
-        for (int i = 0; i < jsonvale.Count; i++)
+        JsonData dataPRojects = JsonMapper.ToObject(jsonString);
+        arrProjects = new ObjectJSONProjects[dataPRojects.Count];
+        for (int i = 0; i < dataPRojects.Count; i++)
         {
-            arrProjectsTemp[i] = new ObjectJSONProjects(jsonvale[i]["id"].ToString()); // json object oproepen door (id)
+            arrProjects[i] = new ObjectJSONProjects(dataPRojects[i]["id"].ToString()); // json object oproepen door (id)
         }
         
         //hierbij nog aanpassen!!!!! geen return meer geven
     }
 
-    private ObjectJSONQuestions[] addQuestionsToArray(string jsonString) // adding the chosen questions to an array, ready for showing on tunnels
+    private void addQuestionsToArray(string jsonString) // adding the chosen questions to an array, ready for showing on tunnels
     {
 
-        JsonData jsonvale = JsonMapper.ToObject(jsonString);
-        ObjectJSONQuestions[] arrQuestionsTemp = new ObjectJSONQuestions[jsonvale.Count];
-        for (int i = 0; i < jsonvale.Count; i++)
+        JsonData dateQuestion = JsonMapper.ToObject(jsonString);
+        arrQuestions = new ObjectJSONQuestions[dateQuestion.Count];
+        for (int i = 0, j = 0; i < dateQuestion.Count; i++, j++)
         {
-            arrQuestionsTemp[i] = new ObjectJSONQuestions(jsonvale[i]["id"].ToString()); // json object oproepen door (id)
-            Debug.Log(arrQuestionsTemp[0].id);
+            if(dateQuestion[i]["choices"].ToString() != "open vragen") {
+            arrQuestions[i] = new ObjectJSONQuestions(
+                    dateQuestion[i]["id"].ToString(), //string tID
+                    dateQuestion[i]["choices"].ToString(), //Type
+                    dateQuestion[i]["vraag"].ToString(), //question
+                    dateQuestion[i]["mogelijke_antwoorden_1"].ToString(), //possibility1
+                    dateQuestion[i]["mogelijke_antwoorden_2"].ToString(), //possibility2
+                    dateQuestion[i]["mogelijke_antwoorden_3"].ToString(), //possibility3
+                    dateQuestion[i]["mogelijke_antwoorden_4"].ToString() //possibility4
+                    );
+                Debug.Log(arrQuestions[i].type);
+//string tQuestion, string tPossibleAnswers1, string tPossibleAnswers2, string tPossibleAnswers3, string tPossibleAnswers4
+               
+               }
+           else
+            {
+                j--;
+            }
         }
-        return arrQuestionsTemp;
     }
 } 
 
