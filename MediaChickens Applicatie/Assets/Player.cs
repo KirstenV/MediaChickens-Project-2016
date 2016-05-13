@@ -3,13 +3,13 @@ using UnityEngine.UI;
 //JSON
 using System.Collections;
 using System.Collections.Generic;
-
+using LitJson;
 
 public class Player : MonoBehaviour {
     //variables for middle of roads
-    private float leftRoad = 28;
+   /* private float leftRoad = 28;
     private float middleRoad = 36;
-    private float rightRoad = 44;
+    private float rightRoad = 44;*/
 
 
     //variables for swipe
@@ -46,10 +46,14 @@ public class Player : MonoBehaviour {
     public Button btnContinue;
     public Text txtPause;
 
+    //variables for database connection
+    string url = "http://mediachickens.multimediatechnology.be/unity/al_projecten/api"; //url of json to be decoded
+    string questionsUrl; //145 vervangen door id project
 
 
-    void Start()
+    IEnumerator Start() //IEnumerator for json
     {
+
         rb = GetComponent<Rigidbody>();
         btnPause.GetComponent<Button>();
         btnContinue.GetComponent<Button>();
@@ -66,7 +70,23 @@ public class Player : MonoBehaviour {
         currentLane = 1; //0links, 1 midden,2 rechts
         road1.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePosition ;
         road1.centerOfMass = new Vector3(0, 0, 0);
-}
+        //JSon 
+        WWW wwwQuestions = new WWW(getQuestions("10")); //nr checken!!!
+        WWW wwwProjects = new WWW(url);
+
+        yield return wwwProjects;
+        yield return wwwQuestions;
+        if (wwwProjects.error == null)
+        {
+            objectJSON[] arrProjects = getProjects(wwwProjects.text);
+        }
+        else
+        {
+            Debug.Log("ERROR: " + wwwProjects.error);
+        }
+        
+
+    }
     void OnTriggerEnter(Collider other)
     {
         
@@ -211,7 +231,60 @@ public class Player : MonoBehaviour {
         btnContinue.gameObject.SetActive(false);
         txtPause.gameObject.SetActive(false);
     }
-    } 
+
+    public class objectJSON
+    {
+        string jID;
+        public objectJSON() { }
+        public objectJSON(string tID)
+        {
+            jID = tID;
+        }
+        
+        public string id
+        {
+            get
+            {
+                return jID;
+            }
+        }
+    }
+
+    private objectJSON[] getProjects(string jsonString) // jsonstring
+    {
+        
+       JsonData jsonvale = JsonMapper.ToObject(jsonString);
+        objectJSON[] arrProjectsTemp = new objectJSON[jsonvale.Count];
+        for (int i = 0; i < jsonvale.Count; i++)
+        {
+            
+            arrProjectsTemp[i] = new objectJSON(jsonvale[i]["id"].ToString()); // json object oproepen door (id)
+            Debug.Log(arrProjectsTemp[i].id);
+        }
+        return arrProjectsTemp;
+       /* parseJSON parsejson;
+        parsejson = new parseJSON();
+      //  parsejson.title = jsonvale["title"].ToString();
+        parsejson.id = jsonvale["id"].ToString();
+       */
+       
+    }
+    private string getQuestions(string projectID)
+    {
+        
+       string urlPart1 = "http://mediachickens.multimediatechnology.be/unity/vragen/";
+        string urlPart2 = "/api";
+       return urlPart1 + projectID + urlPart2;
+
+
+    }
+    IEnumerator getJSONFromURL()
+    {
+
+    }
+
+
+} 
 
     
         
