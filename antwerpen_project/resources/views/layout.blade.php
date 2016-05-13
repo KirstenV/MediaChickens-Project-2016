@@ -42,16 +42,18 @@
 
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
+        <form method="POST" action="{{Request::root()}}/auth/login">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="myModalLabel">Log in</h4>
             </div>
+
             <div class="modal-body">
 
                 <div class="modal-body-center">
-                    <form method="POST" action="{{Request::root()}}/auth/login">
+
                         {!! csrf_field() !!}
 
                         <div>
@@ -92,9 +94,10 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Annuleer</button>
                 <button id="btn-sign-in" name="submit" type="submit" class="btn btn-primary">Log in</button>
-                </form>
+
             </div>
         </div>
+        </form>
     </div>
 </div>
 
@@ -154,12 +157,13 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Annuleer</button>
                 <button id="btn-register" name="submit" type="submit" class="btn btn-primary">Registreer</button>
-                </form>
+
             </div>
 
 
         </div>
     </div>
+    </form>
 </div>
 
 

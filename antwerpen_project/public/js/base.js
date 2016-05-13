@@ -1,6 +1,32 @@
 (function () {
     var app = angular.module('antwerpen_project', ['ngFileUpload']);
 
+
+    app.controller('LoginController',['$http','$scope',function ($http,$scope) {
+        $scope.login_data ={}
+
+
+        $scope.submit_login =function (token) {
+            console.log($scope.login_data);
+
+            var data = {
+
+                email: $scope.login_data.email,
+                password: $scope.login_data.password,
+                _method: "POST",
+                _token: token
+            };
+
+            $http.post(root + "/auth/login", data).success(function (data, status) {
+
+               console.log("return data from loging api",data);
+
+            });
+
+
+        }
+    }])
+
     app.controller('projectController', ['$http', "$scope", function ($http, $scope) {
         $scope.project;
 

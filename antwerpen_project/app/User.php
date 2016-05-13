@@ -6,6 +6,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+
+    public function show_answers()
+    {
+        return $this->hasMany('App\Antwoorden');
+    }
+
 	 public function show_projecten()
     {
         return $this->hasMany('App\Projecten');

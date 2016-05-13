@@ -10,6 +10,7 @@ use App\User;
 use App\Fase;
 Use App\Project_foto;
 use App\Vragen;
+use App\Antwoorden;
 
 class unityController extends Controller
 {
@@ -17,7 +18,12 @@ class unityController extends Controller
         return response()->json( Projecten::all());
     }
 
-    public function get_vragen_by_id($id){
+    public function get_vragen_by_id($id,$user){
+        if($user){
+            
+        }
         return $fases = Projecten::find($id)->show_vragen;
     }
+    
+    
 }
