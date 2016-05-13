@@ -48,7 +48,8 @@ public class Player : MonoBehaviour {
 
     //variables for database connection
     string urlProjects = "http://mediachickens.multimediatechnology.be/unity/al_projecten/api"; //url of json to be decoded
-
+    ObjectJSONProjects[] arrProjects;
+    ObjectJSONQuestions[] arrQuestions;
 
     void Start() //IEnumerator for json
     {
@@ -71,7 +72,9 @@ public class Player : MonoBehaviour {
         road1.centerOfMass = new Vector3(0, 0, 0);
         //JSon 
         StartCoroutine(getProjectsFromURL(urlProjects)); //getting projects from url
-
+        StartCoroutine(getQuestionsFromURL(getQuestionsUrl("11")));
+        Debug.Log("projects test" + arrProjects[0].id);
+        Debug.Log("questions test" + arrQuestions[0].id);
 
     }
     void OnTriggerEnter(Collider other)
@@ -182,7 +185,7 @@ public class Player : MonoBehaviour {
                             {
                                 isPlaying = true;
                                 isRunning = true;
-                                StartCoroutine(getQuestionsFromURL(getQuestionsUrl("0")));
+                                StartCoroutine(getQuestionsFromURL(getQuestionsUrl("0"))); //getting questions once player has chosen project
                                 
                         }
                         }   
@@ -221,10 +224,10 @@ public class Player : MonoBehaviour {
         txtPause.gameObject.SetActive(false);
     }
 
-    public class ObjectJSONProjects
+    public class ObjectJSONProjects //type of objects with info for projects
     {
         string jID;
-        public ObjectJSONProjects() { }
+        public ObjectJSONProjects() { } //empty for default
         public ObjectJSONProjects(string tID)
         {
             jID = tID;
@@ -239,16 +242,33 @@ public class Player : MonoBehaviour {
         }
     }
 
+    public class ObjectJSONQuestions //type of objects with info for questions
+    {
+        string qID;
+        public ObjectJSONQuestions() { } //empty for default
+        public ObjectJSONQuestions(string tID)
+        {
+            qID = tID;
+        }
+        public string id
+        {
+            get
+            {
+                return qID;
+            }
+        }
+    }
+
 
     private string getQuestionsUrl(string projectID)
     {
-        
        string urlPart1 = "http://mediachickens.multimediatechnology.be/unity/vragen/";
         string urlPart2 = "/api";
        return urlPart1 + projectID + urlPart2;
+    } //makes the url for getting the questions from the chosen project
+    
 
 
-    }
    public IEnumerator getProjectsFromURL(string projectUrl)
     {
      //   WWW wwwQuestions = new WWW(getQuestionsUrl("10")); //nr checken!!!
@@ -258,7 +278,7 @@ public class Player : MonoBehaviour {
        // yield return wwwQuestions;
         if (wwwProjects.error == null)
         {
-            ObjectJSONProjects[] arrProjects = addProjectsToArray(wwwProjects.text);
+            arrProjects = addProjectsToArray(wwwProjects.text);
         }
         else
         {
@@ -267,20 +287,22 @@ public class Player : MonoBehaviour {
     }
     IEnumerator getQuestionsFromURL(string urlQuestions)
     {
+        Debug.Log("url questions " + urlQuestions);
         WWW wwwQuestions = new WWW(urlQuestions);
 
         yield return wwwQuestions;
         // yield return wwwQuestions;
         if (wwwQuestions.error == null)
         {
-            ObjectJSONProjects[] arrQuestions = addQuestionsToArray(wwwQuestions.text);
+          ObjectJSONQuestions[] arrQuestionsTest = addQuestionsToArray(wwwQuestions.text);
         }
         else
         {
             Debug.Log("ERROR: " + wwwQuestions.error);
         }
+         
     }
-    private ObjectJSONProjects[] addProjectsToArray(string jsonString) // jsonstring
+    private void addProjectsToArray(string jsonString) // jsonstring
     {
 
         JsonData jsonvale = JsonMapper.ToObject(jsonString);
@@ -289,20 +311,21 @@ public class Player : MonoBehaviour {
         {
             arrProjectsTemp[i] = new ObjectJSONProjects(jsonvale[i]["id"].ToString()); // json object oproepen door (id)
         }
-        return arrProjectsTemp;
-
+        
+        //hierbij nog aanpassen!!!!! geen return meer geven
     }
 
-    private ObjectJSONProjects[] addQuestionsToArray(string jsonString) // jsonstring
+    private ObjectJSONQuestions[] addQuestionsToArray(string jsonString) // adding the chosen questions to an array, ready for showing on tunnels
     {
 
         JsonData jsonvale = JsonMapper.ToObject(jsonString);
-        ObjectJSONProjects[] arrProjectsTemp = new ObjectJSONProjects[jsonvale.Count];
+        ObjectJSONQuestions[] arrQuestionsTemp = new ObjectJSONQuestions[jsonvale.Count];
         for (int i = 0; i < jsonvale.Count; i++)
         {
-            arrProjectsTemp[i] = new ObjectJSONProjects(jsonvale[i]["id"].ToString()); // json object oproepen door (id)
+            arrQuestionsTemp[i] = new ObjectJSONQuestions(jsonvale[i]["id"].ToString()); // json object oproepen door (id)
+            Debug.Log(arrQuestionsTemp[0].id);
         }
-        return arrProjectsTemp;
+        return arrQuestionsTemp;
     }
 } 
 
