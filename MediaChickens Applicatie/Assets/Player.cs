@@ -51,6 +51,8 @@ public class Player : MonoBehaviour {
     ObjectJSONProjects[] arrProjects;
     ObjectJSONQuestions[] arrQuestions;
 
+    //variables for project choice
+    byte currentProject = 10; //change when user choose projects is added
     void Start() //IEnumerator for json
     {
 
@@ -73,6 +75,7 @@ public class Player : MonoBehaviour {
         //JSon 
         StartCoroutine(getProjectsFromURL(urlProjects)); //getting projects from url
         StartCoroutine(getQuestionsFromURL(getQuestionsUrl("10")));
+
 
     }
     void OnTriggerEnter(Collider other)
@@ -183,7 +186,7 @@ public class Player : MonoBehaviour {
                             {
                                 isPlaying = true;
                                 isRunning = true;
-                                StartCoroutine(getQuestionsFromURL(getQuestionsUrl("0"))); //getting questions once player has chosen project
+                                StartCoroutine(getQuestionsFromURL(getQuestionsUrl(currentProject.ToString()))); //getting questions once player has chosen project
                                 
                         }
                         }   
@@ -316,14 +319,13 @@ public class Player : MonoBehaviour {
     }
 
 
+
     private string getQuestionsUrl(string projectID)
     {
        string urlPart1 = "http://mediachickens.multimediatechnology.be/unity/vragen/";
         string urlPart2 = "/api";
        return urlPart1 + projectID + urlPart2;
     } //makes the url for getting the questions from the chosen project
-    
-
 
    public IEnumerator getProjectsFromURL(string projectUrl)
     {
