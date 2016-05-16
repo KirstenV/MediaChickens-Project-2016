@@ -3,15 +3,6 @@
     src: url("SunAntwerpen_500.woff") format("woff");
 }
 
-@font-face {
-    font-family: MyWebfont;
-    src: url("SunAntwerpen_500.eot");
-}
-
-@font-face {
-    font-family: MyWebfont;
-    src: url("SunAntwerpen_500.svg#SunAntwerpen_500") format("svg");
-}
 
 body {
     font-family: MyWebfont, Verdana, sans-serif;
@@ -21,6 +12,10 @@ h1, h2, h3, h4,h5, h6, p {
     font-family: MyWebfont, Verdana, sans-serif;
 }
 
+hr{
+    border-color: lightgrey;
+}
+
 @keyframes highlight {
     0% {
         background: #3498db
@@ -28,6 +23,18 @@ h1, h2, h3, h4,h5, h6, p {
     100% {
         background: none;
     }
+}
+
+.width-transition{
+    transition: width 0.8s;
+}
+
+#div-project{
+    cursor: pointer;
+}
+
+#div-project:hover{
+    color: #DA291C;
 }
 
 .highlight_class {
@@ -120,14 +127,13 @@ h1, h2, h3, h4,h5, h6, p {
 
 #projectContainer {
     position: fixed;
-    width: 50vw;
-    left: 50%;
+    width: inherit;
     top: 0;
     bottom: 0;
     padding: 70px 0px 50px 0px;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    overflow: scroll;
 }
+
 
 #editContainer {
     position: absolute;
@@ -216,8 +222,8 @@ h1, h2, h3, h4,h5, h6, p {
     padding-top: 70px;
     padding-bottom: 50px;
     padding-left: 0px;
-    width: 50%;
     right: 0%;
+    
 }
 
 .navbar-default {
@@ -238,7 +244,7 @@ h1, h2, h3, h4,h5, h6, p {
 
 #editable {
     position: fixed;
-    width: 50%;
+
     text-align: center;
     margin: 0 auto;
     z-index: 999;
@@ -247,9 +253,14 @@ h1, h2, h3, h4,h5, h6, p {
     height: 60px;
 }
 
+.fa-plus{
+    position: relative;
+    top: 30%;
+    color:#DA291C;
+    margin-right: 5px;
+}
+
 #add_project {
-    border-radius: 50px;
-    border: 1px solid #888888;
     color: #888888;
     position: relative;
     width: 70%;
@@ -258,6 +269,90 @@ h1, h2, h3, h4,h5, h6, p {
     top: 30%;
     padding: 5px;
     right: 1%;
+}
+
+#home-titel {
+    position: fixed;
+    width: inherit;
+    text-align: center;
+    margin: 0 auto;
+    z-index: 999;
+    top: 75px;
+    background-color: #DA291C;
+    height: 60px;
+}
+
+.h100{
+    
+    height: 100%;
+    
+}
+#home-titel-content {
+    color: white;
+    position: relative;
+
+    margin: 0 auto;
+    top: 20%;
+
+}
+
+
+#project-titel {
+    position: fixed;
+
+    margin: 0 auto;
+    z-index: 999;
+    top: 75px;
+    background-color: white;
+    height: 60px;
+    
+}
+
+#project-titel div {
+    position: absolute;
+    z-index: 1000;
+    cursor: pointer;
+    color: #DA291C;
+    font-size: 1.2em;
+
+    
+}
+
+
+.div-left {
+
+        width: 60px;
+    height: 100%;
+}
+
+#project-titel i {
+    position: relative;
+    top: 19px;
+    font-size: 0.8em;
+    
+}
+
+#project-titel h1 {
+    text-align: center;
+    
+    
+}
+
+
+#project-titel hr {
+    margin-top: 29px;
+    border-color: black;
+    
+}
+
+
+#project-titel-content {
+    color: #DA291C;
+    position: relative;
+    z-index: 999;
+    margin: 0 auto;
+    top: 20%;
+
 }
 
 .navbar-nav li {
@@ -274,7 +369,7 @@ h1, h2, h3, h4,h5, h6, p {
 
 .panel-body {
     padding: 10px 10px 0px 40px;
-    overflow: hidden;
+   
     position: relative;
     width: 100%;
 }
@@ -311,17 +406,12 @@ h1, h2, h3, h4,h5, h6, p {
 .fa-sign-in,
 .fa-sign-out,
 .fa-user-plus {
-    transform: scale(2);
+    transform: scale(2) translateY(-50%);
     color: #DA291C;
-    opacity: 0.7;
+    padding-left: 1px;
 }
 
-.fa-user:hover,
-.fa-sign-in:hover,
-.fa-sign-out:hover,
-.fa-user-plus:hover {
-    opacity: 1;
-}
+
 
 .fa-user:active,
 .fa-sign-in:active,
@@ -348,8 +438,58 @@ h1, h2, h3, h4,h5, h6, p {
     height: 100%;
     position: absolute;
     top: 0%;
-    left: 5%;
 }
+
+.vert-center{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.navbar-nav li {
+    height: 100%;
+    line-height: 50px;
+    width: 56px;
+    display: inline-block;
+    
+}
+
+.navbar-nav li:hover {
+    background-color: #DA291C;
+}
+
+#nav-right li{
+
+
+    height: inherit;
+    width: 56px;
+    display: inline-block;
+    overflow: hidden;
+
+    
+}
+#nav-right li a{
+    display: block;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    
+}
+
+#nav-right li a i{
+    top: 50%;
+    position: relative;
+    
+}
+
+
+
+#nav-right{
+    height: 100%;
+    list-style-type: none;
+
+}
+
 
 .project_icons {
     position: absolute;
@@ -365,15 +505,21 @@ h1, h2, h3, h4,h5, h6, p {
 }
 
 .fa-search {
-    transform: scale(1.5);
+    transform: scale(1.8) translateY(-50%);
     color: #DA291C;
-    margin-left: 10px;
-    opacity: 0.7;
+    padding-left: 1px;
 }
 
-.fa-search:hover {
-    opacity: 1;
+
+.navbar-default .navbar-nav>.open>a{
+    background-color: white;
 }
+
+.navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
+
+    background-color: #DA291C;
+}
+
 
 .fa-search:active {
     transform: scale(1.3);
@@ -615,7 +761,7 @@ h1, h2, h3, h4,h5, h6, p {
 }
 
 #map-container {
-    width: 50%;
+    width: inherit;
     height: 100%;
     bottom: 0%;
     top: 0%;
