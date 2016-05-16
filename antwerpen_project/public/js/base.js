@@ -2,28 +2,30 @@
     var app = angular.module('antwerpen_project', ['ngFileUpload']);
 
 
-    app.controller('LoginController',['$http','$scope',function ($http,$scope) {
+    app.controller('LoginController',['$http','$scope', function ($http,$scope) {
         $scope.login_data ={}
+        console.log("register controller activ")
+        
+        $scope.intialization_csrt_token = function () {
 
+            console.log("intialiseren van token");
+        }
 
-        $scope.submit_login =function (token) {
-            console.log($scope.login_data);
-
+        $scope.submit_login =function () {
+            //console.log("csrf token is:",$scrf_token);
+            console.log("form verzonden data is: ",$scope.login_data);
+            
             var data = {
-
+                name: $scope.login_data.name,
                 email: $scope.login_data.email,
                 password: $scope.login_data.password,
+                password_password_confirmation: $scope.login_data.password_confirmation,
                 _method: "POST",
-                _token: token
             };
 
-            $http.post(root + "/auth/login", data).success(function (data, status) {
-
+            $http.post(root + "/register", data).success(function (data) {
                console.log("return data from loging api",data);
-
             });
-
-
         }
     }])
 

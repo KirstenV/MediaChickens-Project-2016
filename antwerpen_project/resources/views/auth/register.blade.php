@@ -3,6 +3,9 @@
     <h4 class="modal-title" id="myModalLabel">Registreer</h4>
 </div>
 <div class="modal-body">
+
+        {{var_dump($errors)}}
+
     <div class="modal-body-center">
         <form method="POST" action="{{Request::root()}}/auth/register">
             {!! csrf_field() !!}

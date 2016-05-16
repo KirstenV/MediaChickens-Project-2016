@@ -7,6 +7,9 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -68,6 +71,43 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+    public function register_ajax(Request $request){
+
+
+
+        $userData = array(
+            'name'=>$request["name"],
+            'email'=>$request["email"],
+            'password'=>$request["password"],
+            'password_confirmation'=>$request["password_password_confirmation"],
+        );
+        $rules =array(
+            'name'=>'required',
+            'email'=>'required|email|unique:users',
+            'password'=>'required|min:6|confirmed',
+        );
+
+        $validator = Validator::make($userData,$rules);
+        if($validator->fails()){
+            return response()->json(array(
+                'fail'=> true,'errors'=>$validator->getMessageBag()->toArray(),
+            ));
+        }else{
+            $password = $userData['password'];
+
+            $userData['password'] = Hash::make($userData['password']);
+            unset($userData['password_confirmation']);
+
+            if(User::create($userData)){
+                return response()->json(array(
+                    'succes'=>true,
+                    'email'=>$userData['email'],
+                    'password'=>$userData['password'],
+                ));
+            }
+        }
+
     }
 
 }

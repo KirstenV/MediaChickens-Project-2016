@@ -108,3 +108,22 @@ Route::put('Project_fase/update_fase_img/api', 'projectController@update_fase_im
 Route::post('project/{id}/delete/api','projectController@delte_projeten');
 //delete roots => edit page
 Route::post('edit/{tabele}/{id}/delete/api','projectController@delte_edit_page');
+
+
+
+Route::post('/register', 'Auth\AuthController@register_ajax');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

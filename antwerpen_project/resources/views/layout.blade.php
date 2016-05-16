@@ -31,13 +31,16 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrmTkGoBzp--pRgO5vRXIsbXPrk3VMp_w&libraries=places"
             type="text/javascript"></script>
     <!-- <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
+    <!--<script>
+        angular.module("app").constant("CSRF_TOKEN",{csrf_token: '<?php echo csrf_token();?>'})
+    </script>-->
 
     @yield('header')
 
 
 </head>
 
-<body>
+<body >
 
 
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -81,6 +84,7 @@
                 </div>
 
                 <div id="error-messages">
+                    {{var_dump($errors)}}
                     @foreach ($errors->all() as $error)
                         <li class="title_red error-message"><i class="fa fa-exclamation-triangle"
                                                                aria-hidden="true"></i> {{ $error }}</li>
@@ -102,8 +106,8 @@
 </div>
 
 
-<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" ng-controller="LoginController as login_ctrl"  >
+    <div class="modal-dialog" role="document" ng-init="intialization_csrt_token()">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
@@ -112,31 +116,31 @@
             </div>
             <div class="modal-body">
                 <div class="modal-body-center">
-                    <form method="POST" action="{{Request::root()}}/auth/register">
+                    <form name="formData" method="POST"   ng-submit="submit_login()" ><!--action="{{Request::root()}}/auth/register"-->
                         {!! csrf_field() !!}
 
                         <div>
                             <label>Naam</label>
                             <br>
-                            <input class="textbox" type="text" name="name" value="{{ old('name') }}">
+                            <input class="textbox" type="text" name="name" value="" ng-model="login_data.name">
                         </div>
                         <br>
                         <div>
                             <label>Email</label>
                             <br>
-                            <input class="textbox" type="email" name="email" value="{{ old('email') }}">
+                            <input class="textbox" type="email" name="email" value="" ng-model="login_data.email">
                         </div>
                         <br>
                         <div>
                             <label>Wachtwoord</label>
                             <br>
-                            <input class="textbox" type="password" name="password">
+                            <input class="textbox" type="password" name="password" ng-model="login_data.password">
                         </div>
                         <br>
                         <div style="margin-bottom:25px">
                             <label>Bevestig wachtwoord</label>
                             <br>
-                            <input class="textbox" type="password" name="password_confirmation">
+                            <input class="textbox" type="password" name="password_confirmation"  ng-model="login_data.password_confirmation">
                         </div>
 
 
