@@ -6,16 +6,11 @@ public class CameraScript : MonoBehaviour
 {
     //public GameObject objectname = GameObject.Instantiate(Resources.Load("HoverText")) as GameObject;
     // GUIText nameGUI = objectname.GetComponent<GUIText>();
-
-    public GameObject objectTunnel;
     public TextMesh txtTunnel;
-    GUIText writeOnGameobject;
-    float SomeYOffset = 100f;
  //   public GameObject buildingProject;
  //   public Text txtProjectName;
     void Start()
     {
-        writeOnGameobject = objectTunnel.GetComponent<GUIText>();
         txtTunnel.text = "Antwerpen";
         //txtTunnel.transform.position = new Vector3(0,0,0);
         //   txtProjectName.transform.position = Camera.main.WorldToViewportPoint(transform.position) + new Vector3(buildingProject.transform.position.x, buildingProject.transform.position.y + SomeYOffset, buildingProject.transform.position.z + 400);
