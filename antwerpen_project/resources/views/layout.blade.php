@@ -186,7 +186,7 @@
     </div>
 
 
-    <div class="h100 col-md-6 col-xs-1 no-padding">
+    <div class="h100 col-md-6 col-xs-1">
         <ul id="nav-right" class="pull-right vert-center h100 hidden-xs">
 
 
