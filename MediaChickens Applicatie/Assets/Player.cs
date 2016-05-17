@@ -175,9 +175,9 @@ public class Player : MonoBehaviour {
                             
                             }
                         }
-                        else if (!swipedSideways && deltaYSwipe <= 0 && this.transform.position.y <= playerOnGroundJump) //swiped up
+                        else if (!swipedSideways && deltaYSwipe <= 0) //swiped up
                         {
-                            if (isPlaying ) { 
+                        if (isPlaying ) {
                             isRunning = true;
                             hasSwipedUp = true;
                             speed = 0.7f;
