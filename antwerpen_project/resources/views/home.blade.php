@@ -1,18 +1,20 @@
 @extends('layout') @section('homeContent')
 
 
-<div id="homeContainer" class="col-md-6">
+<div id="homeContainer" class=" col-xs-12 col-md-6">
     <div id="projectContainer" ng-controller="projectController">
         @if(Auth::check()) @if(Auth::user()->is_adm)
-        <div id="editable" ng-hide="project">
-            <h4 id="add_project" class="nieuw_project" contenteditable='true'>Pas mij aan om een nieuw project aan
-                    te maken</h4>
+        <div id="editable" class="col-md-6 col-xs-12" ng-hide="project">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+<h4 id="add_project" data-toggle="tooltip" data-placement="right" data-title="Klik en typ een naam" class="nieuw_project col-md-12 col-xs-12 inline" contenteditable='true'>Nieuw project</h4>
         </div>
         <!-- END DIV EDITABLE -->
-        @endif @endif
+        @endif @else
+        <div id="home-titel" ng-hide="project">
+            <h1 id="home-titel-content"><strong>Huidige projecten</strong></h1>
+        </div>
 
-
-
+        @endif
 
         <div class="alle_projecten">
             <div class="project">
@@ -38,61 +40,60 @@
                             </div>
                         </a>
                     -->
+                <div id="project-titel" class="col-md-8 col-xs-12" ng-show="project">
+                    <div id="project-back" class="vert-center div-left" ng-click="show_projects()"><i class="fa fa-chevron-left inline" aria-hidden="true"></i> <div class="inline vert-center"> <strong>Terug</strong></div></div>
 
+                    <h1 id="project-titel-content"><strong>Project titel</strong></h1>
+                    <hr>
+                </div>
                 <div id="collapse1" class="panel-collapse collapse in" ng-hide="project">
+
                     <div class="panel-body" ng-repeat="project in projects" ng-class="is_tru_id(project.id,highlight_class)">
-                        <div ng-show="project.id">
-                            <h4 id="div-inline" ng-click="show_project_info(project.id)"><!--<a href="project/@{{project.id}}/view">-->@{{project.titel}}<!--</a>--></h4>
-                            @if(Auth::check()) 
-                                @if(Auth::user()->is_adm)
-                                    <div id="div-inline" class="project_icons">
-                                        <div class="col-md-6">
-                                            <div id="div-inline" class="edit_home_page">
-                                                <a href="project/@{{project.id}}/edit" title="wijzig project">
-                                                    <i class="fa fa-pencil" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
+                        <a>
+                            <div id="div-project" ng-show="project.id" ng-click="show_project_info(project.id)">
+
+                                <h4 id="show-project" class="inline"><!--<a href="project/@{{project.id}}/view">-->@{{project.titel}}<!--</a>--></h4> @if(Auth::check()) @if(Auth::user()->is_adm)
+                                <div id="div-inline" class="project_icons">
+                                    <div class="col-md-6">
+                                        <div id="div-inline" class="edit_home_page">
+                                            <a href="project/@{{project.id}}/edit" title="wijzig project">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </a>
                                         </div>
-                                        <!-- END DIV COL-MD-6 -->
-                                        <div class="col-md-6">
-                                            <div id="div-inline" class="delete_home_page" > <!--ng-click="delete_project(project.id,$index)"-->
-                                                <a href="">
-                                                    <i class="fa fa-trash" aria-hidden="true"></i>
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <!-- END DIV COL-MD-6 -->
                                     </div>
-                                    <!-- END DIV PROJECT_ICONS -->
-                                @endif 
-                            @endif
-                            <!--		<br><small><div id="div-inline"  class="begien_datum_home_page"><strong>Begindatum: </strong>@{{project.begin_datum}}</a></div></small> -->
-                            <!--		<small><div id="div-inline"  class="eind_datum_home_page"><strong>Einddatum: </strong>@{{project.eind_datum}}</a></div></small> -->
-                            <!--		<br><div id="div-inline"  class="begien_datum_home_page"><strong>Beschrijving: </strong>@{{project.beschrijving}}</a></div> -->
-                            <hr>
-                        </div>
-                        
-                        
-                        <div class="panel-body-child col-md-12">
-                        
-                            <p class="col-md-8">Weet je zeker dat je project "@{{project.titel}}" wilt verwijderen? </p>
-                            
-                                <button class="btn btn-default col-md-2 cancel-btn">Annuleer</button>
-                                <button class="btn btn-danger col-md-2 delete-btn">Verwijder</button>
-                            
-                        </div>
-                        
-                        
-                        
-                        
-                        
+                                    <!-- END DIV COL-MD-6 -->
+                                    <div class="col-md-6">
+                                        <div id="div-inline" class="delete_home_page">
+                                            <!--ng-click="delete_project(project.id,$index)"-->
+                                            <a href="">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- END DIV COL-MD-6 -->
+                                </div>
+                                <!-- END DIV PROJECT_ICONS -->
+                                @endif @endif
+                                <!--		<br><small><div id="div-inline"  class="begien_datum_home_page"><strong>Begindatum: </strong>@{{project.begin_datum}}</a></div></small> -->
+                                <!--		<small><div id="div-inline"  class="eind_datum_home_page"><strong>Einddatum: </strong>@{{project.eind_datum}}</a></div></small> -->
+                                <!--		<br><div id="div-inline"  class="begien_datum_home_page"><strong>Beschrijving: </strong>@{{project.beschrijving}}</a></div> -->
+                                <hr>
+                            </div>
+                        </a>
+
+
+
+
+
+
+
                     </div>
                     <!-- END DIV PANEL-BODY -->
                 </div>
                 <!-- END DIV COLLAPSE1 -->
 
-                <div class="hole_project" ng-show="project">
-                    <div ng-click="show_projects()">terug naar overzicht van projecten</div>
+                <div class="hole_project col-md-12" ng-show="project">
+                    <div id="project-back" ng-click="show_projects()">terug naar overzicht van projecten</div>
                     @{{ project.project.id }} @{{ project.project.begin_datum }} @{{ project.project.eind_datum }} @{{ project.project.beschrijving }}
 
                     <div ng-repeat="foto in project.fotos">
@@ -160,7 +161,7 @@
 
     </div>
     @stop @section('map')
-    <div class="col-md-6">
+    <div id="mapContainer" class="col-xs-0 col-md-6">
 
         <div id="map-container">
             <div id="map"></div>

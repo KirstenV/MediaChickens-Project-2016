@@ -109,7 +109,7 @@ $(document).ready(function () {
                 //$("#map-locatie").append('<br>' + data["results"][0]["formatted_address"] + "  " + '<a href="" style="text-decoration:none" title="verwijder"><i class="fa fa-times inline" aria-hidden="true"></i></a>' + "<br>");
                 if (data["results"][0]["geometry"]["location"] !== undefined) {
                     angular.element(document.getElementById('edit_project')).scope().google_maps_controller(event.latLng.lat(), event.latLng.lng(), data["results"][0]["formatted_address"]);
-                }else{
+                } else {
                     angular.element(document.getElementById('edit_project')).scope().google_maps_controller_error_catsher("Oeps, dit adres bestaat niet");
                 }
 
@@ -152,11 +152,14 @@ $(document).ready(function () {
                     var myLng = data["results"][0]["geometry"]["location"]["lng"];
 
 
-                    var myLatLng = {lat: myLat, lng: myLng};
+                    var myLatLng = {
+                        lat: myLat
+                        , lng: myLng
+                    };
                     console.log("platsen van de marker gegevens: ", data);
                     placeMarker(myLatLng);
                     angular.element(document.getElementById('edit_project')).scope().google_maps_controller(myLat, myLng, place["formatted_address"]);
-                }else{
+                } else {
                     angular.element(document.getElementById('edit_project')).scope().google_maps_controller_error_catsher("Oeps, dit adres bestaat niet");
                 }
             }
@@ -168,8 +171,8 @@ $(document).ready(function () {
     function placeMarker(location) {
 
         var marker = new google.maps.Marker({
-            position: location,
-            map: map
+            position: location
+            , map: map
         });
 
     }
@@ -194,13 +197,13 @@ $(document).ready(function () {
 
 
     $('#datepicker input').datepicker({
-        format: "yyyy-mm-dd",
-        weekStart: 1,
-        todayBtn: "linked",
-        clearBtn: true,
-        language: "nl-BE",
-        daysOfWeekHighlighted: "0,6",
-        todayHighlight: true
+        format: "yyyy-mm-dd"
+        , weekStart: 1
+        , todayBtn: "linked"
+        , clearBtn: true
+        , language: "nl-BE"
+        , daysOfWeekHighlighted: "0,6"
+        , todayHighlight: true
     });
 
     $('[data-toggle="tooltip"]').tooltip();
@@ -213,6 +216,55 @@ $(document).ready(function () {
         $('#myModal .modal-content').load(link);
 
     });
+
+
+    $("div").on("click", "#div-project", function () {
+
+        $('#homeContainer').removeClass("col-md-6").addClass("col-md-8").addClass("width-transition");
+        $('#mapContainer').removeClass("col-md-6").addClass("col-md-4").addClass("width-transition");
+
+    });
+
+    $("div").on("click", "#project-back", function () {
+
+        $('#homeContainer').removeClass("col-md-8").addClass("col-md-6");
+        $('#mapContainer').removeClass("col-md-4").addClass("col-md-6");
+
+    });
+
+    $("#nav-right li").each(function () {
+
+        $(this).on("mouseover", function () {
+
+            $(this).css("background-color", "#DA291C");
+            $(this).find("i").css("color", "white");
+
+        });
+
+        $(this).on("mouseout", function () {
+            $(this).css("background-color", "white");
+            $(this).find("i").css("color", "#DA291C");
+
+        });
+    });
+    
+    
+    $("#project-back").on("mouseover", function () {
+
+            $(this).css("background-color", "#DA291C");
+            $(this).find("i").css("color", "white");
+        $(this).find("div").css("color", "white");
+
+    });
+
+    $("#project-back").on("mouseout", function () {
+
+            $(this).css("background-color", "white");
+            $(this).find("i").css("color", "#DA291C");
+         $(this).find("div").css("color", "#DA291C");
+
+    });
+    
 
 
     //		$('.collapse').on('shown.bs.collapse', function(){
