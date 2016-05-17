@@ -2,7 +2,11 @@
 
 
 <div id="map-container-editpage">
-    <div id="map"></div>
+    <div id="map">
+    
+        HIER KOMT DE KAART
+    
+    </div>
 </div>
 
 
