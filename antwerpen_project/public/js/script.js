@@ -15,10 +15,8 @@ $(document).ready(function () {
             $('#projectContainer').animate({
                 scrollTop: $('#accordion').height()
             }, 'slow');
-
-
         }
-        $(this).text("Pas mij aan om een nieuw project aan te maken");
+        $(this).text("Nieuw project");
 
 
     });
@@ -237,12 +235,14 @@ $(document).ready(function () {
         $(this).on("mouseover", function () {
 
             $(this).css("background-color", "#DA291C");
+            $(this).css("outline", "1px solid #DA291C");
             $(this).find("i").css("color", "white");
 
         });
 
         $(this).on("mouseout", function () {
             $(this).css("background-color", "white");
+            $(this).css("outline", "none");
             $(this).find("i").css("color", "#DA291C");
 
         });
@@ -251,17 +251,17 @@ $(document).ready(function () {
 
     $("#project-back").on("mouseover", function () {
 
-        $(this).css("background-color", "#DA291C");
-        $(this).find("i").css("color", "white");
-        $(this).find("div").css("color", "white");
+        $(this).css("opacity", "1");
+//        $(this).find("i").css("color", "#DA291C");
+//        $(this).find("div").css("color", "#DA291C");
 
     });
 
     $("#project-back").on("mouseout", function () {
 
-        $(this).css("background-color", "transparent");
-        $(this).find("i").css("color", "#DA291C");
-        $(this).find("div").css("color", "#DA291C");
+        $(this).css("opacity", "0.4");
+//        $(this).find("i").css("color", "#DA291C");
+//        $(this).find("div").css("color", "#DA291C");
 
     });
 

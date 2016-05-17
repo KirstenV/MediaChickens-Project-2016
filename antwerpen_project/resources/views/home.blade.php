@@ -41,10 +41,10 @@
                         </a>
                     -->
                 <div id="project-titel" class="col-md-8 col-xs-12" ng-show="project">
-                    <div id="project-back" class="vert-center div-left" ng-click="show_projects()"><i class="fa fa-chevron-left inline" aria-hidden="true"></i> <div class="inline vert-center"> <strong>Terug</strong></div></div>
+                    <div id="project-back" class="vert-center div-left" ng-click="show_projects()"><i class="fa fa-chevron-left inline" aria-hidden="true"></i> <div id="project-back-text" class="inline vert-center">TERUG</div></div>
 
                     <h1 id="project-titel-content"><strong>Project titel</strong></h1>
-                    <hr>
+                    
                 </div>
                 <div id="collapse1" class="panel-collapse collapse in" ng-hide="project">
 
