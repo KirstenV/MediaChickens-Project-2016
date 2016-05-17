@@ -247,24 +247,24 @@ $(document).ready(function () {
 
         });
     });
-    
-    
+
+
     $("#project-back").on("mouseover", function () {
 
-            $(this).css("background-color", "#DA291C");
-            $(this).find("i").css("color", "white");
+        $(this).css("background-color", "#DA291C");
+        $(this).find("i").css("color", "white");
         $(this).find("div").css("color", "white");
 
     });
 
     $("#project-back").on("mouseout", function () {
 
-            $(this).css("background-color", "white");
-            $(this).find("i").css("color", "#DA291C");
-         $(this).find("div").css("color", "#DA291C");
+        $(this).css("background-color", "transparent");
+        $(this).find("i").css("color", "#DA291C");
+        $(this).find("div").css("color", "#DA291C");
 
     });
-    
+
 
 
     //		$('.collapse').on('shown.bs.collapse', function(){
