@@ -100,23 +100,41 @@ public class Player : MonoBehaviour {
                     {
                         if (swipedSideways && deltaXSwipe > 0) //swiped left
                         {
-                                if (currentLane != 0) // player not on left lane
+                                if (currentLane == 0) // player not on left lane
                             {
-                                    Physics.gravity = new Vector3(0, -30F, 0);
-                                    rb.AddForce(-forceSide, forceUp, 0, ForceMode.Force);
-                                    currentLane--;
-                                }
+                            }
+                                else if(currentLane == 4)
+                            {
+                                Physics.gravity = new Vector3(0, -30F, 0);
+                                rb.AddForce(-(forceSide*1.5f), forceUp, 0, ForceMode.Force);
+                                currentLane--;
+                            }
+                            else
+                            {
+                                Physics.gravity = new Vector3(0, -30F, 0);
+                                rb.AddForce(-forceSide, forceUp, 0, ForceMode.Force);
+                                currentLane--;
+                            }
                             
                         }
 
                         else if (swipedSideways && deltaXSwipe <= 0) //swiped right
                         {
-                                if (currentLane != 4)// player not on right lane
-                            { 
-
-                                    Physics.gravity = new Vector3(0, -30F, 0);
-                                    rb.AddForce(forceSide, forceUp, 0, ForceMode.Force);
-                                    currentLane++;
+                                if (currentLane == 4)// player not on right lane
+                                {
+                                //do nothing
+                                }
+                                else if(currentLane == 3)
+                               {
+                                Physics.gravity = new Vector3(0, -30F, 0);
+                                rb.AddForce(forceSide * 1.5f, forceUp, 0, ForceMode.Force);
+                                currentLane++;
+                            }
+                               else
+                               {
+                                Physics.gravity = new Vector3(0, -30F, 0);
+                                rb.AddForce(forceSide, forceUp, 0, ForceMode.Force);
+                                currentLane++;
                                 }
                            
                         }

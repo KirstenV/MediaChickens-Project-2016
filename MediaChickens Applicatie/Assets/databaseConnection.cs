@@ -86,29 +86,11 @@ public class databaseConnection : MonoBehaviour {
         }
         if (other.gameObject.tag == "StartGame")
         {
-            Debug.Log("addQuestionToText");
             txtAnswer1.text = arrQuestions[answerCount].possibility1;
+            txtnoAnswer.text = "geen antwoord";
         }
     }
 
-    void onTriggerExit(Collider other)
-    {
-        if(other.gameObject.tag == "Tunnel")
-        {
-            txtAnswer1.text = arrQuestions[answerCount].possibility1;
-            txtAnswer1.transform.position = new Vector3(0,0, (float)(txtAnswer1.transform.position.z + 200));
-            txtAnswer2.text = arrQuestions[answerCount].possibility1;
-            txtAnswer2.transform.position = new Vector3(0, 0, (float)(txtAnswer2.transform.position.z + 200));
-            txtAnswer3.text = arrQuestions[answerCount].possibility1;
-            txtAnswer3.transform.position = new Vector3(0, 0, (float)(txtAnswer3.transform.position.z + 200));
-            txtAnswer4.text = arrQuestions[answerCount].possibility1;
-            txtAnswer4.transform.position = new Vector3(0, 0, (float)(txtAnswer4.transform.position.z + 200));
-            txtQuestion.text = arrQuestions[answerCount].possibility1;
-            txtQuestion.transform.position = new Vector3(0, 0, (float)(txtQuestion.transform.position.z + 200));
-            txtnoAnswer.transform.position = new Vector3(0, 0, (float)(txtnoAnswer.transform.position.z + 200));
-            
-        }
-    }
     void FixedUpdate() //always being called
     {
         if (!isPlaying) {
@@ -177,7 +159,7 @@ public class databaseConnection : MonoBehaviour {
     {
         if (other.gameObject.tag == "Tunnel")
         {
-            if (answerCount == arrQuestions.Length || arrQuestions[answerCount] == null)
+            if (answerCount == arrQuestions.Length || arrQuestions[answerCount] == null) // if the player has answered all questions
             {
                 isPlaying = false;
                 bgEndScreen.gameObject.SetActive(true);
@@ -186,10 +168,15 @@ public class databaseConnection : MonoBehaviour {
             }
             else
             {
-                
-                Debug.Log(answerCount + "arrQuestions" + arrQuestions.Length);
-                Debug.Log("answer count queue" + playerAnswers.Count);
-                Debug.Log(arrQuestions[answerCount].type);
+                if (other.gameObject.tag == "Tunnel")
+                {
+                    txtAnswer1.text = arrQuestions[answerCount].possibility1;
+                    txtAnswer2.text = arrQuestions[answerCount].possibility1;
+                    txtAnswer3.text = arrQuestions[answerCount].possibility1;
+                    txtAnswer4.text = arrQuestions[answerCount].possibility1;
+                    txtQuestion.text = arrQuestions[answerCount].possibility1;
+                    txtOnTunnels.transform.position = new Vector3(txtOnTunnels.transform.position.x, txtOnTunnels.transform.position.y, txtOnTunnels.transform.position.z + spawnDistance);
+                }
             }
         }
     }
@@ -248,7 +235,6 @@ public class databaseConnection : MonoBehaviour {
             qID = tID;
             typeOfQuestion = tType;
             qQuestion = tQuestion;
-            Debug.Log("string to split" + tPossibleAnswers1);
             possibleAnswers1 = addPossibleAnswer(tPossibleAnswers1);
             possibleAnswers2 = addPossibleAnswer(tPossibleAnswers2);
             possibleAnswers3 = addPossibleAnswer(tPossibleAnswers3);
@@ -305,7 +291,6 @@ public class databaseConnection : MonoBehaviour {
         }
         private string addPossibleAnswer(string possibleAnswer)
         {
-            Debug.Log("splitting string" + possibleAnswer);
             if (possibleAnswer.Length > 15) // doesn't fit in screen any more
             {
                 int lettersOnLine = 0;
@@ -324,7 +309,6 @@ public class databaseConnection : MonoBehaviour {
                         stringToReturn += " " + wordsInAnswer[i];
                     }
                 }
-                Debug.Log("splitted string" + stringToReturn);
                 return stringToReturn;
             }
             else
@@ -338,7 +322,6 @@ public class databaseConnection : MonoBehaviour {
 
     private string getQuestionsUrl(string projectID)
     {
-        Debug.Log("getting url" + projectID);
         string urlPart1 = "http://mediachickens.multimediatechnology.be/unity/vragen/";
         string urlPart2 = "/api";
         return urlPart1 + projectID + urlPart2;
@@ -360,8 +343,7 @@ public class databaseConnection : MonoBehaviour {
         }
     }
     IEnumerator getQuestionsFromURL(string urlQuestions)
-    {
-        Debug.Log("getting questions" + urlQuestions);
+    { 
         WWW wwwQuestions = new WWW(urlQuestions);
 
         yield return wwwQuestions;
