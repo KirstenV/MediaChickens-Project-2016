@@ -27,7 +27,7 @@ public class Player : MonoBehaviour {
     //rigidbodys for turning on the townsquare
     public Rigidbody road1;
     //if player has chosen answer
-    bool hasSwipedUp = false;
+    public bool hasSwipedUp = false;
     public bool isRunning = false;
 
     //tesqting
@@ -56,6 +56,10 @@ public class Player : MonoBehaviour {
             {
                 isRunning = false;
             }
+        }
+        if(other.gameObject.tag == "StartGame")
+        {
+            hasSwipedUp = false;
         }
         
     }
@@ -107,7 +111,7 @@ public class Player : MonoBehaviour {
 
                         else if (swipedSideways && deltaXSwipe <= 0) //swiped right
                         {
-                                if (currentLane != 2)// player not on right lane
+                                if (currentLane != 4)// player not on right lane
                             { 
 
                                     Physics.gravity = new Vector3(0, -30F, 0);

@@ -38,6 +38,12 @@ public class databaseConnection : MonoBehaviour {
     public TextMesh txtAnswer1;
     public TextMesh txtAnswer2;
     public TextMesh txtAnswer3;
+    public TextMesh txtAnswer4;
+    public TextMesh txtnoAnswer;
+    public GameObject txtOnTunnels;
+
+    //spawning roads and text object
+    private float spawnDistance = 200;
 
     //script of player to change is running
     Player playerScript;
@@ -78,8 +84,31 @@ public class databaseConnection : MonoBehaviour {
             answerCount++;
             playerAnswers.Enqueue('C');
         }
+        if (other.gameObject.tag == "StartGame")
+        {
+            Debug.Log("addQuestionToText");
+            txtAnswer1.text = arrQuestions[answerCount].possibility1;
+        }
     }
 
+    void onTriggerExit(Collider other)
+    {
+        if(other.gameObject.tag == "Tunnel")
+        {
+            txtAnswer1.text = arrQuestions[answerCount].possibility1;
+            txtAnswer1.transform.position = new Vector3(0,0, (float)(txtAnswer1.transform.position.z + 200));
+            txtAnswer2.text = arrQuestions[answerCount].possibility1;
+            txtAnswer2.transform.position = new Vector3(0, 0, (float)(txtAnswer2.transform.position.z + 200));
+            txtAnswer3.text = arrQuestions[answerCount].possibility1;
+            txtAnswer3.transform.position = new Vector3(0, 0, (float)(txtAnswer3.transform.position.z + 200));
+            txtAnswer4.text = arrQuestions[answerCount].possibility1;
+            txtAnswer4.transform.position = new Vector3(0, 0, (float)(txtAnswer4.transform.position.z + 200));
+            txtQuestion.text = arrQuestions[answerCount].possibility1;
+            txtQuestion.transform.position = new Vector3(0, 0, (float)(txtQuestion.transform.position.z + 200));
+            txtnoAnswer.transform.position = new Vector3(0, 0, (float)(txtnoAnswer.transform.position.z + 200));
+            
+        }
+    }
     void FixedUpdate() //always being called
     {
         if (!isPlaying) {
@@ -130,6 +159,7 @@ public class databaseConnection : MonoBehaviour {
                         isPlaying = true;
                         StartCoroutine(getQuestionsFromURL(getQuestionsUrl(arrProjects[currentProject].id.ToString()))); //getting questions once player has chosen project
                         playerScript.isRunning = true;
+                        playerScript.hasSwipedUp = true;
                     }
                         hasSwiped = true;
                     }
@@ -203,6 +233,7 @@ public class databaseConnection : MonoBehaviour {
                 return projectDescription;
             }
         }
+
     }
 
     public class ObjectJSONQuestions //objects with info for questions
@@ -217,10 +248,11 @@ public class databaseConnection : MonoBehaviour {
             qID = tID;
             typeOfQuestion = tType;
             qQuestion = tQuestion;
-            possibleAnswers1 = tPossibleAnswers1;
-            possibleAnswers2 = tPossibleAnswers2;
-            possibleAnswers3 = tPossibleAnswers3;
-            possibleAnswers4 = tPossibleAnswers4;
+            Debug.Log("string to split" + tPossibleAnswers1);
+            possibleAnswers1 = addPossibleAnswer(tPossibleAnswers1);
+            possibleAnswers2 = addPossibleAnswer(tPossibleAnswers2);
+            possibleAnswers3 = addPossibleAnswer(tPossibleAnswers3);
+            possibleAnswers4 = addPossibleAnswer(tPossibleAnswers4);
         }
         public string id
         {
@@ -271,12 +303,42 @@ public class databaseConnection : MonoBehaviour {
                 return possibleAnswers4;
             }
         }
+        private string addPossibleAnswer(string possibleAnswer)
+        {
+            Debug.Log("splitting string" + possibleAnswer);
+            if (possibleAnswer.Length > 15) // doesn't fit in screen any more
+            {
+                int lettersOnLine = 0;
+                string stringToReturn = "";
+                string[] wordsInAnswer = possibleAnswer.Split(' ');
+                for (int i = 0; i < wordsInAnswer.Length; i++)
+                {
+                   lettersOnLine += wordsInAnswer[i].Length;
+                    if(lettersOnLine >= 8)
+                    {
+                        stringToReturn += " " + wordsInAnswer[i] + "\n";
+                        lettersOnLine = 0;
+                    }
+                    else
+                    {
+                        stringToReturn += " " + wordsInAnswer[i];
+                    }
+                }
+                Debug.Log("splitted string" + stringToReturn);
+                return stringToReturn;
+            }
+            else
+            {
+                return possibleAnswer;
+            }
+        }
     }
 
-
+   
 
     private string getQuestionsUrl(string projectID)
     {
+        Debug.Log("getting url" + projectID);
         string urlPart1 = "http://mediachickens.multimediatechnology.be/unity/vragen/";
         string urlPart2 = "/api";
         return urlPart1 + projectID + urlPart2;
@@ -299,6 +361,7 @@ public class databaseConnection : MonoBehaviour {
     }
     IEnumerator getQuestionsFromURL(string urlQuestions)
     {
+        Debug.Log("getting questions" + urlQuestions);
         WWW wwwQuestions = new WWW(urlQuestions);
 
         yield return wwwQuestions;
