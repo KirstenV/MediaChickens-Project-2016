@@ -32,7 +32,7 @@ public class databaseConnection : MonoBehaviour {
 
     //list of answers
     Queue<char> playerAnswers = new Queue<char>();
-
+    byte answerCount;
     //text from question and possible answers
     public TextMesh txtQuestion;
     public TextMesh txtAnswer1;
@@ -58,25 +58,25 @@ public class databaseConnection : MonoBehaviour {
         btnContinue.gameObject.SetActive(false);
         txtPause.gameObject.SetActive(false);
         btnPause.gameObject.SetActive(true);
+        answerCount = 0;
     }
     void OnTriggerEnter(Collider other)
     {
 
         if (other.gameObject.tag == "AnswerA")
         {
+            answerCount++;
             playerAnswers.Enqueue('A');
         }
         else if (other.gameObject.tag == "AnswerB")
         {
+            answerCount++;
             playerAnswers.Enqueue('B');
         }
         else if (other.gameObject.tag == "AnswerC")
         {
+            answerCount++;
             playerAnswers.Enqueue('C');
-        }
-        else if (other.gameObject.tag == "TriggerRoadSpawn")
-        {
-            
         }
     }
 
@@ -103,7 +103,6 @@ public class databaseConnection : MonoBehaviour {
                         {
                             if (currentProject == 0)
                                 {
-                                
                                     currentProject = (byte)(arrProjects.Length - 1);
                                 }
                                 else
@@ -148,12 +147,19 @@ public class databaseConnection : MonoBehaviour {
     {
         if (other.gameObject.tag == "Tunnel")
         {
-            if (playerAnswers.Count == arrQuestions.Length)
+            if (answerCount == arrQuestions.Length || arrQuestions[answerCount] == null)
             {
                 isPlaying = false;
                 bgEndScreen.gameObject.SetActive(true);
                 btnRestart.gameObject.SetActive(true);
                 txtAnswered.gameObject.SetActive(true);
+            }
+            else
+            {
+                
+                Debug.Log(answerCount + "arrQuestions" + arrQuestions.Length);
+                Debug.Log("answer count queue" + playerAnswers.Count);
+                Debug.Log(arrQuestions[answerCount].type);
             }
         }
     }
@@ -329,7 +335,7 @@ public class databaseConnection : MonoBehaviour {
         {
             if (dateQuestion[i]["choices"].ToString() != "open vragen")
             {
-                arrQuestions[i] = new ObjectJSONQuestions(
+                arrQuestions[j] = new ObjectJSONQuestions(
                         dateQuestion[i]["id"].ToString(), //string tID
                         dateQuestion[i]["choices"].ToString(), //Type
                         dateQuestion[i]["vraag"].ToString(), //question

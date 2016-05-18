@@ -20,7 +20,6 @@ public class Player : MonoBehaviour {
      Rigidbody rb;
     //lane in which player is running, only 3 lanes
     private byte currentLane;
-    //height from which player can jump again
     //force to move player
     private short forceSide = 7000;
     private short forceUp = 7800;
@@ -67,12 +66,18 @@ public class Player : MonoBehaviour {
             hasSwipedUp = false;
             speed = 0.35f;
         }
+        if (other.gameObject.tag == "BuildingsTownSquare")
+        {
+            hasSwipedUp = false;
+            speed = 0.35f;
+        }
     }
     void FixedUpdate() //always being called
     {
-        if (scriptDatabase.isPlaying) { 
-            this.transform.position = this.transform.position + new Vector3(0, 0, speed);
+        if (scriptDatabase.isPlaying) {
             if (isRunning) { 
+            this.transform.position = this.transform.position + new Vector3(0, 0, speed);
+            }
             foreach (Touch t in Input.touches)
             {
                 if (t.phase == TouchPhase.Began)
@@ -89,29 +94,27 @@ public class Player : MonoBehaviour {
                     bool swipedSideways = Mathf.Abs(deltaXSwipe) > Mathf.Abs(deltaYSwipe); //swipe up and down or sideways
                     if (distanceSwipe > 100)//100
                     {
-                       if(scriptDatabase.isPlaying)
                         if (swipedSideways && deltaXSwipe > 0) //swiped left
                         {
-                        Debug.Log("swiped left");
-                            if(currentLane != 0) // player not on left lane and on ground
-                                { 
-                            Physics.gravity = new Vector3(0, -30F, 0);
-                            rb.AddForce(-forceSide, forceUp, 0, ForceMode.Force);
-                            currentLane--;
-                            }
-                            }
+                                if (currentLane != 0) // player not on left lane
+                            {
+                                    Physics.gravity = new Vector3(0, -30F, 0);
+                                    rb.AddForce(-forceSide, forceUp, 0, ForceMode.Force);
+                                    currentLane--;
+                                }
+                            
+                        }
 
                         else if (swipedSideways && deltaXSwipe <= 0) //swiped right
                         {
-                        Debug.Log("swiped right");
-                                if (currentLane != 2) { // player not on right lane and on ground
-                                
-                                    //   this.transform.Rotate(new Vector3(0, 15f, 0));
-                                    // this.transform.position = this.transform.position + new Vector3(15f, 0, 0);
+                                if (currentLane != 2)// player not on right lane
+                            { 
+
                                     Physics.gravity = new Vector3(0, -30F, 0);
-                            rb.AddForce(forceSide, forceUp, 0, ForceMode.Force);
-                                currentLane++;
-                            }
+                                    rb.AddForce(forceSide, forceUp, 0, ForceMode.Force);
+                                    currentLane++;
+                                }
+                           
                         }
                         else if (!swipedSideways && deltaYSwipe <= 0) //swiped up
                         {
@@ -127,7 +130,7 @@ public class Player : MonoBehaviour {
                     initialTouchSwipe = new Touch(); //reset touch
                     hasSwiped = false;
                 }
-            }
+            
         }
       }
     }
