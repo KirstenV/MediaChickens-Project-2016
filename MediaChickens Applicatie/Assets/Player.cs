@@ -30,7 +30,7 @@ public class Player : MonoBehaviour {
     public bool hasSwipedUp = false;
     public bool isRunning = false;
 
-    //tesqting
+    //connection with other script
     public GameObject otherScript;
     databaseConnection scriptDatabase;
 

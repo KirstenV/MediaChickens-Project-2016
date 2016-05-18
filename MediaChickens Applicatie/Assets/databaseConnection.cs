@@ -12,6 +12,11 @@ public class databaseConnection : MonoBehaviour {
     private float distanceSwipe = 0;
     private bool hasSwiped = false;
 
+    //roadSpawn
+    public GameObject tunnel4;
+    public GameObject tunnel2;
+    public GameObject roadTrigger;
+    public GameObject road;
     //variables for database connection
     string urlProjects = "http://mediachickens.multimediatechnology.be/unity/al_projecten/api"; //url of json to be decoded
     ObjectJSONProjects[] arrProjects;
@@ -20,7 +25,7 @@ public class databaseConnection : MonoBehaviour {
     //variables for project choice
     byte currentProject = 0; //change when user choose projects is added
     public TextMesh txtProjectName;
-
+    
     //button to restart the game + background on canvas
     public Button btnRestart;
     public Image bgEndScreen;
@@ -41,6 +46,10 @@ public class databaseConnection : MonoBehaviour {
     public TextMesh txtAnswer4;
     public TextMesh txtnoAnswer;
     public GameObject txtOnTunnels;
+    public GameObject tunnel1Option4;
+    public GameObject tunnel2Option4;
+    public GameObject tunnel1Option2;
+    public GameObject tunnel2Option2;
 
     //spawning roads and text object
     private float spawnDistance = 200;
@@ -84,10 +93,73 @@ public class databaseConnection : MonoBehaviour {
             answerCount++;
             playerAnswers.Enqueue('C');
         }
+        if (other.gameObject.tag == "MoveToRight")
+        {
+
+        }
         if (other.gameObject.tag == "StartGame")
         {
+            if (arrQuestions.Length < 1 || arrQuestions[0] == null)
+            {
+                isPlaying = false;
+                bgEndScreen.gameObject.SetActive(true);
+                btnRestart.gameObject.SetActive(true);
+                txtAnswered.gameObject.SetActive(true);
+            }
+            else { 
+            if(arrQuestions[0].type == "Gesloten vragen")
+            {
+                tunnel1Option2.gameObject.SetActive(true);
+                tunnel1Option4.gameObject.SetActive(false);
+            }
+            
+            if (arrQuestions.Length >= 2 && arrQuestions[1] != null) { 
+            if (arrQuestions[1].type == "Gesloten vragen")
+            {
+                tunnel2Option2.gameObject.SetActive(true);
+                tunnel2Option4.gameObject.SetActive(false);
+            }
+            }
             txtAnswer1.text = arrQuestions[answerCount].possibility1;
-            txtnoAnswer.text = "geen antwoord";
+            txtAnswer2.text = arrQuestions[answerCount].possibility2;
+            txtAnswer3.text = arrQuestions[answerCount].possibility3;
+            txtAnswer4.text = arrQuestions[answerCount].possibility4;
+            txtnoAnswer.text = "geen mening";
+            }
+        }
+        if (other.gameObject.CompareTag("TriggerRoadSpawn"))
+        {
+            Destroy(other.gameObject);
+            RoadSpawn();
+        }
+    }
+    void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Tunnel")
+        {
+            if (answerCount == arrQuestions.Length || arrQuestions[answerCount] == null) // if the player has answered all questions
+            {
+                isPlaying = false;
+                bgEndScreen.gameObject.SetActive(true);
+                btnRestart.gameObject.SetActive(true);
+                txtAnswered.gameObject.SetActive(true);
+            }
+            else
+            {
+                if(arrQuestions[answerCount].type == "Gesloten vragen")
+                {
+                    txtAnswer3.text = "";
+                    txtAnswer4.text = "";
+                }
+                else { 
+                txtAnswer3.text = arrQuestions[answerCount].possibility3;
+                txtAnswer4.text = arrQuestions[answerCount].possibility4;
+                }
+                txtAnswer1.text = arrQuestions[answerCount].possibility1;
+                txtAnswer2.text = arrQuestions[answerCount].possibility2;
+                txtQuestion.text = arrQuestions[answerCount].possibility1;
+                txtOnTunnels.transform.position = new Vector3(txtOnTunnels.transform.position.x, txtOnTunnels.transform.position.y, txtOnTunnels.transform.position.z + spawnDistance);
+            }
         }
     }
 
@@ -155,31 +227,7 @@ public class databaseConnection : MonoBehaviour {
         }
         
     }
-    void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag == "Tunnel")
-        {
-            if (answerCount == arrQuestions.Length || arrQuestions[answerCount] == null) // if the player has answered all questions
-            {
-                isPlaying = false;
-                bgEndScreen.gameObject.SetActive(true);
-                btnRestart.gameObject.SetActive(true);
-                txtAnswered.gameObject.SetActive(true);
-            }
-            else
-            {
-                if (other.gameObject.tag == "Tunnel")
-                {
-                    txtAnswer1.text = arrQuestions[answerCount].possibility1;
-                    txtAnswer2.text = arrQuestions[answerCount].possibility1;
-                    txtAnswer3.text = arrQuestions[answerCount].possibility1;
-                    txtAnswer4.text = arrQuestions[answerCount].possibility1;
-                    txtQuestion.text = arrQuestions[answerCount].possibility1;
-                    txtOnTunnels.transform.position = new Vector3(txtOnTunnels.transform.position.x, txtOnTunnels.transform.position.y, txtOnTunnels.transform.position.z + spawnDistance);
-                }
-            }
-        }
-    }
+    
     
     public class ObjectJSONProjects //type of objects with info for projects
     {
@@ -396,6 +444,7 @@ public class databaseConnection : MonoBehaviour {
             {
                 j--;
             }
+            
         }
     }
     void BtnPauseClicked()
@@ -420,5 +469,27 @@ public class databaseConnection : MonoBehaviour {
         btnContinue.gameObject.SetActive(false);
         txtPause.gameObject.SetActive(false);
     }
+
+
+    void RoadSpawn()
+    {
+        if(answerCount+2 < arrQuestions.Length && arrQuestions[answerCount+2].type != null) { 
+            if(arrQuestions[answerCount + 2].type == "Gesloten vragen") { 
+        Instantiate(tunnel2, new Vector3(35.2f, 0.002f, this.transform.position.z + (spawnDistance * 3)), Quaternion.identity);
+                Debug.Log("instantiate tunnel 4");
+            }
+            else if(arrQuestions[answerCount + 2].type == "meerkeuzevragen")
+            {
+                Debug.Log("instantiate tunnel 4");
+                Instantiate(tunnel4, new Vector3(35.2f, 0.002f, this.transform.position.z + (spawnDistance * 3)), Quaternion.identity);
+            }
+                Instantiate(roadTrigger, new Vector3(35.13f, 10, this.transform.position.z + spawnDistance), Quaternion.identity);
+    }
+        else
+        {
+            Instantiate(road, new Vector3(35.2f, 0.002f, this.transform.position.z + (spawnDistance * 3)), Quaternion.identity);
+        }
+    }
+
 }
 
