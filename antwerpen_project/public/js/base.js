@@ -1,20 +1,211 @@
 (function () {
-    var app = angular.module('antwerpen_project', ['ngFileUpload','uiGmapgoogle-maps']);
+    var app = angular.module('antwerpen_project', ['ngFileUpload', 'uiGmapgoogle-maps']);
+
+    app.directive('googleplace', function() {
+        return {
+            require: 'ngModel',
+            link: function(scope, element, attrs, model) {
+                var options = {
+                    types: [],
+                    componentRestrictions: {}
+                };
+                scope.gPlace = new google.maps.places.Autocomplete(element[0], options);
+
+                google.maps.event.addListener(scope.gPlace, 'place_changed', function() {
+                    scope.$apply(function() {
+                        model.$setViewValue(element.val());
+                    });
+                });
+            }
+        };
+    });
 
 
-    app.controller('LoginController',['$http','$scope', function ($http,$scope) {
-        $scope.login_data ={}
+    app.directive('myEnter', function () {
+        return function (scope, element, attrs) {
+            element.bind("keydown keypress", function (event) {
+                if(event.which === 13) {
+                    scope.$apply(function (){
+                        scope.$eval(attrs.myEnter);
+                    });
+
+                    event.preventDefault();
+                }
+            });
+        };
+    });
+
+
+    app.controller('GoogleMapsController', ['$http', '$scope', function ($http, $scope) {
+       
+        $scope.input_location;
+        $scope.add_location_on_enter =function (loc) {
+            console.log("--edit-- --enter key press or mous click-- -> add location:" ,loc);
+            $scope.locations_errors = "";
+            if(loc != undefined){
+
+
+                    $http.get(" https://maps.googleapis.com/maps/api/geocode/json?address=" +loc + "&key=AIzaSyChcI5yCog1780Of_wshHhIZ6yeLrMhkQM")
+                        .success(function (data) {
+
+
+                            if( data.status != "ZERO_RESULTS"){
+                                console.log("--edit-- --ajax-call for lat ngt from address-- get lng lat string",data);
+                                var lat = data.results[0].geometry.location.lat;
+                                var lng = data.results[0].geometry.location.lng;
+                                add_location_to_database(lat, lng, loc,  $scope.project_id);
+                            }else{
+                                $scope.locations_errors = "Oeps, er gien iets verkeerd!";
+                            }
+
+
+
+                        });
+            }else {
+                $scope.locations_errors = "Oeps, er gien iets verkeerd!";
+
+            }
+        }
+
+        $scope.map_initializetion = function ($project_id) {
+            $scope.project_id =$project_id;
+            $scope.locations = [];
+
+
+            $scope.map = {
+                center: {latitude: 51.21945, longitude: 4.40246},
+                zoom: 12,
+                marker_events:{
+                    mouseover: function (gMarker, eventName, model) {
+
+                        console.log("--edit-- --event -> mousover-- on markers");
+                        model.show = true;
+
+                        //$scope.$apply();
+
+                    }
+                },
+                events: {
+                    click: function (map, eventName, originalEventArgs) {
+                        var e = originalEventArgs[0];
+                        var lat = e.latLng.lat(), lon = e.latLng.lng();
+
+                        $http.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lon + "&key=AIzaSyChcI5yCog1780Of_wshHhIZ6yeLrMhkQM")
+                            .success(function (data) {
+
+                                console.log("--edit-- --ajax-call-- get locatie string", data.results[0].formatted_address);
+
+                                add_location_to_database(lat, lon, data.results[0].formatted_address, $project_id);
+
+                            });
+                        $scope.$apply();
+                    }
+                }
+            };
+            if ($project_id != 0) {
+                //initialize for edit page
+                $http.get(root + "/locaties/" + $project_id + "/edit/api")
+                    .success(function (data) {
+                        //$scope.locations = data;
+
+                        for (var i = 0; i < data.length; i++) {
+                            console.log(data[i]);
+
+                            $scope.locations.push({
+                                id: data[i].id,
+                                address: data[i].straat_naam,
+                                location: {
+                                    latitude: data[i].position_latitude,
+                                    longitude: data[i].position_longitude
+                                }
+                            });
+                        }
+                        console.log("--edit-- -api get all locations-- saved location:",  $scope.locations);
+                    });
+            }else {
+                //initialize for home page
+                $http.get(root + "/kaart/api/get_locations")
+                    .success(function (data) {
+                        //$scope.locations = data;
+
+                        for (var i = 0; i < data.length; i++) {
+                            console.log(data[i]);
+
+                            $scope.locations.push({
+                                id: data[i].id,
+                                address: data[i].straat_naam,
+                                location: {
+                                    latitude: data[i].position_latitude,
+                                    longitude: data[i].position_longitude
+                                }
+                            });
+                        }
+                        console.log("--edit-- -api get all locations-- saved location:",  $scope.locations);
+                    });
+            }
+        }
+
+
+        $scope.delete_elemets_on_edit_page_locatie = function ($id, $index, $tabele) {
+            console.log("deleted varagen click with following parameters ==>", $id, $index);
+            var data = {
+                _method: "POST",
+            };
+            $http.post(root + "/edit/" + $tabele + "/" + $id + "/delete/api", data).success(function (data) {
+                if (data != "error") {
+                    $scope.locations.splice($index, 1);
+
+                }
+            });
+        }
+
+        //goole maps
+        function add_location_to_database(lat, lng, adress, project_id) {
+            var data = {
+                lat: lat,
+                lng: lng,
+                address: adress,
+                _method: "POST"
+            };
+            $http.post(root + "/locatie/toevoegen/" + project_id + "/api", data).success(function (data) {
+                //console.log('locaties zijn toegevoegd via google maps controller voor project =', $scope.project_id,data);
+                $scope.locations_errors = "";
+                if (data.$succes) {
+                    console.log("--edit-- --api call-- - function- -succes-" , data.$location);
+
+                    $scope.locations.push({
+                        id: data.$location.id,
+                        address: data.$location.straat_naam,
+                        location: {
+                            latitude: data.$location.position_latitude,
+                            longitude: data.$location.position_longitude
+                        }
+                    });
+                } else {
+                    if (data.$errors) {
+                        $scope.locations_errors = data.$errors;
+                    }
+                    $scope.locations_errors = "Oeps, er gien iets verkeerd!";
+                    
+                }
+
+            });
+        }
+    }])
+
+    app.controller('LoginController', ['$http', '$scope', function ($http, $scope) {
+        $scope.login_data = {}
         console.log("register controller activ")
-        
+
         $scope.intialization_csrt_token = function () {
 
             console.log("intialiseren van token");
         }
 
-        $scope.submit_login =function () {
+        $scope.submit_login = function () {
             //console.log("csrf token is:",$scrf_token);
-            console.log("form verzonden data is: ",$scope.login_data);
-            
+            console.log("form verzonden data is: ", $scope.login_data);
+
             var data = {
                 name: $scope.login_data.name,
                 email: $scope.login_data.email,
@@ -24,18 +215,12 @@
             };
 
             $http.post(root + "/register", data).success(function (data) {
-               console.log("return data from loging api",data);
+                console.log("return data from loging api", data);
             });
         }
     }])
 
     app.controller('projectController', ['$http', "$scope", function ($http, $scope) {
-
-        //goole maps
-        $scope.map = { center: { latitude: 45, longitude: -73 }, zoom: 8 };
-
-
-
 
 
         $scope.project;
@@ -112,10 +297,11 @@
     app.controller('edit_projectController', ['$scope', '$http', function ($scope, $http) {
         //console.log("controller is klaar");
 
-        $scope.google_maps_controller_error_catsher = function ($error) {
+
+        /*$scope.google_maps_controller_error_catsher = function ($error) {
             $scope.locations_errors = $error;
-        }
-        $scope.google_maps_controller = function (lat, lng, adress) {
+        }*/
+        /*$scope.google_maps_controller = function (lat, lng, adress) {
             //console.log("gegevens van de goole maps zij",lat,lng,adress);
 
             var data = {
@@ -138,9 +324,9 @@
                 }
 
             });
-        }
+        }*/
 
-        $scope.delete_elemets_on_edit_page_locatie = function ($id, $index, $tabele) {
+       /* $scope.delete_elemets_on_edit_page_locatie = function ($id, $index, $tabele) {
             console.log("deleted varagen click with following parameters ==>", $id, $index);
             var data = {
                 _method: "POST",
@@ -152,7 +338,7 @@
                 }
                 console.log(data);
             });
-        }
+        }*/
 
         $scope.initializetion = function (id) {
             //console.log("project is geintializeerd");
@@ -175,12 +361,12 @@
                     //console.log(data);
                 });
 
-            $http.get(root + "/locaties/" + $scope.project_id + "/edit/api")
+          /*  $http.get(root + "/locaties/" + $scope.project_id + "/edit/api")
                 .success(function (data) {
                     $scope.locations = data;
                     //console.log("vragen data is binnen");
                     //console.log(data);
-                });
+                });*/
 
         }
 
@@ -224,7 +410,7 @@
 
                     $scope.server_controle_input_veld_succes = data.rij_naam;
                     $scope.server_controller_error = data.$succes;
-                    console.log("validatiion alles is goed opgeslagen");
+                    //   console.log("validatiion alles is goed opgeslagen");
                 }
             });
 
@@ -233,12 +419,12 @@
 
         $scope.toon_fout_melding = function ($tabele, $id) {
             if ($scope.server_controle_input_veld == $tabele && $scope.server_controle_veld__id == $id) {
-                console.log("toon fout melding van de angepaste veld met id van ", $scope.server_controle_veld__id);
+                // console.log("toon fout melding van de angepaste veld met id van ", $scope.server_controle_veld__id);
                 return true;
             }
         }
         $scope.toon_succes_melding = function ($tabele, $id) {
-            console.log("toon succes meldin =" , $scope.server_controle_input_veld_succes , $tabele , $scope.server_controle_veld__id, $id);
+//            console.log("toon succes meldin =" , $scope.server_controle_input_veld_succes , $tabele , $scope.server_controle_veld__id, $id);
             if ($scope.server_controle_input_veld_succes == $tabele && $scope.server_controle_veld__id == $id) {
                 return true;
             }
@@ -287,7 +473,7 @@
                 .success(function (data) {
                     $scope.show_fotos = data;
                     //console.log("project data is binnen");
-                    console.log("overzicht van alle fotos = ", $scope.show_fotos);
+                    //console.log("overzicht van alle fotos = ", $scope.show_fotos);
                 });
 
 

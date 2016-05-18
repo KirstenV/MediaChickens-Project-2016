@@ -16,15 +16,18 @@
     <link rel="stylesheet" href="{{Request::root()}}/css/base.css">
     <link rel="stylesheet" href="{{Request::root()}}/css/bootstrap-datepicker3.min.css">
 
-    <script src="{{Request::root()}}/javascript_main"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
-    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
     <!--lodash is nodig om google maps te configureren-->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/lodash/4.12.0/lodash.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
     <script src="{{Request::root()}}/js/angular-simple-logger.js"></script>
     <script src="{{Request::root()}}/js/angular-google-maps.js"></script>
+
+
+    <script src="{{Request::root()}}/javascript_main"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
 
     <script src="{{Request::root()}}/js/ng_file_upload/ng-file-upload-shim.min.js"></script>
@@ -47,7 +50,7 @@
 
 </head>
 
-<body>
+<body ng-controller="GoogleMapsController">
 
 
 
