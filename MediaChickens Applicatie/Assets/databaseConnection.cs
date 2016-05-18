@@ -25,7 +25,8 @@ public class databaseConnection : MonoBehaviour {
     //variables for project choice
     byte currentProject = 0; //change when user choose projects is added
     public TextMesh txtProjectName;
-    
+    public TextMesh txtProjectDescription;
+    public TextMesh txtProjectDates;
     //button to restart the game + background on canvas
     public Button btnRestart;
     public Image bgEndScreen;
@@ -35,6 +36,8 @@ public class databaseConnection : MonoBehaviour {
     public Button btnContinue;
     public Text txtPause;
 
+    //how to text
+    public TextMesh txtHowTo;
     //list of answers
     Queue<char> playerAnswers = new Queue<char>();
     byte answerCount;
@@ -59,9 +62,10 @@ public class databaseConnection : MonoBehaviour {
 
 
     void Start () {
+        txtHowTo.gameObject.SetActive(false);
         StartCoroutine(getProjectsFromURL(urlProjects));
         playerScript = GetComponent<Player>();
-        txtProjectName.text = "swipe left and right \n to choose project";
+        txtProjectName.text = "veeg naar links en rechts \n om een project te kiezen";
         btnPause.GetComponent<Button>();
         btnContinue.GetComponent<Button>();
         btnPause.onClick.AddListener(() => { BtnPauseClicked(); });
@@ -93,13 +97,10 @@ public class databaseConnection : MonoBehaviour {
             answerCount++;
             playerAnswers.Enqueue('C');
         }
-        if (other.gameObject.tag == "MoveToRight")
-        {
-
-        }
         if (other.gameObject.tag == "StartGame")
         {
-            if (arrQuestions.Length < 1 || arrQuestions[0] == null)
+            txtHowTo.gameObject.SetActive(false);
+            if (arrQuestions.Length < 1 || arrQuestions[0] == null) //stop game if there aren't any questions
             {
                 isPlaying = false;
                 bgEndScreen.gameObject.SetActive(true);
@@ -111,20 +112,28 @@ public class databaseConnection : MonoBehaviour {
             {
                 tunnel1Option2.gameObject.SetActive(true);
                 tunnel1Option4.gameObject.SetActive(false);
-            }
+                    playerScript.maxLaneLeft = 2;
+                    txtAnswer3.text = "";
+                    txtAnswer4.text = "";
+                }
+                else
+                {
+                    txtAnswer3.text = arrQuestions[answerCount].possibility3;
+                    txtAnswer4.text = arrQuestions[answerCount].possibility4;
+                }
             
             if (arrQuestions.Length >= 2 && arrQuestions[1] != null) { 
             if (arrQuestions[1].type == "Gesloten vragen")
             {
                 tunnel2Option2.gameObject.SetActive(true);
                 tunnel2Option4.gameObject.SetActive(false);
+
             }
             }
             txtAnswer1.text = arrQuestions[answerCount].possibility1;
             txtAnswer2.text = arrQuestions[answerCount].possibility2;
-            txtAnswer3.text = arrQuestions[answerCount].possibility3;
-            txtAnswer4.text = arrQuestions[answerCount].possibility4;
-            txtnoAnswer.text = "geen mening";
+            txtQuestion.text = arrQuestions[answerCount].question;
+            txtnoAnswer.text = "geen \n mening";
             }
         }
         if (other.gameObject.CompareTag("TriggerRoadSpawn"))
@@ -150,14 +159,16 @@ public class databaseConnection : MonoBehaviour {
                 {
                     txtAnswer3.text = "";
                     txtAnswer4.text = "";
+                    playerScript.maxLaneLeft = 2;
                 }
-                else { 
+                else {
+                    playerScript.maxLaneLeft = 0;
                 txtAnswer3.text = arrQuestions[answerCount].possibility3;
                 txtAnswer4.text = arrQuestions[answerCount].possibility4;
                 }
                 txtAnswer1.text = arrQuestions[answerCount].possibility1;
                 txtAnswer2.text = arrQuestions[answerCount].possibility2;
-                txtQuestion.text = arrQuestions[answerCount].possibility1;
+                txtQuestion.text = arrQuestions[answerCount].question;
                 txtOnTunnels.transform.position = new Vector3(txtOnTunnels.transform.position.x, txtOnTunnels.transform.position.y, txtOnTunnels.transform.position.z + spawnDistance);
             }
         }
@@ -194,7 +205,9 @@ public class databaseConnection : MonoBehaviour {
                                 }
 
                                 txtProjectName.text = arrProjects[currentProject].title;
-                            }
+                                txtProjectDescription.text = arrProjects[currentProject].description;
+                                txtProjectDates.text = arrProjects[currentProject].date;
+                        }
                         else if (swipedSideways && deltaXSwipe <= 0) //swiped right
                         {
                                 if (currentProject == (byte)(arrProjects.Length - 1))
@@ -206,10 +219,13 @@ public class databaseConnection : MonoBehaviour {
                                     currentProject++;
                                 }
                                 txtProjectName.text = arrProjects[currentProject].title;
+                                txtProjectDescription.text = arrProjects[currentProject].description;
+                                txtProjectDates.text = arrProjects[currentProject].date;
                             
                         }
                         else if (!swipedSideways && deltaYSwipe <= 0) //swiped up
                         {
+                            txtHowTo.gameObject.SetActive(true);
                         isPlaying = true;
                         StartCoroutine(getQuestionsFromURL(getQuestionsUrl(arrProjects[currentProject].id.ToString()))); //getting questions once player has chosen project
                         playerScript.isRunning = true;
@@ -237,14 +253,16 @@ public class databaseConnection : MonoBehaviour {
         string jID;
         string projectTitle;
         string projectDescription;
-
+        string projectDate;
 
         public ObjectJSONProjects() { } //empty for default
-        public ObjectJSONProjects(string tID, string tTitle, string tDescription)
+        public ObjectJSONProjects(string tID, string tTitle, string tDescription, string startDate, string endDate)
         {
             jID = tID;
             projectTitle = tTitle;
-            projectDescription = tDescription;
+            projectDescription = splitProjectsString( tDescription);
+            projectDate = startDate + " tot " + endDate;
+
         }
 
         public string id
@@ -252,6 +270,13 @@ public class databaseConnection : MonoBehaviour {
             get
             {
                 return jID;
+            }
+        }
+        public string date
+        {
+            get
+            {
+                return projectDate;
             }
         }
         public string title
@@ -268,6 +293,33 @@ public class databaseConnection : MonoBehaviour {
                 return projectDescription;
             }
         }
+        private string splitProjectsString(string stringToSplit)
+        {
+            if (stringToSplit.Length > 15) // doesn't fit in screen any more
+            {
+                int lettersOnLine = 0;
+                string stringToReturn = "";
+                string[] wordsInString = stringToSplit.Split(' ');
+                for (int i = 0; i < wordsInString.Length; i++)
+                {
+                    lettersOnLine += wordsInString[i].Length;
+                    if (lettersOnLine >= 10)
+                    {
+                        stringToReturn += " " + wordsInString[i] + "\n";
+                        lettersOnLine = 0;
+                    }
+                    else
+                    {
+                        stringToReturn += " " + wordsInString[i];
+                    }
+                }
+                return stringToReturn;
+            }
+            else
+            {
+                return stringToSplit;
+            }
+        }
 
     }
 
@@ -282,11 +334,12 @@ public class databaseConnection : MonoBehaviour {
         {
             qID = tID;
             typeOfQuestion = tType;
-            qQuestion = tQuestion;
-            possibleAnswers1 = addPossibleAnswer(tPossibleAnswers1);
-            possibleAnswers2 = addPossibleAnswer(tPossibleAnswers2);
-            possibleAnswers3 = addPossibleAnswer(tPossibleAnswers3);
-            possibleAnswers4 = addPossibleAnswer(tPossibleAnswers4);
+            qQuestion = splitQuestionStrings(tQuestion);
+            possibleAnswers1 = splitQuestionStrings(tPossibleAnswers1);
+            possibleAnswers2 = splitQuestionStrings(tPossibleAnswers2);
+            possibleAnswers3 = splitQuestionStrings(tPossibleAnswers3);
+            possibleAnswers4 = splitQuestionStrings(tPossibleAnswers4);
+
         }
         public string id
         {
@@ -337,31 +390,31 @@ public class databaseConnection : MonoBehaviour {
                 return possibleAnswers4;
             }
         }
-        private string addPossibleAnswer(string possibleAnswer)
+        private string splitQuestionStrings(string stringToSplit)
         {
-            if (possibleAnswer.Length > 15) // doesn't fit in screen any more
+            if (stringToSplit.Length > 15) // doesn't fit in screen any more
             {
                 int lettersOnLine = 0;
                 string stringToReturn = "";
-                string[] wordsInAnswer = possibleAnswer.Split(' ');
-                for (int i = 0; i < wordsInAnswer.Length; i++)
+                string[] wordsInString = stringToSplit.Split(' ');
+                for (int i = 0; i < wordsInString.Length; i++)
                 {
-                   lettersOnLine += wordsInAnswer[i].Length;
+                   lettersOnLine += wordsInString[i].Length;
                     if(lettersOnLine >= 8)
                     {
-                        stringToReturn += " " + wordsInAnswer[i] + "\n";
+                        stringToReturn += " " + wordsInString[i] + "\n";
                         lettersOnLine = 0;
                     }
                     else
                     {
-                        stringToReturn += " " + wordsInAnswer[i];
+                        stringToReturn += " " + wordsInString[i];
                     }
                 }
                 return stringToReturn;
             }
             else
             {
-                return possibleAnswer;
+                return stringToSplit;
             }
         }
     }
@@ -413,7 +466,7 @@ public class databaseConnection : MonoBehaviour {
         arrProjects = new ObjectJSONProjects[dataProjects.Count];
         for (int i = 0; i < dataProjects.Count; i++)
         {
-            arrProjects[i] = new ObjectJSONProjects(dataProjects[i]["id"].ToString(), dataProjects[i]["titel"].ToString(), dataProjects[i]["beschrijving"].ToString()); // json object oproepen door (id)
+            arrProjects[i] = new ObjectJSONProjects(dataProjects[i]["id"].ToString(), dataProjects[i]["titel"].ToString(), dataProjects[i]["beschrijving"].ToString(), dataProjects[i]["begin_datum"].ToString(), dataProjects[i]["eind_datum"].ToString()); // json object oproepen door (id)
         }
 
         //hierbij nog aanpassen!!!!! geen return meer geven

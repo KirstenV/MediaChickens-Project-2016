@@ -6,11 +6,6 @@ using System.Collections.Generic;
 using LitJson;
 
 public class Player : MonoBehaviour {
-    //variables for middle of roads
-   /* private float leftRoad = 28;
-    private float middleRoad = 36;
-    private float rightRoad = 44;*/
-
 
     //variables for swipe
     private Touch initialTouchSwipe = new Touch();
@@ -18,8 +13,9 @@ public class Player : MonoBehaviour {
     private bool hasSwiped = false;
     //rigidbody for movement with force
      Rigidbody rb;
-    //lane in which player is running, only 3 lanes
+    //lane in which player is running, only 5 lanes
     private byte currentLane;
+    public byte maxLaneLeft = 0;
     //force to move player
     private short forceSide = 7000;
     private short forceUp = 7800;
@@ -49,8 +45,14 @@ public class Player : MonoBehaviour {
     }
     void OnTriggerEnter(Collider other)
     {
-       
-        if(other.gameObject.tag == "Tunnel")
+        if (other.gameObject.tag == "MoveToRight")
+        {
+            speed = 0.35f;
+            rb.AddForce(forceSide, forceUp, 0, ForceMode.Force);
+            currentLane++;
+            hasSwipedUp = false;
+        }
+        if (other.gameObject.tag == "Tunnel")
         {
             if (!hasSwipedUp)
             {
@@ -60,6 +62,7 @@ public class Player : MonoBehaviour {
         if(other.gameObject.tag == "StartGame")
         {
             hasSwipedUp = false;
+            speed = 0.35f;
         }
         
     }
@@ -100,18 +103,16 @@ public class Player : MonoBehaviour {
                     {
                         if (swipedSideways && deltaXSwipe > 0) //swiped left
                         {
-                                if (currentLane == 0) // player not on left lane
+                                if (currentLane == maxLaneLeft) // player not on left lane
                             {
                             }
                                 else if(currentLane == 4)
                             {
-                                Physics.gravity = new Vector3(0, -30F, 0);
                                 rb.AddForce(-(forceSide*1.5f), forceUp, 0, ForceMode.Force);
                                 currentLane--;
                             }
                             else
                             {
-                                Physics.gravity = new Vector3(0, -30F, 0);
                                 rb.AddForce(-forceSide, forceUp, 0, ForceMode.Force);
                                 currentLane--;
                             }
@@ -126,13 +127,11 @@ public class Player : MonoBehaviour {
                                 }
                                 else if(currentLane == 3)
                                {
-                                Physics.gravity = new Vector3(0, -30F, 0);
                                 rb.AddForce(forceSide * 1.5f, forceUp, 0, ForceMode.Force);
                                 currentLane++;
                             }
                                else
                                {
-                                Physics.gravity = new Vector3(0, -30F, 0);
                                 rb.AddForce(forceSide, forceUp, 0, ForceMode.Force);
                                 currentLane++;
                                 }
