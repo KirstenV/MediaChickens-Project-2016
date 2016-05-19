@@ -53,7 +53,6 @@
 <body ng-controller="GoogleMapsController">
 
 
-
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <form method="POST" action="{{Request::root()}}/auth/login">
@@ -118,67 +117,78 @@
 </div>
 
 
-<div class="modal fade" id="registerModal" tabindex="-1" role="dialog"  aria-labelledby="myModalLabel" ng-controller="LoginController as login_ctrl"  >
-    <div class="modal-dialog" role="document" ng-init="intialization_csrt_token()">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Registreer</h4>
-            </div>
-            <div class="modal-body">
-                <div class="modal-body-center">
-                    <form name="formData" method="POST"   ng-submit="submit_login()" ><!--action="{{Request::root()}}/auth/register"-->
-                        {!! csrf_field() !!}
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     ng-controller="LoginController as login_ctrl">
 
-                        <div>
-                            <label>Naam</label>
-                            <br>
-                            <input class="textbox" type="text" name="name" value="" ng-model="login_data.name">
-                        </div>
-                        <br>
-                        <div>
-                            <label>Email</label>
-                            <br>
-                            <input class="textbox" type="email" name="email" value="" ng-model="login_data.email">
-                        </div>
-                        <br>
-                        <div>
-                            <label>Wachtwoord</label>
-                            <br>
-                            <input class="textbox" type="password" name="password" ng-model="login_data.password">
-                        </div>
-                        <br>
-                        <div style="margin-bottom:25px">
-                            <label>Bevestig wachtwoord</label>
-                            <br>
-                            <input class="textbox" type="password" name="password_confirmation"  ng-model="login_data.password_confirmation">
+    <form name="formData" method="POST" ng-submit="submit_login()">
+        <div class="modal-dialog" role="document" ng-init="intialization_csrt_token()">
+            <div class="modal-content">
+
+
+                <div class="modal-header">
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    <h4 ng-hide="register_succes" class="modal-title" id="myModalLabel">Registreer</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body-center">
+
+                        <div ng-show="register_succes">
+                            <h3>succesvol geregistreerd</h3>
+
                         </div>
 
+                        <div ng-hide="register_succes">
+                            <!--action="{{Request::root()}}/auth/register"-->
+                            {!! csrf_field() !!}
+
+                            <div>
+                                <label>Naam</label>
+                                <br>
+                                <input class="textbox" type="text" name="name" value="" ng-model="login_data.name">
+                            </div>
+                            <br>
+                            <div>
+                                <label>Email</label>
+                                <br>
+                                <input class="textbox" type="email" name="email" value="" ng-model="login_data.email">
+                            </div>
+                            <br>
+                            <div>
+                                <label>Wachtwoord</label>
+                                <br>
+                                <input class="textbox" type="password" name="password" ng-model="login_data.password">
+                            </div>
+                            <br>
+                            <div style="margin-bottom:25px">
+                                <label>Bevestig wachtwoord</label>
+                                <br>
+                                <input class="textbox" type="password" name="password_confirmation"
+                                       ng-model="login_data.password_confirmation">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="error-messages" ng-show="register_errors">
+
+                        <li ng-repeat="error in register_errors" class="title_red error-message"><i
+                                    class="fa fa-exclamation-triangle"
+                                    aria-hidden="true"></i> @{{ error[0] }}</li>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer"  ng-hide="register_succes">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuleer</button>
+                    <button id="btn-register" name="submit" type="submit" class="btn btn-primary">Registreer</button>
 
                 </div>
 
-                <div id="error-messages">
-                    @foreach ($errors->all() as $error)
-                        <li class="title_red error-message"><i class="fa fa-exclamation-triangle"
-                                                               aria-hidden="true"></i> {{ $error }}</li>
-                    @endforeach @if ($errors->all())
-                        <script>
-                            $('#registerModal').modal('show');
-                        </script>
-                    @endif
-                </div>
 
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Annuleer</button>
-                <button id="btn-register" name="submit" type="submit" class="btn btn-primary">Registreer</button>
-
-            </div>
-
-
         </div>
-    </div>
     </form>
 </div>
 
@@ -271,18 +281,29 @@
 -->
 
 
-
-<div id="map-container-editpage" ng-init="map_initializetion(<?php if(isset($id)){echo $id;}else{echo 0;} ?>)">
-    <ui-gmap-google-map center="map.center" zoom="map.zoom"  draggable="true" events="map.events">
-        <ui-gmap-markers models="locations" coords="'location'" idkey="'id'"  events="map.marker_events">
+<div id="map-container-editpage" ng-init="map_initializetion(<?php if (isset($id)) {
+    echo $id;
+} else {
+    echo 0;
+} ?>)">
+    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events">
+        <ui-gmap-markers models="locations" coords="'location'" idkey="'id'" events="map.marker_events">
             @if (isset($id))
-            <ui-gmap-windows show="'show'">
-                <p ng-non-bindable> @{{ address }}</p>
-            </ui-gmap-windows>
+                <ui-gmap-windows show="'show'">
+                    <p ng-non-bindable> @{{ address }}</p>
+                </ui-gmap-windows>
             @else
                 <ui-gmap-windows show="'show'">
-                    <p ng-non-bindable> @{{ project_id }}</p>
-                    <p ng-non-bindable> home page</p>
+
+                    <div ng-non-bindable>
+
+
+                        <img src="img/project/small_@{{ image }}" width="64"
+                             height="64">
+                        <h4>@{{ titel}}...</h4>
+                        <h5>@{{ discription }}...</h5>
+                        <p>@{{address }}</p>
+                    </div>
                 </ui-gmap-windows>
             @endif
         </ui-gmap-markers>
@@ -298,10 +319,9 @@
             </ui-gmap-markers>
         </ui-gmap-google-map>
     </div>-->
-    
-    
-    
-    @yield('homeContent') @yield('editContent')
+
+
+@yield('homeContent') @yield('editContent')
 
 
 <div class="col-md-8" style="display: none;">

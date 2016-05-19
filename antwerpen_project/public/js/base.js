@@ -94,8 +94,6 @@
                 }
 
 
-
-
                 $scope.input_location;
                 $scope.add_location_on_enter = function (loc) {
                     console.log("--edit-- --enter key press or mous click-- -> add location:", loc);
@@ -188,11 +186,11 @@
                 //-------------------------------------------------------------------------------project controller-------------------------------------------------------//
                 $scope.project;
                 $scope.projects_for_user = [];
-                
-                $scope.whatClassIsIt = function($controll_variabel,$class_1,$class_2){
-                    if($controll_variabel){
+
+                $scope.whatClassIsIt = function ($controll_variabel, $class_1, $class_2) {
+                    if ($controll_variabel) {
                         return $class_1;
-                    }else{
+                    } else {
                         return $class_2;
                     }
                 }
@@ -220,23 +218,37 @@
 
                                     $http.get(root + "/kaart/api/get_locations/" + $scope.projects[i].id)
                                         .success(function (data) {
-                                            console.log("--home page-- --ajax call-- get location:", data);
+                                            console.log("--home page-- --ajax call-- get project --> locations --> first foto:", data);
+
+                                            if (data.image.length > 0) {
+                                                var image_src = data.image[0].project_picture;
+                                                console.log("--home page-- --get img in the marker-- src", image_src);
+                                            } else {
+                                                var image_src = "antwerpen_logo.png";
+                                                console.log("--home page-- --get img in the marker-- src", image_src);
+                                            }
 
 
-                                            for (var i = 0; i < data.length; i++) {
+
+
+                                            for (var i = 0; i < data.locaties.length; i++) {
                                                 console.log(data[i]);
 
                                                 $scope.locations.push({
-                                                    id: data[i].id,
-                                                    project_id:  $scope.projects[i].id,
-                                                    address: data[i].straat_naam,
+                                                    id: data.locaties[i].id,
+                                                    project_id: data.project.id,
+
+                                                    address: data.locaties[i].straat_naam,
+                                                    image: image_src,
+                                                    titel:data.project.titel.substr(0,35),
+                                                    discription:data.project.beschrijving.substr(0,100),
                                                     location: {
-                                                        latitude: data[i].position_latitude,
-                                                        longitude: data[i].position_longitude
+                                                        latitude: data.locaties[i].position_latitude,
+                                                        longitude: data.locaties[i].position_longitude
                                                     }
                                                 });
                                             }
-                                            console.log("--edit-- -api get all locations-- saved location:", $scope.locations);
+                                            // console.log("--edit-- -api get all locations-- saved location:", $scope.locations);
                                         });
                                 }
 
@@ -358,7 +370,7 @@
         $scope.submit_login = function () {
             //console.log("csrf token is:",$scrf_token);
             console.log("form verzonden data is: ", $scope.login_data);
-
+            $scope.register_errors="";
             var data = {
                 name: $scope.login_data.name,
                 email: $scope.login_data.email,
@@ -369,6 +381,12 @@
 
             $http.post(root + "/register", data).success(function (data) {
                 console.log("return data from loging api", data);
+                if(data.errors){
+                    $scope.register_errors = data.errors;
+                }
+                if(data.succes){
+                    $scope.register_succes = data.succes;
+                }
             });
         }
     }])
