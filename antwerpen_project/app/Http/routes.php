@@ -43,7 +43,7 @@ Route::get('kaart/{id}/api/get_locations', 'kaartController@json_projects');
 Route::post('/locatie/toevoegen/{id}/api','projectController@add_location');
 Route::get('locaties/{id}/edit/api', 'projectController@json_locaties');
 
-Route::get('kaart/api/get_locations', 'kaartController@json_locations');
+Route::get('kaart/api/get_locations/{id}', 'kaartController@json_locations');
 
 
 Route::put('{tabel}/api/add_dependency', 'projectController@add_project_dependency');

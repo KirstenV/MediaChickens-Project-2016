@@ -271,7 +271,22 @@
 -->
 
 
-<h1 style="border: 1px solid; margin-top: 100px">KAAAAAAAAAART</h1>
+
+<div id="map-container-editpage" ng-init="map_initializetion(<?php if(isset($id)){echo $id;}else{echo 0;} ?>)">
+    <ui-gmap-google-map center="map.center" zoom="map.zoom"  draggable="true" events="map.events">
+        <ui-gmap-markers models="locations" coords="'location'" idkey="'id'"  events="map.marker_events">
+            @if (isset($id))
+            <ui-gmap-windows show="'show'">
+                <p ng-non-bindable> @{{ address }}</p>
+            </ui-gmap-windows>
+            @else
+                <ui-gmap-windows show="'show'">
+                    <p ng-non-bindable> home page</p>
+                </ui-gmap-windows>
+            @endif
+        </ui-gmap-markers>
+    </ui-gmap-google-map>
+</div>
 <!--    <div id="map-container-editpage">
          <ui-gmap-google-map center="map.center" zoom="map.zoom"  draggable="true" events="map.events">
             <ui-gmap-markers models="locations" coords="'location'" idkey="'id'"  events="map.marker_events">

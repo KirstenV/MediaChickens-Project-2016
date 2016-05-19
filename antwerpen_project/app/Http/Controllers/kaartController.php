@@ -21,12 +21,17 @@ class kaartController extends Controller
    }
    
    
-   	public function json_locations(){
-	
+   	public function json_locations($id){
+		if(Projecten::find($id)->show_locaties){
+			return Projecten::find($id)->show_locaties;
+		}else{
+			return array('error' => "locatie zijn niet terug gevonden");
+		}
+
 	   //projecten ->many to many relationship locatie
-	   $locaties = Locatie::all();
+
 	   
-	   return $locaties;
+
 
    }
 }
