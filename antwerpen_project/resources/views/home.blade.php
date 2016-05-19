@@ -6,7 +6,7 @@
         @if(Auth::check()) @if(Auth::user()->is_adm)
         <div id="editable" class="col-md-6 col-xs-12" ng-hide="project">
             <i class="fa fa-plus" aria-hidden="true"></i>
-<h4 id="add_project" data-toggle="tooltip" data-placement="right" data-title="Klik en typ een naam" class="nieuw_project col-md-12 col-xs-12 inline" contenteditable='true'>Nieuw project</h4>
+            <h4 id="add_project" data-toggle="tooltip" data-placement="right" data-title="Klik en typ een naam" class="nieuw_project col-md-12 col-xs-12 inline" contenteditable='true'>Nieuw project</h4>
         </div>
         <!-- END DIV EDITABLE -->
         @endif @else
@@ -41,10 +41,12 @@
                         </a>
                     -->
                 <div id="project-titel" class="col-md-8 col-xs-12" ng-show="project">
-                    <div id="project-back" class="vert-center div-left" ng-click="show_projects()"><i class="fa fa-chevron-left inline" aria-hidden="true"></i> <div id="project-back-text" class="inline vert-center">TERUG</div></div>
+                    <div id="project-back" class="vert-center div-left" ng-click="show_projects()"><i class="fa fa-chevron-left inline" aria-hidden="true"></i>
+                        <div id="project-back-text" class="inline vert-center">TERUG</div>
+                    </div>
 
                     <h1 id="project-titel-content"><strong>Project titel</strong></h1>
-                    
+
                 </div>
                 <div id="collapse1" class="panel-collapse collapse in" ng-hide="project">
 
@@ -92,14 +94,41 @@
                 </div>
                 <!-- END DIV COLLAPSE1 -->
 
-                <div class="hole_project col-md-12" ng-show="project">
-                    <div id="project-back" ng-click="show_projects()">terug naar overzicht van projecten</div>
-                    @{{ project.project.id }} @{{ project.project.begin_datum }} @{{ project.project.eind_datum }} @{{ project.project.beschrijving }}
+                <div class="hole_project" ng-show="project">
 
-                    <div ng-repeat="foto in project.fotos">
+
+
+                    <div id="carousel-container" class="col-md-12">
+
+                        <div id="main-pic" ng-repeat="foto in project.fotos" ng-if="$first" class="col-md-10">
+
+
+                            <img ng-src="{{Request::root()}}/img/project/@{{ foto.project_picture }}">
+                        </div>
+                        <div id="thumb-container">
+                            <div id="thumb-scroll-up"></div>
+                            <div id="thumb-pic" class="col-md-2 no-padding" ng-repeat="foto in project.fotos">
+                                <img ng-src="{{Request::root()}}/img/project/@{{ foto.project_picture }}">
+                            </div>
+                            <div id="thumb-scroll-down"></div>
+                        </div>
+                    </div>
+
+
+
+
+
+
+
+
+
+                    <!--                    <div ng-repeat="foto in project.fotos">
                         <div>@{{ $index }}</div>
                         <img ng-src="{{Request::root()}}/img/project/small_@{{ foto.project_picture }}">
-                    </div>
+                    </div>-->
+
+
+                    @{{ project.project.id }} @{{ project.project.begin_datum }} @{{ project.project.eind_datum }} @{{ project.project.beschrijving }}
 
                     <div ng-repeat="vraag in project.vragen">
                         <div>@{{ $index }}</div>

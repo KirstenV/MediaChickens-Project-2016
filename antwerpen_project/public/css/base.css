@@ -3,16 +3,21 @@
     src: url("SunAntwerpen_500.woff") format("woff");
 }
 
-
 body {
     font-family: MyWebfont, Verdana, sans-serif;
 }
 
-h1, h2, h3, h4,h5, h6, p {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
     font-family: MyWebfont, Verdana, sans-serif;
 }
 
-hr{
+hr {
     border-color: lightgrey;
 }
 
@@ -25,15 +30,15 @@ hr{
     }
 }
 
-.width-transition{
+.width-transition {
     transition: width 0.8s;
 }
 
-#div-project{
+#div-project {
     cursor: pointer;
 }
 
-#div-project:hover{
+#div-project:hover {
     color: #DA291C;
 }
 
@@ -134,7 +139,6 @@ hr{
     overflow: scroll;
 }
 
-
 #editContainer {
     position: absolute;
     right: 0;
@@ -223,7 +227,6 @@ hr{
     padding-bottom: 50px;
     padding-left: 0px;
     right: 0%;
-    
 }
 
 .navbar-default {
@@ -244,7 +247,6 @@ hr{
 
 #editable {
     position: fixed;
-
     text-align: center;
     margin: 0 auto;
     z-index: 999;
@@ -253,10 +255,10 @@ hr{
     height: 60px;
 }
 
-.fa-plus{
+.fa-plus {
     position: relative;
     top: 30%;
-    color:#DA291C;
+    color: #DA291C;
     margin-right: 5px;
 }
 
@@ -282,34 +284,26 @@ hr{
     height: 60px;
 }
 
-.h100{
-    
+.h100 {
     height: 100%;
-    
 }
+
 #home-titel-content {
     color: white;
     position: relative;
     font-size: 1.8em;
     margin: 0 auto;
     top: 30%;
-
 }
-
 
 #project-titel {
     position: fixed;
-
     margin: 0 auto;
     z-index: 999;
     top: 75px;
     background-color: #DA291C;
     height: 60px;
-    
-    
 }
-
-
 
 #project-back {
     position: absolute;
@@ -317,19 +311,16 @@ hr{
     cursor: pointer;
     color: white;
     font-size: 1.2em;
-opacity: 0.4;
-    
+    opacity: 0.4;
 }
 
-#project-back-text{
+#project-back-text {
     top: 31%;
     font-size: 0.8em;
 }
 
-
 .div-left {
-
-        width: 60px;
+    width: 60px;
     height: 100%;
 }
 
@@ -337,22 +328,16 @@ opacity: 0.4;
     position: relative;
     top: 19px;
     font-size: 0.8em;
-    
 }
 
 #project-titel h1 {
     text-align: center;
-    
-    
 }
-
 
 #project-titel hr {
     margin-top: 29px;
     border-color: black;
-    
 }
-
 
 #project-titel-content {
     color: white;
@@ -361,10 +346,7 @@ opacity: 0.4;
     margin: 0 auto;
     top: 30%;
     font-size: 1.6em;
-
 }
-
-
 
 .navbar-nav li {
     height: 50px;
@@ -380,7 +362,6 @@ opacity: 0.4;
 
 .panel-body {
     padding: 10px 10px 0px 40px;
-   
     position: relative;
     width: 100%;
 }
@@ -411,21 +392,19 @@ opacity: 0.4;
     transition: left 1s;
 }
 
-
-
 .fa-user,
 .fa-sign-out,
 .fa-user-plus {
     transform: scale(2) translateY(-50%);
     color: #DA291C;
-    
 }
 
-.fa-sign-in{
-    transform:scale(2.4) translateY(-41%) ;
+.fa-sign-in {
+    transform: scale(2.4) translateY(-41%);
     color: #DA291C;
-    
 }
+
+
 /*
 .fa-sign-in:active {
     transform: scale(2.2) translateY(-41%);
@@ -467,7 +446,7 @@ opacity: 0.4;
     top: 0%;
 }
 
-.vert-center{
+.vert-center {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
@@ -478,45 +457,35 @@ opacity: 0.4;
     line-height: 50px;
     width: 56px;
     display: inline-block;
-    
 }
 
 .navbar-nav li:hover {
     background-color: #DA291C;
 }
 
-#nav-right li{
-
-
+#nav-right li {
     height: inherit;
     width: 56px;
     display: inline-block;
     overflow: hidden;
-
-    
 }
-#nav-right li a{
+
+#nav-right li a {
     display: block;
     text-align: center;
     height: 100%;
     width: 100%;
-    
 }
 
-#nav-right li a i{
+#nav-right li a i {
     top: 50%;
     position: relative;
-    
 }
 
-
-
-#nav-right{
+#nav-right {
     height: 100%;
     list-style-type: none;
-
 }
-
 
 .project_icons {
     position: absolute;
@@ -537,18 +506,14 @@ opacity: 0.4;
     padding-left: 1px;
 }
 
-
-.navbar-default .navbar-nav>.open>a{
+.navbar-default .navbar-nav>.open>a {
     background-color: white;
 }
 
-.navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus {
-
+.navbar-default .navbar-nav>.open>a:hover,
+.navbar-default .navbar-nav>.open>a:focus {
     background-color: #DA291C;
 }
-
-
-
 
 .fa-angle-double-right,
 .fa-angle-double-down {
@@ -715,7 +680,6 @@ opacity: 0.4;
     width: 150px;
 }
 
-
 #fase-add-button {
     display: inline-block;
 }
@@ -752,8 +716,6 @@ opacity: 0.4;
 .mybutton {
     width: 100%;
 }
-
-
 
 .vraag_add_button:hover {
     border: 1px dashed #DA291C;
@@ -792,4 +754,71 @@ opacity: 0.4;
     top: 0%;
     left: 0%;
     position: fixed;
+}
+
+.hole_project {
+    background-color: lightgrey;
+}
+
+#carousel-container {
+    margin-top: 20px;
+    height: 350px;
+    background-color: white;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+#thumb-container {
+    height: 100%;
+    overflow: auto;
+    overflow-y: hidden;
+}
+
+#thumb-scroll-up {
+    height: 30px;
+    position: absolute;
+    background-color: white;
+    z-index: 99;
+    width: 100%;
+    opacity: 0.5;
+    top: 0%;
+}
+
+#thumb-scroll-down {
+    height: 30px;
+    position: absolute;
+    background-color: white;
+    z-index: 99;
+    bottom: 20px;
+    width: 100%;
+    opacity: 0.5;
+}
+
+#thumb-pic {
+    width: 100%;
+    position: relative;
+    opacity: 0.7;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+#thumb-pic img {
+    height: 100%;
+    width: 100%;
+}
+
+#thumb-pic:hover {
+    opacity: 1;
+}
+
+#main-pic {
+    height: 100%;
+    overflow: hidden;
+    padding-left: 0px;
+    position: relative;
+}
+
+#main-pic img {
+    height: 100%;
+    width: 100%;
 }
