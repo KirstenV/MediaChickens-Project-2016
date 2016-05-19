@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html ng-app="antwerpen_project">
+<head>
+<!--lodash is nodig om google maps te configureren-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/lodash/4.12.0/lodash.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+    <script src="angular-simple-logger.js"></script>
+    <script src="angular-google-maps.js"></script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrmTkGoBzp--pRgO5vRXIsbXPrk3VMp_w&libraries=places"
+            type="text/javascript"></script>
+	<script src="test_angular_app.js"></script>
+	
+	<style>
+	.angular-google-map-container { height: 400px; }
+	</style>
+<title>Page Title</title>
+</head>
+<body ng-controller="projectController">
+{{ready}}
+<ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+
+</body>
+</html>
