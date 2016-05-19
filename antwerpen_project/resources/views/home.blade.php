@@ -1,7 +1,7 @@
 @extends('layout') @section('homeContent')
 
 
-<div id="homeContainer" class=" col-xs-12 col-md-6">
+<div id="homeContainer" class=" col-xs-12 col-md-6 width-transition" ng-class='whatClassIsIt(project, "col-md-8", "col-md-6")'>
     <div id="projectContainer" ng-controller="projectController">
         @if(Auth::check()) @if(Auth::user()->is_adm)
         <div id="editable" class="col-md-6 col-xs-12" ng-hide="project">

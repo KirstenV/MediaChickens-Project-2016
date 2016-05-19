@@ -216,19 +216,19 @@ $(document).ready(function () {
     });
 
 
-    $("div").on("click", "#div-project", function () {
-
-        $('#homeContainer').removeClass("col-md-6").addClass("col-md-8").addClass("width-transition");
-        $('#mapContainer').removeClass("col-md-6").addClass("col-md-4").addClass("width-transition");
-
-    });
-
-    $("div").on("click", "#project-back", function () {
-
-        $('#homeContainer').removeClass("col-md-8").addClass("col-md-6");
-        $('#mapContainer').removeClass("col-md-4").addClass("col-md-6");
-
-    });
+//    $("div").on("click", "#div-project", function () {
+//
+//        $('#homeContainer').removeClass("col-md-6").addClass("col-md-8").addClass("width-transition");
+//        $('#mapContainer').removeClass("col-md-6").addClass("col-md-4").addClass("width-transition");
+//
+//    });
+//
+//    $("div").on("click", "#project-back", function () {
+//
+//        $('#homeContainer').removeClass("col-md-8").addClass("col-md-6");
+//        $('#mapContainer').removeClass("col-md-4").addClass("col-md-6");
+//
+//    });
 
     $("#nav-right li").each(function () {
 

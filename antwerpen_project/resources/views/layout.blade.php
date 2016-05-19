@@ -281,6 +281,7 @@
             </ui-gmap-windows>
             @else
                 <ui-gmap-windows show="'show'">
+                    <p ng-non-bindable> @{{ project_id }}</p>
                     <p ng-non-bindable> home page</p>
                 </ui-gmap-windows>
             @endif

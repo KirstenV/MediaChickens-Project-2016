@@ -188,6 +188,14 @@
                 //-------------------------------------------------------------------------------project controller-------------------------------------------------------//
                 $scope.project;
                 $scope.projects_for_user = [];
+                
+                $scope.whatClassIsIt = function($controll_variabel,$class_1,$class_2){
+                    if($controll_variabel){
+                        return $class_1;
+                    }else{
+                        return $class_2;
+                    }
+                }
                 // home page haal alle projecten
                 $http.get(root + "/al_projects/api/get")
                     .success(function (data) {
