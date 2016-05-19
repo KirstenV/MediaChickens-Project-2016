@@ -289,26 +289,26 @@ $(document).ready(function () {
 
     });
 
-    if($("#thumb-container").scrollTop() === 0){
-        
+    if ($("#thumb-container").scrollTop() === 0) {
+
         $('#thumb-scroll-up').hide();
-        
+
     }
-    
+
 
 
     $("#thumb-container").scroll(function () {
         var y = $(this).scrollTop();
-        var x = $(this).innerHeight() ;
+        var x = $(this).innerHeight();
         var z = $(this)[0].scrollHeight;
         if (y > 0) {
-            
+
             $('#thumb-scroll-up').fadeIn();
 
-        }else{
+        } else {
             $('#thumb-scroll-up').fadeOut();
         }
-        
+
         console.log($(this).height());
         if (y + x >= z) {
             console.log("helllllllll");
@@ -341,6 +341,71 @@ $(document).ready(function () {
 
 
     });
+
+
+
+
+
+
+
+
+
+    var index = 1;
+    $("#project-side-date p").html(index + "/4");
+
+
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+
+        $("#project-side-date p").html(index + "/4");
+        $(document).on("click", '#next', function () {
+            console.log('hi');
+
+            $("#vraag-container").animate({
+                scrollLeft: $("#vraag-container").scrollLeft() + 288
+            }, 500);
+            index++;
+            console.log(index);
+            $("#project-side-date p").html(index + "/4");
+        });
+        
+        $(document).on("click", '#previous', function () {
+            console.log('hi');
+
+            $("#vraag-container").animate({
+                scrollLeft: $("#vraag-container").scrollLeft() - 288
+            }, 500);
+            index--;
+            console.log(index);
+            $("#project-side-date p").html(index + "/4");
+        });
+    } else {
+
+        $(document).on("click", '#next', function () {
+            console.log('hi');
+
+            $("#vraag-container").animate({
+                scrollLeft: $("#vraag-container").scrollLeft() + 614
+            }, 500);
+            index++;
+            console.log(index);
+            $("#project-side-date p").html(index + "/4");
+        });
+        
+        $(document).on("click", '#previous', function () {
+            console.log('hi');
+
+            $("#vraag-container").animate({
+                scrollLeft: $("#vraag-container").scrollLeft() - 614
+            }, 500);
+            index--;
+            console.log(index);
+            $("#project-side-date p").html(index + "/4");
+        });
+
+
+    }
+
+
 
 
 

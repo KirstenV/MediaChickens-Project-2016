@@ -792,9 +792,10 @@ hr {
     position: absolute;
     background-color: white;
     z-index: 99;
-    width: 100%;
-    opacity: 0.5;
+    opacity: 0.8;
     top: 0%;
+    text-align: center;
+    cursor: pointer;
 }
 
 #thumb-scroll-down {
@@ -803,8 +804,9 @@ hr {
     background-color: white;
     z-index: 99;
     bottom: 20px;
-    width: 100%;
-    opacity: 0.5;
+    opacity: 0.8;
+    text-align: center;
+    cursor: pointer;
 }
 
 #thumb-pic {
@@ -834,4 +836,118 @@ hr {
 #main-pic img {
     height: 100%;
     width: 100%;
+}
+
+.fa-caret-down,
+.fa-caret-up {
+    color: #DA291C;
+    position: relative;
+    top: 50%;
+    transform: scale(2)translateY(-50%);
+}
+
+#project-info-container {
+    min-height: 300px;
+    overflow: auto;
+    margin: 20px 0px;
+    background-color: white;
+    overflow-x: hidden;
+}
+
+#project-beschrijving-container {
+    background-color: lightgrey;
+    min-height: 300px;
+    padding-left: 0px;
+}
+
+#project-beschrijving {
+    background-color: white;
+    min-height: 300px;
+    padding: 15px 15px 15px 0px;
+}
+
+#project-side-date,
+#project-side-location {
+    background-color: white;
+    height: auto;
+    padding: 15px 0px 15px 15px;
+}
+
+#project-side-container {
+    padding: 0px;
+    height: inherit;
+    background-color: lightgrey;
+    z-index: 3;
+}
+
+#project-side-split {
+    height: 15px;
+    background-color: lightgrey;
+    width: 113%;
+    margin-right: 0px;
+}
+
+#project-side-rest {
+    height: 100%;
+    z-index: 2;
+    background-color: lightgrey;
+    width: 18%;
+    margin-right: 0px;
+    position: absolute;
+    bottom: 0%;
+    right: 0%;
+}
+
+#vraag-container {
+    overflow: hidden;
+    display: flex;
+}
+
+#project-vraag {
+    display: inline-block;
+    min-width: 100%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#project-vraag-content {
+    text-align: left;
+    display: inline-block;
+}
+
+#previous {
+    height: 155px;
+    width: 50px;
+    position: absolute;
+    text-align: center;
+}
+
+#next {
+    height: 155px;
+    width: 50px;
+    position: absolute;
+    right: 0%;
+    text-align: center;
+}
+
+.fa-caret-left,
+.fa-caret-right {
+    transform: scale(4);
+    position: relative;
+    top: 50%;
+    color: #DA291C;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.fa-caret-left:hover,
+.fa-caret-right:hover {
+
+    opacity: 1;
+}
+
+.fa-caret-left:active,
+.fa-caret-right:active {
+
+    transform: scale(3);
 }

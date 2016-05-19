@@ -98,47 +98,116 @@
 
 
 
-                    <div id="carousel-container" class="col-md-12">
+                    <div id="carousel-container" class="col-md-12 col-xs-12">
 
-                        <div id="main-pic" ng-repeat="foto in project.fotos" ng-if="$first" class="col-md-10">
+                        <div id="main-pic" ng-repeat="foto in project.fotos" ng-if="$first" class="col-md-10 col-xs-10">
 
 
                             <img ng-src="{{Request::root()}}/img/project/@{{ foto.project_picture }}">
                         </div>
                         <div id="thumb-container">
-                            <div id="thumb-scroll-up"></div>
-                            <div id="thumb-pic" class="col-md-2 no-padding" ng-repeat="foto in project.fotos">
+                            <div id="thumb-scroll-up" class="col-md-2 col-xs-2 no-padding">
+                                <i class="fa fa-caret-up" aria-hidden="true"></i>
+                            </div>
+                            <div id="thumb-pic" class="col-md-2 col-xs-2 no-padding" ng-repeat="foto in project.fotos">
                                 <img ng-src="{{Request::root()}}/img/project/@{{ foto.project_picture }}">
                             </div>
-                            <div id="thumb-scroll-down"></div>
+                            <div id="thumb-scroll-down" class="col-md-2 col-xs-2 no-padding">
+                                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                            </div>
                         </div>
                     </div>
 
 
+                    <div id="project-info-container" class="col-md-12 col-xs-12">
+                        <div id="project-beschrijving-container" class="col-md-10 col-xs-10">
+                            <div id="project-beschrijving" class="col-md-12 col-xs-12">
+                                <h4 class="title_red">Wat?</h4>
+                                <p>@{{ project.project.beschrijving }}</p>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p>
+                                <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p>
+                            </div>
 
 
+                        </div>
+                        <div id="project-side-container" class="col-md-2 col-xs-2">
+                            <div id="project-side-date" class="col-md-12 col-xs-12">
+                                <h4 class="title_red">Wanneer?</h4>
+                                <strong>Van</strong>
+                                <br> @{{ project.project.begin_datum }}
+                                <br>
+                                <strong>Tot</strong>
+                                <br> @{{ project.project.eind_datum }}
+
+                            </div>
+                            <div id="project-side-split" class="col-md-2 col-xs-2">
+                            </div>
+                        </div>
+                        <div id="project-side-container" class="col-md-2 col-xs-2">
+                            <div id="project-side-location" class="col-md-12 col-xs-12">
+                                <h4 class="title_red">Waar?</h4> Meir, 15, Antwerpen, Belgium
 
 
+                            </div>
 
+                        </div>
+                        <div id="project-side-rest" class="col-md-2 col-xs-2">
+                        </div>
 
-
-                    <!--                    <div ng-repeat="foto in project.fotos">
-                        <div>@{{ $index }}</div>
-                        <img ng-src="{{Request::root()}}/img/project/small_@{{ foto.project_picture }}">
-                    </div>-->
-
-
-                    @{{ project.project.id }} @{{ project.project.begin_datum }} @{{ project.project.eind_datum }} @{{ project.project.beschrijving }}
-
-                    <div ng-repeat="vraag in project.vragen">
-                        <div>@{{ $index }}</div>
-                        <div>@{{ vraag}}</div>
                     </div>
 
-                    <div ng-repeat="vraag in project.vragen">
-                        <div>@{{ $index }}</div>
-                        <div>@{{ vraag}}</div>
+                    <div id="project-info-container" class="col-md-12 col-xs-12">
+                        <div id="project-beschrijving-container" class="col-md-10 col-xs-10">
+                            <div id="project-beschrijving" class="col-md-12 col-xs-12">
+                                <h4 class="title_red">Vragen</h4>
+                                <form>
+
+                                    <div id="vraag-container">
+                                        <div id="previous">
+                                            <i class="fa fa-caret-left" aria-hidden="true"></i>
+                                        </div>
+                                        <div id="project-vraag" ng-repeat="vraag in project.vragen">
+                                            <div id="project-vraag-content">
+                                                <h5>Vraag @{{ $index }}: @{{ vraag.vraag}}</h5>
+                                                <p>@{{ vraag.mogelijke_antwoorden_1}}</p>
+                                                <p>@{{ vraag.mogelijke_antwoorden_2}}</p>
+                                                <p>@{{ vraag.mogelijke_antwoorden_3}}</p>
+                                                <p>@{{ vraag.mogelijke_antwoorden_4}}</p>
+                                            </div>
+                                        </div>
+                                        <div id="next">
+                                            <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+
+
+                        </div>
+                        <div id="project-side-container" class="col-md-2 col-xs-2">
+                            <div id="project-side-date" class="col-md-12 col-xs-12">
+                                <h4 class="title_red">Vraag</h4>
+                                <p>/4</p>
+                            </div>
+                            <div id="project-side-split" class="col-md-2 col-xs-2">
+                            </div>
+                        </div>
+
+                        <div id="project-side-rest" class="col-md-2 col-xs-2">
+                        </div>
+
                     </div>
+
+
+
+
+
+
+
+
+
 
                 </div>
                 <!--end div evreting obout project-->
@@ -189,13 +258,13 @@
         <!-- END DIV ACCORDION -->
 
     </div>
-    @stop 
-    
-    
+    @stop
 
-    
-    
-<!--    <div id="map-container-editpage">
+
+
+
+
+    <!--    <div id="map-container-editpage">
          <ui-gmap-google-map center="map.center" zoom="map.zoom"  draggable="true" events="map.events">
             <ui-gmap-markers models="locations" coords="'location'" idkey="'id'"  events="map.marker_events">
                 <ui-gmap-windows show="'show'">
@@ -205,10 +274,10 @@
             </ui-gmap-markers>
         </ui-gmap-google-map>
     </div>-->
-    
-    
-    
-<!--    <div id="mapContainer" class="col-xs-0 col-md-6">
+
+
+
+    <!--    <div id="mapContainer" class="col-xs-0 col-md-6">
 
         <div id="map-container">
             <div id="map"></div>
