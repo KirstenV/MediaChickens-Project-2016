@@ -21,6 +21,19 @@ hr {
     border-color: lightgrey;
 }
 
+.angular-google-map-container {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+}
+
+.middle {
+    display: table;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 @keyframes highlight {
     0% {
         background: #3498db
@@ -465,7 +478,7 @@ hr {
 
 #nav-right li {
     height: inherit;
-    width: 56px;
+    width: 58px;
     display: inline-block;
     overflow: hidden;
 }

@@ -1,21 +1,8 @@
 @extends('layout') @section('header') @stop @section('editContent')
-    <style>
-        .angular-google-map-container {
-            height: 100%;
-            width: 100%;
-            position: absolute;
-        }
-
-        .middle {
-            display: table;
-            width: 50%;
-            margin-left: auto;
-            margin-right: auto;
-        }
-    </style>
+   
 
     <div id="map-container-editpage" ng-init="map_initializetion({{$id}})">
-        < <ui-gmap-google-map center="map.center" zoom="map.zoom"  draggable="true" events="map.events">
+         <ui-gmap-google-map center="map.center" zoom="map.zoom"  draggable="true" events="map.events">
             <ui-gmap-markers models="locations" coords="'location'" idkey="'id'"  events="map.marker_events">
                 <ui-gmap-windows show="'show'">
                     <p ng-non-bindable> @{{ address }}</p>

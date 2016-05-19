@@ -195,7 +195,7 @@
     </div>
 
 
-    <div class="h100 col-md-6 col-xs-1">
+    <div class="h100 col-md-6 col-xs-1 no-padding">
         <ul id="nav-right" class="pull-right vert-center h100 hidden-xs">
 
 
@@ -271,8 +271,21 @@
 -->
 
 
+<h1 style="border: 1px solid; margin-top: 100px">KAAAAAAAAAART</h1>
+<!--    <div id="map-container-editpage">
+         <ui-gmap-google-map center="map.center" zoom="map.zoom"  draggable="true" events="map.events">
+            <ui-gmap-markers models="locations" coords="'location'" idkey="'id'"  events="map.marker_events">
+                <ui-gmap-windows show="'show'">
+                    <p ng-non-bindable> @{{ address }}</p>
+                </ui-gmap-windows>
 
-@yield('map') @yield('homeContent') @yield('editContent')
+            </ui-gmap-markers>
+        </ui-gmap-google-map>
+    </div>-->
+    
+    
+    
+    @yield('homeContent') @yield('editContent')
 
 
 <div class="col-md-8" style="display: none;">

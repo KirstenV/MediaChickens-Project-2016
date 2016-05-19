@@ -189,11 +189,28 @@
         <!-- END DIV ACCORDION -->
 
     </div>
-    @stop @section('map')
-    <div id="mapContainer" class="col-xs-0 col-md-6">
+    @stop 
+    
+    
+
+    
+    
+<!--    <div id="map-container-editpage">
+         <ui-gmap-google-map center="map.center" zoom="map.zoom"  draggable="true" events="map.events">
+            <ui-gmap-markers models="locations" coords="'location'" idkey="'id'"  events="map.marker_events">
+                <ui-gmap-windows show="'show'">
+                    <p ng-non-bindable> @{{ address }}</p>
+                </ui-gmap-windows>
+
+            </ui-gmap-markers>
+        </ui-gmap-google-map>
+    </div>-->
+    
+    
+    
+<!--    <div id="mapContainer" class="col-xs-0 col-md-6">
 
         <div id="map-container">
             <div id="map"></div>
         </div>
-    </div>
-    @stop
+    </div>-->
