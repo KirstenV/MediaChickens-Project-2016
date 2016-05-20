@@ -9,6 +9,15 @@
             <h4 id="add_project" data-toggle="tooltip" data-placement="right" data-title="Klik en typ een naam" class="nieuw_project col-md-12 col-xs-12 inline" contenteditable='true'>Nieuw project</h4>
         </div>
         <!-- END DIV EDITABLE -->
+        
+        @else
+        
+        <div id="home-titel" ng-hide="project">
+            <h1 id="home-titel-content"><strong>Huidige projecten</strong></h1>
+        </div>
+
+        
+        
         @endif @else
         <div id="home-titel" ng-hide="project">
             <h1 id="home-titel-content"><strong>Huidige projecten</strong></h1>
@@ -41,7 +50,7 @@
                         </a>
                     -->
                 <div id="project-titel" class="col-md-8 col-xs-12" ng-show="project">
-                    <div id="project-back" class="vert-center div-left" ng-click="show_projects()"><i class="fa fa-chevron-left inline" aria-hidden="true"></i>
+                    <div id="project-back" class="vert-center div-left" ng-click="show_projects()"><i class="fa fa-chevron-right inline" aria-hidden="true"></i>
                         <div id="project-back-text" class="inline vert-center">TERUG</div>
                     </div>
 
@@ -50,6 +59,10 @@
                 </div>
                 <div id="collapse1" class="panel-collapse collapse in" ng-hide="project">
 
+                    
+                    
+                    @if(Auth::check()) @if(Auth::user()->is_adm)
+                    
                     <div class="panel-body" ng-repeat="project in projects" ng-class="is_tru_id(project.id,highlight_class)">
                         <a>
                             <div id="div-project" ng-show="project.id" ng-click="show_project_info(project.id)">
@@ -79,17 +92,99 @@
                                 <!--		<br><small><div id="div-inline"  class="begien_datum_home_page"><strong>Begindatum: </strong>@{{project.begin_datum}}</a></div></small> -->
                                 <!--		<small><div id="div-inline"  class="eind_datum_home_page"><strong>Einddatum: </strong>@{{project.eind_datum}}</a></div></small> -->
                                 <!--		<br><div id="div-inline"  class="begien_datum_home_page"><strong>Beschrijving: </strong>@{{project.beschrijving}}</a></div> -->
-                                <hr>
+                                <hr ng-if="!$last">
+                            </div>
+                        </a>
+
+                    </div>
+                    @else
+                    
+                    
+                     <div class="panel-body" ng-repeat="project in projects_for_user" ng-class="is_tru_id(project.id,highlight_class)">
+                        <a>
+                            <div id="div-project" ng-show="project.id" ng-click="show_project_info(project.id)">
+
+                                <h4 id="show-project" class="inline"><!--<a href="project/@{{project.id}}/view">-->@{{project.titel}}<!--</a>--></h4> @if(Auth::check()) @if(Auth::user()->is_adm)
+                                <div id="div-inline" class="project_icons">
+                                    <div class="col-md-6">
+                                        <div id="div-inline" class="edit_home_page">
+                                            <a href="project/@{{project.id}}/edit" title="wijzig project">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- END DIV COL-MD-6 -->
+                                    <div class="col-md-6">
+                                        <div id="div-inline" class="delete_home_page">
+                                            <!--ng-click="delete_project(project.id,$index)"-->
+                                            <a href="">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- END DIV COL-MD-6 -->
+                                </div>
+                                <!-- END DIV PROJECT_ICONS -->
+                                @endif @endif
+                                <!--		<br><small><div id="div-inline"  class="begien_datum_home_page"><strong>Begindatum: </strong>@{{project.begin_datum}}</a></div></small> -->
+                                <!--		<small><div id="div-inline"  class="eind_datum_home_page"><strong>Einddatum: </strong>@{{project.eind_datum}}</a></div></small> -->
+                                <!--		<br><div id="div-inline"  class="begien_datum_home_page"><strong>Beschrijving: </strong>@{{project.beschrijving}}</a></div> -->
+                                <hr ng-if="!$last">
                             </div>
                         </a>
 
 
 
+                    </div>
+                    
+                   
+                    
+                    
+                    @endif   
+                    @else
+                    
+                    
+                    
+                    
+                     <div class="panel-body" ng-repeat="project in projects_for_user" ng-class="is_tru_id(project.id,highlight_class)">
+                        <a>
+                            <div id="div-project" ng-show="project.id" ng-click="show_project_info(project.id)">
 
+                                <h4 id="show-project" class="inline"><!--<a href="project/@{{project.id}}/view">-->@{{project.titel}}<!--</a>--></h4> @if(Auth::check()) @if(Auth::user()->is_adm)
+                                <div id="div-inline" class="project_icons">
+                                    <div class="col-md-6">
+                                        <div id="div-inline" class="edit_home_page">
+                                            <a href="project/@{{project.id}}/edit" title="wijzig project">
+                                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- END DIV COL-MD-6 -->
+                                    <div class="col-md-6">
+                                        <div id="div-inline" class="delete_home_page">
+                                            <!--ng-click="delete_project(project.id,$index)"-->
+                                            <a href="">
+                                                <i class="fa fa-trash" aria-hidden="true"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <!-- END DIV COL-MD-6 -->
+                                </div>
+                                <!-- END DIV PROJECT_ICONS -->
+                                @endif @endif
+                                <!--		<br><small><div id="div-inline"  class="begien_datum_home_page"><strong>Begindatum: </strong>@{{project.begin_datum}}</a></div></small> -->
+                                <!--		<small><div id="div-inline"  class="eind_datum_home_page"><strong>Einddatum: </strong>@{{project.eind_datum}}</a></div></small> -->
+                                <!--		<br><div id="div-inline"  class="begien_datum_home_page"><strong>Beschrijving: </strong>@{{project.beschrijving}}</a></div> -->
+                                <hr ng-if="!$last">
+                            </div>
+                        </a>
 
 
 
                     </div>
+                    
+                    
+                    @endif
                     <!-- END DIV PANEL-BODY -->
                 </div>
                 <!-- END DIV COLLAPSE1 -->

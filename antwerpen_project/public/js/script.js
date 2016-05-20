@@ -408,11 +408,24 @@ $(document).ready(function () {
 
 $('#rating').rating({
     
-    showCaption:false,
+    
     emptyStar: "<i class='fa fa-star-o'></i>",
     filledStar: "<i class='fa fa-star'></i>",
     clearButton: "<i class='fa fa-minus-circle'></i>",
     clearButtonTitle: "verwijder",
+    defaultCaption: "Geen beoordeling",
+    starCaptions:    {
+
+        1: '1 ster',
+
+        2: '2 sterren',
+
+        3: '3 sterren',
+
+        4: '4 sterren',
+
+        5: '5 sterren'
+    }
 });
 
 

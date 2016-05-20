@@ -25,6 +25,7 @@ hr {
     height: 100%;
     width: 100%;
     position: absolute;
+    left: 0%;
 }
 
 .middle {
@@ -561,6 +562,7 @@ hr {
 
 #collapse1 {
     padding-top: 20px;
+    padding-bottom: 50px;
 }
 
 #accordion a:hover {
