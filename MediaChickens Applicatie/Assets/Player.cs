@@ -25,10 +25,14 @@ public class Player : MonoBehaviour {
     //if player has chosen answer
     public bool hasSwipedUp = false;
     public bool isRunning = false;
+    //pause button 
+    public GameObject btnPause;
 
     //connection with other script
     public GameObject otherScript;
     databaseConnection scriptDatabase;
+
+    
 
     void Start()
     {

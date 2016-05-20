@@ -76,7 +76,7 @@ public class databaseConnection : MonoBehaviour {
         logoEndScreen.gameObject.SetActive(false);
         btnContinue.gameObject.SetActive(false);
         txtPause.gameObject.SetActive(false);
-        btnPause.gameObject.SetActive(true);
+        btnPause.gameObject.SetActive(false);
         answerCount = 0;
     }
     void OnTriggerEnter(Collider other)
@@ -230,6 +230,7 @@ public class databaseConnection : MonoBehaviour {
                         StartCoroutine(getQuestionsFromURL(getQuestionsUrl(arrProjects[currentProject].id.ToString()))); //getting questions once player has chosen project
                         playerScript.isRunning = true;
                         playerScript.hasSwipedUp = true;
+                            btnPause.gameObject.SetActive(true);
                     }
                         hasSwiped = true;
                     }
