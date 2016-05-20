@@ -73,7 +73,7 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 //Route::get('unity/vragen/{id}/api', 'unityController@get_vragen_by_id');
 Route::get('unity/vragen/{id}/{gebreuker}/api', 'unityController@get_vragen_by_id');
 Route::get('unity/al_projecten/api', 'unityController@get_projects');
-
+Route::post('unity/login', 'unityController@login_unity');
 
 
 
