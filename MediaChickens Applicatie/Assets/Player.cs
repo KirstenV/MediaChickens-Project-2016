@@ -19,7 +19,9 @@ public class Player : MonoBehaviour {
     //force to move player
     private short forceSide = 7000;
     private short forceUp = 7800;
-    private float speed = 0.35f;
+    private float speed = 0.7f;
+    private float speedSlow = 0.7f;
+    private float speedFast = 1f;
     //rigidbodys for turning on the townsquare
     public Rigidbody road1;
     //if player has chosen answer
@@ -51,7 +53,7 @@ public class Player : MonoBehaviour {
     {
         if (other.gameObject.tag == "MoveToRight")
         {
-            speed = 0.35f;
+            speed = speedSlow;
             rb.AddForce(forceSide, forceUp, 0, ForceMode.Force);
             currentLane++;
             hasSwipedUp = false;
@@ -66,7 +68,7 @@ public class Player : MonoBehaviour {
         if(other.gameObject.tag == "StartGame")
         {
             hasSwipedUp = false;
-            speed = 0.35f;
+            speed = speedSlow;
         }
         
     }
@@ -75,12 +77,12 @@ public class Player : MonoBehaviour {
         if (other.gameObject.tag == "Tunnel")
         {
             hasSwipedUp = false;
-            speed = 0.35f;
+            speed = speedSlow;
         }
         if (other.gameObject.tag == "BuildingsTownSquare")
         {
             hasSwipedUp = false;
-            speed = 0.35f;
+            speed = speedSlow;
         }
     }
     void FixedUpdate() //always being called
@@ -145,7 +147,7 @@ public class Player : MonoBehaviour {
                         {
                             isRunning = true;
                             hasSwipedUp = true;
-                            speed = 0.7f;
+                            speed = speedFast;
                         }   
                         hasSwiped = true;
                     }
