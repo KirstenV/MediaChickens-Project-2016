@@ -527,10 +527,10 @@ public class databaseConnection : MonoBehaviour {
 
     void RoadSpawn()
     {
-        if(answerCount+2 < arrQuestions.Length && arrQuestions[answerCount+2].type != null) { 
+        if(answerCount+2 < arrQuestions.Length && arrQuestions[answerCount+2] != null) { 
             if(arrQuestions[answerCount + 2].type == "Gesloten vragen") { 
         Instantiate(tunnel2, new Vector3(35.2f, 0.002f, this.transform.position.z + (spawnDistance * 3)), Quaternion.identity);
-                Debug.Log("instantiate tunnel 4");
+                Debug.Log("instantiate tunnel 2");
             }
             else if(arrQuestions[answerCount + 2].type == "meerkeuzevragen")
             {
@@ -541,6 +541,7 @@ public class databaseConnection : MonoBehaviour {
     }
         else
         {
+            Debug.Log("end game");
             Instantiate(road, new Vector3(35.2f, 0.002f, this.transform.position.z + (spawnDistance * 3)), Quaternion.identity);
         }
     }
