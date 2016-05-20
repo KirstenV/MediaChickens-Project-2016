@@ -272,7 +272,7 @@
 
 
 
-<div id="map-container-editpage" ng-init="map_initializetion(<?php if(isset($id)){echo $id;}else{echo 0;} ?>)">
+<div id="map-container" ng-class='whatClassIsIt(project, "opacity-lower", "opacity-higher")' class="col-md-6" ng-init="map_initializetion(<?php if(isset($id)){echo $id;}else{echo 0;} ?>)">
     <ui-gmap-google-map center="map.center" zoom="map.zoom"  draggable="true" events="map.events">
         <ui-gmap-markers models="locations" coords="'location'" idkey="'id'"  events="map.marker_events">
             @if (isset($id))

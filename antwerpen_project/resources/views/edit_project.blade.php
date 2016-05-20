@@ -29,7 +29,7 @@
 
                     <div id="edit_header">
                         <a href="{{Request::root()}}">
-                            <div id="div-inline" class="edit_header_icon_back"><i class="fa fa-caret-left"
+                            <div id="edit_back" class="edit_header_icon_back inline"><i class="fa fa-caret-left"
                                                                                   aria-hidden="true"></i> Terug naar
                                 homepage
                             </div>

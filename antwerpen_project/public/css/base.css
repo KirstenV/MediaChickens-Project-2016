@@ -29,7 +29,6 @@ hr {
 
 .middle {
     display: table;
-    width: 50%;
     margin-left: auto;
     margin-right: auto;
 }
@@ -149,7 +148,7 @@ hr {
     top: 0;
     bottom: 0;
     padding: 70px 0px 50px 0px;
-    overflow: scroll;
+    overflow-y: scroll;
 }
 
 #editContainer {
@@ -223,7 +222,7 @@ hr {
     transform: scale(3);
 }
 
-.fa-caret-left {
+#edit-back .fa-caret-left {
     color: #fff;
     transform: scale(2);
     margin-right: 5px;
@@ -299,6 +298,10 @@ hr {
 
 .h100 {
     height: 100%;
+}
+
+.w100 {
+    width: 100%;
 }
 
 #home-titel-content {
@@ -760,8 +763,17 @@ hr {
     height: 150px;
 }
 
+.opacity-lower {
+    opacity: 0.4;
+    transition: opacity 0.8s;
+}
+
+.opacity-higher {
+    opacity: 1;
+    transition: opacity 0.8s;
+}
+
 #map-container {
-    width: inherit;
     height: 100%;
     bottom: 0%;
     top: 0%;
@@ -847,7 +859,6 @@ hr {
 }
 
 #project-info-container {
-    min-height: 300px;
     overflow: auto;
     margin: 20px 0px;
     background-color: lightgrey;
@@ -856,13 +867,11 @@ hr {
 
 #project-beschrijving-container {
     background-color: lightgrey;
-    min-height: 300px;
     padding-left: 0px;
 }
 
 #project-beschrijving {
     background-color: white;
-    min-height: 300px;
     padding: 15px 15px 15px 15px;
 }
 
@@ -870,7 +879,7 @@ hr {
 #project-side-location {
     background-color: white;
     height: auto;
-    padding: 15px 0px 15px 15px;
+    padding: 15px 15px 15px 15px;
 }
 
 #project-side-container {
@@ -878,24 +887,7 @@ hr {
     height: inherit;
     background-color: lightgrey;
     z-index: 3;
-}
-
-#project-side-split {
-    height: 15px;
-    background-color: lightgrey;
-    width: 113%;
-    margin-right: 0px;
-}
-
-#project-side-rest {
-    height: 100%;
-    z-index: 2;
-    background-color: lightgrey;
-    width: 18%;
-    margin-right: 0px;
-    position: absolute;
-    bottom: 0%;
-    right: 0%;
+    margin-bottom: 15px;
 }
 
 #vraag-container {
@@ -930,8 +922,8 @@ hr {
     text-align: center;
 }
 
-.fa-caret-left,
-.fa-caret-right {
+#previous .fa-caret-left,
+#next .fa-caret-right {
     transform: scale(4);
     position: relative;
     top: 50%;
@@ -940,14 +932,52 @@ hr {
     cursor: pointer;
 }
 
-.fa-caret-left:hover,
-.fa-caret-right:hover {
-
+#previous .fa-caret-left:hover,
+#next .fa-caret-right:hover {
     opacity: 1;
 }
 
-.fa-caret-left:active,
-.fa-caret-right:active {
-
+#previous .fa-caret-left:active,
+#next .fa-caret-right:active {
     transform: scale(3);
+}
+
+#user-info {
+    text-align: center;
+}
+
+#user-pic {
+    max-height: 70%;
+    max-width: 70%;
+    text-align: center
+}
+
+#caret-reactie {
+    position: absolute;
+    top: 25%;
+    right: -1%;
+    transform: scale(5);
+    color: white;
+}
+
+#reactie-submit {
+    padding-top: 5px;
+    padding-right: 0px;
+}
+
+#reactie-container{
+        overflow: auto;
+    overflow-x: hidden;
+}
+
+#input-naam {
+    padding-left: 0px;
+}
+
+#input-email {
+    padding-right: 0px;
+}
+
+span.filled-stars span{
+    color: #DA291C;
 }

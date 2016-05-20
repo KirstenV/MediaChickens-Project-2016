@@ -141,8 +141,7 @@
                                 <br> @{{ project.project.eind_datum }}
 
                             </div>
-                            <div id="project-side-split" class="col-md-2 col-xs-2">
-                            </div>
+
                         </div>
                         <div id="project-side-container" class="col-md-2 col-xs-2">
                             <div id="project-side-location" class="col-md-12 col-xs-12">
@@ -152,8 +151,7 @@
                             </div>
 
                         </div>
-                        <div id="project-side-rest" class="col-md-2 col-xs-2">
-                        </div>
+
 
                     </div>
 
@@ -175,6 +173,9 @@
                                                 <p>@{{ vraag.mogelijke_antwoorden_3}}</p>
                                                 <p>@{{ vraag.mogelijke_antwoorden_4}}</p>
                                             </div>
+                                            <div ng-if="$last">
+                                                <button> Verzend</button>
+                                            </div>
                                         </div>
                                         <div id="next">
                                             <i class="fa fa-caret-right" aria-hidden="true"></i>
@@ -191,12 +192,66 @@
                                 <h4 class="title_red">Vraag</h4>
                                 <p>/4</p>
                             </div>
-                            <div id="project-side-split" class="col-md-2 col-xs-2">
-                            </div>
+
                         </div>
 
-                        <div id="project-side-rest" class="col-md-2 col-xs-2">
+
+
+                    </div>
+<script src="{{Request::root()}}/js/star-rating.js"></script>
+<link rel="stylesheet" href="{{Request::root()}}/css/star-rating.css">
+                    
+                    <div id="project-info-container" class="col-md-12 col-xs-12">
+                        <div id="project-beschrijving-container" class="col-md-10 col-xs-10">
+                            <div id="project-beschrijving" class=" col-md-12 col-xs-12">
+                                <h4 class="title_red">Reactie</h4>
+                                <form>
+
+                                    <div id="reactie-container" class="col-md-12">
+                                        <div id="input-naam" class="col-md-6">
+                                            <label>Naam (optioneel)</label>
+                                            <br>
+                                            <input class="w100 form-control" type="text" name="naam">
+                                            <br>
+                                        </div>
+                                        <div id="input-email" class="col-md-6">
+                                            <label>E-mail (optioneel)</label>
+                                            <br>
+                                            <input class="w100 form-control" type="text" name="email">
+                                            <br>
+                                        </div>
+                                        <div class="col-md-12 inline no-padding">
+                                            <label>Commentaar</label>
+                                            <br>
+                                            <textarea class="w100 form-control" rows="5" name="naam"></textarea>
+                                        </div>
+                                        <div id="star-rating" class="col-md-9">
+                                            <input id="rating" class="rating" data-size="xs" data-min="0" data-max="5" data-step="1">
+                                        </div>
+                                        <div id="reactie-submit" class="pull-right col-md-3">
+                                            <button type="submit" class="form-control" name="submit">Verzend</button>
+                                        </div>
+
+                                        
+                                    </div>
+
+                                </form>
+                                <i id="caret-reactie" class="fa fa-caret-right" aria-hidden="true"></i>
+                            </div>
+
+
                         </div>
+                        <div id="project-side-container" class="col-md-2 col-xs-2">
+                            <div id="project-side-date" class="col-md-12 col-xs-12">
+                                <h4 class="title_red">Gebruiker</h4>
+                                <div id="user-info">
+                                    <img id="user-pic" src="{{Request::root()}}/img/userpic.gif" alt="user-pic" /> Anoniem
+                                </div>
+                            </div>
+
+                        </div>
+
+
 
                     </div>
 
