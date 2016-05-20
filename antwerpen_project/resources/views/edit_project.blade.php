@@ -1,6 +1,6 @@
 @extends('layout') @section('header') @stop @section('editContent')
    
-<!--
+
     <div id="map-container-editpage" ng-init="map_initializetion({{$id}})">
          <ui-gmap-google-map center="map.center" zoom="map.zoom"  draggable="true" events="map.events">
             <ui-gmap-markers models="locations" coords="'location'" idkey="'id'"  events="map.marker_events">
@@ -11,7 +11,7 @@
             </ui-gmap-markers>
         </ui-gmap-google-map>
     </div>
-    -->
+    
     <!--
     <div id="map-container-editpage">
         <div id="map"></div>

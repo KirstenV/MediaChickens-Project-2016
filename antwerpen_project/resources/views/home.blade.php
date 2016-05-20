@@ -217,7 +217,7 @@
                     <div id="project-info-container" class="col-md-12 col-xs-12">
                         <div id="project-beschrijving-container" class="col-md-10 col-xs-10">
                             <div id="project-beschrijving" class="col-md-12 col-xs-12">
-                                <h4 class="title_red">Wat?</h4>
+                                <h4 class="title_red title-font">Wat?</h4>
                                 <p>@{{ project.project.beschrijving }}</p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
                                 <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"</p>
@@ -228,7 +228,7 @@
                         </div>
                         <div id="project-side-container" class="col-md-2 col-xs-2">
                             <div id="project-side-date" class="col-md-12 col-xs-12">
-                                <h4 class="title_red">Wanneer?</h4>
+                                <h4 class="title_red title-font">Wanneer?</h4>
                                 <strong>Van</strong>
                                 <br> @{{ project.project.begin_datum }}
                                 <br>
@@ -240,7 +240,7 @@
                         </div>
                         <div id="project-side-container" class="col-md-2 col-xs-2">
                             <div id="project-side-location" class="col-md-12 col-xs-12">
-                                <h4 class="title_red">Waar?</h4> Meir, 15, Antwerpen, Belgium
+                                <h4 class="title_red title-font">Waar?</h4> Meir, 15, Antwerpen, Belgium
 
 
                             </div>
@@ -253,7 +253,7 @@
                     <div id="project-info-container" class="col-md-12 col-xs-12">
                         <div id="project-beschrijving-container" class="col-md-10 col-xs-10">
                             <div id="project-beschrijving" class="col-md-12 col-xs-12">
-                                <h4 class="title_red">Vragen</h4>
+                                <h4 class="title_red title-font">Vragen</h4>
                                 <form>
 
                                     <div id="vraag-container">
@@ -284,7 +284,7 @@
                         </div>
                         <div id="project-side-container" class="col-md-2 col-xs-2">
                             <div id="project-side-date" class="col-md-12 col-xs-12">
-                                <h4 class="title_red">Vraag</h4>
+                                <h4 class="title_red title-font">Vraag</h4>
                                 <p>/4</p>
                             </div>
 
@@ -299,7 +299,7 @@
                     <div id="project-info-container" class="col-md-12 col-xs-12">
                         <div id="project-beschrijving-container" class="col-md-10 col-xs-10">
                             <div id="project-beschrijving" class=" col-md-12 col-xs-12">
-                                <h4 class="title_red">Reactie</h4>
+                                <h4 class="title_red title-font">Reactie</h4>
                                 <form>
 
                                     <div id="reactie-container" class="col-md-12">
@@ -338,7 +338,7 @@
                         </div>
                         <div id="project-side-container" class="col-md-2 col-xs-2">
                             <div id="project-side-date" class="col-md-12 col-xs-12">
-                                <h4 class="title_red">Gebruiker</h4>
+                                <h4 class="title_red title-font">Gebruiker</h4>
                                 <div id="user-info">
                                     <img id="user-pic" src="{{Request::root()}}/img/userpic.gif" alt="user-pic" /> Anoniem
                                 </div>
@@ -348,6 +348,25 @@
 
 
 
+                    </div>
+                    <div id="carousel-container" class="col-md-12 col-xs-12">
+
+                        <div id="main-pic" ng-repeat="foto in project.fotos" ng-if="$first" class="col-md-10 col-xs-10">
+
+
+                            <img ng-src="{{Request::root()}}/img/project/@{{ foto.project_picture }}">
+                        </div>
+                        <div id="thumb-container">
+                            <div id="thumb-scroll-up" class="col-md-2 col-xs-2 no-padding">
+                                <i class="fa fa-caret-up" aria-hidden="true"></i>
+                            </div>
+                            <div id="thumb-pic" class="col-md-2 col-xs-2 no-padding" ng-repeat="foto in project.fotos">
+                                <img ng-src="{{Request::root()}}/img/project/@{{ foto.project_picture }}">
+                            </div>
+                            <div id="thumb-scroll-down" class="col-md-2 col-xs-2 no-padding">
+                                <i class="fa fa-caret-down" aria-hidden="true"></i>
+                            </div>
+                        </div>
                     </div>
 
 
@@ -411,7 +430,45 @@
     @stop
 
 
+@section("map")
+<div id="map-container" ng-class='whatClassIsIt(project, "opacity-lower", "opacity-higher")'  class="col-md-6"  ng-init="map_initializetion(<?php if (isset($id)) {
+    echo $id;
+} else {
+    echo 0;
+} ?>)">
+    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events">
+        <ui-gmap-markers models="locations" coords="'location'" idkey="'id'" events="map.marker_events">
+            @if (isset($id))
+                <ui-gmap-windows show="'show'">
+                    <p ng-non-bindable> @{{ address }}</p>
+                </ui-gmap-windows>
+            @else
+                <ui-gmap-windows show="'show'">
 
+                    <div ng-non-bindable>
+
+
+                        <img src="img/project/small_@{{ image }}" width="64"
+                             height="64">
+                        <h4>@{{ titel}}...</h4>
+                        <h5>@{{ discription }}...</h5>
+                        <p>@{{address }}</p>
+                    </div>
+                </ui-gmap-windows>
+            @endif
+        </ui-gmap-markers>
+    </ui-gmap-google-map>
+</div>
+<!--    <div id="map-container-editpage">
+         <ui-gmap-google-map center="map.center" zoom="map.zoom"  draggable="true" events="map.events">
+            <ui-gmap-markers models="locations" coords="'location'" idkey="'id'"  events="map.marker_events">
+                <ui-gmap-windows show="'show'">
+                    <p ng-non-bindable> @{{ address }}</p>
+                </ui-gmap-windows>
+
+            </ui-gmap-markers>
+        </ui-gmap-google-map>
+    </div>-->
 
 
     <!--    <div id="map-container-editpage">
@@ -433,3 +490,4 @@
             <div id="map"></div>
         </div>
     </div>-->
+    @stop

@@ -1,10 +1,16 @@
 @font-face {
-    font-family: MyWebfont;
+    font-family: SunAntwerpen;
     src: url("SunAntwerpen_500.woff") format("woff");
 }
 
+@font-face {
+    font-family: Antwerpen-regular;
+    src: url("Antwerpen-Regular.woff") format("woff");
+}
+
+
 body {
-    font-family: MyWebfont, Verdana, sans-serif;
+    
 }
 
 h1,
@@ -14,7 +20,12 @@ h4,
 h5,
 h6,
 p {
-    font-family: MyWebfont, Verdana, sans-serif;
+    font-family: SunAntwerpen, Verdana, sans-serif;
+}
+
+.title-font{
+    font-family: Antwerpen-regular;
+font-size: 1.8em;
 }
 
 hr {

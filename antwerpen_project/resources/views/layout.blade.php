@@ -281,47 +281,9 @@
 -->
 
 
-<div id="map-container" ng-class='whatClassIsIt(project, "opacity-lower", "opacity-higher")'  class="col-md-6"  ng-init="map_initializetion(<?php if (isset($id)) {
-    echo $id;
-} else {
-    echo 0;
-} ?>)">
-    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events">
-        <ui-gmap-markers models="locations" coords="'location'" idkey="'id'" events="map.marker_events">
-            @if (isset($id))
-                <ui-gmap-windows show="'show'">
-                    <p ng-non-bindable> @{{ address }}</p>
-                </ui-gmap-windows>
-            @else
-                <ui-gmap-windows show="'show'">
-
-                    <div ng-non-bindable>
 
 
-                        <img src="img/project/small_@{{ image }}" width="64"
-                             height="64">
-                        <h4>@{{ titel}}...</h4>
-                        <h5>@{{ discription }}...</h5>
-                        <p>@{{address }}</p>
-                    </div>
-                </ui-gmap-windows>
-            @endif
-        </ui-gmap-markers>
-    </ui-gmap-google-map>
-</div>
-<!--    <div id="map-container-editpage">
-         <ui-gmap-google-map center="map.center" zoom="map.zoom"  draggable="true" events="map.events">
-            <ui-gmap-markers models="locations" coords="'location'" idkey="'id'"  events="map.marker_events">
-                <ui-gmap-windows show="'show'">
-                    <p ng-non-bindable> @{{ address }}</p>
-                </ui-gmap-windows>
-
-            </ui-gmap-markers>
-        </ui-gmap-google-map>
-    </div>-->
-
-
-@yield('homeContent') @yield('editContent')
+@yield('map') @yield('homeContent') @yield('editContent')
 
 
 <div class="col-md-8" style="display: none;">
