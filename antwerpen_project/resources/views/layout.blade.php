@@ -95,7 +95,7 @@
 
 
                     <div id="error-messages">
-                       
+
                         @foreach ($errors->all() as $error)
                             <li class="title_red error-message"><i class="fa fa-exclamation-triangle"
                                                                    aria-hidden="true"></i> {{ $error }}</li>
