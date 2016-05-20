@@ -9,15 +9,15 @@
             <h4 id="add_project" data-toggle="tooltip" data-placement="right" data-title="Klik en typ een naam" class="nieuw_project col-md-12 col-xs-12 inline" contenteditable='true'>Nieuw project</h4>
         </div>
         <!-- END DIV EDITABLE -->
-        
+
         @else
-        
+
         <div id="home-titel" ng-hide="project">
             <h1 id="home-titel-content"><strong>Huidige projecten</strong></h1>
         </div>
 
-        
-        
+
+
         @endif @else
         <div id="home-titel" ng-hide="project">
             <h1 id="home-titel-content"><strong>Huidige projecten</strong></h1>
@@ -59,10 +59,10 @@
                 </div>
                 <div id="collapse1" class="panel-collapse collapse in" ng-hide="project">
 
-                    
-                    
+
+
                     @if(Auth::check()) @if(Auth::user()->is_adm)
-                    
+
                     <div class="panel-body" ng-repeat="project in projects" ng-class="is_tru_id(project.id,highlight_class)">
                         <a>
                             <div id="div-project" ng-show="project.id" ng-click="show_project_info(project.id)">
@@ -98,9 +98,9 @@
 
                     </div>
                     @else
-                    
-                    
-                     <div class="panel-body" ng-repeat="project in projects_for_user" ng-class="is_tru_id(project.id,highlight_class)">
+
+
+                    <div class="panel-body" ng-repeat="project in projects_for_user" ng-class="is_tru_id(project.id,highlight_class)">
                         <a>
                             <div id="div-project" ng-show="project.id" ng-click="show_project_info(project.id)">
 
@@ -136,17 +136,16 @@
 
 
                     </div>
-                    
-                   
-                    
-                    
-                    @endif   
-                    @else
-                    
-                    
-                    
-                    
-                     <div class="panel-body" ng-repeat="project in projects_for_user" ng-class="is_tru_id(project.id,highlight_class)">
+
+
+
+
+                    @endif @else
+
+
+
+
+                    <div class="panel-body" ng-repeat="project in projects_for_user" ng-class="is_tru_id(project.id,highlight_class)">
                         <a>
                             <div id="div-project" ng-show="project.id" ng-click="show_project_info(project.id)">
 
@@ -182,8 +181,8 @@
 
 
                     </div>
-                    
-                    
+
+
                     @endif
                     <!-- END DIV PANEL-BODY -->
                 </div>
@@ -255,28 +254,41 @@
                             <div id="project-beschrijving" class="col-md-12 col-xs-12">
                                 <h4 class="title_red title-font">Vragen</h4>
                                 <form>
-
+                                    <div id="previous">
+                                        <i class="fa fa-caret-left" aria-hidden="true"></i>
+                                    </div>
                                     <div id="vraag-container">
-                                        <div id="previous">
-                                            <i class="fa fa-caret-left" aria-hidden="true"></i>
-                                        </div>
+
                                         <div id="project-vraag" ng-repeat="vraag in project.vragen">
                                             <div id="project-vraag-content">
                                                 <h5>Vraag @{{ $index }}: @{{ vraag.vraag}}</h5>
-                                                <p>@{{ vraag.mogelijke_antwoorden_1}}</p>
-                                                <p>@{{ vraag.mogelijke_antwoorden_2}}</p>
-                                                <p>@{{ vraag.mogelijke_antwoorden_3}}</p>
-                                                <p>@{{ vraag.mogelijke_antwoorden_4}}</p>
+                                                <div ng-show="vraag.choices == 'open vragen'">
+                                                <textarea class="form-control" cols="5" name="antwoord_@{{ $index }}"></textarea>
+                                                </div>
+                                                
+                                                <div ng-show="vraag.choices == 'meerkeuzevragen'">
+                                                <label><input type="checkbox" name="antwoord_@{{ $index }}"> @{{ vraag.mogelijke_antwoorden_1}}</label><br>
+                                                <label><input type="checkbox" name="antwoord_@{{ $index }}"> @{{ vraag.mogelijke_antwoorden_2}}</label><br>
+                                                <label><input type="checkbox" name="antwoord_@{{ $index }}"> @{{ vraag.mogelijke_antwoorden_3}}</label><br>
+                                                <label><input type="checkbox" name="antwoord_@{{ $index }}"> @{{ vraag.mogelijke_antwoorden_4}}</label>
+                                                </div>
+                                                
+                                                <div ng-show="vraag.choices == 'Gesloten vragen'">
+                                                <label><input type="radio" name="antwoord_@{{ $index }}">@{{ vraag.mogelijke_antwoorden_1}}</label><br>
+                                                <label><input type="radio" name="antwoord_@{{ $index }}">@{{ vraag.mogelijke_antwoorden_2}}</label>
+                                                </div>
+                                                
+                                                <div id="vraag-btn-submit" ng-if="$last">
+                                                <button class="form-control"> Verzend</button>
+                                                </div>
                                             </div>
-                                            <div ng-if="$last">
-                                                <button> Verzend</button>
-                                            </div>
+                                            
                                         </div>
-                                        <div id="next">
-                                            <i class="fa fa-caret-right" aria-hidden="true"></i>
-                                        </div>
-                                    </div>
 
+                                    </div>
+                                    <div id="next">
+                                        <i class="fa fa-caret-right" aria-hidden="true"></i>
+                                    </div>
                                 </form>
                             </div>
 
@@ -293,9 +305,9 @@
 
 
                     </div>
-<script src="{{Request::root()}}/js/star-rating.js"></script>
-<link rel="stylesheet" href="{{Request::root()}}/css/star-rating.css">
-                    
+                    <script src="{{Request::root()}}/js/star-rating.js"></script>
+                    <link rel="stylesheet" href="{{Request::root()}}/css/star-rating.css">
+
                     <div id="project-info-container" class="col-md-12 col-xs-12">
                         <div id="project-beschrijving-container" class="col-md-10 col-xs-10">
                             <div id="project-beschrijving" class=" col-md-12 col-xs-12">
@@ -327,7 +339,7 @@
                                             <button type="submit" class="form-control" name="submit">Verzend</button>
                                         </div>
 
-                                        
+
                                     </div>
 
                                 </form>
@@ -348,25 +360,6 @@
 
 
 
-                    </div>
-                    <div id="carousel-container" class="col-md-12 col-xs-12">
-
-                        <div id="main-pic" ng-repeat="foto in project.fotos" ng-if="$first" class="col-md-10 col-xs-10">
-
-
-                            <img ng-src="{{Request::root()}}/img/project/@{{ foto.project_picture }}">
-                        </div>
-                        <div id="thumb-container">
-                            <div id="thumb-scroll-up" class="col-md-2 col-xs-2 no-padding">
-                                <i class="fa fa-caret-up" aria-hidden="true"></i>
-                            </div>
-                            <div id="thumb-pic" class="col-md-2 col-xs-2 no-padding" ng-repeat="foto in project.fotos">
-                                <img ng-src="{{Request::root()}}/img/project/@{{ foto.project_picture }}">
-                            </div>
-                            <div id="thumb-scroll-down" class="col-md-2 col-xs-2 no-padding">
-                                <i class="fa fa-caret-down" aria-hidden="true"></i>
-                            </div>
-                        </div>
                     </div>
 
 
@@ -427,39 +420,35 @@
         <!-- END DIV ACCORDION -->
 
     </div>
-    @stop
-
-
-@section("map")
-<div id="map-container" ng-class='whatClassIsIt(project, "opacity-lower", "opacity-higher")'  class="col-md-6"  ng-init="map_initializetion(<?php if (isset($id)) {
+    @stop @section("map")
+    <div id="map-container" ng-class='whatClassIsIt(project, "opacity-lower", "opacity-higher")' class="col-md-6" ng-init="map_initializetion(<?php if (isset($id)) {
     echo $id;
 } else {
     echo 0;
 } ?>)">
-    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events">
-        <ui-gmap-markers models="locations" coords="'location'" idkey="'id'" events="map.marker_events">
-            @if (isset($id))
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events">
+            <ui-gmap-markers models="locations" coords="'location'" idkey="'id'" events="map.marker_events">
+                @if (isset($id))
                 <ui-gmap-windows show="'show'">
                     <p ng-non-bindable> @{{ address }}</p>
                 </ui-gmap-windows>
-            @else
+                @else
                 <ui-gmap-windows show="'show'">
 
                     <div ng-non-bindable>
 
 
-                        <img src="img/project/small_@{{ image }}" width="64"
-                             height="64">
+                        <img src="img/project/small_@{{ image }}" width="64" height="64">
                         <h4>@{{ titel}}...</h4>
                         <h5>@{{ discription }}...</h5>
                         <p>@{{address }}</p>
                     </div>
                 </ui-gmap-windows>
-            @endif
-        </ui-gmap-markers>
-    </ui-gmap-google-map>
-</div>
-<!--    <div id="map-container-editpage">
+                @endif
+            </ui-gmap-markers>
+        </ui-gmap-google-map>
+    </div>
+    <!--    <div id="map-container-editpage">
          <ui-gmap-google-map center="map.center" zoom="map.zoom"  draggable="true" events="map.events">
             <ui-gmap-markers models="locations" coords="'location'" idkey="'id'"  events="map.marker_events">
                 <ui-gmap-windows show="'show'">

@@ -8,10 +8,7 @@
     src: url("Antwerpen-Regular.woff") format("woff");
 }
 
-
-body {
-    
-}
+body {}
 
 h1,
 h2,
@@ -23,9 +20,9 @@ p {
     font-family: SunAntwerpen, Verdana, sans-serif;
 }
 
-.title-font{
+.title-font {
     font-family: Antwerpen-regular;
-font-size: 1.8em;
+    font-size: 1.8em;
 }
 
 hr {
@@ -918,13 +915,19 @@ hr {
 #project-vraag-content {
     text-align: left;
     display: inline-block;
+    
 }
+
+
 
 #previous {
     height: 155px;
     width: 50px;
     position: absolute;
     text-align: center;
+    left: 0%;
+    top: 27%;
+    cursor: pointer;
 }
 
 #next {
@@ -933,6 +936,8 @@ hr {
     position: absolute;
     right: 0%;
     text-align: center;
+    top: 27%;
+    cursor: pointer;
 }
 
 #previous .fa-caret-left,
@@ -978,8 +983,8 @@ hr {
     padding-right: 0px;
 }
 
-#reactie-container{
-        overflow: auto;
+#reactie-container {
+    overflow: auto;
     overflow-x: hidden;
 }
 
@@ -991,6 +996,11 @@ hr {
     padding-right: 0px;
 }
 
-span.filled-stars span{
+span.filled-stars span {
     color: #DA291C;
+}
+
+#vraag-btn-submit button{
+    width: 50%;
+margin: 0px auto;
 }

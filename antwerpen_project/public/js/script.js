@@ -361,8 +361,9 @@ $(document).ready(function () {
             console.log('hi');
 
             $("#vraag-container").animate({
-                scrollLeft: $("#vraag-container").scrollLeft() + 288
+                scrollLeft: $("#vraag-container").scrollLeft() + $("#vraag-container").width()
             }, 500);
+            
             index++;
             console.log(index);
             $("#project-side-date p").html(index + "/4");
@@ -372,7 +373,7 @@ $(document).ready(function () {
             console.log('hi');
 
             $("#vraag-container").animate({
-                scrollLeft: $("#vraag-container").scrollLeft() - 288
+                scrollLeft: $("#vraag-container").scrollLeft() - $("#vraag-container").width()
             }, 500);
             index--;
             console.log(index);
@@ -383,8 +384,9 @@ $(document).ready(function () {
         $(document).on("click", '#next', function () {
             console.log('hi');
 
+
             $("#vraag-container").animate({
-                scrollLeft: $("#vraag-container").scrollLeft() + 614
+                scrollLeft: $("#vraag-container").scrollLeft() + $("#vraag-container").width()
             }, 500);
             index++;
             console.log(index);
@@ -395,7 +397,7 @@ $(document).ready(function () {
             console.log('hi');
 
             $("#vraag-container").animate({
-                scrollLeft: $("#vraag-container").scrollLeft() - 614
+                scrollLeft: $("#vraag-container").scrollLeft() - $("#vraag-container").width()
             }, 500);
             index--;
             console.log(index);
@@ -427,7 +429,6 @@ $('#rating').rating({
         5: '5 sterren'
     }
 });
-
 
 
 
