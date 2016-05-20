@@ -224,7 +224,7 @@
 
                                     <h5 ng-class="{'invalid': toon_fout_melding('vraag',vraag.id)}"
                                         class='vraag project titel col-md-12 no-padding title_red'
-                                        data-update_status='init' data-titel='vraag' data-tabel='Vragen'
+                                        data-update_status='init' data-titel='vraag' data-tabel='vragen'
                                         data-id='@{{vraag.id}}' contenteditable='true'></h5>
                                     <!--feedback validatie-->
                                     <div class="col-md-1 pull-right glyphicon glyphicon-saved "
@@ -238,7 +238,7 @@
 
 
                                     <h5 class='vraag project titel' data-update_status='init' data-titel='vraag'
-                                        data-tabel='Vragen' data-id='@{{vraag.id}}' contenteditable='true'
+                                        data-tabel='vragen' data-id='@{{vraag.id}}' contenteditable='true'
                                         placeholder="">@{{vraag.vraag}}</h5>
 
                                 </div>
@@ -253,7 +253,7 @@
 
                                     <h5 ng-class="{'invalid': toon_fout_melding('vraag',vraag.id)}"
                                         class='vraag project titel col-md-12 no-padding title_red'
-                                        data-update_status='init' data-titel='vraag' data-tabel='Vragen'
+                                        data-update_status='init' data-titel='vraag' data-tabel='vragen'
                                         data-id='@{{vraag.id}}' contenteditable='true'></h5>
                                     <!--feedback validatie-->
                                     <div class="col-md-1 pull-right glyphicon glyphicon-saved "
@@ -267,27 +267,27 @@
 
 
                                     <h5 class='vraag project titel' data-update_status='init' data-titel='vraag'
-                                        data-tabel='Vragen' data-id='@{{vraag.id}}'
+                                        data-tabel='vragen' data-id='@{{vraag.id}}'
                                         contenteditable='true'>@{{vraag.vraag}}</h5>
                                     <br>
                                     <i class="fa fa-square-o inline"></i>
                                     <h5 class='vraag project titel inline' data-update_status='init'
-                                        data-titel='mogelijke_antwoorden_1' data-tabel='Vragen' data-id='@{{vraag.id}}'
+                                        data-titel='mogelijke_antwoorden_1' data-tabel='vragen' data-id='@{{vraag.id}}'
                                         contenteditable='true'> @{{vraag.mogelijke_antwoorden_1}}</h5>
                                     <br>
                                     <i class="fa fa-square-o inline"></i>
                                     <h5 class='vraag project titel inline' data-update_status='init'
-                                        data-titel='mogelijke_antwoorden_2' data-tabel='Vragen' data-id='@{{vraag.id}}'
+                                        data-titel='mogelijke_antwoorden_2' data-tabel='vragen' data-id='@{{vraag.id}}'
                                         contenteditable='true'> @{{vraag.mogelijke_antwoorden_2}}</h5>
                                     <br>
                                     <i class="fa fa-square-o inline"></i>
                                     <h5 class='vraag project titel inline' data-update_status='init'
-                                        data-titel='mogelijke_antwoorden_3' data-tabel='Vragen' data-id='@{{vraag.id}}'
+                                        data-titel='mogelijke_antwoorden_3' data-tabel='vragen' data-id='@{{vraag.id}}'
                                         contenteditable='true'> @{{vraag.mogelijke_antwoorden_3}}</h5>
                                     <br>
                                     <i class="fa fa-square-o inline"></i>
                                     <h5 class='vraag project titel inline' data-update_status='init'
-                                        data-titel='mogelijke_antwoorden_4' data-tabel='Vragen' data-id='@{{vraag.id}}'
+                                        data-titel='mogelijke_antwoorden_4' data-tabel='vragen' data-id='@{{vraag.id}}'
                                         contenteditable='true'> @{{vraag.mogelijke_antwoorden_4}}</h5>
                                 </div>
                                 <div ng-show="vraag.choices == 'Gesloten vragen'">
@@ -301,7 +301,7 @@
 
                                     <h5 ng-class="{'invalid': toon_fout_melding('vraag',vraag.id)}"
                                         class='vraag project titel col-md-12 no-padding title_red'
-                                        data-update_status='init' data-titel='vraag' data-tabel='Vragen'
+                                        data-update_status='init' data-titel='vraag' data-tabel='vragen'
                                         data-id='@{{vraag.id}}' contenteditable='true'></h5>
                                     <!--feedback validatie-->
                                     <div class="col-md-1 pull-right glyphicon glyphicon-saved "
@@ -315,17 +315,17 @@
 
 
                                     <h5 class='vraag project titel' data-update_status='init' data-titel='vraag'
-                                        data-tabel='Vragen' data-id='@{{vraag.id}}'
+                                        data-tabel='vragen' data-id='@{{vraag.id}}'
                                         contenteditable='true'>@{{vraag.vraag}}</h5>
                                     <br>
                                     <i class="fa fa-circle-thin inline"></i>
                                     <h5 class='vraag project titel inline' data-update_status='init'
-                                        data-titel='mogelijke_antwoorden_1' data-tabel='Vragen' data-id='@{{vraag.id}}'
+                                        data-titel='mogelijke_antwoorden_1' data-tabel='vragen' data-id='@{{vraag.id}}'
                                         contenteditable='true'> @{{vraag.mogelijke_antwoorden_1}}</h5>
                                     <br>
                                     <i class="fa fa-circle-thin inline"></i>
                                     <h5 class='vraag project titel inline' data-update_status='init'
-                                        data-titel='mogelijke_antwoorden_2' data-tabel='Vragen' data-id='@{{vraag.id}}'
+                                        data-titel='mogelijke_antwoorden_2' data-tabel='vragen' data-id='@{{vraag.id}}'
                                         contenteditable='true'> @{{vraag.mogelijke_antwoorden_2}}</h5>
                                 </div>
                             </div>
