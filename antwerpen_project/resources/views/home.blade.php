@@ -261,28 +261,38 @@
 
                                         <div id="project-vraag" ng-repeat="vraag in project.vragen">
                                             <div id="project-vraag-content">
-                                                <h5>Vraag @{{ $index }}: @{{ vraag.vraag}}</h5>
+                                                <h5 class="text-center">Vraag @{{ $index+1  }}: @{{ vraag.vraag}}</h5>
                                                 <div ng-show="vraag.choices == 'open vragen'">
-                                                <textarea class="form-control" cols="5" name="antwoord_@{{ $index }}"></textarea>
+                                                    <textarea class="form-control" rows="5" name="antwoord_@{{ $index }}"></textarea>
                                                 </div>
-                                                
+
                                                 <div ng-show="vraag.choices == 'meerkeuzevragen'">
-                                                <label><input type="checkbox" name="antwoord_@{{ $index }}"> @{{ vraag.mogelijke_antwoorden_1}}</label><br>
-                                                <label><input type="checkbox" name="antwoord_@{{ $index }}"> @{{ vraag.mogelijke_antwoorden_2}}</label><br>
-                                                <label><input type="checkbox" name="antwoord_@{{ $index }}"> @{{ vraag.mogelijke_antwoorden_3}}</label><br>
-                                                <label><input type="checkbox" name="antwoord_@{{ $index }}"> @{{ vraag.mogelijke_antwoorden_4}}</label>
+                                                    <label>
+                                                        <input type="checkbox" name="antwoord_@{{ $index }}"> @{{ vraag.mogelijke_antwoorden_1}}</label>
+                                                    <br>
+                                                    <label>
+                                                        <input type="checkbox" name="antwoord_@{{ $index }}"> @{{ vraag.mogelijke_antwoorden_2}}</label>
+                                                    <br>
+                                                    <label>
+                                                        <input type="checkbox" name="antwoord_@{{ $index }}"> @{{ vraag.mogelijke_antwoorden_3}}</label>
+                                                    <br>
+                                                    <label>
+                                                        <input type="checkbox" name="antwoord_@{{ $index }}"> @{{ vraag.mogelijke_antwoorden_4}}</label>
                                                 </div>
-                                                
+
                                                 <div ng-show="vraag.choices == 'Gesloten vragen'">
-                                                <label><input type="radio" name="antwoord_@{{ $index }}">@{{ vraag.mogelijke_antwoorden_1}}</label><br>
-                                                <label><input type="radio" name="antwoord_@{{ $index }}">@{{ vraag.mogelijke_antwoorden_2}}</label>
+                                                    <label>
+                                                        <input type="radio" name="antwoord_@{{ $index }}">@{{ vraag.mogelijke_antwoorden_1}}</label>
+                                                    <br>
+                                                    <label>
+                                                        <input type="radio" name="antwoord_@{{ $index }}">@{{ vraag.mogelijke_antwoorden_2}}</label>
                                                 </div>
-                                                
+
                                                 <div id="vraag-btn-submit" ng-if="$last">
-                                                <button class="form-control"> Verzend</button>
+                                                    <button class="form-control"> Verzend</button>
                                                 </div>
                                             </div>
-                                            
+
                                         </div>
 
                                     </div>
@@ -295,9 +305,10 @@
 
                         </div>
                         <div id="project-side-container" class="col-md-2 col-xs-2">
-                            <div id="project-side-date" class="col-md-12 col-xs-12">
+                            <div id="project-side-date" class="col-md-12 col-xs-12" ng-repeat="vraag in project.vragen" ng-if="$last">
                                 <h4 class="title_red title-font">Vraag</h4>
-                                <p>/4</p>
+                                <p>1/@{{ $index+1  }}</p>
+                                <div class="hidden">@{{ $index+1  }}</div>
                             </div>
 
                         </div>
@@ -308,31 +319,41 @@
                     <script src="{{Request::root()}}/js/star-rating.js"></script>
                     <link rel="stylesheet" href="{{Request::root()}}/css/star-rating.css">
 
-                    <div id="project-info-container" class="col-md-12 col-xs-12">
-                        <div id="project-beschrijving-container" class="col-md-10 col-xs-10">
+                    <div id="project-info-container" class=" col-md-12 col-xs-12">
+                        <div id="project-beschrijving-container" class="col-md-12 col-xs-12 no-padding">
                             <div id="project-beschrijving" class=" col-md-12 col-xs-12">
-                                <h4 class="title_red title-font">Reactie</h4>
+                                <h4 class="title_red title-font">Commentaar</h4>
+
+
+
+
+
+                                <div id="reactie-container" class="col-md-12 no-padding">
+                                    <div id="user-info" class="col-md-1 no-padding">
+                                        <img id="user-pic" src="{{Request::root()}}/img/userpic.gif" alt="user-pic" />
+
+                                    </div>
+
+                                    <div id="user-reactie" class="col-md-11">
+                                        <strong>sqdfjsqdlkfjqsdflmjqsdlfsjqfdm</strong> zei: <a href=""><i class="fa fa-times" aria-hidden="true"></i> verwijder</a>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                    </div>
+
+                                </div>
+                                
+
+
+
+                                
                                 <form>
 
-                                    <div id="reactie-container" class="col-md-12">
-                                        <div id="input-naam" class="col-md-6">
-                                            <label>Naam (optioneel)</label>
-                                            <br>
-                                            <input class="w100 form-control" type="text" name="naam">
-                                            <br>
-                                        </div>
-                                        <div id="input-email" class="col-md-6">
-                                            <label>E-mail (optioneel)</label>
-                                            <br>
-                                            <input class="w100 form-control" type="text" name="email">
-                                            <br>
-                                        </div>
+                                    <div id="reactie-container" class="pad-left col-md-11 no-padding pull-right">
+
                                         <div class="col-md-12 inline no-padding">
-                                            <label>Commentaar</label>
-                                            <br>
+
                                             <textarea class="w100 form-control" rows="5" name="naam"></textarea>
                                         </div>
-                                        <div id="star-rating" class="col-md-9">
+                                        <div id="star-rating" class="col-md-9 no-padding">
                                             <input id="rating" class="rating" data-size="xs" data-min="0" data-max="5" data-step="1">
                                         </div>
                                         <div id="reactie-submit" class="pull-right col-md-3">
@@ -343,20 +364,12 @@
                                     </div>
 
                                 </form>
-                                <i id="caret-reactie" class="fa fa-caret-right" aria-hidden="true"></i>
+
                             </div>
 
 
                         </div>
-                        <div id="project-side-container" class="col-md-2 col-xs-2">
-                            <div id="project-side-date" class="col-md-12 col-xs-12">
-                                <h4 class="title_red title-font">Gebruiker</h4>
-                                <div id="user-info">
-                                    <img id="user-pic" src="{{Request::root()}}/img/userpic.gif" alt="user-pic" /> Anoniem
-                                </div>
-                            </div>
 
-                        </div>
 
 
 
@@ -421,7 +434,7 @@
 
     </div>
     @stop @section("map")
-    <div id="map-container" ng-class='whatClassIsIt(project, "opacity-lower", "opacity-higher")' class="col-md-6" ng-init="map_initializetion(<?php if (isset($id)) {
+    <div id="map-container" ng-class='whatClassIsIt(project, "opacity-lower", "opacity-higher")' class="col-md-6 hidden-xs" ng-init="map_initializetion(<?php if (isset($id)) {
     echo $id;
 } else {
     echo 0;

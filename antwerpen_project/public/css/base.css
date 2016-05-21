@@ -8,7 +8,12 @@
     src: url("Antwerpen-Regular.woff") format("woff");
 }
 
-body {}
+body {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -ms-user-select: none;
+}
 
 h1,
 h2,
@@ -883,6 +888,7 @@ hr {
 #project-beschrijving {
     background-color: white;
     padding: 15px 15px 15px 15px;
+    overflow: auto;
 }
 
 #project-side-date,
@@ -915,10 +921,8 @@ hr {
 #project-vraag-content {
     text-align: left;
     display: inline-block;
-    
+    min-width: 50%;
 }
-
-
 
 #previous {
     height: 155px;
@@ -960,22 +964,32 @@ hr {
     transform: scale(3);
 }
 
-#user-info {
-    text-align: center;
+#user-reactie {
+    padding-right: 0px;
+}
+
+#user-reactie a {
+    color: #DA291C;
+    float: right;
+    opacity: 0.5;
+}
+
+#user-reactie a:hover {
+    opacity: 1;
+}
+
+#user-reactie i {
+    transform: scale(1);
+    color: #DA291C;
 }
 
 #user-pic {
-    max-height: 70%;
-    max-width: 70%;
-    text-align: center
+    max-height: 100%;
+    max-width: 100%;
 }
 
-#caret-reactie {
-    position: absolute;
-    top: 25%;
-    right: -1%;
-    transform: scale(5);
-    color: white;
+#user-info {
+    padding-top: 5px;
 }
 
 #reactie-submit {
@@ -986,6 +1000,11 @@ hr {
 #reactie-container {
     overflow: auto;
     overflow-x: hidden;
+    margin-bottom: 20px;
+}
+
+.pad-left{
+    padding-left: 15px;
 }
 
 #input-naam {
@@ -1000,7 +1019,7 @@ span.filled-stars span {
     color: #DA291C;
 }
 
-#vraag-btn-submit button{
+#vraag-btn-submit button {
     width: 50%;
-margin: 0px auto;
+    margin: 0px auto;
 }

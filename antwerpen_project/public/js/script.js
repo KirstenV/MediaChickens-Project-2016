@@ -351,71 +351,57 @@ $(document).ready(function () {
 
 
     var index = 1;
-    $("#project-side-date p").html(index + "/4");
 
 
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
 
-        $("#project-side-date p").html(index + "/4");
+
+
+        
+        
         $(document).on("click", '#next', function () {
             console.log('hi');
-
-            $("#vraag-container").animate({
-                scrollLeft: $("#vraag-container").scrollLeft() + $("#vraag-container").width()
-            }, 500);
             
-            index++;
-            console.log(index);
-            $("#project-side-date p").html(index + "/4");
-        });
-        
-        $(document).on("click", '#previous', function () {
-            console.log('hi');
-
-            $("#vraag-container").animate({
-                scrollLeft: $("#vraag-container").scrollLeft() - $("#vraag-container").width()
-            }, 500);
-            index--;
-            console.log(index);
-            $("#project-side-date p").html(index + "/4");
-        });
-    } else {
-
-        $(document).on("click", '#next', function () {
-            console.log('hi');
-
+            var index_max = parseInt($("#project-side-date div").text());
+            
 
             $("#vraag-container").animate({
                 scrollLeft: $("#vraag-container").scrollLeft() + $("#vraag-container").width()
-            }, 500);
-            index++;
-            console.log(index);
-            $("#project-side-date p").html(index + "/4");
+            }, 200);
+            if(index < index_max){
+                index++;
+            }
+
+            $("#project-side-date p").html(index + "/" + index_max);
         });
         
         $(document).on("click", '#previous', function () {
             console.log('hi');
+            
+            var index_max = parseInt($("#project-side-date div").text());
+            
 
             $("#vraag-container").animate({
                 scrollLeft: $("#vraag-container").scrollLeft() - $("#vraag-container").width()
-            }, 500);
-            index--;
-            console.log(index);
-            $("#project-side-date p").html(index + "/4");
+            }, 200);
+            if(index != 1){
+                
+                index--;
+            }
+            
+
+            $("#project-side-date p").html(index + "/" + index_max);
         });
 
-
-    }
 
 
 $('#rating').rating({
-    
-    
+    clearCaption:"Geen beoordeling",
+    defaultCaption: "Geen beoordeling",
     emptyStar: "<i class='fa fa-star-o'></i>",
     filledStar: "<i class='fa fa-star'></i>",
     clearButton: "<i class='fa fa-minus-circle'></i>",
     clearButtonTitle: "verwijder",
-    defaultCaption: "Geen beoordeling",
+    
     starCaptions:    {
 
         1: '1 ster',
