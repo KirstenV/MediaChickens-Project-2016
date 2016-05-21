@@ -423,4 +423,41 @@ class projectController extends Controller
         return $locaties;
     }
 
+    public  function get_user_json(){
+
+        $users = DB::table('users')->select('name');
+        $is_adm = $users->addSelect('is_adm','id','email')->get();
+
+        if(!$is_adm){
+            return  array('$error' => "Fout met her server");
+        }
+        return $is_adm;
+    }
+
+    public function manag_users(Request $request){
+        if($request->action === "delete"){
+            $project = User::find($request->id);
+            $project->delete();
+            $massege =  array('succes' =>true, "delete"=>true);
+            return $massege;
+        }else{
+            $id = $request->id;
+            if($request->action == "0"){
+                DB::table('users')->where('id', $id)->update(array('is_adm' => "1"));
+                $users = DB::table('users')->select('name')->where('id',$id);
+                $is_adm = $users->addSelect('is_adm','id','email')->get();
+
+                return array('succes' => true,"id"=>$id,"is_adm"=> '1',"update"=>true,"user"=>$is_adm);
+            }
+            if($request->action == "1"){
+                $users = DB::table('users')->select('name')->where('id',$id);
+                $is_adm = $users->addSelect('is_adm','id','email')->get();
+                DB::table('users')->where('id', $id)->update(array('is_adm' => "0"));
+                return array('succes' => true,"id"=>$id,"is_adm"=> '0',"update"=>true,"user"=>$is_adm);
+            }
+
+        }
+        return array('$error' => "Fout met her server");
+    }
+
 }

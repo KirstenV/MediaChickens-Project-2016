@@ -1,9 +1,9 @@
 @extends('layout') @section('header') @stop @section('editContent')
-   
+
 
     <div id="map-container-editpage" ng-init="map_initializetion({{$id}})">
-         <ui-gmap-google-map center="map.center" zoom="map.zoom"  draggable="true" events="map.events">
-            <ui-gmap-markers models="locations" coords="'location'" idkey="'id'"  events="map.marker_events">
+        <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events">
+            <ui-gmap-markers models="locations" coords="'location'" idkey="'id'" events="map.marker_events">
                 <ui-gmap-windows show="'show'">
                     <p ng-non-bindable> @{{ address }}</p>
                 </ui-gmap-windows>
@@ -11,7 +11,6 @@
             </ui-gmap-markers>
         </ui-gmap-google-map>
     </div>
-    
     <!--
     <div id="map-container-editpage">
         <div id="map"></div>
@@ -24,13 +23,15 @@
 
         <div ng-controller="edit_projectController" ng-init="initializetion({{$id}})">
 
+
             <div id="edit_project" class="container">
                 <div class="row">
 
                     <div id="edit_header">
                         <a href="{{Request::root()}}">
                             <div id="edit_back" class="edit_header_icon_back inline"><i class="fa fa-caret-left"
-                                                                                  aria-hidden="true"></i> Terug naar
+                                                                                        aria-hidden="true"></i> Terug
+                                naar
                                 homepage
                             </div>
                         </a>
@@ -40,6 +41,43 @@
                     </div>
 
                     <div id="edit_content">
+
+
+                        <!------------------------------start User management-->
+                        <style>
+                            .odd {
+                                background-color: #c9e2b3;
+                            }
+                        </style>
+
+                        <div ng-controller="UsersController" class="col-md-10">
+
+                            <label>Search: <input ng-model="searchText"></label>
+                            <ul>
+                                <li>
+                                    <div class="col-md-1">index</div>
+                                    <div class="col-md-4">Naam</div>
+                                    <div class="col-md-4">Emeil</div>
+                                    <div class="col-md-1">admin</div>
+                                    <div class="col-md-1">Verwijder</div>
+                                </li>
+                                <li ng-repeat="user in all_users | filter:searchText" ng-class-odd="'odd'">
+                                    <div class="col-md-1">@{{ $index }}</div>
+                                    <div class="col-md-4">@{{ user.name  }}</div>
+                                    <div class="col-md-4">@{{ user.email  }}</div>
+                                    <div ng-class="chek_for_admin(@{{ user.is_adm }},'glyphicon glyphicon-ok','
+glyphicon glyphicon-remove')" class="col-md-1" ng-click="update_user( user.id,user.is_adm,$index)"></div>
+                                    <div class="col-md-1 fa fa-trash" ng-click="update_user( user.id,'delete',$index)" ></div>
+                                </li>
+
+
+                            </ul>
+                            <div ng-show="error_users_management">@{{ error_users_management }}</div>
+
+                        </div>
+
+                        <!------------------------------end User management-->
+
 
                         <div class="alle_content">
                             <div class="row">
@@ -172,15 +210,17 @@
                             </div>
 
 
-                                <div>selection is: @{{input_loc}}</div><div ng-show="$scope.locations_errors">@{{ $scope.locations_errors }}</div>
-                            <form  ng-submit="add_location_on_enter(input_loc)" >
-                               <div class="col-md-10"><input id="autocomplete" type="text" class="textbox "
-                                           placeholder="Typ een adres of klik op de kaart"  ng-model="input_loc" googleplace /></div>
-                               <div class="col-md-1"><button class="glyphicon glyphicon-plus" type="submit"></button></div>
+                            <div>selection is: @{{input_loc}}</div>
+                            <div ng-show="$scope.locations_errors">@{{ $scope.locations_errors }}</div>
+                            <form ng-submit="add_location_on_enter(input_loc)">
+                                <div class="col-md-10"><input id="autocomplete" type="text" class="textbox "
+                                                              placeholder="Typ een adres of klik op de kaart"
+                                                              ng-model="input_loc" googleplace/></div>
+                                <div class="col-md-1">
+                                    <button class="glyphicon glyphicon-plus" type="submit"></button>
+                                </div>
 
                             </form>
-
-
 
 
                             <br>

@@ -1,6 +1,7 @@
 (function () {
     var app = angular.module('antwerpen_project', ['ngFileUpload', 'uiGmapgoogle-maps']);
 
+
     app.directive('googleplace', function () {
         return {
             require: 'ngModel',
@@ -34,6 +35,76 @@
             });
         };
     });
+
+    app.controller("UsersController", ['$http', '$scope', function ($http, $scope) {
+        console.log("--user management-- --initialize controller--");
+        $scope.error_users_management;
+        $scope.all_users;
+
+        $http({
+            method: 'GET',
+            url: root + '/gebruikers/api'
+        }).then(function successCallback(response) {
+            console.log("--user management-- reseav data is: ", response);
+            if (response.data.$error) {
+                $scope.error_users_management = response.data.$error;
+            } else {
+                $scope.all_users = response.data;
+            }
+
+        }, function errorCallback(response) {
+            $scope.error_users_management = "Fout met server refresh je venster aub";
+        });
+
+        $scope.chek_for_admin = function (is_adm, class1, class2) {
+            if (is_adm) {
+                return class1;
+            } else {
+                return class2;
+            }
+        }
+        $scope.update_user = function (user_id, action, index) {
+            if (index != -1) {
+                $http({
+                    method: 'POST',
+                    url: root + '/gebruikers/api',
+                    data: {
+                        id: user_id,
+                        action: action,
+                    }
+                }).then(function successCallback(response) {
+                    console.log("--user management-- reseav data is: ", response);
+                    if (response.data.$error) {
+                        $scope.error_users_management = response.data.$error;
+                    } else {
+                        if (response.data.succes) {
+
+                            $http({
+                                method: 'GET',
+                                url: root + '/gebruikers/api'
+                            }).then(function successCallback(response) {
+                                console.log("--user management-- reseav data is: ", response);
+                                if (response.data.$error) {
+                                    $scope.error_users_management = response.data.$error;
+                                } else {
+                                    $scope.all_users = response.data;
+                                }
+
+                            }, function errorCallback(response) {
+                                $scope.error_users_management = "Fout met server refresh je venster aub";
+                            });
+
+
+                         
+                        }
+                    }
+                }, function errorCallback(response) {
+                    $scope.error_users_management = "Fout met server refresh je venster aub";
+                });
+            }
+        }
+
+    }])
 
 
     app.controller('GoogleMapsController', ['$http', '$scope', function ($http, $scope) {
@@ -229,8 +300,6 @@
                                             }
 
 
-
-
                                             for (var i = 0; i < data.locaties.length; i++) {
                                                 console.log(data[i]);
 
@@ -240,8 +309,8 @@
 
                                                     address: data.locaties[i].straat_naam,
                                                     image: image_src,
-                                                    titel:data.project.titel.substr(0,35),
-                                                    discription:data.project.beschrijving.substr(0,100),
+                                                    titel: data.project.titel.substr(0, 35),
+                                                    discription: data.project.beschrijving.substr(0, 100),
                                                     location: {
                                                         latitude: data.locaties[i].position_latitude,
                                                         longitude: data.locaties[i].position_longitude
@@ -370,7 +439,7 @@
         $scope.submit_login = function () {
             //console.log("csrf token is:",$scrf_token);
             console.log("form verzonden data is: ", $scope.login_data);
-            $scope.register_errors="";
+            $scope.register_errors = "";
             var data = {
                 name: $scope.login_data.name,
                 email: $scope.login_data.email,
@@ -381,10 +450,10 @@
 
             $http.post(root + "/register", data).success(function (data) {
                 console.log("return data from loging api", data);
-                if(data.errors){
+                if (data.errors) {
                     $scope.register_errors = data.errors;
                 }
-                if(data.succes){
+                if (data.succes) {
                     $scope.register_succes = data.succes;
                 }
             });

@@ -76,8 +76,9 @@ Route::get('unity/al_projecten/api', 'unityController@get_projects');
 Route::post('unity/login', 'unityController@login_unity');
 
 
-
-
+//User management
+Route::get('gebruikers/api', 'projectController@get_user_json');
+Route::post('gebruikers/api', 'projectController@manag_users');
 
 
 //ingeloogd test
