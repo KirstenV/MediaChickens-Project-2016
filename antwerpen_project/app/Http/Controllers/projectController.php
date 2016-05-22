@@ -425,7 +425,8 @@ class projectController extends Controller
 
     public  function get_user_json(){
 
-        $users = DB::table('users')->select('name');
+        $users = DB::table('users')->select('name')->whereNull('deleted_at')
+            ->orderBy('name');
         $is_adm = $users->addSelect('is_adm','id','email')->get();
 
         if(!$is_adm){
@@ -436,23 +437,29 @@ class projectController extends Controller
 
     public function manag_users(Request $request){
         if($request->action === "delete"){
-            $project = User::find($request->id);
-            $project->delete();
+            $users = User::find($request->id);
+            $users->delete();
             $massege =  array('succes' =>true, "delete"=>true);
             return $massege;
         }else{
             $id = $request->id;
             if($request->action == "0"){
                 DB::table('users')->where('id', $id)->update(array('is_adm' => "1"));
-                $users = DB::table('users')->select('name')->where('id',$id);
+
+
+                $users = DB::table('users')->select('name')->where('id',$id)->whereNull('deleted_at')
+                    ->orderBy('name');;
                 $is_adm = $users->addSelect('is_adm','id','email')->get();
 
                 return array('succes' => true,"id"=>$id,"is_adm"=> '1',"update"=>true,"user"=>$is_adm);
             }
             if($request->action == "1"){
-                $users = DB::table('users')->select('name')->where('id',$id);
-                $is_adm = $users->addSelect('is_adm','id','email')->get();
                 DB::table('users')->where('id', $id)->update(array('is_adm' => "0"));
+                
+                $users = DB::table('users')->select('name')->where('id',$id)->whereNull('deleted_at')
+                    ->orderBy('name');;
+                $is_adm = $users->addSelect('is_adm','id','email')->get();
+
                 return array('succes' => true,"id"=>$id,"is_adm"=> '0',"update"=>true,"user"=>$is_adm);
             }
 
