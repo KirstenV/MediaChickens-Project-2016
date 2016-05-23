@@ -65,7 +65,7 @@ public class databaseConnection : MonoBehaviour {
         txtHowTo.gameObject.SetActive(false);
         StartCoroutine(getProjectsFromURL(urlProjects));
         playerScript = GetComponent<Player>();
-        txtProjectName.text = "veeg naar links en rechts \n om een project te kiezen";
+        txtProjectName.text = "veeg naar links \n en rechts \n om een project \n te kiezen";
         btnPause.GetComponent<Button>();
         btnContinue.GetComponent<Button>();
         btnPause.onClick.AddListener(() => { BtnPauseClicked(); });
@@ -96,6 +96,16 @@ public class databaseConnection : MonoBehaviour {
         {
             answerCount++;
             playerAnswers.Enqueue('C');
+        }
+        else if (other.gameObject.tag == "AnswerD")
+        {
+            answerCount++;
+            playerAnswers.Enqueue('D');
+        }
+        else if (other.gameObject.tag == "NoAnswer")
+        {
+            answerCount++;
+            playerAnswers.Enqueue('N');
         }
         if (other.gameObject.tag == "StartGame")
         {
@@ -195,6 +205,7 @@ public class databaseConnection : MonoBehaviour {
                     {
                         if (swipedSideways && deltaXSwipe > 0) //swiped left
                         {
+                            
                             if (currentProject == 0)
                                 {
                                     currentProject = (byte)(arrProjects.Length - 1);
@@ -260,9 +271,9 @@ public class databaseConnection : MonoBehaviour {
         public ObjectJSONProjects(string tID, string tTitle, string tDescription, string startDate, string endDate)
         {
             jID = tID;
-            projectTitle = tTitle;
+            projectTitle = splitProjectsString(tTitle);
             projectDescription = splitProjectsString( tDescription);
-            projectDate = startDate + " tot " + endDate;
+            projectDate = startDate + "\n tot \n" + endDate;
 
         }
 
@@ -304,7 +315,7 @@ public class databaseConnection : MonoBehaviour {
                 for (int i = 0; i < wordsInString.Length; i++)
                 {
                     lettersOnLine += wordsInString[i].Length;
-                    if (lettersOnLine >= 10)
+                    if (lettersOnLine >= 7)
                     {
                         stringToReturn += " " + wordsInString[i] + "\n";
                         lettersOnLine = 0;
@@ -462,7 +473,7 @@ public class databaseConnection : MonoBehaviour {
     }
     private void addProjectsToArray(string jsonString) // jsonstring
     {
-
+        
         JsonData dataProjects = JsonMapper.ToObject(jsonString);
         arrProjects = new ObjectJSONProjects[dataProjects.Count];
         for (int i = 0; i < dataProjects.Count; i++)

@@ -13,28 +13,33 @@ public class Player : MonoBehaviour {
     private bool hasSwiped = false;
     //rigidbody for movement with force
      Rigidbody rb;
+
     //lane in which player is running, only 5 lanes
     private byte currentLane;
     public byte maxLaneLeft = 0;
     //force to move player
-    private short forceSide = 7000;
-    private short forceUp = 7800;
+    private short forceSide = 700; //7000 //590 600acceler
+    private short forceUp = 225; //7800 //290 impuls 250
     private float speed = 0.7f;
     private float speedSlow = 0.7f;
     private float speedFast = 1f;
+    private float playerOnGround = 1.30f;
     //rigidbodys for turning on the townsquare
     public Rigidbody road1;
     //if player has chosen answer
     public bool hasSwipedUp = false;
     public bool isRunning = false;
-    //pause button 
-    public GameObject btnPause;
 
     //connection with other script
     public GameObject otherScript;
     databaseConnection scriptDatabase;
 
-    
+    //camera for lerp
+    public Camera mainCam;
+    byte cameraHeight = 6;
+    float distanceFromPlayer;
+
+
 
     void Start()
     {
@@ -54,7 +59,7 @@ public class Player : MonoBehaviour {
         if (other.gameObject.tag == "MoveToRight")
         {
             speed = speedSlow;
-            rb.AddForce(forceSide, forceUp, 0, ForceMode.Force);
+            rb.AddForce(forceSide, forceUp, 0, ForceMode.Impulse);
             currentLane++;
             hasSwipedUp = false;
         }
@@ -65,10 +70,14 @@ public class Player : MonoBehaviour {
                 isRunning = false;
             }
         }
-        if(other.gameObject.tag == "StartGame")
+        if (other.gameObject.tag == "StartGame")
         {
             hasSwipedUp = false;
             speed = speedSlow;
+        }
+        if (other.gameObject.tag == "BuildingsTownSquare")
+        {
+
         }
         
     }
@@ -88,6 +97,12 @@ public class Player : MonoBehaviour {
     void FixedUpdate() //always being called
     {
         if (scriptDatabase.isPlaying) {
+            if(this.transform.position.z-mainCam.transform.position.z < 4)
+            {
+                distanceFromPlayer = mainCam.transform.position.z;
+            }
+            else { distanceFromPlayer = this.transform.position.z; }
+            mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, new Vector3(this.transform.position.x, mainCam.transform.position.y, distanceFromPlayer), 5.0f * Time.deltaTime);
             if (isRunning) { 
             this.transform.position = this.transform.position + new Vector3(0, 0, speed);
             }
@@ -105,21 +120,22 @@ public class Player : MonoBehaviour {
                     distanceSwipe = Mathf.Sqrt((deltaXSwipe * deltaXSwipe) + (deltaYSwipe * deltaYSwipe));
                     //direction
                     bool swipedSideways = Mathf.Abs(deltaXSwipe) > Mathf.Abs(deltaYSwipe); //swipe up and down or sideways
-                    if (distanceSwipe > 100)//100
+                    if (distanceSwipe > 100 && this.transform.position.y < playerOnGround)//100
                     {
                         if (swipedSideways && deltaXSwipe > 0) //swiped left
                         {
-                                if (currentLane == maxLaneLeft) // player not on left lane
+                            Debug.Log("currentlane:" + currentLane + "max lane" + maxLaneLeft);
+                                if (currentLane <= maxLaneLeft) // player not on left lane
                             {
                             }
                                 else if(currentLane == 4)
                             {
-                                rb.AddForce(-(forceSide*1.5f), forceUp, 0, ForceMode.Force);
+                                rb.AddForce(-(forceSide*1.5f), forceUp, 0, ForceMode.Impulse); //force
                                 currentLane--;
                             }
                             else
                             {
-                                rb.AddForce(-forceSide, forceUp, 0, ForceMode.Force);
+                                rb.AddForce(-forceSide, forceUp, 0, ForceMode.Impulse);
                                 currentLane--;
                             }
                             
@@ -133,12 +149,12 @@ public class Player : MonoBehaviour {
                                 }
                                 else if(currentLane == 3)
                                {
-                                rb.AddForce(forceSide * 1.5f, forceUp, 0, ForceMode.Force);
+                                rb.AddForce(forceSide * 1.5f, forceUp, 0, ForceMode.Impulse);
                                 currentLane++;
                             }
                                else
                                {
-                                rb.AddForce(forceSide, forceUp, 0, ForceMode.Force);
+                                rb.AddForce(forceSide, forceUp, 0, ForceMode.Impulse);
                                 currentLane++;
                                 }
                            
