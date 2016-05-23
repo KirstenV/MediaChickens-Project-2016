@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/swipeWorks.unity
+- path: Assets/scene_AntwerpRunner.unity
   isLoaded: 1
   isActive: 1
