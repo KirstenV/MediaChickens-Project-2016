@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{Request::root()}}/css/google-maps.css">
     <link rel="stylesheet" href="{{Request::root()}}/css/base.css">
     <link rel="stylesheet" href="{{Request::root()}}/css/bootstrap-datepicker3.min.css">
+    <link rel="stylesheet" href="{{Request::root()}}/css/star-rating.css">
 
 
     <!--lodash is nodig om google maps te configureren-->
@@ -29,7 +30,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
-
+    <script src="{{Request::root()}}/js/star-rating.js"></script>
     <script src="{{Request::root()}}/js/ng_file_upload/ng-file-upload-shim.min.js"></script>
     <script src="{{Request::root()}}/js/ng_file_upload/ng-file-upload.min.js"></script>
     <script src="{{Request::root()}}/js/edit.js"></script>
@@ -37,7 +38,7 @@
     <script src="{{Request::root()}}/js/script.js"></script>
     <script src="{{Request::root()}}/js/bootstrap-datepicker.min.js"></script>
     <script src="{{Request::root()}}/js/bootstrap-datepicker.nl-BE.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrmTkGoBzp--pRgO5vRXIsbXPrk3VMp_w&libraries=places"
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrmTkGoBzp--pRgO5vRXIsbXPrk3VMp_w&libraries=places&language=nl&region=BE"
             type="text/javascript"></script>
     <!-- <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
     <!--<script>
