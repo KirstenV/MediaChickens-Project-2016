@@ -16,7 +16,7 @@ class CreatReacktieTable extends Migration
             $table->increments('id');
 			$table->string('reactie_masseg', 100)->nullable();
 			$table->integer('rating')->unsigned()->nullable();
-			$table->integer('user_id')->unsigned();
+			$table->integer('user_id')->unsigned()->nullable();;
 			$table->foreign('user_id')->references('id')->on('users');
 			$table->integer('projecten_id')->unsigned();
 			$table->foreign('projecten_id')->references('id')->on('projecten')->onDelete('cascade');

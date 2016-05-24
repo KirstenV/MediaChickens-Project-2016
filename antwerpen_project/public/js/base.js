@@ -93,9 +93,6 @@
                             }, function errorCallback(response) {
                                 $scope.error_users_management = "Fout met server refresh je venster aub";
                             });
-
-
-                         
                         }
                     }
                 }, function errorCallback(response) {
@@ -272,6 +269,8 @@
                         //console.log(data);
                         console.log("--home page-- --ajax call-- get projects:", $scope.projects);
 
+
+
                         //loop trou project and controll if they are in date reng
                         for (var i = 0; i < $scope.projects.length; i++) {
                             console.log("--home page-- --loop cotrolle all projects on date--", $scope.projects[i]);
@@ -327,15 +326,64 @@
                         }
 
 
+
                     });
 
                 $scope.show_project_info = function ($id_project) {
+                    $scope.$id_project= $id_project;
                     console.log("id van de gelickte project is = ", $id_project);
                     $http.get(root + "/project/" + $id_project + "/api")
                         .success(function (data) {
-                            $scope.project = data;
-                            console.log(data);
+                            if(data.error){
+                                $scope.project.error = "oeps er ging iets mis, vernieuw de pagina aub."
+                            }else{
+                                $scope.project = data;
+                            }
+                            
+
+
+                            //get all users
+                            $http.get(root + "/project/reacttions/3/"+$id_project+"/api")
+                                .success(function (data) {
+                                    if(data.error){
+                                        $scope.project.error = "oeps er ging iets mis, vernieuw de pagina aub."
+                                    }else{
+                                        $scope.project.reactions = data;
+                                    }
+
+                                    console.log("--home page-- ------------------------------->get special number of rections: ",data);
+
+                                });
+
+
                         });
+                }
+
+
+                $scope.reaction_post={};
+                $scope.submit_reaction = function (user_id) {
+                 /*   $http({
+                        method: 'POST',
+                        url: root + "/review/message",
+                        data: {
+                            message:$scope.reaction_post.massage,
+                            project_id: $scope.$id_project,
+                            user_id: user_id,
+
+                        },
+                    }).then(function successCallback(response) {
+
+                        if(response.error){
+                            $scope.project.post_error = response.error;
+                        }else{
+
+                            console.log(response)
+                            $scope.project.reactions.push(response.data);
+                        }
+                    }, function errorCallback(response) {
+                        $scope.project.post_error = "oeps er ging iets mis, vernieuw de pagina aub."
+                    });*/
+                    console.log("--home page -- submit form after clieck",$scope.reaction_post.rating);
                 }
 
                 $scope.show_projects = function () {

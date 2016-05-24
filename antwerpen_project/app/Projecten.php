@@ -26,6 +26,10 @@ class Projecten extends Model
     {
          return $this->hasMany('App\Vragen');
     }
+    public function show_reactie()
+    {
+        return $this->hasMany('App\Reactie');
+    }
 	
     //
     protected $table = 'projecten';

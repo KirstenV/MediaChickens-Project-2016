@@ -90,6 +90,8 @@ Route::get('ingeloogd', function(){
 
 //get all cotente of project
 Route::get('project/{id}/api', 'PagesController@get_al_info_from_project');
+Route::get('project/reacttions/{number}/{id}/api', 'PagesController@get_al_reactions');
+Route::post('review/message','PagesController@add_review');
 
 
 
