@@ -70,8 +70,8 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 
 //voor unity json objecten
-//Route::get('unity/vragen/{id}/api', 'unityController@get_vragen_by_id');
-Route::get('unity/vragen/{id}/{gebreuker}/api', 'unityController@get_vragen_by_id');
+Route::get('unity/vragen/{id}/api', 'unityController@get_vragen_by_id');
+//Route::get('unity/vragen/{id}/{gebreuker}/api', 'unityController@get_vragen_by_id');
 Route::get('unity/al_projecten/api', 'unityController@get_projects');
 Route::post('unity/login', 'unityController@login_unity');
 
@@ -92,6 +92,7 @@ Route::get('ingeloogd', function(){
 Route::get('project/{id}/api', 'PagesController@get_al_info_from_project');
 Route::get('project/reacttions/{number}/{id}/api', 'PagesController@get_al_reactions');
 Route::post('review/message','PagesController@add_review');
+Route::post('review/delete','projectController@delete_review');
 
 
 

@@ -70,6 +70,7 @@ class PagesController extends Controller
         $reaction_information = array();
         if ($project) {
             $rections = $project->show_reactie;
+            $rections = $rections->take($number);
             if ($rections) {
                 for ($i = 0; $i < count($rections); $i++) {
                     $user = User::find($rections[$i]->user_id);
@@ -82,25 +83,35 @@ class PagesController extends Controller
                 return $reaction_information;
             }
         }
-
-
         return  array('error' => true);
+    }
+    
+    
+    public function delete_review(Request $request){
+        
     }
 
     public function add_review(Request $request){
         $review = new Reactie;
         $review->reactie_masseg = $request->message;
-        $review->user_id = $request->user_id;
+        if($request->user_id == "null"){
+            $review->user_id = 0;
+        }else{
+            $review->user_id = $request->user_id;
+        }
+
         $review->projecten_id = $request->project_id;
+        $review->rating = $request->rating;
+
 
 
         if($review){
             $review->save();
             $user= User::find($request->user_id);
             if($user){
-
-
                 return array('user' => $user, 'reaction' => $review);
+            }else{
+                return array( 'reaction' => $review);
             }
 
         }

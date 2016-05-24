@@ -353,28 +353,38 @@
                                         </div>
 
                                         <div id="user-reactie" class="col-md-11">
+                                            <strong ng-show="reaction.user.name"> @{{ reaction.user.name }}</strong>
+                                            <strong ng-hide="reaction.user.name"> Bezoeker</strong> zei:
                                             @if(Auth::check()) @if(Auth::user()->is_adm)
-                                                <strong ng-show="reaction.user.name"> @{{ reaction.user.name }}</strong> <strong ng-hide="reaction.user.name"> Bezoeker</strong>   zei: <a href=""><i
+                                                <a href="" ng-click="delete_review(reaction.reaction.id,$index)"><i
                                                             class="fa fa-times" aria-hidden="true"></i> verwijder</a>
                                             @endif
                                             @endif
                                             <p>@{{ reaction.reaction.reactie_masseg }}</p>
+                                            <p>@{{ reaction.reaction.rating }}</p>
                                         </div>
 
+
                                     </div>
+                                    <div ng-click="get_more_reviews()" ng-hide="get_mor_reviews">ton meer reacties</div>
 
-
-                                    <form  name="reviewForm" ng-submit="reviewForm.$valid && submit_reaction(<?php if(Auth::check()){echo Auth::user()->id;}else{echo "null";}?>)" novalidate>
+                                    <form name="reviewForm"
+                                          ng-submit="reviewForm.$valid && submit_reaction(<?php if (Auth::check()) {
+                                              echo Auth::user()->id;
+                                          } else {
+                                              echo "null";
+                                          }?>)" novalidate>
 
                                         <div id="reactie-container" class="pad-left col-md-11 no-padding pull-right">
 
                                             <div class="col-md-12 inline no-padding">
 
-                                                <textarea class="w100 form-control" rows="5" name="naam" ng-model="reaction_post.massage" required></textarea>
+                                                <textarea class="w100 form-control" rows="5" name="naam"
+                                                          ng-model="reaction_post.massage" required></textarea>
                                             </div>
                                             <div id="star-rating" class="col-md-9 no-padding">
                                                 <input id="rating" class="rating" data-size="xs" data-min="0"
-                                                       data-max="5" data-step="1" ng-model="reaction_post.rating">
+                                                       data-max="5" data-step="1">
                                             </div>
 
                                             <div id="reactie-submit" class="pull-right col-md-3">

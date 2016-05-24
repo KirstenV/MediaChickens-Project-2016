@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
 use DB;
 use App\Projecten;
@@ -10,6 +11,7 @@ use App\Fase;
 Use App\Project_foto;
 use App\Vragen;
 use App\Locatie;
+use App\Reactie;
 use App\Locatie_projecten;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
@@ -284,6 +286,18 @@ class projectController extends Controller
         return $massege;
 
 
+    }
+
+    public function delete_review(Request $request){
+
+
+        $review = Reactie::find($request->review_id);
+        if($review->delete()){
+            return  array('succes' => true);
+        }
+
+
+        return array('error' => "Er ging iets fout met verwijderen van commentaar");
     }
 
     public function delte_edit_page($tabele, $id)

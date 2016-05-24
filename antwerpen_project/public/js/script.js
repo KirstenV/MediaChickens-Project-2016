@@ -28,6 +28,8 @@ $(document).ready(function () {
     });
 
 
+
+
     //    var map = new google.maps.Map(document.getElementById("map"), {
     //        center: new google.maps.LatLng(51.21945, 4.40246)
     //        , zoom: 14
@@ -415,8 +417,12 @@ $('#rating').rating({
         5: '5 sterren'
     }
 });
+$("#star-rating").on('rating.change',function (event,value,caption) {
+    angular.element(document.getElementById('rating')).scope().select_rating(value);
 
 
+    console.log("--home page-- --rating chenge-- stars given: ",value);
+})
 
 
 

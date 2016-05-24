@@ -358,32 +358,89 @@
 
                         });
                 }
+                $scope.review_to_get = 3;
 
+                $scope.get_more_reviews = function () {
+                    $scope.review_to_get +=3;
+                    $http.get(root + "/project/reacttions/"+ $scope.review_to_get+"/"+$scope.$id_project+"/api")
+                        .success(function (data) {
+                            if(data.error){
+                                $scope.project.error = "oeps er ging iets mis, vernieuw de pagina aub."
+                            }else{
+                                $scope.project.reactions = data;
+                            }
+                            console.log("--home page-- --get more review-- limit: ",data);
+                            if($scope.review_to_get>  $scope.project.reactions.length){
+                                $scope.get_mor_reviews = true;
+
+                            }
+
+                            console.log("--home page-- ------------------------------->get special number of rections: ",data);
+
+                        });
+                }
+
+
+                $scope.select_rating =function (value) {
+                    $scope.selected_rating = value;
+                    console.log("--home page-- --function-- --initialize rating-- :",  $scope.selected_rating );
+                }
 
                 $scope.reaction_post={};
                 $scope.submit_reaction = function (user_id) {
-                   $http({
-                        method: 'POST',
-                        url: root + "/review/message",
-                        data: {
-                            message:$scope.reaction_post.massage,
-                            project_id: $scope.$id_project,
-                            user_id: user_id,
+                    if( $scope.selected_rating){
+                        if(!$scope.reaction_post.massage){
+                            $scope.project.post_error = "Tekst invoerveld is verplicht."
+                        }
+                        $http({
+                            method: 'POST',
+                            url: root + "/review/message",
+                            data: {
+                                message:$scope.reaction_post.massage,
+                                project_id: $scope.$id_project,
+                                user_id: user_id,
+                                rating:$scope.selected_rating,
 
+                            },
+                        }).then(function successCallback(response) {
+                            console.log("--home page-- --post review-- --resiv data", response);
+                            if(response.data.error){
+                                $scope.project.post_error = response.data.error;
+                            }else{
+
+                                $scope.project.reactions.push(response.data);
+                            }
+                        }, function errorCallback(response) {
+                            $scope.project.post_error = "oeps er ging iets mis, vernieuw de pagina aub."
+                        });
+                    }else{
+                        $scope.project.post_error = "Met hoeveel sterren waardeert u deze project?"
+                    }
+
+                    console.log("--home page -- submit form after clieck");
+                }
+
+
+                
+                $scope.delete_review = function (review_id,index) {
+                    $http({
+                        method: 'POST',
+                        url: root + "/review/delete",
+                        data: {
+                            review_id: review_id,
                         },
                     }).then(function successCallback(response) {
 
-                        if(response.error){
-                            $scope.project.post_error = response.error;
+                        if(response.data.succes){
+                            $scope.project.reactions.splice(index,1);
+                            console.log("-home page-- review is verwijder onder id: ",response.data);
                         }else{
+                            $scope.project.post_error = response.data.error;
 
-                            console.log(response)
-                            $scope.project.reactions.push(response.data);
                         }
                     }, function errorCallback(response) {
                         $scope.project.post_error = "oeps er ging iets mis, vernieuw de pagina aub."
                     });
-                    console.log("--home page -- submit form after clieck");
                 }
 
                 $scope.show_projects = function () {
