@@ -362,7 +362,7 @@
 
                 $scope.reaction_post={};
                 $scope.submit_reaction = function (user_id) {
-                 /*   $http({
+                   $http({
                         method: 'POST',
                         url: root + "/review/message",
                         data: {
@@ -382,8 +382,8 @@
                         }
                     }, function errorCallback(response) {
                         $scope.project.post_error = "oeps er ging iets mis, vernieuw de pagina aub."
-                    });*/
-                    console.log("--home page -- submit form after clieck",$scope.reaction_post.rating);
+                    });
+                    console.log("--home page -- submit form after clieck");
                 }
 
                 $scope.show_projects = function () {
