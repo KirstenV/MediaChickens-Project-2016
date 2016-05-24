@@ -63,6 +63,7 @@ public class databaseConnection : MonoBehaviour {
 
 
     void Start () {
+        
         txtHowTo.gameObject.SetActive(false);
         StartCoroutine(getProjectsFromURL(urlProjects));
         playerScript = GetComponent<Player>();
@@ -79,6 +80,7 @@ public class databaseConnection : MonoBehaviour {
       //  txtPause.gameObject.SetActive(false);
         btnPause.gameObject.SetActive(false);
         answerCount = 0;
+        StartCoroutine(getQuestionsFromURL(getQuestionsUrl("15"))); //arrProjects[currentProject].id.ToString()
     }
     void OnTriggerEnter(Collider other)
     {
@@ -438,7 +440,7 @@ public class databaseConnection : MonoBehaviour {
     {
         string urlPart1 = "http://mediachickens.multimediatechnology.be/unity/vragen/";
         string urlPart2 = "/api";
-        return urlPart1 + projectID + urlPart2;
+        return urlPart1 + projectID + urlPart2; 
     } //makes the url for getting the questions from the chosen project
 
 
@@ -470,6 +472,7 @@ public class databaseConnection : MonoBehaviour {
         {
             Debug.Log("ERROR: " + wwwQuestions.error);
         }
+       
 
     }
     private void addProjectsToArray(string jsonString) // jsonstring
@@ -494,8 +497,10 @@ public class databaseConnection : MonoBehaviour {
         {
             if (dateQuestion[i]["choices"].ToString() != "open vragen")
             {
+               // Debug.Log(dateQuestion[i]["id"].ToString());
                 arrQuestions[j] = new ObjectJSONQuestions(
                         dateQuestion[i]["id"].ToString(), //string tID
+                        
                         dateQuestion[i]["choices"].ToString(), //Type
                         dateQuestion[i]["vraag"].ToString(), //question
                         dateQuestion[i]["mogelijke_antwoorden_1"].ToString(), //possibility1

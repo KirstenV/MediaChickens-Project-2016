@@ -18,8 +18,11 @@ public class login : MonoBehaviour {
     public Image background;
     public databaseConnection scriptDatabaseConnection;
 
-    string url = "http://mediachickens.multimediatechnology.be/unity/login";
+    string urlLogin = "http://mediachickens.multimediatechnology.be/unity/login";
+    string urlReturnAnswers = "http://mediachickens.multimediatechnology.be/unity/answers";
     WWWForm form;
+    WWWForm formAnswers;
+    WWW wwwAnswers;
     WWW www;
     void Start()
     {
@@ -33,15 +36,41 @@ public class login : MonoBehaviour {
         inputPassword.gameObject.SetActive(true);
         btnLogin.gameObject.SetActive(true);
         scriptDatabaseConnection = GetComponent<databaseConnection>();
+     //   returnAnswers();
     }
 
+    private void returnAnswers()
+    {
+        formAnswers = new WWWForm();
+        formAnswers.AddField("antwoorden", "test");
+        formAnswers.AddField("vragen_id", "20");
+        formAnswers.AddField("user_id", "lel");
+        wwwAnswers = new WWW(urlReturnAnswers, formAnswers);
+        StartCoroutine(answerReturnRequest(wwwAnswers));
+    }
     private void checkUser()
     {
         form = new WWWForm();
         form.AddField("email", email);
         form.AddField("password", passWord);
-        www = new WWW(url, form);
+        www = new WWW(urlLogin, form);
         StartCoroutine(WaitForRequest(www));
+    }
+
+    IEnumerator answerReturnRequest(WWW www)
+    {
+        yield return www;
+
+        // check for errors
+        if (www.error == null)
+        {
+            Debug.Log("WWW Ok!: " + www.text);
+           // JsonData dataProjects = JsonMapper.ToObject(www.text); 
+        }
+        else
+        {
+            Debug.Log("WWW Error: " + www.error);
+        }
     }
 
     IEnumerator WaitForRequest(WWW www)
@@ -78,6 +107,7 @@ public class login : MonoBehaviour {
                 stringError = "";
                 for (int i = 0; i < dataProjects["errors"].Count; i++)
                 {
+
                     for (int j = 0; j < dataProjects["errors"][i].Count; j++)
                     {
                         stringError += dataProjects["errors"][i][j] + "\n";
