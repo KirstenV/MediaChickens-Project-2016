@@ -255,11 +255,20 @@
 
                         </div>
 
-                        <div id="project-info-container" class="col-md-12 col-xs-12">
+                        <div id="project-info-container" class="col-md-12 col-xs-12" ng-show="answer_post_succes">
+                            <div id="project-beschrijving-container" class="col-md-10 col-xs-10">
+                                <div id="project-beschrijving" class="col-md-12 col-xs-12">
+                                    @{{ answer_post_succes }}
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div id="project-info-container" class="col-md-12 col-xs-12" ng-hide="answer_post_succes">
                             <div id="project-beschrijving-container" class="col-md-10 col-xs-10">
                                 <div id="project-beschrijving" class="col-md-12 col-xs-12">
                                     <h4 class="title_red title-font">Vragen</h4>
-                                    <form>
+                                    <form name="answerFrom" ng-submit="answers_post(project.vragen)">
                                         <div id="previous">
                                             <i class="fa fa-caret-left" aria-hidden="true"></i>
                                         </div>
@@ -271,40 +280,53 @@
                                                         : @{{ vraag.vraag}}</h5>
                                                     <div ng-show="vraag.choices == 'open vragen'">
                                                         <textarea class="form-control" rows="5"
-                                                                  name="antwoord_@{{ $index }}"></textarea>
+                                                                  name="antwoord_@{{ $index }}"
+                                                                  ng-model="questions_answer[vraag.id].answer[0]"></textarea>
                                                     </div>
 
                                                     <div ng-show="vraag.choices == 'meerkeuzevragen'">
                                                         <label>
                                                             <input type="checkbox"
-                                                                   name="antwoord_@{{ $index }}"> @{{ vraag.mogelijke_antwoorden_1}}
+                                                                   name="antwoord_@{{ $index }}"
+                                                                   ng-model="questions_answer[vraag.id].answer[vraag.mogelijke_antwoorden_1]"
+                                                                   ng-value=""> @{{ vraag.mogelijke_antwoorden_1}}
                                                         </label>
                                                         <br>
                                                         <label>
                                                             <input type="checkbox"
-                                                                   name="antwoord_@{{ $index }}"> @{{ vraag.mogelijke_antwoorden_2}}
+                                                                   name="antwoord_@{{ $index }}"
+                                                                   ng-model="questions_answer[vraag.id].answer[vraag.mogelijke_antwoorden_2]"
+                                                                   ng-value="vraag.mogelijke_antwoorden_2"> @{{ vraag.mogelijke_antwoorden_2}}
                                                         </label>
                                                         <br>
                                                         <label>
                                                             <input type="checkbox"
-                                                                   name="antwoord_@{{ $index }}"> @{{ vraag.mogelijke_antwoorden_3}}
+                                                                   name="antwoord_@{{ $index }}"
+                                                                   ng-model="questions_answer[vraag.id].answer[vraag.mogelijke_antwoorden_3]"
+                                                                   ng-value="vraag.mogelijke_antwoorden_3"> @{{ vraag.mogelijke_antwoorden_3}}
                                                         </label>
                                                         <br>
                                                         <label>
                                                             <input type="checkbox"
-                                                                   name="antwoord_@{{ $index }}"> @{{ vraag.mogelijke_antwoorden_4}}
+                                                                   name="antwoord_@{{ $index }}"
+                                                                   ng-model="questions_answer[vraag.id].answer[vraag.mogelijke_antwoorden_4]"
+                                                                   ng-value="vraag.mogelijke_antwoorden_4"> @{{ vraag.mogelijke_antwoorden_4}}
                                                         </label>
                                                     </div>
 
                                                     <div ng-show="vraag.choices == 'Gesloten vragen'">
                                                         <label>
                                                             <input type="radio"
-                                                                   name="antwoord_@{{ $index }}">@{{ vraag.mogelijke_antwoorden_1}}
+                                                                   name="antwoord_@{{ $index }}"
+                                                                   ng-model="questions_answer[vraag.id].answer[0]"
+                                                                   ng-value="vraag.mogelijke_antwoorden_1">@{{ vraag.mogelijke_antwoorden_1}}
                                                         </label>
                                                         <br>
                                                         <label>
                                                             <input type="radio"
-                                                                   name="antwoord_@{{ $index }}">@{{ vraag.mogelijke_antwoorden_2}}
+                                                                   name="antwoord_@{{ $index }}"
+                                                                   ng-model="questions_answer[vraag.id].answer[0]"
+                                                                   ng-value="vraag.mogelijke_antwoorden_2">@{{ vraag.mogelijke_antwoorden_2}}
                                                         </label>
                                                     </div>
 
@@ -312,7 +334,7 @@
                                                         <button class="form-control"> Verzend</button>
                                                     </div>
                                                 </div>
-
+                                                <div ng-show="answer_post_error">@{{ answer_post_error }}</div>
                                             </div>
 
                                         </div>
@@ -373,7 +395,7 @@
                                               echo Auth::user()->id;
                                           } else {
                                               echo "null";
-                                          }?>)" novalidate>
+                                          }?>)" data-toggle="validator">
 
                                         <div id="reactie-container" class="pad-left col-md-11 no-padding pull-right">
 

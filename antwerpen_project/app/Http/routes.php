@@ -93,6 +93,7 @@ Route::get('project/{id}/api', 'PagesController@get_al_info_from_project');
 Route::get('project/reacttions/{number}/{id}/api', 'PagesController@get_al_reactions');
 Route::post('review/message','PagesController@add_review');
 Route::post('review/delete','projectController@delete_review');
+Route::post('question/answer','PagesController@save_answers');
 
 
 

@@ -9,6 +9,7 @@ use App\User;
 use App\Fase;
 use App\Http\Requests;
 use App\Reactie;
+use App\Antwoorden;
 
 class PagesController extends Controller
 {
@@ -43,6 +44,43 @@ class PagesController extends Controller
     public function json_al_projects()
     {
         return response()->json(Projecten::all());
+    }
+
+
+    public  function save_answers(Request $request){
+        $project_information = array('antwoord' => "error");
+
+
+
+        foreach ($request->message as $key=>$data){
+            foreach ($data as $index=>$content){
+                foreach ($content as $i=>$value){
+                    if($value=="true"){
+                        $project_information = array('antwoord' =>$i , "vrag_id"=>$key);
+                        $answer = new Antwoorden;
+                        $answer->antwoorden =$i;
+                        $answer->vragen_id =$key;
+                        $answer->user_id =1;
+                    }
+                    if($i=="0"){
+                        $project_information = array('antwoord' =>$value , "vrag_id"=>$key);
+                        $answer = new Antwoorden;
+                        $answer->antwoorden =$value;
+                        $answer->vragen_id =$key;
+                        $answer->user_id =1;
+
+                    }
+                    if($answer){
+                        if(!$answer->save()){
+                            return $project_information = array('error' =>true);
+                            break;
+                        }
+                    }
+                }
+
+            }
+        }
+        return array('succes' =>true);
     }
 
 

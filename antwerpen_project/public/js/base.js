@@ -270,7 +270,6 @@
                         console.log("--home page-- --ajax call-- get projects:", $scope.projects);
 
 
-
                         //loop trou project and controll if they are in date reng
                         for (var i = 0; i < $scope.projects.length; i++) {
                             console.log("--home page-- --loop cotrolle all projects on date--", $scope.projects[i]);
@@ -326,32 +325,67 @@
                         }
 
 
-
                     });
 
+
+                $scope.answer_post_succes="";
+                $scope.questions_answer = {};
+                $scope.answers_post = function () {
+
+                    /*for(var key in  $scope.questions_answer){
+                     for(var index in  $scope.questions_answer[key]){
+                     console.log("--home page-- --questions-- $scope.questions_answer",index, $scope.questions_answer[key][index]);
+                     }
+                     }*/
+                    $scope.answer_post_error = "";
+                    $http({
+                        method: 'POST',
+                        url: root + "/question/answer",
+                        data: {
+                            message: $scope.questions_answer,
+                        },
+                    }).then(function successCallback(response) {
+console.log("--home page-- --aswers feadback-- server answer:0",response.data);
+                        if (response.data.succes) {
+                            $scope.answer_post_succes = "Dank u voor het invullen van de vragen, uw mening telt";
+                           
+                        } else {
+                            $scope.answer_post_error= "Oeps, er ging iets fout. Kunt u de pagina herstarten en het nog eens proberen aub. "
+                        }
+
+                    }, function errorCallback(response) {
+                        $scope.answer_post_error = "oeps er ging iets mis, vernieuw de pagina aub."
+                    });
+
+                    console.log("--home page-- --question post-- sumit data: ", $scope.questions_answer);
+                }
+
+
+
+
+
                 $scope.show_project_info = function ($id_project) {
-                    $scope.$id_project= $id_project;
+                    $scope.$id_project = $id_project;
                     console.log("id van de gelickte project is = ", $id_project);
                     $http.get(root + "/project/" + $id_project + "/api")
                         .success(function (data) {
-                            if(data.error){
+                            if (data.error) {
                                 $scope.project.error = "oeps er ging iets mis, vernieuw de pagina aub."
-                            }else{
+                            } else {
                                 $scope.project = data;
                             }
-                            
 
 
                             //get all users
-                            $http.get(root + "/project/reacttions/3/"+$id_project+"/api")
+                            $http.get(root + "/project/reacttions/3/" + $id_project + "/api")
                                 .success(function (data) {
-                                    if(data.error){
+                                    if (data.error) {
                                         $scope.project.error = "oeps er ging iets mis, vernieuw de pagina aub."
-                                    }else{
+                                    } else {
                                         $scope.project.reactions = data;
                                     }
 
-                                    console.log("--home page-- ------------------------------->get special number of rections: ",data);
+                                    console.log("--home page-- ------------------------------->get special number of rections: ", data);
 
                                 });
 
@@ -361,59 +395,59 @@
                 $scope.review_to_get = 3;
 
                 $scope.get_more_reviews = function () {
-                    $scope.review_to_get +=3;
-                    $http.get(root + "/project/reacttions/"+ $scope.review_to_get+"/"+$scope.$id_project+"/api")
+                    $scope.review_to_get += 3;
+                    $http.get(root + "/project/reacttions/" + $scope.review_to_get + "/" + $scope.$id_project + "/api")
                         .success(function (data) {
-                            if(data.error){
+                            if (data.error) {
                                 $scope.project.error = "oeps er ging iets mis, vernieuw de pagina aub."
-                            }else{
+                            } else {
                                 $scope.project.reactions = data;
                             }
-                            console.log("--home page-- --get more review-- limit: ",data);
-                            if($scope.review_to_get>  $scope.project.reactions.length){
+                            console.log("--home page-- --get more review-- limit: ", data);
+                            if ($scope.review_to_get > $scope.project.reactions.length) {
                                 $scope.get_mor_reviews = true;
 
                             }
 
-                            console.log("--home page-- ------------------------------->get special number of rections: ",data);
+                            console.log("--home page-- ------------------------------->get special number of rections: ", data);
 
                         });
                 }
 
 
-                $scope.select_rating =function (value) {
+                $scope.select_rating = function (value) {
                     $scope.selected_rating = value;
-                    console.log("--home page-- --function-- --initialize rating-- :",  $scope.selected_rating );
+                    console.log("--home page-- --function-- --initialize rating-- :", $scope.selected_rating);
                 }
 
-                $scope.reaction_post={};
+                $scope.reaction_post = {};
                 $scope.submit_reaction = function (user_id) {
-                    if( $scope.selected_rating){
-                        if(!$scope.reaction_post.massage){
+                    if ($scope.selected_rating) {
+                        if (!$scope.reaction_post.massage) {
                             $scope.project.post_error = "Tekst invoerveld is verplicht."
                         }
                         $http({
                             method: 'POST',
                             url: root + "/review/message",
                             data: {
-                                message:$scope.reaction_post.massage,
+                                message: $scope.reaction_post.massage,
                                 project_id: $scope.$id_project,
                                 user_id: user_id,
-                                rating:$scope.selected_rating,
+                                rating: $scope.selected_rating,
 
                             },
                         }).then(function successCallback(response) {
                             console.log("--home page-- --post review-- --resiv data", response);
-                            if(response.data.error){
+                            if (response.data.error) {
                                 $scope.project.post_error = response.data.error;
-                            }else{
+                            } else {
 
                                 $scope.project.reactions.push(response.data);
                             }
                         }, function errorCallback(response) {
                             $scope.project.post_error = "oeps er ging iets mis, vernieuw de pagina aub."
                         });
-                    }else{
+                    } else {
                         $scope.project.post_error = "Met hoeveel sterren waardeert u deze project?"
                     }
 
@@ -421,8 +455,7 @@
                 }
 
 
-                
-                $scope.delete_review = function (review_id,index) {
+                $scope.delete_review = function (review_id, index) {
                     $http({
                         method: 'POST',
                         url: root + "/review/delete",
@@ -431,10 +464,10 @@
                         },
                     }).then(function successCallback(response) {
 
-                        if(response.data.succes){
-                            $scope.project.reactions.splice(index,1);
-                            console.log("-home page-- review is verwijder onder id: ",response.data);
-                        }else{
+                        if (response.data.succes) {
+                            $scope.project.reactions.splice(index, 1);
+                            console.log("-home page-- review is verwijder onder id: ", response.data);
+                        } else {
                             $scope.project.post_error = response.data.error;
 
                         }
