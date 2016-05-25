@@ -75,7 +75,8 @@ public class login : MonoBehaviour {
 
     IEnumerator WaitForRequest(WWW www)
     {
-        Debug.Log("stil working before return");
+        stringError = "";
+        //Debug.Log("stil working before return");
         yield return www;
 
         // check for errors
@@ -84,6 +85,7 @@ public class login : MonoBehaviour {
 
             Debug.Log("WWW Ok!: " + www.text);
             JsonData dataProjects = JsonMapper.ToObject(www.text);
+            
             if (dataProjects["success"].ToString() == "True")
             {
                 txtError.gameObject.SetActive(false);
@@ -98,21 +100,25 @@ public class login : MonoBehaviour {
             }
             else
             {
-                Debug.Log(dataProjects["User"]);
-                if (dataProjects["User"].ToString() == "Gebruiker bestaat niet")
+                foreach (string keyToShow in dataProjects.Keys)
                 {
-                    stringError = "E-mail of wachtwoord is fout";
-                }
-                else { 
-                stringError = "";
-                for (int i = 0; i < dataProjects["errors"].Count; i++)
-                {
-
-                    for (int j = 0; j < dataProjects["errors"][i].Count; j++)
+                    if(keyToShow == "User")
                     {
-                        stringError += dataProjects["errors"][i][j] + "\n";
+                        stringError += "E-mail of wachtwoord is fout";
                     }
-                }
+                    else if(keyToShow == "errors")
+                    {
+                        for (int i = 0; i < dataProjects["errors"].Count; i++)
+                        {
+
+                            for (int j = 0; j < dataProjects["errors"][i].Count; j++)
+                            {
+                                stringError += dataProjects["errors"][i][j] + "\n";
+                            }
+                        }
+
+                    }
+
                 }
                 txtError.text = stringError;
             }
