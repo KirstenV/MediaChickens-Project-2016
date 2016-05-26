@@ -1081,21 +1081,20 @@ span.filled-stars span {
     opacity: 0;
     z-index: 999;
 }
+
 @-webkit-keyframes successfade {
     0% {
         opacity: 0;
-        top:-25px;
+        top: -25px;
     }
     50% {
         opacity: 1;
         top: 25px;
     }
-    
     75% {
         opacity: 1;
         top: 25px;
     }
-    
     100% {
         opacity: 0;
         top: 25px;
@@ -1105,18 +1104,16 @@ span.filled-stars span {
 @-moz-keyframes successfade {
     0% {
         opacity: 0;
-        top:-25px;
+        top: -25px;
     }
     50% {
         opacity: 1;
         top: 25px;
     }
-    
     75% {
         opacity: 1;
         top: 25px;
     }
-    
     100% {
         opacity: 0;
         top: 25px;
@@ -1126,7 +1123,7 @@ span.filled-stars span {
 @-ms-keyframes successfade {
     0% {
         opacity: 0;
-        top:-25px;
+        top: -25px;
     }
     50% {
         opacity: 1;
@@ -1141,18 +1138,16 @@ span.filled-stars span {
 @-o-keyframes successfade {
     0% {
         opacity: 0;
-        top:-25px;
+        top: -25px;
     }
     50% {
         opacity: 1;
         top: 25px;
     }
-    
     75% {
         opacity: 1;
         top: 25px;
     }
-    
     100% {
         opacity: 0;
         top: 25px;
@@ -1162,24 +1157,21 @@ span.filled-stars span {
 @keyframes successfade {
     0% {
         opacity: 0;
-        top:-25px;
+        top: -25px;
     }
     50% {
         opacity: 1;
         top: 25px;
     }
-    
     75% {
         opacity: 1;
         top: 25px;
     }
-    
     100% {
         opacity: 0;
         top: 25px;
     }
 }
-
 
 .slide-down-fade {
     -webkit-animation: successfade 3s;
@@ -1189,3 +1181,7 @@ span.filled-stars span {
     animation: successfade 3s;
 }
 
+#users-search-hint-small {
+    opacity: 0.5;
+    float: left;
+}

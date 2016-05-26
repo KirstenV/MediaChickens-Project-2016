@@ -220,7 +220,7 @@
                                 <div class="col-md-12">
 
                                     <input placeholder="Zoeken" class="form-control" ng-model="searchText">
-                                    <small style="opacity: 0.5; float: left;">Typ "1" om te zoeken naar admins, "0" om te zoeken naar gebruikers</small>
+                                    <small id="users-search-hint-small">Typ "1" om te zoeken naar admins, "0" om te zoeken naar gebruikers</small>
                                 </div>
                             </div>
 
