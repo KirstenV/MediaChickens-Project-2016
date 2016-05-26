@@ -98,27 +98,27 @@ class projectController extends Controller
                 break;
             case "vraag":
                 $validator = Validator::make($request->all(), [
-                    'invul_veld' => 'required|max:1000',
+                    'invul_veld' => 'required|max:250',
                 ]);
                 break;
             case "mogelijke_antwoorden_1" :
                 $validator = Validator::make($request->all(), [
-                    'invul_veld' => 'required|max:1000',
+                    'invul_veld' => 'required|max:250',
                 ]);
                 break;
             case "mogelijke_antwoorden_2" :
                 $validator = Validator::make($request->all(), [
-                    'invul_veld' => 'required|max:1000',
+                    'invul_veld' => 'required|max:250',
                 ]);
                 break;
             case "mogelijke_antwoorden_3" :
                 $validator = Validator::make($request->all(), [
-                    'invul_veld' => 'required|max:1000',
+                    'invul_veld' => 'required|max:250',
                 ]);
                 break;
             case "mogelijke_antwoorden_4" :
                 $validator = Validator::make($request->all(), [
-                    'invul_veld' => 'required|max:1000',
+                    'invul_veld' => 'required|max:250',
                 ]);
                 break;
             case "fase_titel" :
@@ -128,7 +128,7 @@ class projectController extends Controller
                 break;
             case "fase_beschrijving" :
                 $validator = Validator::make($request->all(), [
-                    'invul_veld' => 'required|max:500',
+                    'invul_veld' => 'required|max:250',
                 ]);
                 break;
             case "fases_picture" :

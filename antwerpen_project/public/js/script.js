@@ -425,5 +425,12 @@ $("#star-rating").on('rating.change',function (event,value,caption) {
 })
 
 
+$(document).on("click", '#thumbs', function () {
+
+        var img = $(this).find("a.thumbnail img").clone();
+        
+        $('#edit-foto-big').html(img);
+});
+
 
 });

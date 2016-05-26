@@ -21,7 +21,7 @@ class Authenticate
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
             } else {
-                return redirect()->guest('/')-with("login","true");
+                return redirect()->guest('/');
             }
         } else {
             if (Auth::user()->is_adm) {

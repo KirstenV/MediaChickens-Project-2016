@@ -216,7 +216,7 @@
                             var e = originalEventArgs[0];
                             var lat = e.latLng.lat(), lon = e.latLng.lng();
 
-                            $http.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lon + "&key=AIzaSyChcI5yCog1780Of_wshHhIZ6yeLrMhkQM")
+                            $http.get("https://maps.googleapis.com/maps/api/geocode/json?latlng=" + lat + "," + lon + "&key=AIzaSyChcI5yCog1780Of_wshHhIZ6yeLrMhkQM&language=nl&region=BE")
                                 .success(function (data) {
 
                                     console.log("--edit-- --ajax-call-- get locatie string", data.results[0].formatted_address);

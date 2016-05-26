@@ -30,7 +30,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
-    
+
     <script src="{{Request::root()}}/js/star-rating.js"></script>
     <script src="{{Request::root()}}/js/ng_file_upload/ng-file-upload-shim.min.js"></script>
     <script src="{{Request::root()}}/js/ng_file_upload/ng-file-upload.min.js"></script>
@@ -98,11 +98,13 @@
 
                             @foreach ($errors->all() as $error)
                             <li class="title_red error-message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ $error }}</li>
-                            @endforeach @if ($errors->all())
+
+                            @if(isset($message)) {{$message}} @endif @endforeach @if ($errors->all() || isset($message))
                             <script>
                                 $('#loginModal').modal('show');
                             </script>
                             @endif
+
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -218,7 +220,7 @@
                                 <div class="col-md-12">
 
                                     <input placeholder="Zoeken" class="form-control" ng-model="searchText">
-
+                                    <small style="opacity: 0.5; float: left;">Typ "1" om te zoeken naar admins, "0" om te zoeken naar gebruikers</small>
                                 </div>
                             </div>
 

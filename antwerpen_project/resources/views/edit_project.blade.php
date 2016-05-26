@@ -258,7 +258,7 @@
                                     <div id="edit-vraag-content" ng-show="vraag.choices == 'open vragen'">
 
 
-                                        <h5 class="title_red title-font">Vraag @{{ $index+1 }}: @{{vraag.choices}} <small>max 1000 karakters per veld</small></h5>
+                                        <h5 class="title_red title-font">Vraag @{{ $index+1 }}: @{{vraag.choices}} <small>max 250 karakters per veld</small></h5>
                                         <a href="" title="verwijder">
                                             <i class="fa fa-times" aria-hidden="true" ng-click="delete_elemets_on_edit_page_vragen(vraag.id,$index,'vragen')"></i>
                                         </a>
