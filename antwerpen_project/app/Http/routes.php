@@ -117,7 +117,7 @@ Route::post('/register', 'Auth\AuthController@register_ajax');
 
 
 //exel
-Route::get('neem/exel',"export@get_export");
+Route::get('export/xls',"export@get_export");
 
 
 
