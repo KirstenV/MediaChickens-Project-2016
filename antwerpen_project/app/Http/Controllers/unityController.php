@@ -115,5 +115,9 @@ class unityController extends Controller
         }
     }
 
+    public function login_unity_test(){
+        return view('auth/register')->with('name', 'Victoria');
+    }
+
 
 }

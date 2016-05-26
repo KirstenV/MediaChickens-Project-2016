@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers;
 
 use GuzzleHttp\Psr7\Response;
 use Illuminate\Http\Request;
@@ -17,6 +15,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use Validator;
 use Intervention\Image\ImageManagerStatic as Image;
+
 
 
 use App\Http\Requests;
@@ -138,11 +137,8 @@ class projectController extends Controller
                 ]);
 
                 break;
-
             default:
-                $validator = Validator::make($request->all(), [
-                    'invul_veld' => 'required|max: 250',
-                ]);
+                return array("error", "Er ging iets fout");
         }
 
 
@@ -480,5 +476,6 @@ class projectController extends Controller
         }
         return array('$error' => "Fout met her server");
     }
+   
 
 }

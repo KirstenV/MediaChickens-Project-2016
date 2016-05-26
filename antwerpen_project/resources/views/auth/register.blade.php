@@ -2,13 +2,17 @@
     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
     <h4 class="modal-title" id="myModalLabel">Registreer</h4>
 </div>
+
+@if(isset($name))
+    {{$name}}
+    @endif
 <div class="modal-body">
 
         {{var_dump($errors)}}
 
     <div class="modal-body-center">
-        <form method="POST" action="{{Request::root()}}/auth/register">
-            {!! csrf_field() !!}
+        <form method="GET" action="{{Request::root()}}/unity/login/test">
+
 
             <div>
                 <label>Naam</label>

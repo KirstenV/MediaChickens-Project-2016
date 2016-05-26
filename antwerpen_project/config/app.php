@@ -161,6 +161,7 @@ return [
 		*my service Providers
 		*/
 		Intervention\Image\ImageServiceProvider::class,
+		'Maatwebsite\Excel\ExcelServiceProvider',
 
     ],
 
@@ -214,6 +215,7 @@ return [
 	  * my Aliases
 	  */
 		'Image' => Intervention\Image\Facades\Image::class,
+		'Excel' => 'Maatwebsite\Excel\Facades\Excel',
     ],
 
 ];

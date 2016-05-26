@@ -82,10 +82,7 @@ Route::post('gebruikers/api', 'projectController@manag_users');
 
 
 //ingeloogd test
-Route::get('ingeloogd', function(){
-	$user = Auth::user();
-	return $user;
-});
+//Route::get('unity/login/test', 'unityController@login_unity_test');
 
 
 //get all cotente of project
@@ -117,6 +114,10 @@ Route::post('edit/{tabele}/{id}/delete/api','projectController@delte_edit_page')
 
 
 Route::post('/register', 'Auth\AuthController@register_ajax');
+
+
+//exel
+Route::get('neem/exel',"export@get_export");
 
 
 
