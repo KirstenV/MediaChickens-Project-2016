@@ -488,8 +488,8 @@
             } else {
                 echo 0;
             } ?>)">
-                <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events">
-                    <ui-gmap-markers models="locations" coords="'location'" idkey="'id'" events="map.marker_events">
+                <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true"  events="map.events" >
+                    <ui-gmap-markers models="locations" coords="'location'" options="map.options" idkey="'id'" events="map.marker_events">
                         @if (isset($id))
                             <ui-gmap-windows show="'show'">
                                 <p ng-non-bindable> @{{ address }}</p>

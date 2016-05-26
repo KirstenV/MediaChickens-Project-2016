@@ -54,23 +54,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="base.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="base.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/antwerpen_project/public/js/base.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="338" column="24" selection-start-line="338" selection-start-column="24" selection-end-line="338" selection-end-column="24" />
+            <state relative-caret-position="403">
+              <caret line="536" column="86" selection-start-line="536" selection-start-column="86" selection-end-line="536" selection-end-column="86" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="home.blade.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="home.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/antwerpen_project/resources/views/home.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="377">
-              <caret line="397" column="71" selection-start-line="397" selection-start-column="71" selection-end-line="397" selection-end-column="71" />
+            <state relative-caret-position="402">
+              <caret line="491" column="97" selection-start-line="491" selection-start-column="97" selection-end-line="491" selection-end-column="97" />
               <folding>
-                <marker date="1464218057549" expanded="true" signature="26588:26619" placeholder="..." />
+                <marker date="1464221321542" expanded="true" signature="26588:26619" placeholder="..." />
               </folding>
             </state>
           </provider>
@@ -79,8 +79,8 @@
       <file leaf-file-name="layout.blade.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/antwerpen_project/resources/views/layout.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="149" column="98" selection-start-line="149" selection-start-column="88" selection-end-line="149" selection-end-column="98" />
+            <state relative-caret-position="241">
+              <caret line="111" column="94" selection-start-line="111" selection-start-column="91" selection-end-line="111" selection-end-column="94" />
               <folding />
             </state>
           </provider>
@@ -150,9 +150,9 @@
         <option value="$PROJECT_DIR$/antwerpen_project/app/Http/Middleware/VerifyCsrfToken.php" />
         <option value="$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/unityController.php" />
         <option value="$PROJECT_DIR$/antwerpen_project/app/Http/routes.php" />
-        <option value="$PROJECT_DIR$/antwerpen_project/public/js/base.js" />
         <option value="$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/PagesController.php" />
         <option value="$PROJECT_DIR$/antwerpen_project/resources/views/home.blade.php" />
+        <option value="$PROJECT_DIR$/antwerpen_project/public/js/base.js" />
       </list>
     </option>
   </component>
@@ -283,6 +283,72 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MediaChickens-Project-2016" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MediaChickens-Project-2016" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="antwerpen_project" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="img" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MediaChickens-Project-2016" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MediaChickens-Project-2016" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="antwerpen_project" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="img" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="google_maps" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MediaChickens-Project-2016" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MediaChickens-Project-2016" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="antwerpen_project" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="app" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -351,20 +417,20 @@
       <workItem from="1464125227587" duration="4735000" />
       <workItem from="1464130095577" duration="71000" />
       <workItem from="1464132963110" duration="126000" />
-      <workItem from="1464185416503" duration="14729000" />
+      <workItem from="1464185416503" duration="18322000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71842000" />
+    <option name="totallyTimeSpent" value="75435000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2078125" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15481171" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15481171" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -442,7 +508,7 @@
         <state relative-caret-position="6392">
           <caret line="376" column="112" selection-start-line="376" selection-start-column="92" selection-end-line="376" selection-end-column="112" />
           <folding>
-            <marker date="1464218057549" expanded="true" signature="26588:26619" placeholder="..." />
+            <marker date="1464221321542" expanded="true" signature="26588:26619" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -653,7 +719,7 @@
         <state relative-caret-position="3026">
           <caret line="178" column="28" selection-start-line="165" selection-start-column="58" selection-end-line="165" selection-end-column="69" />
           <folding>
-            <marker date="1464218057549" expanded="true" signature="26588:26619" placeholder="..." />
+            <marker date="1464221321542" expanded="true" signature="26588:26619" placeholder="..." />
           </folding>
         </state>
       </provider>
@@ -790,22 +856,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/antwerpen_project/resources/views/layout.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="486">
-          <caret line="149" column="98" selection-start-line="149" selection-start-column="88" selection-end-line="149" selection-end-column="98" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/antwerpen_project/public/js/base.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="338" column="24" selection-start-line="338" selection-start-column="24" selection-end-line="338" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/routes.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="275">
@@ -832,13 +882,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/antwerpen_project/resources/views/layout.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="241">
+          <caret line="111" column="94" selection-start-line="111" selection-start-column="91" selection-end-line="111" selection-end-column="94" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/antwerpen_project/resources/views/home.blade.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="377">
-          <caret line="397" column="71" selection-start-line="397" selection-start-column="71" selection-end-line="397" selection-end-column="71" />
+        <state relative-caret-position="402">
+          <caret line="491" column="97" selection-start-line="491" selection-start-column="97" selection-end-line="491" selection-end-column="97" />
           <folding>
-            <marker date="1464218057549" expanded="true" signature="26588:26619" placeholder="..." />
+            <marker date="1464221321542" expanded="true" signature="26588:26619" placeholder="..." />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/antwerpen_project/public/js/base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="403">
+          <caret line="536" column="86" selection-start-line="536" selection-start-column="86" selection-end-line="536" selection-end-column="86" />
+          <folding />
         </state>
       </provider>
     </entry>

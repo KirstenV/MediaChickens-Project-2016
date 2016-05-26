@@ -533,6 +533,9 @@ console.log("--home page-- --aswers feadback-- server answer:0",response.data);
                 $scope.map = {
                     center: {latitude: 51.21945, longitude: 4.40246},
                     zoom: 12,
+                    options:{
+                        draggable: false,      icon: root+'/img/google_maps/marker.png',
+                    },
                     marker_events: {
                         mouseover: function (gMarker, eventName, model) {
 
@@ -551,7 +554,9 @@ console.log("--home page-- --aswers feadback-- server answer:0",response.data);
 
                         },
                         click: function ($event) {
-                            console.log("--home page-- --click event-- marker", $event)
+                            console.log("--home page-- --click event-- marker", $event.model.location)
+                            $scope.map.center ={latitude:  $event.model.location.latitude, longitude: $event.model.location.longitude};
+                            $scope.map.zoom=15;
                             $scope.show_project_info($event.model.project_id)
                         }
                     }
