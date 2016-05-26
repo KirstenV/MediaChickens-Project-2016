@@ -21,7 +21,7 @@ public class databaseConnection : MonoBehaviour {
     //variables for database connection
     string urlProjects = "http://mediachickens.multimediatechnology.be/unity/al_projecten/api"; //url of json to be decoded
     ObjectJSONProjects[] arrProjects;
-    ObjectJSONQuestions[] arrQuestions;
+    public ObjectJSONQuestions[] arrQuestions;
 
     //variables for project choice
     byte currentProject = 0; //change when user choose projects is added
@@ -39,8 +39,7 @@ public class databaseConnection : MonoBehaviour {
 
     //how to text
     public TextMesh txtHowTo;
-    //list of answers
-    Queue<char> playerAnswers = new Queue<char>();
+    //show answers
     byte answerCount;
     //text from question and possible answers
     public TextMesh txtQuestion;
@@ -88,27 +87,22 @@ public class databaseConnection : MonoBehaviour {
         if (other.gameObject.tag == "AnswerA")
         {
             answerCount++;
-            playerAnswers.Enqueue('A');
         }
         else if (other.gameObject.tag == "AnswerB")
         {
             answerCount++;
-            playerAnswers.Enqueue('B');
         }
         else if (other.gameObject.tag == "AnswerC")
         {
             answerCount++;
-            playerAnswers.Enqueue('C');
         }
         else if (other.gameObject.tag == "AnswerD")
         {
             answerCount++;
-            playerAnswers.Enqueue('D');
         }
         else if (other.gameObject.tag == "NoAnswer")
         {
             answerCount++;
-            playerAnswers.Enqueue('N');
         }
         if (other.gameObject.tag == "StartGame")
         {

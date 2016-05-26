@@ -14,6 +14,6 @@ public class BtnRestart : MonoBehaviour {
 	}
     public void OnClick()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene("swipeWorks");
+        UnityEngine.SceneManagement.SceneManager.LoadScene("scene_AntwerpRunner");
     }
 }

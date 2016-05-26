@@ -17,7 +17,12 @@ public class login : MonoBehaviour {
     string stringError;
     public Image background;
     public databaseConnection scriptDatabaseConnection;
-
+    private string idPlayer = "";
+    private string namePlayer = "";
+    public Text txtName;
+    private string currentAnswer = "";
+    private byte answerCount = 0;
+    private string answerID = "";
     string urlLogin = "http://mediachickens.multimediatechnology.be/unity/login";
     string urlReturnAnswers = "http://mediachickens.multimediatechnology.be/unity/answers";
     WWWForm form;
@@ -26,6 +31,7 @@ public class login : MonoBehaviour {
     WWW www;
     void Start()
     {
+        Debug.Log(idPlayer);
         txtError.gameObject.SetActive(true);
         txtPassWord.gameObject.SetActive(true);
         txtEmail.gameObject.SetActive(true);
@@ -38,13 +44,55 @@ public class login : MonoBehaviour {
         scriptDatabaseConnection = GetComponent<databaseConnection>();
      //   returnAnswers();
     }
-
-    private void returnAnswers()
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "AnswerA")
+        {
+           currentAnswer =  scriptDatabaseConnection.arrQuestions[answerCount].possibility1;
+            answerID = scriptDatabaseConnection.arrQuestions[answerCount].id;
+            answerCount++;
+            Debug.Log(currentAnswer);
+            returnAnswers(currentAnswer, answerID);
+        }
+        else if (other.gameObject.tag == "AnswerB")
+        {
+            currentAnswer = scriptDatabaseConnection.arrQuestions[answerCount].possibility2;
+            answerID = scriptDatabaseConnection.arrQuestions[answerCount].id;
+            answerCount++;
+            Debug.Log(currentAnswer);
+            returnAnswers(currentAnswer, answerID);
+        }
+        else if (other.gameObject.tag == "AnswerC")
+        {
+            currentAnswer = scriptDatabaseConnection.arrQuestions[answerCount].possibility3;
+            answerID = scriptDatabaseConnection.arrQuestions[answerCount].id;
+            answerCount++;
+            Debug.Log(currentAnswer);
+            returnAnswers(currentAnswer, answerID);
+        }
+        else if (other.gameObject.tag == "AnswerD")
+        {
+            currentAnswer = scriptDatabaseConnection.arrQuestions[answerCount].possibility4;
+            answerID = scriptDatabaseConnection.arrQuestions[answerCount].id;
+            answerCount++;
+            Debug.Log(currentAnswer);
+            returnAnswers(currentAnswer, answerID);
+        }
+        else if (other.gameObject.tag == "NoAnswer")
+        {
+            currentAnswer = "geen mening";
+            answerID = scriptDatabaseConnection.arrQuestions[answerCount].id;
+            answerCount++;
+            Debug.Log(currentAnswer);
+            returnAnswers(currentAnswer, answerID);
+        }
+    }
+    private void returnAnswers(string playerAnswered, string questionID)
     {
         formAnswers = new WWWForm();
-        formAnswers.AddField("antwoorden", "test");
-        formAnswers.AddField("vragen_id", "20");
-        formAnswers.AddField("user_id", "lel");
+        formAnswers.AddField("antwoorden", playerAnswered);
+        formAnswers.AddField("vragen_id", questionID);
+        formAnswers.AddField("user_id", idPlayer);
         wwwAnswers = new WWW(urlReturnAnswers, formAnswers);
         StartCoroutine(answerReturnRequest(wwwAnswers));
     }
@@ -97,6 +145,10 @@ public class login : MonoBehaviour {
                 inputPassword.gameObject.SetActive(false);
                 btnLogin.gameObject.SetActive(false);
                 scriptDatabaseConnection.isChoosing = true;
+
+               idPlayer = dataProjects["User"]["id"].ToString();
+                namePlayer = dataProjects["User"]["name"].ToString();
+                txtName.text = namePlayer;
             }
             else
             {
