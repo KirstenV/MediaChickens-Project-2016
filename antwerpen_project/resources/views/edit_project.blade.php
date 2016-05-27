@@ -180,12 +180,13 @@
                                                 <img ng-src="{{Request::root()}}/img/project/@{{ foto.project_picture }}" alt="@{{ foto.project_picture }}" />
                                             </a>
                                         </div>
-                                        <div ng-if="$last" class="edit_foto_add_button col-md-3 col-xs-6" ngf-select="uploadFiles($files, $invalidFiles)" multiple accept="image/*" ngf-max-height="1000" ngf-accept="'image/*'" ngf-max-size="1MB">
-                                            <div class="glyphicon glyphicon-plus col-md-12"></div>
-                                            <small class="edit_foto_add_button_small">Selecteer foto</small>
-                                            <small class="edit_foto_add_button_small_maxsize">Max 1024x768 - 1MB</small>
-                                        </div>
 
+
+                                    </div>
+                                    <div class="edit_foto_add_button col-md-3 col-xs-6" ngf-select="uploadFiles($files, $invalidFiles)" multiple accept="image/*" ngf-max-height="1000" ngf-accept="'image/*'" ngf-max-size="1MB">
+                                        <div class="glyphicon glyphicon-plus col-md-12"></div>
+                                        <small class="edit_foto_add_button_small">Selecteer foto</small>
+                                        <small class="edit_foto_add_button_small_maxsize">Max 1024x768 - 1MB</small>
                                     </div>
                                     <!--end of foto galerij-->
 
@@ -210,8 +211,14 @@
                                 </div>
                                 <!--end of file_upload Conroller-->
 
-                                <div class="col-md-6 show_fotos" id="edit-foto-big" ng-repeat="foto in show_fotos" ng-if="$first">
+                                <div class="col-md-6" id="edit-foto-big" ng-show="show_fotos.length" ng-repeat="foto in show_fotos" ng-if="$first">
+                                    
+                                    <img ng-src="{{Request::root()}}/img/project/@{{ foto.project_picture }}" alt="@{{ foto.project_picture }}" />
 
+                                </div>
+                                
+                                <div class="col-md-6" id="edit-foto-big" ng-hide="show_fotos.length">
+                                    hello thar
                                     <img ng-src="{{Request::root()}}/img/project/@{{ foto.project_picture }}" alt="@{{ foto.project_picture }}" />
 
                                 </div>

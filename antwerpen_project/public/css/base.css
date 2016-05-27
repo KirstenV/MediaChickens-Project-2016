@@ -800,6 +800,8 @@ h5.title-font {
 
 #edit-foto-big {
     margin-top: 20px;
+    width: 540px;
+    height: 385px;
 }
 
 #edit-foto-big img {
@@ -1200,6 +1202,10 @@ span.filled-stars span {
         opacity: 0;
         top: 25px;
     }
+}
+
+.alle_fotos ul li{
+    list-style-type: none;
 }
 
 .slide-down-fade {
