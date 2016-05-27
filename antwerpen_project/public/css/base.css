@@ -1053,6 +1053,35 @@ span.filled-stars span {
     margin: 0px auto;
 }
 
+#btn-sign-in,
+#btn-register {
+    background-color: transparent;
+    border-radius: 0px;
+    border-color: #DA291C;
+    color: black;
+}
+
+#btn-sign-in:hover,
+#btn-register:hover {
+    background-color: #DA291C;
+    color: white;
+}
+
+.form-control{
+    border-radius: 0;
+    
+}
+
+.form-control:focus{
+    border-color: black;
+    box-shadow: none;
+    
+}
+
+.btn-default {
+    border-radius: 0;
+}
+
 .fa-toggle-on,
 .fa-toggle-off {
     transform: scale(1.6);

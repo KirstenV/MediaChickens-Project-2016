@@ -72,13 +72,13 @@
                             <div>
                                 <label>Email</label>
                                 <br>
-                                <input class="textbox" type="email" name="email" value="{{ old('email') }}">
+                                <input class="form-control" type="email" name="email" value="{{ old('email') }}">
                             </div>
                             <br>
                             <div>
                                 <label>Wachtwoord</label>
                                 <br>
-                                <input class="textbox" type="password" name="password" id="password">
+                                <input class="form-control" type="password" name="password" id="password">
                             </div>
                             <br>
                             <div>
@@ -145,25 +145,25 @@
                                 <div>
                                     <label>Naam</label>
                                     <br>
-                                    <input class="textbox" type="text" name="name" value="" ng-model="login_data.name">
+                                    <input class="form-control" type="text" name="name" value="" ng-model="login_data.name">
                                 </div>
                                 <br>
                                 <div>
                                     <label>Email</label>
                                     <br>
-                                    <input class="textbox" type="email" name="email" value="" ng-model="login_data.email">
+                                    <input class="form-control" type="email" name="email" value="" ng-model="login_data.email">
                                 </div>
                                 <br>
                                 <div>
                                     <label>Wachtwoord</label>
                                     <br>
-                                    <input class="textbox" type="password" name="password" ng-model="login_data.password">
+                                    <input class="form-control" type="password" name="password" ng-model="login_data.password">
                                 </div>
                                 <br>
-                                <div style="margin-bottom:25px">
+                                <div>
                                     <label>Bevestig wachtwoord</label>
                                     <br>
-                                    <input class="textbox" type="password" name="password_confirmation" ng-model="login_data.password_confirmation">
+                                    <input class="form-control" type="password" name="password_confirmation" ng-model="login_data.password_confirmation">
                                 </div>
 
                             </div>
