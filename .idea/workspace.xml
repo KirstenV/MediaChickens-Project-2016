@@ -25,9 +25,21 @@
       <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="119" column="30" selection-start-line="119" selection-start-column="30" selection-end-line="119" selection-end-column="30" />
+            <state relative-caret-position="359">
+              <caret line="76" column="62" selection-start-line="76" selection-start-column="62" selection-end-line="76" selection-end-column="62" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="unityController.php" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/unityController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="531">
+              <caret line="32" column="54" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="54" />
+              <folding>
+                <element signature="e#40#68#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -35,14 +47,16 @@
       <file leaf-file-name="projectController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/projectController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="126">
+              <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+              <folding>
+                <element signature="e#39#68#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="export.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="export.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/export.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
@@ -57,7 +71,7 @@
       <file leaf-file-name="AuthController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/Auth/AuthController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-300">
+            <state relative-caret-position="374">
               <caret line="29" column="42" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="42" />
               <folding />
             </state>
@@ -94,11 +108,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="app.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/antwerpen_project/config/app.php">
+      <file leaf-file-name="base.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/antwerpen_project/public/js/base.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1316">
-              <caret line="217" column="8" selection-start-line="217" selection-start-column="8" selection-end-line="217" selection-end-column="53" />
+            <state relative-caret-position="299">
+              <caret line="276" column="84" selection-start-line="276" selection-start-column="79" selection-end-line="276" selection-end-column="84" />
               <folding />
             </state>
           </provider>
@@ -109,16 +123,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="187">
               <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/antwerpen_project/public/js/base.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="403">
-              <caret line="536" column="86" selection-start-line="536" selection-start-column="86" selection-end-line="536" selection-end-column="86" />
               <folding />
             </state>
           </provider>
@@ -144,14 +148,14 @@
         <option value="$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/PagesController.php" />
         <option value="$PROJECT_DIR$/antwerpen_project/resources/views/home.blade.php" />
         <option value="$PROJECT_DIR$/antwerpen_project/public/js/base.js" />
-        <option value="$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/unityController.php" />
         <option value="$PROJECT_DIR$/antwerpen_project/resources/views/auth/register.blade.php" />
         <option value="$PROJECT_DIR$/antwerpen_project/config/app.php" />
         <option value="$PROJECT_DIR$/antwerpen_project/app/Http/Middleware/Authenticate.php" />
         <option value="$PROJECT_DIR$/antwerpen_project/composer.json" />
-        <option value="$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/projectController.php" />
-        <option value="$PROJECT_DIR$/antwerpen_project/app/Http/routes.php" />
         <option value="$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/export.php" />
+        <option value="$PROJECT_DIR$/antwerpen_project/app/Http/routes.php" />
+        <option value="$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/unityController.php" />
+        <option value="$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/projectController.php" />
       </list>
     </option>
   </component>
@@ -166,8 +170,7 @@
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
+    <option name="width" value="1932" />
     <option name="height" value="1066" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -196,6 +199,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -309,6 +313,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MediaChickens-Project-2016" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MediaChickens-Project-2016" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="antwerpen_project" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
@@ -502,7 +528,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -566,17 +591,18 @@
       <workItem from="1464132963110" duration="126000" />
       <workItem from="1464185416503" duration="18322000" />
       <workItem from="1464266759314" duration="7464000" />
+      <workItem from="1464333308826" duration="5024000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82899000" />
+    <option name="totallyTimeSpent" value="87923000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
+    <frame x="-8" y="0" width="1932" height="1066" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14322917" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.14457202" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15481171" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -803,9 +829,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3026">
           <caret line="178" column="28" selection-start-line="165" selection-start-column="58" selection-end-line="165" selection-end-column="69" />
-          <folding>
-            <marker date="1464221321542" expanded="true" signature="26588:26619" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -908,7 +931,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="18" column="63" selection-start-line="18" selection-start-column="63" selection-end-line="18" selection-end-column="63" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -924,9 +946,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1207">
           <caret line="78" column="17" selection-start-line="78" selection-start-column="17" selection-end-line="78" selection-end-column="17" />
-          <folding>
-            <element signature="e#40#68#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -934,7 +953,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1887">
           <caret line="111" column="94" selection-start-line="111" selection-start-column="91" selection-end-line="111" selection-end-column="94" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -942,9 +960,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8347">
           <caret line="491" column="97" selection-start-line="491" selection-start-column="97" selection-end-line="491" selection-end-column="97" />
-          <folding>
-            <marker date="1464221321542" expanded="true" signature="26588:26619" placeholder="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -952,17 +967,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/unityController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="783">
-          <caret line="118" column="48" selection-start-line="118" selection-start-column="44" selection-end-line="118" selection-end-column="48" />
-          <folding>
-            <element signature="e#40#68#0#PHP" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -970,21 +974,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
           <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="16" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/antwerpen_project/public/js/base.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="403">
-          <caret line="536" column="86" selection-start-line="536" selection-start-column="86" selection-end-line="536" selection-end-column="86" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/antwerpen_project/config/app.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1316">
+        <state relative-caret-position="3689">
           <caret line="217" column="8" selection-start-line="217" selection-start-column="8" selection-end-line="217" selection-end-column="53" />
           <folding />
         </state>
@@ -1008,7 +1003,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/Auth/AuthController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-300">
+        <state relative-caret-position="374">
           <caret line="29" column="42" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="42" />
           <folding />
         </state>
@@ -1030,28 +1025,48 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/projectController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="119" column="30" selection-start-line="119" selection-start-column="30" selection-end-line="119" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/export.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="204">
           <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
           <folding>
             <element signature="e#38#66#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="76" column="62" selection-start-line="76" selection-start-column="62" selection-end-line="76" selection-end-column="62" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/antwerpen_project/public/js/base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="299">
+          <caret line="276" column="84" selection-start-line="276" selection-start-column="79" selection-end-line="276" selection-end-column="84" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/projectController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="126">
+          <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+          <folding>
+            <element signature="e#39#68#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/unityController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="531">
+          <caret line="32" column="54" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="54" />
+          <folding>
+            <element signature="e#40#68#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>

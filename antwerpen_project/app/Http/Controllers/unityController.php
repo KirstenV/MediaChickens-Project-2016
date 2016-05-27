@@ -67,17 +67,18 @@ class unityController extends Controller
 
     public function answers_unity(Request $request)
     {
-
-
-        // return array('antwoorden' => $request["antwoorden"],'vragen_id'=>$request["vragen_id"],'user_id'=>$request["user_id"]);
         if ($request["antwoorden"] && $request["vragen_id"] && $request["user_id"]) {
+
             $antwoord = new Antwoorden;
+
             if ($antwoord) {
+
                 $antwoord->antwoorden = $request["antwoorden"];
                 $antwoord->vragen_id = $request["vragen_id"];
-                $antwoord->projecten_id = $request["user_id"];
+                $antwoord->user_id = $request["user_id"];
+                //return array("debug"=>"binnen variabelen angemaakt maar niet opgeslagen");
+                if ( $antwoord->save()) {
 
-                if ($antwoord->save()) {
                     return array('succes' => true, "antwoord" => $antwoord);
                 } else {
                     return array('error' => true, "debug" => "server error save dosen´t workt");
