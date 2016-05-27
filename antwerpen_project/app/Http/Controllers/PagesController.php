@@ -104,7 +104,6 @@ class PagesController extends Controller
     public function get_al_reactions($number, $id)
     {
         $project = Projecten::find($id);
-
         $reaction_information = array();
         if ($project) {
             $rections = $project->show_reactie;

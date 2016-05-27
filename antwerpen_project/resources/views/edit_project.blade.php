@@ -212,15 +212,11 @@
                                 <!--end of file_upload Conroller-->
 
                                 <div class="col-md-6" id="edit-foto-big" ng-show="show_fotos.length" ng-repeat="foto in show_fotos" ng-if="$first">
-                                    
                                     <img ng-src="{{Request::root()}}/img/project/@{{ foto.project_picture }}" alt="@{{ foto.project_picture }}" />
-
                                 </div>
                                 
                                 <div class="col-md-6" id="edit-foto-big" ng-hide="show_fotos.length">
-                                    
-                                    <img ng-src="{{Request::root()}}/img/project/default.png" alt="default" />
-
+                                    <img ng-src="{{Request::root()}}/img/project/default.png" alt="default"  ngf-select="uploadFiles($files, $invalidFiles)" multiple accept="image/*" ngf-max-height="1000" ngf-accept="'image/*'" ngf-max-size="1MB" />
                                 </div>
 
                             </div>
@@ -425,8 +421,8 @@
 
                                                 <div id="fase-img" class="col-md-6">
 
-                                                    <a href="" id="fase-img-del" title="Verwijder foto" ng-click="delete_elemets_on_edit_page_fotos(foto.id,$index,'foto','show_fotos')">
-                                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                                    <a href="" id="fase-img-del" title="Verwijder foto" ng-click="delete_elemets_on_edit_page_fotos(foto.id,$index,'foto','show_fotos')" >
+                                                        <i class="fa fa-times" aria-hidden="true" ng-click="delete_update_fase_img(fase.id,$index)"></i>
                                                     </a>
                                                     <img ng-click="get_fase_id($index)" ngf-select="uploadFiles($files, $invalidFiles, fase.id,$index )" accept="image/*" ngf-max-height="1000" ngf-accept="'image/*'" ngf-max-size="1MB" ng-src="{{Request::root()}}/img/fase/@{{ fase.fases_picture }}" alt="@{{ fase.fases_picture }}">
 

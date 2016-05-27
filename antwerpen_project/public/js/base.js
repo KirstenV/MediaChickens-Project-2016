@@ -854,6 +854,30 @@ console.log("--home page-- --aswers feadback-- server answer:0",response.data);
 
         $scope.fase_choice = [];
 
+
+
+
+        $scope.delete_update_fase_img = function (fese_id,index) {
+            console.log("--edit page -- -click-- -- delete_update_fase_img");
+            $http({
+             method: 'POST',
+             url: root + '/project_fase/update_fase_img/api',
+             data:{
+             fase_id:fese_id,
+             }
+             }).then(function successCallback(response) {
+             if (response.data.succes) {
+             console.log("-edit page-- --update delet img-- :",$scope.show_fases[index].fases_picture, response.data);
+                 $scope.show_fases[index].fases_picture = response.data.fase_img_url;
+             }
+             }, function errorCallback(response) {
+             $scope.error_users_management = "Fout met server refresh je venster aub";
+             });
+
+        }
+
+
+
         $scope.delete_elemets_on_edit_page_fase = function ($id, $index, $tabele) {
             console.log("deleted varagen click with following parameters ==>", $id, $index);
             var data = {
@@ -866,6 +890,8 @@ console.log("--home page-- --aswers feadback-- server answer:0",response.data);
                 console.log(data);
             });
         }
+
+
 
         $scope.fase_update = function ($index, $fase_id) {
             //$scope.fase_choice=event.target.value;
