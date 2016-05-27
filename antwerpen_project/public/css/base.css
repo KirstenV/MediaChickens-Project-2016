@@ -156,8 +156,8 @@ hr {
 
 #editContainer {
     position: absolute;
-    right: 116px;
-    width: calc(100% - 232px);
+    right: 178px;
+width: calc(100% - 356px);
     padding-top: 60px;
 }
 
@@ -432,7 +432,14 @@ hr {
     transition: left 1s;
 }
 
-.fa-user,
+.fa-users{
+    transform: scale(1.5) translateY(-62%);
+    color: #DA291C;
+}
+.fa-download{
+    transform: scale(1.7) translateY(-50%);
+    color: #DA291C;
+}
 .fa-sign-out,
 .fa-user-plus {
     transform: scale(2) translateY(-50%);
@@ -800,8 +807,6 @@ h5.title-font {
 
 #edit-foto-big {
     margin-top: 20px;
-    width: 540px;
-    height: 385px;
 }
 
 #edit-foto-big img {

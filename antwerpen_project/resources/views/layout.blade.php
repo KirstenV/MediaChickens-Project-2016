@@ -307,12 +307,24 @@
                 <!--                <li>
                     Welkom, {{Auth::user()->name}}!
                 </li>-->
+                @if (Auth::user()->is_adm)
+                
                 <li>
-                    <a href="" title="Gebruikersbeheer" data-toggle="modal" data-target="#usersModal">
-                        <i class="fa fa-user" aria-hidden="true"></i>
+                    <a href="{{Request::root()}}/export/xls" title="Verzamel inspraak">
+                        <i class="fa fa-download" aria-hidden="true"></i>
+
 
                     </a>
                 </li>
+                
+                
+                <li>
+                    <a href="" title="Gebruikersbeheer" data-toggle="modal" data-target="#usersModal">
+                        <i class="fa fa-users" aria-hidden="true"></i>
+
+                    </a>
+                </li>
+                @endif
                 <li>
                     <a href="{{Request::root()}}/auth/logout" title="log uit">
                         <i class="fa fa-sign-out" aria-hidden="true"></i>
