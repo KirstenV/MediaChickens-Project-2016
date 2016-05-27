@@ -18,6 +18,8 @@ public class login : MonoBehaviour {
     string passWord;
     string stringError;
     public Image background;
+    public RawImage errorLogo1;
+    public RawImage errorLogo2;
     public databaseConnection scriptDatabaseConnection;
     private string idPlayer = "";
     private string namePlayer = "";
@@ -43,11 +45,12 @@ public class login : MonoBehaviour {
         btnLogin.gameObject.SetActive(false);
         scriptDatabaseConnection = GetComponent<databaseConnection>();
         if (PlayerPrefs.GetString("loggedIn") == "true") {
-            
+            txtBtnLogout.text = "Afmelden";
             txtName.text = PlayerPrefs.GetString("userName");
         }
         else
         {
+            txtBtnLogout.text = "Aanmelden";
             txtName.gameObject.SetActive(false);
             //   returnAnswers();
 
@@ -101,8 +104,7 @@ public class login : MonoBehaviour {
         formAnswers = new WWWForm();
         formAnswers.AddField("antwoorden", playerAnswered);
         formAnswers.AddField("vragen_id", questionID);
-        formAnswers.AddField("user_id", "0");
-        //formAnswers.AddField("user_id", PlayerPrefs.GetString("userID"));
+        formAnswers.AddField("user_id", PlayerPrefs.GetString("userID"));
         wwwAnswers = new WWW(urlReturnAnswers, formAnswers);
         StartCoroutine(answerReturnRequest(wwwAnswers));
     }
@@ -149,17 +151,20 @@ public class login : MonoBehaviour {
                 txtError.gameObject.SetActive(false);
                 txtPassWord.gameObject.SetActive(false);
                 txtEmail.gameObject.SetActive(false);
-                background.gameObject.SetActive(false);
+                
                 txtTitle.gameObject.SetActive(false);
                 inputEmail.gameObject.SetActive(false);
                 inputPassword.gameObject.SetActive(false);
                 btnLogin.gameObject.SetActive(false);
+                background.gameObject.SetActive(false);
 
-               idPlayer = dataProjects["User"]["id"].ToString();
+                idPlayer = dataProjects["User"]["id"].ToString();
                 PlayerPrefs.SetString("userID", idPlayer);
                 namePlayer = dataProjects["User"]["name"].ToString();
                 PlayerPrefs.SetString("userName", namePlayer);
                 txtName.text = namePlayer;
+                scriptDatabaseConnection.BtnContinueClicked();
+                btnAnonymous.gameObject.SetActive(false);
             }
             else
             {
@@ -167,10 +172,19 @@ public class login : MonoBehaviour {
                 {
                     if(keyToShow == "User")
                     {
-                        stringError += "E-mail of wachtwoord is fout";
+
+                        stringError +=  "E-mail of wachtwoord is fout";
                     }
                     else if(keyToShow == "errors")
                     {
+                        if(dataProjects["errors"].Count > 0)
+                        {
+                            errorLogo1.gameObject.SetActive(true);
+                        }
+                        if(dataProjects["errors"].Count >1)
+                        {
+                            errorLogo2.gameObject.SetActive(true);
+                        }
                         for (int i = 0; i < dataProjects["errors"].Count; i++)
                         {
 
@@ -196,7 +210,7 @@ public class login : MonoBehaviour {
         email = txtEmail.text;
         passWord = txtPassWord.text;
         checkUser();
-        scriptDatabaseConnection.BtnContinueClicked();
+        PlayerPrefs.SetString("loggedIn", "true");
     }
     public void btnLogoutClicked() //button is logout if logged in, login if logged out
     {
@@ -224,8 +238,8 @@ public class login : MonoBehaviour {
     {
         txtName.text = "";
         txtName.gameObject.SetActive(false);
-        PlayerPrefs.SetString("userID", "0");
-        PlayerPrefs.SetString("userName", "");
+     //   PlayerPrefs.SetString("userID", "0");
+      //  PlayerPrefs.SetString("userName", "");
         txtBtnLogout.text = "Inloggen";
         email = "unknown@anonymous.anonymous";
         passWord = "123456";
