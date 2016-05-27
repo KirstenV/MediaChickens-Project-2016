@@ -30,6 +30,8 @@ public class databaseConnection : MonoBehaviour {
     //button to restart the game + background on canvas
     public Button btnRestart;
     public Image bgEndScreen;
+    public Image headerPause;
+    public Image headerAnswered;
     public RawImage logoEndScreen;
     public Text txtAnswered;
     public Button btnPause;
@@ -62,22 +64,21 @@ public class databaseConnection : MonoBehaviour {
 
 
     void Start () {
-        
+        headerAnswered.gameObject.SetActive(false);
+        headerPause.gameObject.SetActive(false);
         txtHowTo.gameObject.SetActive(false);
         StartCoroutine(getProjectsFromURL(urlProjects));
         playerScript = GetComponent<Player>();
         txtProjectName.text = "veeg naar links \n en rechts \n om een project \n te kiezen";
-      //  btnPause.GetComponent<Button>();
-      //  btnContinue.GetComponent<Button>();
         btnPause.onClick.AddListener(() => { BtnPauseClicked(); });
         btnContinue.onClick.AddListener(() => { BtnContinueClicked(); });
         btnRestart.gameObject.SetActive(false);
+        btnPause.gameObject.SetActive(true);
      //   bgEndScreen.gameObject.SetActive(false);
         txtAnswered.gameObject.SetActive(false);
         logoEndScreen.gameObject.SetActive(false);
         btnContinue.gameObject.SetActive(false);
       //  txtPause.gameObject.SetActive(false);
-        btnPause.gameObject.SetActive(false);
         btnLogout.gameObject.SetActive(false);
          answerCount = 0;
         txtPause.gameObject.SetActive(false);
@@ -114,6 +115,8 @@ public class databaseConnection : MonoBehaviour {
                 bgEndScreen.gameObject.SetActive(true);
                 btnRestart.gameObject.SetActive(true);
                 txtAnswered.gameObject.SetActive(true);
+                headerAnswered.gameObject.SetActive(true);
+                btnPause.gameObject.SetActive(false);
             }
             else { 
             if(arrQuestions[0].type == "Gesloten vragen")
@@ -160,6 +163,8 @@ public class databaseConnection : MonoBehaviour {
                 bgEndScreen.gameObject.SetActive(true);
                 btnRestart.gameObject.SetActive(true);
                 txtAnswered.gameObject.SetActive(true);
+                headerAnswered.gameObject.SetActive(true);
+                btnPause.gameObject.SetActive(false);
             }
             else
             {
@@ -547,30 +552,37 @@ public class databaseConnection : MonoBehaviour {
             
         }
     }
-    void BtnPauseClicked()
+   public void BtnPauseClicked()
     {
-        isPlaying = false;
+
+        txtPause.text = "PAUZE";
+        txtPause.gameObject.SetActive(true);
+        btnLogout.gameObject.SetActive(true);
         bgEndScreen.gameObject.SetActive(true);
         btnRestart.gameObject.SetActive(true);
         txtAnswered.gameObject.SetActive(false);
         logoEndScreen.gameObject.SetActive(true);
         btnPause.gameObject.SetActive(false);
-        btnContinue.gameObject.SetActive(true);
-        txtPause.text = "PAUZE";
-        txtPause.gameObject.SetActive(true);
-        btnLogout.gameObject.SetActive(true);
+        headerPause.gameObject.SetActive(true);
+        if (isPlaying) { 
+        isPlaying = false;
+        btnContinue.gameObject.SetActive(true); 
+        }
+
     }
     public void BtnContinueClicked()
     {
         isPlaying = true;
+        logoEndScreen.gameObject.SetActive(false);
+        headerPause.gameObject.SetActive(false);
         setPauseScreenInactive();
     }
+
     public void setPauseScreenInactive()
     {
         bgEndScreen.gameObject.SetActive(false);
         btnRestart.gameObject.SetActive(false);
         txtAnswered.gameObject.SetActive(false);
-        logoEndScreen.gameObject.SetActive(false);
         btnPause.gameObject.SetActive(true);
         btnContinue.gameObject.SetActive(false);
         txtPause.gameObject.SetActive(false);

@@ -35,6 +35,8 @@ public class login : MonoBehaviour {
     WWW www;
     void Start()
     {
+        errorLogo1.gameObject.SetActive(false);
+        errorLogo2.gameObject.SetActive(false);
         txtError.gameObject.SetActive(false);
         txtPassWord.gameObject.SetActive(false);
         txtEmail.gameObject.SetActive(false);
@@ -44,6 +46,7 @@ public class login : MonoBehaviour {
         inputPassword.gameObject.SetActive(false);
         btnLogin.gameObject.SetActive(false);
         scriptDatabaseConnection = GetComponent<databaseConnection>();
+        Debug.Log(PlayerPrefs.GetString("loggedIn"));
         if (PlayerPrefs.GetString("loggedIn") == "true") {
             txtBtnLogout.text = "Afmelden";
             txtName.text = PlayerPrefs.GetString("userName");
@@ -52,7 +55,7 @@ public class login : MonoBehaviour {
         {
             txtBtnLogout.text = "Aanmelden";
             txtName.gameObject.SetActive(false);
-            //   returnAnswers();
+            txtName.text = "";
 
         }
     }
@@ -135,8 +138,9 @@ public class login : MonoBehaviour {
 
     IEnumerator WaitForRequest(WWW www)
     {
+        errorLogo1.gameObject.SetActive(false);
+        errorLogo2.gameObject.SetActive(false);
         stringError = "";
-        //Debug.Log("stil working before return");
         yield return www;
 
         // check for errors
@@ -148,23 +152,19 @@ public class login : MonoBehaviour {
             
             if (dataProjects["success"].ToString() == "True")
             {
+                inputEmail.gameObject.SetActive(false);
+                inputPassword.gameObject.SetActive(false);
                 txtError.gameObject.SetActive(false);
                 txtPassWord.gameObject.SetActive(false);
                 txtEmail.gameObject.SetActive(false);
-                
-                txtTitle.gameObject.SetActive(false);
-                inputEmail.gameObject.SetActive(false);
-                inputPassword.gameObject.SetActive(false);
                 btnLogin.gameObject.SetActive(false);
-                background.gameObject.SetActive(false);
-
                 idPlayer = dataProjects["User"]["id"].ToString();
                 PlayerPrefs.SetString("userID", idPlayer);
                 namePlayer = dataProjects["User"]["name"].ToString();
                 PlayerPrefs.SetString("userName", namePlayer);
                 txtName.text = namePlayer;
-                scriptDatabaseConnection.BtnContinueClicked();
                 btnAnonymous.gameObject.SetActive(false);
+                scriptDatabaseConnection.BtnPauseClicked();
             }
             else
             {
@@ -172,7 +172,7 @@ public class login : MonoBehaviour {
                 {
                     if(keyToShow == "User")
                     {
-
+                        errorLogo1.gameObject.SetActive(true);
                         stringError +=  "E-mail of wachtwoord is fout";
                     }
                     else if(keyToShow == "errors")
@@ -215,17 +215,17 @@ public class login : MonoBehaviour {
     public void btnLogoutClicked() //button is logout if logged in, login if logged out
     {
         scriptDatabaseConnection.setPauseScreenInactive();
-        if (PlayerPrefs.GetString("loggedIn") != "false") { //log out
+        if (PlayerPrefs.GetString("loggedIn") == "true") { //log out
 
             btnAnonymousClicked();
         }
         else
-        {
+        { //change backgrounds
             txtError.gameObject.SetActive(true);
             txtPassWord.gameObject.SetActive(true);
             txtEmail.gameObject.SetActive(true);
             background.gameObject.SetActive(true);
-            txtTitle.text = "Log in";
+            txtTitle.text = "LOG IN";
             txtTitle.gameObject.SetActive(true);
             inputEmail.gameObject.SetActive(true);
             inputPassword.gameObject.SetActive(true);
@@ -244,9 +244,10 @@ public class login : MonoBehaviour {
         email = "unknown@anonymous.anonymous";
         passWord = "123456";
         checkUser();
-        Debug.Log(idPlayer);
+        
         PlayerPrefs.SetString("loggedIn", "false");
-        scriptDatabaseConnection.BtnContinueClicked();
+
+        scriptDatabaseConnection.BtnPauseClicked();
         btnAnonymous.gameObject.SetActive(false);
     }
 
