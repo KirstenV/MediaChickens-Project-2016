@@ -36,6 +36,7 @@ public class databaseConnection : MonoBehaviour {
     public Button btnPause;
     public Button btnContinue;
     public Text txtPause;
+    public Button btnLogout;
 
     //how to text
     public TextMesh txtHowTo;
@@ -53,9 +54,9 @@ public class databaseConnection : MonoBehaviour {
     public GameObject tunnel2Option4;
     public GameObject tunnel1Option2;
     public GameObject tunnel2Option2;
-
+   // public GameObject 
     //spawning roads and text object
-    private float spawnDistance = 200;
+   private float spawnDistance = 200;
 
     //script of player to change is running
     Player playerScript;
@@ -78,8 +79,8 @@ public class databaseConnection : MonoBehaviour {
         btnContinue.gameObject.SetActive(false);
       //  txtPause.gameObject.SetActive(false);
         btnPause.gameObject.SetActive(false);
-        answerCount = 0;
-        StartCoroutine(getQuestionsFromURL(getQuestionsUrl("15"))); //arrProjects[currentProject].id.ToString()
+        btnLogout.gameObject.SetActive(false);
+         answerCount = 0;
     }
     void OnTriggerEnter(Collider other)
     {
@@ -338,6 +339,7 @@ public class databaseConnection : MonoBehaviour {
         string typeOfQuestion;
         string qQuestion;
         string possibleAnswers1, possibleAnswers2, possibleAnswers3, possibleAnswers4;
+        string answerToReturn1, answerToReturn2, answerToReturn3, answerToReturn4;
         public ObjectJSONQuestions() { } //empty for default
         public ObjectJSONQuestions(string tID, string tType, string tQuestion, string tPossibleAnswers1, string tPossibleAnswers2, string tPossibleAnswers3, string tPossibleAnswers4)
         {
@@ -348,7 +350,10 @@ public class databaseConnection : MonoBehaviour {
             possibleAnswers2 = splitQuestionStrings(tPossibleAnswers2);
             possibleAnswers3 = splitQuestionStrings(tPossibleAnswers3);
             possibleAnswers4 = splitQuestionStrings(tPossibleAnswers4);
-
+            answerToReturn1 = tPossibleAnswers1;
+            answerToReturn2 = tPossibleAnswers2;
+            answerToReturn3 = tPossibleAnswers3;
+            answerToReturn4 = tPossibleAnswers4;
         }
         public string id
         {
@@ -371,6 +376,34 @@ public class databaseConnection : MonoBehaviour {
                 return qQuestion;
             }
         }
+        public string stringAnswer1
+        {
+            get
+            {
+                return answerToReturn1;
+            }
+        }
+        public string stringAnswer2
+        {
+            get
+            {
+                return answerToReturn2;
+            }
+        }
+        public string stringAnswer3
+        {
+            get
+            {
+                return answerToReturn3;
+            }
+        }
+        public string stringAnswer4
+        {
+            get
+            {
+                return answerToReturn4;
+            }
+        }
         public string possibility1
         {
             get
@@ -378,6 +411,7 @@ public class databaseConnection : MonoBehaviour {
                 return possibleAnswers1;
             }
         }
+        
         public string possibility2
         {
             get
@@ -435,6 +469,7 @@ public class databaseConnection : MonoBehaviour {
         string urlPart1 = "http://mediachickens.multimediatechnology.be/unity/vragen/";
         string urlPart2 = "/api";
         return urlPart1 + projectID + urlPart2; 
+        
     } //makes the url for getting the questions from the chosen project
 
 
@@ -523,6 +558,7 @@ public class databaseConnection : MonoBehaviour {
         btnContinue.gameObject.SetActive(true);
         txtPause.text = "Pauze";
         txtPause.gameObject.SetActive(true);
+        btnLogout.gameObject.SetActive(true);
     }
     void BtnContinueClicked()
     {
@@ -534,6 +570,7 @@ public class databaseConnection : MonoBehaviour {
         btnPause.gameObject.SetActive(true);
         btnContinue.gameObject.SetActive(false);
         txtPause.gameObject.SetActive(false);
+        btnLogout.gameObject.SetActive(false);
     }
 
 
