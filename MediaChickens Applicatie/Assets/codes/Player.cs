@@ -36,7 +36,6 @@ public class Player : MonoBehaviour {
 
     //camera for lerp
     public Camera mainCam;
-    byte cameraHeight = 6;
     float distanceFromPlayer;
 
 

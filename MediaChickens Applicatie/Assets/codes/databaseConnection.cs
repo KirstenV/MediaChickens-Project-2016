@@ -64,24 +64,13 @@ public class databaseConnection : MonoBehaviour {
 
 
     void Start () {
-        headerAnswered.gameObject.SetActive(false);
-        headerPause.gameObject.SetActive(false);
         txtHowTo.gameObject.SetActive(false);
         StartCoroutine(getProjectsFromURL(urlProjects));
         playerScript = GetComponent<Player>();
         txtProjectName.text = "veeg naar links \n en rechts \n om een project \n te kiezen";
-        btnPause.onClick.AddListener(() => { BtnPauseClicked(); });
+        btnPause.onClick.AddListener(() => { BtnPauseClicked(); });                                                 //btn on clicks move?
         btnContinue.onClick.AddListener(() => { BtnContinueClicked(); });
-        btnRestart.gameObject.SetActive(false);
-        btnPause.gameObject.SetActive(true);
-     //   bgEndScreen.gameObject.SetActive(false);
-        txtAnswered.gameObject.SetActive(false);
-        logoEndScreen.gameObject.SetActive(false);
-        btnContinue.gameObject.SetActive(false);
-      //  txtPause.gameObject.SetActive(false);
-        btnLogout.gameObject.SetActive(false);
          answerCount = 0;
-        txtPause.gameObject.SetActive(false);
     }
     void OnTriggerEnter(Collider other)
     {

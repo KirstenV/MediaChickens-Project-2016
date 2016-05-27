@@ -14,16 +14,19 @@ public class login : MonoBehaviour {
     public Button btnLogin;
     public Button btnAnonymous;
     public Text txtBtnLogout;
-    string email;
-    string passWord;
-    string stringError;
+    public Text txtName;
     public Image background;
     public RawImage errorLogo1;
     public RawImage errorLogo2;
+
+    string email;
+    string passWord;
+    string stringError;
+
     public databaseConnection scriptDatabaseConnection;
     private string idPlayer = "";
     private string namePlayer = "";
-    public Text txtName;
+
     private string currentAnswer = "";
     private byte answerCount = 0;
     private string answerID = "";
@@ -35,29 +38,7 @@ public class login : MonoBehaviour {
     WWW www;
     void Start()
     {
-        errorLogo1.gameObject.SetActive(false);
-        errorLogo2.gameObject.SetActive(false);
-        txtError.gameObject.SetActive(false);
-        txtPassWord.gameObject.SetActive(false);
-        txtEmail.gameObject.SetActive(false);
-        background.gameObject.SetActive(false);
-        txtTitle.gameObject.SetActive(false);
-        inputEmail.gameObject.SetActive(false);
-        inputPassword.gameObject.SetActive(false);
-        btnLogin.gameObject.SetActive(false);
         scriptDatabaseConnection = GetComponent<databaseConnection>();
-        Debug.Log(PlayerPrefs.GetString("loggedIn"));
-        if (PlayerPrefs.GetString("loggedIn") == "true") {
-            txtBtnLogout.text = "Afmelden";
-            txtName.text = PlayerPrefs.GetString("userName");
-        }
-        else
-        {
-            txtBtnLogout.text = "Aanmelden";
-            txtName.gameObject.SetActive(false);
-            txtName.text = "";
-
-        }
     }
     void OnTriggerEnter(Collider other)
     {
