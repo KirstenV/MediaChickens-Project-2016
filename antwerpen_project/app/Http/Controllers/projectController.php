@@ -36,7 +36,7 @@ class projectController extends Controller
 
     public function project_toevoegen(Request $request)
     {
-
+//Carbon::createFromFormat('Y-m-d');
         $project = new Projecten;
         $project->titel = $request->titel;
         $project->beschrijving = "klick op mij en pas mij aan voor de beschrijving";
@@ -188,12 +188,12 @@ class projectController extends Controller
 
     public function add_project($tabel, Request $request)
     {
-
+//Carbon::createFromFormat('Y-m-d');
 
         $project = new Projecten;
         $project->titel = $request->row_content;
-        $project->begin_datum = "niet ingevuld";
-        $project->eind_datum = "niet ingevuld";
+        $project->begin_datum =  Carbon::now();
+        $project->eind_datum =  Carbon::now();
         $project->beschrijving = "klick op mij en pas mij aan voor de beschrijving";
         $project->project_picture = "proef_proef.jpg";
         $project->user_id = $request->admin;

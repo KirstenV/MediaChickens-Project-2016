@@ -25,14 +25,14 @@
       <file leaf-file-name="routes.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/routes.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="76" column="62" selection-start-line="76" selection-start-column="62" selection-end-line="76" selection-end-column="62" />
+            <state relative-caret-position="282">
+              <caret line="38" column="60" selection-start-line="38" selection-start-column="49" selection-end-line="38" selection-end-column="60" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="unityController.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="unityController.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/unityController.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="531">
@@ -44,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="projectController.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="projectController.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/projectController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
+            <state relative-caret-position="564">
+              <caret line="207" column="68" selection-start-line="207" selection-start-column="68" selection-end-line="207" selection-end-column="68" />
               <folding>
                 <element signature="e#39#68#0#PHP" expanded="true" />
               </folding>
@@ -56,11 +56,21 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="script.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/antwerpen_project/public/js/script.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="87" selection-start-line="12" selection-start-column="76" selection-end-line="12" selection-end-column="87" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="export.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/export.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+            <state relative-caret-position="459">
+              <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
               <folding>
                 <element signature="e#38#66#0#PHP" expanded="true" />
               </folding>
@@ -81,8 +91,8 @@
       <file leaf-file-name="Authenticate.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/Middleware/Authenticate.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="374">
-              <caret line="23" column="57" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="57" />
+            <state relative-caret-position="357">
+              <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -111,18 +121,8 @@
       <file leaf-file-name="base.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/antwerpen_project/public/js/base.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="299">
-              <caret line="276" column="84" selection-start-line="276" selection-start-column="79" selection-end-line="276" selection-end-column="84" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="register.blade.php" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/antwerpen_project/resources/views/auth/register.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state relative-caret-position="452">
+              <caret line="493" column="57" selection-start-line="493" selection-start-column="50" selection-end-line="493" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -591,12 +591,12 @@
       <workItem from="1464132963110" duration="126000" />
       <workItem from="1464185416503" duration="18322000" />
       <workItem from="1464266759314" duration="7464000" />
-      <workItem from="1464333308826" duration="5024000" />
+      <workItem from="1464333308826" duration="5882000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="87923000" />
+    <option name="totallyTimeSpent" value="88781000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="0" width="1932" height="1066" extended-state="0" />
@@ -920,13 +920,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/antwerpen_project/public/js/script.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7055">
-          <caret line="415" column="0" selection-start-line="415" selection-start-column="0" selection-end-line="415" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/antwerpen_project/database/migrations/2016_04_14_111250_creat_reacktie_table.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -1011,8 +1004,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/Middleware/Authenticate.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="23" column="57" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="57" />
+        <state relative-caret-position="357">
+          <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
           <folding />
         </state>
       </provider>
@@ -1027,36 +1020,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/export.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
+        <state relative-caret-position="459">
+          <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
           <folding>
             <element signature="e#38#66#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/routes.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="76" column="62" selection-start-line="76" selection-start-column="62" selection-end-line="76" selection-end-column="62" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/antwerpen_project/public/js/base.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="276" column="84" selection-start-line="276" selection-start-column="79" selection-end-line="276" selection-end-column="84" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/projectController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="21" column="18" selection-start-line="21" selection-start-column="18" selection-end-line="21" selection-end-column="18" />
-          <folding>
-            <element signature="e#39#68#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1067,6 +1034,40 @@
           <caret line="32" column="54" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="54" />
           <folding>
             <element signature="e#40#68#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/antwerpen_project/public/js/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="87" selection-start-line="12" selection-start-column="76" selection-end-line="12" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/antwerpen_project/public/js/base.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="452">
+          <caret line="493" column="57" selection-start-line="493" selection-start-column="50" selection-end-line="493" selection-end-column="57" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/routes.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="282">
+          <caret line="38" column="60" selection-start-line="38" selection-start-column="49" selection-end-line="38" selection-end-column="60" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/antwerpen_project/app/Http/Controllers/projectController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="564">
+          <caret line="207" column="68" selection-start-line="207" selection-start-column="68" selection-end-line="207" selection-end-column="68" />
+          <folding>
+            <element signature="e#39#68#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
