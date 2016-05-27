@@ -7,7 +7,6 @@ using LitJson;
 
 public class databaseConnection : MonoBehaviour {
     public bool isPlaying = false;
-    public bool isChoosing = false;
     //variables for swipe
     private Touch initialTouchSwipe = new Touch();
     private float distanceSwipe = 0;
@@ -68,8 +67,8 @@ public class databaseConnection : MonoBehaviour {
         StartCoroutine(getProjectsFromURL(urlProjects));
         playerScript = GetComponent<Player>();
         txtProjectName.text = "veeg naar links \n en rechts \n om een project \n te kiezen";
-        btnPause.GetComponent<Button>();
-        btnContinue.GetComponent<Button>();
+      //  btnPause.GetComponent<Button>();
+      //  btnContinue.GetComponent<Button>();
         btnPause.onClick.AddListener(() => { BtnPauseClicked(); });
         btnContinue.onClick.AddListener(() => { BtnContinueClicked(); });
         btnRestart.gameObject.SetActive(false);
@@ -81,6 +80,7 @@ public class databaseConnection : MonoBehaviour {
         btnPause.gameObject.SetActive(false);
         btnLogout.gameObject.SetActive(false);
          answerCount = 0;
+        txtPause.gameObject.SetActive(false);
     }
     void OnTriggerEnter(Collider other)
     {
@@ -184,7 +184,7 @@ public class databaseConnection : MonoBehaviour {
 
     void FixedUpdate() //always being called
     {
-        if (!isPlaying && isChoosing) {
+        if (!isPlaying) {
             foreach (Touch t in Input.touches)
             {
                 if (t.phase == TouchPhase.Began)
@@ -556,13 +556,17 @@ public class databaseConnection : MonoBehaviour {
         logoEndScreen.gameObject.SetActive(true);
         btnPause.gameObject.SetActive(false);
         btnContinue.gameObject.SetActive(true);
-        txtPause.text = "Pauze";
+        txtPause.text = "PAUZE";
         txtPause.gameObject.SetActive(true);
         btnLogout.gameObject.SetActive(true);
     }
-    void BtnContinueClicked()
+    public void BtnContinueClicked()
     {
         isPlaying = true;
+        setPauseScreenInactive();
+    }
+    public void setPauseScreenInactive()
+    {
         bgEndScreen.gameObject.SetActive(false);
         btnRestart.gameObject.SetActive(false);
         txtAnswered.gameObject.SetActive(false);
@@ -590,7 +594,6 @@ public class databaseConnection : MonoBehaviour {
     }
         else
         {
-            Debug.Log("end game");
             Instantiate(road, new Vector3(35.2f, 0.002f, this.transform.position.z + (spawnDistance * 3)), Quaternion.identity);
         }
     }
