@@ -157,7 +157,7 @@ hr {
 #editContainer {
     position: absolute;
     right: 178px;
-width: calc(100% - 356px);
+    width: calc(100% - 356px);
     padding-top: 60px;
 }
 
@@ -342,7 +342,8 @@ width: calc(100% - 356px);
     z-index: 999;
     top: 75px;
     background-color: #DA291C;
-    height: 60px;
+    min-height: 60px;
+    padding-top: 15px;
 }
 
 #project-back {
@@ -366,12 +367,13 @@ width: calc(100% - 356px);
 
 #project-titel i {
     position: relative;
-    top: 19px;
+    top: 32%;
     font-size: 0.8em;
 }
 
 #project-titel h1 {
     text-align: center;
+    padding: 0px 80px 15px 80px;
 }
 
 #project-titel hr {
@@ -432,14 +434,16 @@ width: calc(100% - 356px);
     transition: left 1s;
 }
 
-.fa-users{
+.fa-users {
     transform: scale(1.5) translateY(-62%);
     color: #DA291C;
 }
-.fa-download{
+
+.fa-download {
     transform: scale(1.7) translateY(-50%);
     color: #DA291C;
 }
+
 .fa-sign-out,
 .fa-user-plus {
     transform: scale(2) translateY(-50%);
@@ -843,6 +847,7 @@ h5.title-font {
     background-color: white;
     width: 100%;
     padding-bottom: 20px;
+    padding-top: 28px;
 }
 
 #thumb-container {
@@ -1075,15 +1080,13 @@ span.filled-stars span {
     color: white;
 }
 
-.form-control{
+.form-control {
     border-radius: 0;
-    
 }
 
-.form-control:focus{
+.form-control:focus {
     border-color: black;
     box-shadow: none;
-    
 }
 
 .btn-default {
@@ -1210,7 +1213,7 @@ span.filled-stars span {
     }
 }
 
-.alle_fotos ul li{
+.alle_fotos ul li {
     list-style-type: none;
 }
 

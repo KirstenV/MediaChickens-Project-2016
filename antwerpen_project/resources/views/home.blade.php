@@ -52,7 +52,7 @@
                         -->
                     <div id="project-titel" class="col-md-8 col-xs-12" ng-show="project">
                         <div id="project-back" class="vert-center div-left" ng-click="show_projects()"><i
-                                    class="fa fa-chevron-right inline" aria-hidden="true"></i>
+                                    class="fa fa-chevron-right inline vert-center" aria-hidden="true"></i>
                             <div id="project-back-text" class="inline vert-center">TERUG</div>
                         </div>
 
