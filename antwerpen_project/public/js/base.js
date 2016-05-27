@@ -373,6 +373,7 @@ console.log("--home page-- --aswers feadback-- server answer:0",response.data);
                                 $scope.project.error = "oeps er ging iets mis, vernieuw de pagina aub."
                             } else {
                                 $scope.project = data;
+                                console.log("--home pge-- --get all resived data--: ",data);
                             }
 
 
@@ -441,7 +442,6 @@ console.log("--home page-- --aswers feadback-- server answer:0",response.data);
                             if (response.data.error) {
                                 $scope.project.post_error = response.data.error;
                             } else {
-
                                 $scope.project.reactions.push(response.data);
                             }
                         }, function errorCallback(response) {

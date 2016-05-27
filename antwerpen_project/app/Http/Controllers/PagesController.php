@@ -92,6 +92,7 @@ class PagesController extends Controller
         $project_information = array_add($project_information, 'fotos', $project->show_fotos);
         $project_information = array_add($project_information, 'fases', $project->show_fases);
         $project_information = array_add($project_information, 'vragen', $project->show_vragen);
+        $project_information = array_add($project_information, 'review_rating_sum', $project->show_reactie->avg('rating'));
 
         if ($project_information) {
             return $project_information;
