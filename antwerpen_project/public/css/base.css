@@ -807,6 +807,7 @@ h5.title-font {
 #edit-foto-big img {
     max-height: 100%;
     max-width: 100%;
+    border: 1px solid;
 }
 
 .opacity-lower {

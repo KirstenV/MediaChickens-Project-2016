@@ -218,8 +218,8 @@
                                 </div>
                                 
                                 <div class="col-md-6" id="edit-foto-big" ng-hide="show_fotos.length">
-                                    hello thar
-                                    <img ng-src="{{Request::root()}}/img/project/@{{ foto.project_picture }}" alt="@{{ foto.project_picture }}" />
+                                    
+                                    <img ng-src="{{Request::root()}}/img/project/default.png" alt="default" />
 
                                 </div>
 
