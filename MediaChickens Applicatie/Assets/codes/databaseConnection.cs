@@ -27,17 +27,6 @@ public class databaseConnection : MonoBehaviour {
     public TextMesh txtProjectName;
     public TextMesh txtProjectDescription;
     public TextMesh txtProjectDates;
-    //button to restart the game + background on canvas
-    public Button btnRestart;
-    public Image bgEndScreen;
-    public Image headerPause;
-    public Image headerAnswered;
-    public RawImage logoEndScreen;
-    public Text txtAnswered;
-    public Button btnPause;
-    public Button btnContinue;
-    public Text txtPause;
-    public Button btnLogout;
 
     //how to text
     public TextMesh txtHowTo;
@@ -59,17 +48,16 @@ public class databaseConnection : MonoBehaviour {
     //spawning roads and text object
    private float spawnDistance = 200;
 
-    //script of player to change is running
+    //script of Player and canvas
     Player playerScript;
-
+    canvasScript scriptCanvas;
 
     void Start () {
         txtHowTo.gameObject.SetActive(false);
         StartCoroutine(getProjectsFromURL(urlProjects));
         playerScript = GetComponent<Player>();
+        scriptCanvas = GetComponent<canvasScript>();
         txtProjectName.text = "veeg naar links \n en rechts \n om een project \n te kiezen";
-        btnPause.onClick.AddListener(() => { BtnPauseClicked(); });                                                 //btn on clicks move?
-        btnContinue.onClick.AddListener(() => { BtnContinueClicked(); });
          answerCount = 0;
     }
     void OnTriggerEnter(Collider other)
@@ -101,11 +89,7 @@ public class databaseConnection : MonoBehaviour {
             if (arrQuestions.Length < 1 || arrQuestions[0] == null) //stop game if there aren't any questions
             {
                 isPlaying = false;
-                bgEndScreen.gameObject.SetActive(true);
-                btnRestart.gameObject.SetActive(true);
-                txtAnswered.gameObject.SetActive(true);
-                headerAnswered.gameObject.SetActive(true);
-                btnPause.gameObject.SetActive(false);
+                scriptCanvas.showEndScreen();
             }
             else { 
             if(arrQuestions[0].type == "Gesloten vragen")
@@ -149,11 +133,7 @@ public class databaseConnection : MonoBehaviour {
             if (answerCount == arrQuestions.Length || arrQuestions[answerCount] == null) // if the player has answered all questions
             {
                 isPlaying = false;
-                bgEndScreen.gameObject.SetActive(true);
-                btnRestart.gameObject.SetActive(true);
-                txtAnswered.gameObject.SetActive(true);
-                headerAnswered.gameObject.SetActive(true);
-                btnPause.gameObject.SetActive(false);
+                scriptCanvas.showEndScreen();
             }
             else
             {
@@ -233,7 +213,6 @@ public class databaseConnection : MonoBehaviour {
                         StartCoroutine(getQuestionsFromURL(getQuestionsUrl(arrProjects[currentProject].id.ToString()))); //getting questions once player has chosen project
                         playerScript.isRunning = true;
                         playerScript.hasSwipedUp = true;
-                            btnPause.gameObject.SetActive(true);
                     }
                         hasSwiped = true;
                     }
@@ -543,41 +522,16 @@ public class databaseConnection : MonoBehaviour {
     }
    public void BtnPauseClicked()
     {
-
-        txtPause.text = "PAUZE";
-        txtPause.gameObject.SetActive(true);
-        btnLogout.gameObject.SetActive(true);
-        bgEndScreen.gameObject.SetActive(true);
-        btnRestart.gameObject.SetActive(true);
-        txtAnswered.gameObject.SetActive(false);
-        logoEndScreen.gameObject.SetActive(true);
-        btnPause.gameObject.SetActive(false);
-        headerPause.gameObject.SetActive(true);
+        scriptCanvas.showPauseScreen(isPlaying);
         if (isPlaying) { 
         isPlaying = false;
-        btnContinue.gameObject.SetActive(true); 
         }
-
     }
     public void BtnContinueClicked()
     {
         isPlaying = true;
-        logoEndScreen.gameObject.SetActive(false);
-        headerPause.gameObject.SetActive(false);
-        setPauseScreenInactive();
+        scriptCanvas.hideAllPaused();
     }
-
-    public void setPauseScreenInactive()
-    {
-        bgEndScreen.gameObject.SetActive(false);
-        btnRestart.gameObject.SetActive(false);
-        txtAnswered.gameObject.SetActive(false);
-        btnPause.gameObject.SetActive(true);
-        btnContinue.gameObject.SetActive(false);
-        txtPause.gameObject.SetActive(false);
-        btnLogout.gameObject.SetActive(false);
-    }
-
 
     void RoadSpawn()
     {

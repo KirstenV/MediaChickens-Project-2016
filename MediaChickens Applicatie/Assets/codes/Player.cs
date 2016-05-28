@@ -7,10 +7,11 @@ using LitJson;
 
 public class Player : MonoBehaviour {
 
-    //variables for swipe
+    //variables used for swipe touch registration
     private Touch initialTouchSwipe = new Touch();
     private float distanceSwipe = 0;
     private bool hasSwiped = false;
+
     //rigidbody for movement with force
      Rigidbody rb;
 

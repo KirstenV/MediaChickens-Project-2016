@@ -2,16 +2,7 @@
 using System.Collections;
 
 public class BtnRestart : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    //script only for reset button, hereby resetting the scene
     public void OnClick()
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("scene_AntwerpRunner");

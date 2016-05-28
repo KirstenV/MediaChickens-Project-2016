@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class canvasScript : MonoBehaviour { 
-    //script for all UI exept textMeshes
+    //script for all UI except textMeshes
 
     //UI for overall use (all paused screens)
     public Image background;
@@ -39,48 +39,18 @@ public class canvasScript : MonoBehaviour {
     public Image headerAnswered;
     public Text txtAnswered;
 
-    //arrays with gameobject for easier looping through
-    // public GameObject[] arrAllInterfaceObjects =  { background.gameObject , btnRestart.gameObject};
-/*    List<GameObject> listPause;
-    List<GameObject> listOverallPaused;
-    List<GameObject> listOverallPlaying;
-    List<GameObject> listPauseAndLogin;
-    List<GameObject> listLogin;
-    List<GameObject> listEnd;
-
-    */
 
     void Start () {
-  /*      listPause.AddRange(
-            { btnContinue.gameObject, btnLogout.gameObject, txtBtnLogout.gameObject}
-        );
-        listPause = new List<GameObject>();
-        listPause.AddRange(GameObject.FindGameObjectsWithTag("UIPause"));
-        listOverallPaused = new List<GameObject>();
-        listOverallPaused.AddRange(GameObject.FindGameObjectsWithTag("UIAllPaused"));
-        listOverallPlaying = new List<GameObject>();
-        listOverallPlaying.AddRange(GameObject.FindGameObjectsWithTag("UIAllPlaying"));
-        listPauseAndLogin = new List<GameObject>();
-        listPauseAndLogin.AddRange(GameObject.FindGameObjectsWithTag("UIPauseAndLogin"));
-        listLogin = new List<GameObject>();
-        listLogin.AddRange(GameObject.FindGameObjectsWithTag("UILogin"));
-        listEnd = new List<GameObject>();
-        listEnd.AddRange(GameObject.FindGameObjectsWithTag("UIEnd"));
-
-        Debug.Log(listLogin.Find(test => test.name == "txtError"));
-
-    */
-        btnPause.gameObject.SetActive(true);
-
-        hideAllPaused();
-        toggleLoginLogoutButton();
-        changePlayerName();
-        showAllPlaying();
+        hideAllPaused(); //hides the pause screen and shows the game interface
+        toggleLoginLogoutButton(); //shows the right text on the login/logout button in the pause screen
+        changePlayerName(); //fills the text with the right player name
+        txtAnswered.text = "alle vragen zijn beantwoord".ToUpper();
     }
 
     public void showLoginScreen()
     {
-
+        txtPauseTitle.text = "log in".ToUpper();
+        showPauseAll();
         txtEmail.gameObject.SetActive(true);
         txtPassWord.gameObject.SetActive(true);
         txtError.gameObject.SetActive(true);
@@ -88,43 +58,56 @@ public class canvasScript : MonoBehaviour {
         inputPassword.gameObject.SetActive(true);
         btnLogin.gameObject.SetActive(true);
         btnAnonymous.gameObject.SetActive(true);
-
-    }
+        txtPauseTitle.gameObject.SetActive(true);
+        headerPause.gameObject.SetActive(true);
+    } //shows the login screen
     public void showLoginErrors(byte numberOfErrors, string stringErrors)
     {
-        if (numberOfErrors > 0)
-        {
-            errorLogo1.gameObject.SetActive(true);
-        }
-        if(numberOfErrors > 1)
+        hideLoginErrors(); //resets the errors
+        errorLogo1.gameObject.SetActive(true);
+        if(numberOfErrors > 1) //if there are more than 1 error, 2 error signs must be showed
         {
             errorLogo2.gameObject.SetActive(true);
         }
        
         txtError.text = stringErrors;
-    }
-    public void showPauseAll()
+    } //shows and fills the login errors
+    public void hideLoginErrors()
     {
-        //UI for overall use during pause
+        txtError.text = "";
+        errorLogo1.gameObject.SetActive(false);
+        errorLogo2.gameObject.SetActive(false);
+    } //hides the login errors
+    void showPauseAll()
+    {
         background.gameObject.SetActive(true);
         logoEndScreen.gameObject.SetActive(true);
-    }
-    public void showPauseScreen()
+        hideAllPlaying();
+    } //shows the elements all paused screens have (background, logo) and hides the game interface
+    public void showPauseScreen(bool isPlaying)
     {
+        txtPauseTitle.text = "pauze".ToUpper(); 
+        showPauseAll();
         //overlap Pause and Login, not finished -> finished is when all questions of project are answered, and player gets and end screen
         txtPauseTitle.gameObject.SetActive(true);
         headerPause.gameObject.SetActive(true);
         
         //UI pause
-        btnContinue.gameObject.SetActive(true);
         btnLogout.gameObject.SetActive(true);
         txtBtnLogout.gameObject.SetActive(true);
         btnRestart.gameObject.SetActive(true);
-    }
+
+        if(isPlaying) //if player is in game, the continue button is available, if player is choosing project, continue button is not available
+        {
+            btnContinue.gameObject.SetActive(true);
+        }
+    } //shows the basic paused screen
     public void showEndScreen()
     {
-
-    }
+        showPauseAll();
+        headerAnswered.gameObject.SetActive(true);
+        txtAnswered.gameObject.SetActive(true);
+    } //shows the screen when all questions are answered
     public void hideAllPaused()
     {
     //UI for overall use during pause
@@ -143,32 +126,33 @@ public class canvasScript : MonoBehaviour {
     //UI for login
     txtEmail.gameObject.SetActive(false);
     txtPassWord.gameObject.SetActive(false);
-     txtError.gameObject.SetActive(false);
+    txtPassWord.text = "";
+    hideLoginErrors();
     inputEmail.gameObject.SetActive(false);
-     inputPassword.gameObject.SetActive(false);
-     btnLogin.gameObject.SetActive(false);
-     btnAnonymous.gameObject.SetActive(false);
-    errorLogo1.gameObject.SetActive(false);
-     errorLogo2.gameObject.SetActive(false);
+    inputPassword.gameObject.SetActive(false);
+    btnLogin.gameObject.SetActive(false);
+    btnAnonymous.gameObject.SetActive(false);
+
 
     //UI project finished 
      headerAnswered.gameObject.SetActive(false);
      txtAnswered.gameObject.SetActive(false);
-}
+        showAllPlaying();
+} //hides all components used during pause screens (end screen, paused and login)
     public void changePlayerName()
     {
         txtName.text = PlayerPrefs.GetString("userName");
-    }
+    } //changes the players name on the screen
     public void showAllPlaying()
     {
         txtName.gameObject.SetActive(true);
         btnPause.gameObject.SetActive(true);
-    }
+    } //shows the gaming interface
     public void hideAllPlaying()
     {
         txtName.gameObject.SetActive(false);
         btnPause.gameObject.SetActive(false);
-    }
+    } //hides the gaming interface
     public void toggleLoginLogoutButton()
     {
         if (PlayerPrefs.GetString("loggedIn") == "true")
@@ -180,5 +164,12 @@ public class canvasScript : MonoBehaviour {
             txtBtnLogout.text = "Aanmelden";
         }
     } //sets text from button on login when logged out en logout when logged in
-	
+	public string getInputEmail()
+    {
+        return inputEmail.text;
+    } //gets the email user filled in
+    public string getInputPassword()
+    {
+        return inputPassword.text;
+    } //gets the password user filled in
 }
