@@ -10,7 +10,7 @@ public class canvasScript : MonoBehaviour {
     public Image background;
     public Button btnRestart;
     public RawImage logoEndScreen;
-
+    
     //UI for overall use (during playing)
     public Button btnPause;
     public Text txtName;
@@ -41,22 +41,19 @@ public class canvasScript : MonoBehaviour {
 
     //arrays with gameobject for easier looping through
     // public GameObject[] arrAllInterfaceObjects =  { background.gameObject , btnRestart.gameObject};
-    List<GameObject> listPause;
+/*    List<GameObject> listPause;
     List<GameObject> listOverallPaused;
     List<GameObject> listOverallPlaying;
     List<GameObject> listPauseAndLogin;
     List<GameObject> listLogin;
     List<GameObject> listEnd;
 
+    */
 
-
-
-
-
-
-
-    // Use this for initialization
     void Start () {
+  /*      listPause.AddRange(
+            { btnContinue.gameObject, btnLogout.gameObject, txtBtnLogout.gameObject}
+        );
         listPause = new List<GameObject>();
         listPause.AddRange(GameObject.FindGameObjectsWithTag("UIPause"));
         listOverallPaused = new List<GameObject>();
@@ -70,40 +67,118 @@ public class canvasScript : MonoBehaviour {
         listEnd = new List<GameObject>();
         listEnd.AddRange(GameObject.FindGameObjectsWithTag("UIEnd"));
 
+        Debug.Log(listLogin.Find(test => test.name == "txtError"));
 
-
-        headerAnswered.gameObject.SetActive(false);
-        headerPause.gameObject.SetActive(false);
-        btnRestart.gameObject.SetActive(false);
+    */
         btnPause.gameObject.SetActive(true);
-        //   bgEndScreen.gameObject.SetActive(false);
-        txtAnswered.gameObject.SetActive(false);
-        logoEndScreen.gameObject.SetActive(false);
-        btnContinue.gameObject.SetActive(false);
-        //  txtPause.gameObject.SetActive(false);
-        btnLogout.gameObject.SetActive(false);
-        txtPauseTitle.gameObject.SetActive(false);
-        errorLogo1.gameObject.SetActive(false);
-        errorLogo2.gameObject.SetActive(false);
-        txtError.gameObject.SetActive(false);
-        txtPassWord.gameObject.SetActive(false);
-        txtEmail.gameObject.SetActive(false);
-        background.gameObject.SetActive(false);
-        inputEmail.gameObject.SetActive(false);
-        inputPassword.gameObject.SetActive(false);
-        btnLogin.gameObject.SetActive(false);
 
+        hideAllPaused();
+        toggleLoginLogoutButton();
+        changePlayerName();
+        showAllPlaying();
+    }
+
+    public void showLoginScreen()
+    {
+
+        txtEmail.gameObject.SetActive(true);
+        txtPassWord.gameObject.SetActive(true);
+        txtError.gameObject.SetActive(true);
+        inputEmail.gameObject.SetActive(true);
+        inputPassword.gameObject.SetActive(true);
+        btnLogin.gameObject.SetActive(true);
+        btnAnonymous.gameObject.SetActive(true);
+
+    }
+    public void showLoginErrors(byte numberOfErrors, string stringErrors)
+    {
+        if (numberOfErrors > 0)
+        {
+            errorLogo1.gameObject.SetActive(true);
+        }
+        if(numberOfErrors > 1)
+        {
+            errorLogo2.gameObject.SetActive(true);
+        }
+       
+        txtError.text = stringErrors;
+    }
+    public void showPauseAll()
+    {
+        //UI for overall use during pause
+        background.gameObject.SetActive(true);
+        logoEndScreen.gameObject.SetActive(true);
+    }
+    public void showPauseScreen()
+    {
+        //overlap Pause and Login, not finished -> finished is when all questions of project are answered, and player gets and end screen
+        txtPauseTitle.gameObject.SetActive(true);
+        headerPause.gameObject.SetActive(true);
+        
+        //UI pause
+        btnContinue.gameObject.SetActive(true);
+        btnLogout.gameObject.SetActive(true);
+        txtBtnLogout.gameObject.SetActive(true);
+        btnRestart.gameObject.SetActive(true);
+    }
+    public void showEndScreen()
+    {
+
+    }
+    public void hideAllPaused()
+    {
+    //UI for overall use during pause
+    background.gameObject.SetActive(false);
+    btnRestart.gameObject.SetActive(false);
+    logoEndScreen.gameObject.SetActive(false);
+
+    //overlap Pause and Login, not finished -> finished is when all questions of project are answered, and player gets and end screen
+    txtPauseTitle.gameObject.SetActive(false);
+     headerPause.gameObject.SetActive(false);
+
+    //UI pause
+   btnContinue.gameObject.SetActive(false);
+     btnLogout.gameObject.SetActive(false);
+
+    //UI for login
+    txtEmail.gameObject.SetActive(false);
+    txtPassWord.gameObject.SetActive(false);
+     txtError.gameObject.SetActive(false);
+    inputEmail.gameObject.SetActive(false);
+     inputPassword.gameObject.SetActive(false);
+     btnLogin.gameObject.SetActive(false);
+     btnAnonymous.gameObject.SetActive(false);
+    errorLogo1.gameObject.SetActive(false);
+     errorLogo2.gameObject.SetActive(false);
+
+    //UI project finished 
+     headerAnswered.gameObject.SetActive(false);
+     txtAnswered.gameObject.SetActive(false);
+}
+    public void changePlayerName()
+    {
+        txtName.text = PlayerPrefs.GetString("userName");
+    }
+    public void showAllPlaying()
+    {
+        txtName.gameObject.SetActive(true);
+        btnPause.gameObject.SetActive(true);
+    }
+    public void hideAllPlaying()
+    {
+        txtName.gameObject.SetActive(false);
+        btnPause.gameObject.SetActive(false);
+    }
+    public void toggleLoginLogoutButton()
+    {
         if (PlayerPrefs.GetString("loggedIn") == "true")
         {
             txtBtnLogout.text = "Afmelden";
-            txtName.text = PlayerPrefs.GetString("userName");
         }
         else
         {
             txtBtnLogout.text = "Aanmelden";
-            txtName.gameObject.SetActive(false);
-            txtName.text = "";
         }
-    }
+    } //sets text from button on login when logged out en logout when logged in
 	
 }

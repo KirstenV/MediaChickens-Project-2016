@@ -23,7 +23,8 @@ public class login : MonoBehaviour {
     string passWord;
     string stringError;
 
-    public databaseConnection scriptDatabaseConnection;
+    databaseConnection scriptDatabaseConnection;
+    canvasScript scriptCanvas;
     private string idPlayer = "";
     private string namePlayer = "";
 
@@ -39,6 +40,7 @@ public class login : MonoBehaviour {
     void Start()
     {
         scriptDatabaseConnection = GetComponent<databaseConnection>();
+        scriptCanvas = GetComponent<canvasScript>();
     }
     void OnTriggerEnter(Collider other)
     {
@@ -142,7 +144,14 @@ public class login : MonoBehaviour {
                 idPlayer = dataProjects["User"]["id"].ToString();
                 PlayerPrefs.SetString("userID", idPlayer);
                 namePlayer = dataProjects["User"]["name"].ToString();
-                PlayerPrefs.SetString("userName", namePlayer);
+                if(namePlayer == "Anonymous")
+                {
+                    PlayerPrefs.SetString("userName", "");
+                }
+                else
+                {
+                    PlayerPrefs.SetString("userName", namePlayer);
+                }
                 txtName.text = namePlayer;
                 btnAnonymous.gameObject.SetActive(false);
                 scriptDatabaseConnection.BtnPauseClicked();
@@ -158,14 +167,7 @@ public class login : MonoBehaviour {
                     }
                     else if(keyToShow == "errors")
                     {
-                        if(dataProjects["errors"].Count > 0)
-                        {
-                            errorLogo1.gameObject.SetActive(true);
-                        }
-                        if(dataProjects["errors"].Count >1)
-                        {
-                            errorLogo2.gameObject.SetActive(true);
-                        }
+                        
                         for (int i = 0; i < dataProjects["errors"].Count; i++)
                         {
 
@@ -174,6 +176,7 @@ public class login : MonoBehaviour {
                                 stringError += dataProjects["errors"][i][j] + "\n";
                             }
                         }
+                        scriptCanvas.showLoginErrors((byte)dataProjects["errors"].Count, stringError);
 
                     }
 
@@ -192,6 +195,7 @@ public class login : MonoBehaviour {
         passWord = txtPassWord.text;
         checkUser();
         PlayerPrefs.SetString("loggedIn", "true");
+        
     }
     public void btnLogoutClicked() //button is logout if logged in, login if logged out
     {
@@ -212,24 +216,23 @@ public class login : MonoBehaviour {
             inputPassword.gameObject.SetActive(true);
             btnLogin.gameObject.SetActive(true);
             btnAnonymous.gameObject.SetActive(true);
-            txtBtnLogout.text = "Uitloggen";
+           // txtBtnLogout.text = "Uitloggen";
         }
     }
     public void btnAnonymousClicked()
     {
-        txtName.text = "";
         txtName.gameObject.SetActive(false);
-     //   PlayerPrefs.SetString("userID", "0");
-      //  PlayerPrefs.SetString("userName", "");
-        txtBtnLogout.text = "Inloggen";
+      
+     //   txtBtnLogout.text = "Inloggen";
         email = "unknown@anonymous.anonymous";
         passWord = "123456";
         checkUser();
         
         PlayerPrefs.SetString("loggedIn", "false");
-
+        scriptCanvas.showAllPlaying();
         scriptDatabaseConnection.BtnPauseClicked();
         btnAnonymous.gameObject.SetActive(false);
     }
+    
 
 }
