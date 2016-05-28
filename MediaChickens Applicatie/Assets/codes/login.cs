@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
 using LitJson;
 
 public class login : MonoBehaviour {
@@ -9,11 +8,14 @@ public class login : MonoBehaviour {
     canvasScript scriptCanvas;
 
     //variables to be filled with input from user and send to database
-    string email; 
-    string passWord;
+    private string email; 
+    private string passWord;
 
+    //variables for anonymous login
+    private string emailAnonymous = "unknown@anonymous.anonymous";
+    private string passwordAnonymous = "123456";
     //string with errors to be showed when login failed
-    string stringError;
+    private string stringError;
 
     //the info from player returned from database
     private string idPlayer = "";
@@ -21,21 +23,27 @@ public class login : MonoBehaviour {
 
     //variables to register the answer of the user and send it to database
     private string currentAnswer = "";
-    private byte answerCount = 0;
+    public byte answerCount = 0;
     private string answerID = "";
 
     //variables for connection database - login
-    WWWForm formLogin;
-    WWW wwwLogin;
-    string urlLogin = "http://mediachickens.multimediatechnology.be/unity/login";
+    private WWWForm formLogin;
+    private WWW wwwLogin;
+    private string urlLogin = "http://mediachickens.multimediatechnology.be/unity/login";
 
     //variables for connection database - answers
-    string urlReturnAnswers = "http://mediachickens.multimediatechnology.be/unity/answers";
-    WWWForm formAnswers;
-    WWW wwwAnswers;
+    private string urlReturnAnswers = "http://mediachickens.multimediatechnology.be/unity/answers";
+    private WWWForm formAnswers;
+    private WWW wwwAnswers;
 
     void Start()
     {
+        if(PlayerPrefs.GetString("firstTimePlayed") == "") //if this is the first time player opens app, player is set to anonymous
+        {
+            btnAnonymousClicked();
+            PlayerPrefs.SetString("firstTimePlayed", "false");
+        }
+
         scriptDatabaseConnection = GetComponent<databaseConnection>();
         scriptCanvas = GetComponent<canvasScript>();
     }
@@ -72,10 +80,10 @@ public class login : MonoBehaviour {
     {
         answerID = scriptDatabaseConnection.arrQuestions[answerCount].id;
         answerCount++;
-        returnAnswers(currentAnswer, answerID);
-        Debug.Log(currentAnswer);
-    }
-    private void returnAnswers(string playerAnswered, string questionID)
+        fillAnswerForm(currentAnswer, answerID);
+        Debug.Log(currentAnswer); 
+    } //the user has given his answer, variables are filled in and sent to database
+    private void fillAnswerForm(string playerAnswered, string questionID)
     {
         formAnswers = new WWWForm();
         formAnswers.AddField("antwoorden", playerAnswered);
@@ -83,17 +91,8 @@ public class login : MonoBehaviour {
         formAnswers.AddField("user_id", PlayerPrefs.GetString("userID"));
         wwwAnswers = new WWW(urlReturnAnswers, formAnswers);
         StartCoroutine(sendAnswerToDatabase(wwwAnswers));
-    }
-    private void checkUser()
-    {
-        formLogin = new WWWForm();
-        formLogin.AddField("email", email);
-        formLogin.AddField("password", passWord);
-        wwwLogin = new WWW(urlLogin, formLogin);
-        StartCoroutine(sendLoginToDatabase(wwwLogin));
-    }
-
-    IEnumerator sendAnswerToDatabase(WWW www)
+    } //form is filled and answers sent to database
+    IEnumerator sendAnswerToDatabase(WWW www) //answer is sent to database
     {
         yield return www;
 
@@ -107,8 +106,16 @@ public class login : MonoBehaviour {
         {
             Debug.Log("WWW Error: " + www.error);
         }
-    }
+    }//sent answer to the database
 
+    private void fillUserForm() 
+    {
+        formLogin = new WWWForm();
+        formLogin.AddField("email", email);
+        formLogin.AddField("password", passWord);
+        wwwLogin = new WWW(urlLogin, formLogin);
+        StartCoroutine(sendLoginToDatabase(wwwLogin));
+    } //form is filled and login sent to database
     IEnumerator sendLoginToDatabase(WWW www)
     {
         stringError = "";
@@ -117,11 +124,9 @@ public class login : MonoBehaviour {
         // check for errors
         if (www.error == null)
         {
-
-            Debug.Log("WWW Ok!: " + www.text);
-            JsonData dataProjects = JsonMapper.ToObject(www.text);
+            JsonData dataProjects = JsonMapper.ToObject(www.text); //make json object from info database returned
             
-            if (dataProjects["success"].ToString() == "True")
+            if (dataProjects["success"].ToString() == "True") //if user exists, add data and start game
             {
                 scriptCanvas.hideAllPaused();
                 idPlayer = dataProjects["User"]["id"].ToString();
@@ -141,22 +146,22 @@ public class login : MonoBehaviour {
                 scriptCanvas.showAllPlaying();
                 scriptCanvas.toggleLoginLogoutButton();
             }
-            else
+            else //if login failed
             {
                 foreach (string keyToShow in dataProjects.Keys)
                 {
-                    if(keyToShow == "User")
+                    if(keyToShow == "User") //email or password not in database
                     {
                         stringError +=  "E-mail of wachtwoord is fout";
-                        scriptCanvas.showLoginErrors(1, stringError); //hier altijd maar 1 error
+                        scriptCanvas.showLoginErrors(1, stringError); //always 1 error
                     }
-                    else if(keyToShow == "errors")
+                    else if(keyToShow == "errors") //syntax errors
                     {
                         
                         for (int i = 0; i < dataProjects["errors"].Count; i++)
                         {
 
-                            for (int j = 0; j < dataProjects["errors"][i].Count; j++)
+                            for (int j = 0; j < dataProjects["errors"][i].Count; j++) //for each error, add it to the string
                             {
                                 stringError += dataProjects["errors"][i][j] + "\n";
                             }
@@ -171,32 +176,30 @@ public class login : MonoBehaviour {
             
             Debug.Log("WWW Error: " + www.error);
         }
-    }
+    } //sent login to database and check if user exists or is anonymous
     public void btnLoginClicked()
     {
         email = scriptCanvas.getInputEmail();
         passWord = scriptCanvas.getInputPassword();
-        checkUser();
-        
-    }
-    public void btnLogoutClicked() //button is logout if logged in, login if logged out
+        fillUserForm();
+    } //user clicked the login, check user in database
+    public void btnLogoutClicked() 
     {
-        Debug.Log(PlayerPrefs.GetString("loggedIn"));
         scriptCanvas.hideAllPaused();
         if (PlayerPrefs.GetString("loggedIn") == "true") { //log out
             btnAnonymousClicked();
         }
-        else
+        else //log in
         { 
             scriptCanvas.showLoginScreen();
         }
-    }
+    }//button is logout if logged in, login if logged out
     public void btnAnonymousClicked()
     {
-        email = "unknown@anonymous.anonymous"; //set in different var
-        passWord = "123456";
-        checkUser(); 
-    }
+        email = emailAnonymous; //set in different var
+        passWord = passwordAnonymous;
+        fillUserForm(); 
+    } //gets anonymous user from database
     
 
 }

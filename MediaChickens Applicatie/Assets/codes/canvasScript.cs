@@ -1,6 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine.UI;
 
 public class canvasScript : MonoBehaviour { 
@@ -105,6 +103,7 @@ public class canvasScript : MonoBehaviour {
     public void showEndScreen()
     {
         showPauseAll();
+        btnRestart.gameObject.SetActive(true);
         headerAnswered.gameObject.SetActive(true);
         txtAnswered.gameObject.SetActive(true);
     } //shows the screen when all questions are answered

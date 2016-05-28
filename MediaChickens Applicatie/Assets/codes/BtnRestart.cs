@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class BtnRestart : MonoBehaviour {
     //script only for reset button, hereby resetting the scene

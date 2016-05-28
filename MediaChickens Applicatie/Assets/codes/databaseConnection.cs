@@ -1,37 +1,52 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-//JSON
 using System.Collections;
-using System.Collections.Generic;
 using LitJson;
 
 public class databaseConnection : MonoBehaviour {
+    //script of Player and canvas
+    Player playerScript;
+    canvasScript scriptCanvas;
+
+    //game is not paused
     public bool isPlaying = false;
+
     //variables for swipe
     private Touch initialTouchSwipe = new Touch();
     private float distanceSwipe = 0;
     private bool hasSwiped = false;
+    private byte distanceToRegisterSwipe = 100;
+
 
     //roadSpawn
     public GameObject tunnel4;
     public GameObject tunnel2;
     public GameObject roadTrigger;
     public GameObject road;
+    public float roadYPosition = 0.002f;
+    public float roadXPosition = 35.2f;
+    public float tunnelYPosition = 0.002f;
+    public float tunnelXposition = 35.2f;
+    public float triggerYPosition = 10;
+    public float triggerXPosition = 35.13f;
+    private byte numberFirstTunnelSpawn = 3;
+
     //variables for database connection
-    string urlProjects = "http://mediachickens.multimediatechnology.be/unity/al_projecten/api"; //url of json to be decoded
-    ObjectJSONProjects[] arrProjects;
+    private string urlProjects = "http://mediachickens.multimediatechnology.be/unity/al_projecten/api"; //url of json to be decoded
+    private ObjectJSONProjects[] arrProjects;
     public ObjectJSONQuestions[] arrQuestions;
 
     //variables for project choice
-    byte currentProject = 0; //change when user choose projects is added
+    private byte currentProject = 0; //change when user choose projects is added
     public TextMesh txtProjectName;
     public TextMesh txtProjectDescription;
     public TextMesh txtProjectDates;
 
     //how to text
     public TextMesh txtHowTo;
-    //show answers
-    byte answerCount;
+
+    //show possible answers, counts number of answers already given
+    private byte answerCount = 0;
+
     //text from question and possible answers
     public TextMesh txtQuestion;
     public TextMesh txtAnswer1;
@@ -44,25 +59,32 @@ public class databaseConnection : MonoBehaviour {
     public GameObject tunnel2Option4;
     public GameObject tunnel1Option2;
     public GameObject tunnel2Option2;
-   // public GameObject 
-    //spawning roads and text object
-   private float spawnDistance = 200;
 
-    //script of Player and canvas
-    Player playerScript;
-    canvasScript scriptCanvas;
+    //spawning roads and text object
+   public float spawnDistance = 200;
+
+    //maximum lane player can run on (to be send to player)
+    private byte maxLaneLeftClosedQuestion = 2;
+
+    //project object variables
+    public byte lengthStringSplitProject = 15;
+    public byte maxLettersOnLineProject = 7;
+
+    //question object variables
+    public byte lengthStringSplitQuestions = 15;
+    public byte maxLettersOnLineQuestions = 8;
 
     void Start () {
         txtHowTo.gameObject.SetActive(false);
-        StartCoroutine(getProjectsFromURL(urlProjects));
+        StartCoroutine(getProjectsFromURL(urlProjects)); //Get projects from URL
         playerScript = GetComponent<Player>();
         scriptCanvas = GetComponent<canvasScript>();
         txtProjectName.text = "veeg naar links \n en rechts \n om een project \n te kiezen";
-         answerCount = 0;
+
     }
     void OnTriggerEnter(Collider other)
     {
-
+        //if player has chosen answer 
         if (other.gameObject.tag == "AnswerA")
         {
             answerCount++;
@@ -83,6 +105,7 @@ public class databaseConnection : MonoBehaviour {
         {
             answerCount++;
         }
+
         if (other.gameObject.tag == "StartGame")
         {
             txtHowTo.gameObject.SetActive(false);
@@ -92,40 +115,42 @@ public class databaseConnection : MonoBehaviour {
                 scriptCanvas.showEndScreen();
             }
             else { 
-            if(arrQuestions[0].type == "Gesloten vragen")
+            if(arrQuestions[0].type == "Gesloten vragen") //only 2 possible answers for first tunnel
             {
                 tunnel1Option2.gameObject.SetActive(true);
                 tunnel1Option4.gameObject.SetActive(false);
-                    playerScript.maxLaneLeft = 2;
+                    playerScript.maxLaneLeft = maxLaneLeftClosedQuestion;
                     txtAnswer3.text = "";
                     txtAnswer4.text = "";
                 }
-                else
+                else //4 possible answers for first tunnel
                 {
                     txtAnswer3.text = arrQuestions[answerCount].possibility3;
                     txtAnswer4.text = arrQuestions[answerCount].possibility4;
                 }
             
-            if (arrQuestions.Length >= 2 && arrQuestions[1] != null) { 
-            if (arrQuestions[1].type == "Gesloten vragen")
+            if (arrQuestions.Length >= 2 && arrQuestions[1] != null) { //if there are enough questions for at least 2 tunnels
+            if (arrQuestions[1].type == "Gesloten vragen") //if there are only 2 possible answers for 2nd tunnel
             {
                 tunnel2Option2.gameObject.SetActive(true);
                 tunnel2Option4.gameObject.SetActive(false);
-
             }
             }
+            //change text objects to possible answers for first tunnel
             txtAnswer1.text = arrQuestions[answerCount].possibility1;
             txtAnswer2.text = arrQuestions[answerCount].possibility2;
             txtQuestion.text = arrQuestions[answerCount].question;
             txtnoAnswer.text = "geen \n mening";
             }
         }
-        if (other.gameObject.CompareTag("TriggerRoadSpawn"))
+
+        if (other.gameObject.CompareTag("TriggerRoadSpawn")) //spawn the road and destroy trigger
         {
             Destroy(other.gameObject);
             RoadSpawn();
         }
     }
+
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Tunnel")
@@ -135,16 +160,16 @@ public class databaseConnection : MonoBehaviour {
                 isPlaying = false;
                 scriptCanvas.showEndScreen();
             }
-            else
+            else //show next tunnel question and possible answers
             {
-                if(arrQuestions[answerCount].type == "Gesloten vragen")
+                if(arrQuestions[answerCount].type == "Gesloten vragen") //2 possible answers
                 {
                     txtAnswer3.text = "";
                     txtAnswer4.text = "";
-                    playerScript.maxLaneLeft = 2;
+                    playerScript.maxLaneLeft = maxLaneLeftClosedQuestion;
                 }
-                else {
-                    playerScript.maxLaneLeft = 0;
+                else { //4 possible answers
+                playerScript.maxLaneLeft = 0; //reset maximum lane left
                 txtAnswer3.text = arrQuestions[answerCount].possibility3;
                 txtAnswer4.text = arrQuestions[answerCount].possibility4;
                 }
@@ -171,14 +196,15 @@ public class databaseConnection : MonoBehaviour {
                     float deltaXSwipe = initialTouchSwipe.position.x - t.position.x;
                     float deltaYSwipe = initialTouchSwipe.position.y - t.position.y;
                     distanceSwipe = Mathf.Sqrt((deltaXSwipe * deltaXSwipe) + (deltaYSwipe * deltaYSwipe));
-                    //direction
+
+                    //direction formula
                     bool swipedSideways = Mathf.Abs(deltaXSwipe) > Mathf.Abs(deltaYSwipe); //swipe up and down or sideways
-                    if (distanceSwipe > 100)//100
+                    if (distanceSwipe > distanceToRegisterSwipe)
                     {
-                        if (swipedSideways && deltaXSwipe > 0) //swiped left
+                        if (swipedSideways && deltaXSwipe > 0) //swiped left, change project
                         {
                             
-                            if (currentProject == 0)
+                            if (currentProject == 0) //go to end of project line
                                 {
                                     currentProject = (byte)(arrProjects.Length - 1);
                                 }
@@ -191,9 +217,9 @@ public class databaseConnection : MonoBehaviour {
                                 txtProjectDescription.text = arrProjects[currentProject].description;
                                 txtProjectDates.text = arrProjects[currentProject].date;
                         }
-                        else if (swipedSideways && deltaXSwipe <= 0) //swiped right
+                        else if (swipedSideways && deltaXSwipe <= 0) //swiped right, change project
                         {
-                                if (currentProject == (byte)(arrProjects.Length - 1))
+                                if (currentProject == (byte)(arrProjects.Length - 1)) //go to begin of project line
                                 {
                                     currentProject = 0;
                                 }
@@ -204,9 +230,8 @@ public class databaseConnection : MonoBehaviour {
                                 txtProjectName.text = arrProjects[currentProject].title;
                                 txtProjectDescription.text = arrProjects[currentProject].description;
                                 txtProjectDates.text = arrProjects[currentProject].date;
-                            
                         }
-                        else if (!swipedSideways && deltaYSwipe <= 0) //swiped up
+                        else if (!swipedSideways && deltaYSwipe <= 0) //swiped up, start game/answering questions
                         {
                             txtHowTo.gameObject.SetActive(true);
                         isPlaying = true;
@@ -224,28 +249,27 @@ public class databaseConnection : MonoBehaviour {
                 }
             }
         }
-        
+
     }
     
-    
-    public class ObjectJSONProjects //type of objects with info for projects
+     
+    public class ObjectJSONProjects //objects with info for projects
     {
-        //{"id":10,"titel":"W<CW<C","beschrijving":"klick op mij en pas mij aan voor de beschrijving",
-        //"begin_datum":"0000-00-00","eind_datum":"0000-00-00","project_picture":"proef_proef.jpg",
-        //"user_id":"1","deleted_at":null,"created_at":"2016-05-13 07:40:35","updated_at":"2016-05-13 07:40:35"}
         string jID;
         string projectTitle;
         string projectDescription;
         string projectDate;
-
+        byte maxLettersOnLine;
+        byte lengthStringSplit;
         public ObjectJSONProjects() { } //empty for default
-        public ObjectJSONProjects(string tID, string tTitle, string tDescription, string startDate, string endDate)
+        public ObjectJSONProjects(string tID, string tTitle, string tDescription, string startDate, string endDate, byte tLengthStringSplit, byte tMaxLettersOnLine)
         {
+            maxLettersOnLine = tMaxLettersOnLine;
+            lengthStringSplit = tLengthStringSplit;
             jID = tID;
             projectTitle = splitProjectsString(tTitle);
             projectDescription = splitProjectsString( tDescription);
             projectDate = startDate + "\n tot \n" + endDate;
-
         }
 
         public string id
@@ -276,17 +300,17 @@ public class databaseConnection : MonoBehaviour {
                 return projectDescription;
             }
         }
-        private string splitProjectsString(string stringToSplit)
+        private string splitProjectsString(string stringToSplit) //split string to fit on screen
         {
-            if (stringToSplit.Length > 15) // doesn't fit in screen any more
+            if (stringToSplit.Length > lengthStringSplit) // doesn't fit in screen any more
             {
                 int lettersOnLine = 0;
                 string stringToReturn = "";
                 string[] wordsInString = stringToSplit.Split(' ');
-                for (int i = 0; i < wordsInString.Length; i++)
+                for (int i = 0; i < wordsInString.Length; i++) //adds words to a new line in the string
                 {
                     lettersOnLine += wordsInString[i].Length;
-                    if (lettersOnLine >= 7)
+                    if (lettersOnLine >= maxLettersOnLine) // if the letters already added on a line are over the max, add an enter
                     {
                         stringToReturn += " " + wordsInString[i] + "\n";
                         lettersOnLine = 0;
@@ -313,9 +337,13 @@ public class databaseConnection : MonoBehaviour {
         string qQuestion;
         string possibleAnswers1, possibleAnswers2, possibleAnswers3, possibleAnswers4;
         string answerToReturn1, answerToReturn2, answerToReturn3, answerToReturn4;
+        byte maxLettersOnLine;
+        byte lengthStringSplit;
         public ObjectJSONQuestions() { } //empty for default
-        public ObjectJSONQuestions(string tID, string tType, string tQuestion, string tPossibleAnswers1, string tPossibleAnswers2, string tPossibleAnswers3, string tPossibleAnswers4)
+        public ObjectJSONQuestions(string tID, string tType, string tQuestion, string tPossibleAnswers1, string tPossibleAnswers2, string tPossibleAnswers3, string tPossibleAnswers4, byte tLengthStringSplit, byte tMaxLettersOnLine)
         {
+            maxLettersOnLine = tMaxLettersOnLine;
+            lengthStringSplit = tLengthStringSplit;
             qID = tID;
             typeOfQuestion = tType;
             qQuestion = splitQuestionStrings(tQuestion);
@@ -327,6 +355,7 @@ public class databaseConnection : MonoBehaviour {
             answerToReturn2 = tPossibleAnswers2;
             answerToReturn3 = tPossibleAnswers3;
             answerToReturn4 = tPossibleAnswers4;
+
         }
         public string id
         {
@@ -408,7 +437,7 @@ public class databaseConnection : MonoBehaviour {
         }
         private string splitQuestionStrings(string stringToSplit)
         {
-            if (stringToSplit.Length > 15) // doesn't fit in screen any more
+            if (stringToSplit.Length > lengthStringSplit) // doesn't fit in screen any more
             {
                 int lettersOnLine = 0;
                 string stringToReturn = "";
@@ -416,7 +445,7 @@ public class databaseConnection : MonoBehaviour {
                 for (int i = 0; i < wordsInString.Length; i++)
                 {
                    lettersOnLine += wordsInString[i].Length;
-                    if(lettersOnLine >= 8)
+                    if(lettersOnLine >= maxLettersOnLine)
                     {
                         stringToReturn += " " + wordsInString[i] + "\n";
                         lettersOnLine = 0;
@@ -435,9 +464,7 @@ public class databaseConnection : MonoBehaviour {
         }
     }
 
-   
-
-    private string getQuestionsUrl(string projectID)
+    private string getQuestionsUrl(string projectID) //makes an url from chosen project
     {
         string urlPart1 = "http://mediachickens.multimediatechnology.be/unity/vragen/";
         string urlPart2 = "/api";
@@ -445,8 +472,7 @@ public class databaseConnection : MonoBehaviour {
         
     } //makes the url for getting the questions from the chosen project
 
-
-    public IEnumerator getProjectsFromURL(string projectUrl)
+    IEnumerator getProjectsFromURL(string projectUrl) //getting projects from the project URL
     {
         WWW wwwProjects = new WWW(projectUrl);
         yield return wwwProjects;
@@ -460,7 +486,8 @@ public class databaseConnection : MonoBehaviour {
             Debug.Log("ERROR: " + wwwProjects.error);
         }
     }
-    IEnumerator getQuestionsFromURL(string urlQuestions)
+
+    IEnumerator getQuestionsFromURL(string urlQuestions) //getting questions from the question URL
     { 
         WWW wwwQuestions = new WWW(urlQuestions);
 
@@ -477,29 +504,25 @@ public class databaseConnection : MonoBehaviour {
        
 
     }
-    private void addProjectsToArray(string jsonString) // jsonstring
+
+    private void addProjectsToArray(string jsonString) // add all projects to the projectArray
     {
-        
         JsonData dataProjects = JsonMapper.ToObject(jsonString);
         arrProjects = new ObjectJSONProjects[dataProjects.Count];
         for (int i = 0; i < dataProjects.Count; i++)
         {
-            arrProjects[i] = new ObjectJSONProjects(dataProjects[i]["id"].ToString(), dataProjects[i]["titel"].ToString(), dataProjects[i]["beschrijving"].ToString(), dataProjects[i]["begin_datum"].ToString(), dataProjects[i]["eind_datum"].ToString()); // json object oproepen door (id)
+            arrProjects[i] = new ObjectJSONProjects(dataProjects[i]["id"].ToString(), dataProjects[i]["titel"].ToString(), dataProjects[i]["beschrijving"].ToString(), dataProjects[i]["begin_datum"].ToString(), dataProjects[i]["eind_datum"].ToString(), lengthStringSplitProject, maxLettersOnLineProject); // json object oproepen door (id)
         }
-
-        //hierbij nog aanpassen!!!!! geen return meer geven
     }
 
     private void addQuestionsToArray(string jsonString) // adding the chosen questions to an array, ready for showing on tunnels
     {
-
         JsonData dateQuestion = JsonMapper.ToObject(jsonString);
         arrQuestions = new ObjectJSONQuestions[dateQuestion.Count];
-        for (int i = 0, j = 0; i < dateQuestion.Count; i++, j++)
+        for (int i = 0, j = 0; i < dateQuestion.Count; i++, j++) //add all questions to array
         {
-            if (dateQuestion[i]["choices"].ToString() != "open vragen")
+            if (dateQuestion[i]["choices"].ToString() != "open vragen") //if question has possible answers, add new question to array
             {
-               // Debug.Log(dateQuestion[i]["id"].ToString());
                 arrQuestions[j] = new ObjectJSONQuestions(
                         dateQuestion[i]["id"].ToString(), //string tID
                         
@@ -508,10 +531,10 @@ public class databaseConnection : MonoBehaviour {
                         dateQuestion[i]["mogelijke_antwoorden_1"].ToString(), //possibility1
                         dateQuestion[i]["mogelijke_antwoorden_2"].ToString(), //possibility2
                         dateQuestion[i]["mogelijke_antwoorden_3"].ToString(), //possibility3
-                        dateQuestion[i]["mogelijke_antwoorden_4"].ToString() //possibility4
+                        dateQuestion[i]["mogelijke_antwoorden_4"].ToString(), //possibility4
+                        lengthStringSplitQuestions,
+                        maxLettersOnLineQuestions
                         );
-                //string tQuestion, string tPossibleAnswers1, string tPossibleAnswers2, string tPossibleAnswers3, string tPossibleAnswers4
-
             }
             else
             {
@@ -520,36 +543,39 @@ public class databaseConnection : MonoBehaviour {
             
         }
     }
-   public void BtnPauseClicked()
+
+   public void BtnPauseClicked() //the pause button is clicked
     {
         scriptCanvas.showPauseScreen(isPlaying);
         if (isPlaying) { 
         isPlaying = false;
         }
     }
-    public void BtnContinueClicked()
+
+    public void BtnContinueClicked() //continue button is clicked, game continues
     {
         isPlaying = true;
         scriptCanvas.hideAllPaused();
     }
 
-    void RoadSpawn()
+    void RoadSpawn() //automatically spawns the road when reached roadtrigger
     {
-        if(answerCount+2 < arrQuestions.Length && arrQuestions[answerCount+2] != null) { 
-            if(arrQuestions[answerCount + 2].type == "Gesloten vragen") { 
-        Instantiate(tunnel2, new Vector3(35.2f, 0.002f, this.transform.position.z + (spawnDistance * 3)), Quaternion.identity);
-                Debug.Log("instantiate tunnel 2");
-            }
-            else if(arrQuestions[answerCount + 2].type == "meerkeuzevragen")
-            {
-                Debug.Log("instantiate tunnel 4");
-                Instantiate(tunnel4, new Vector3(35.2f, 0.002f, this.transform.position.z + (spawnDistance * 3)), Quaternion.identity);
-            }
-                Instantiate(roadTrigger, new Vector3(35.13f, 10, this.transform.position.z + spawnDistance), Quaternion.identity);
-    }
-        else
+        if(answerCount+2 < arrQuestions.Length && arrQuestions[answerCount+2] != null) { //if there are questions left show tunnel and new trigger
+
+            if(arrQuestions[answerCount + (numberFirstTunnelSpawn-1)].type == "Gesloten vragen") { //2 possible answers
+        Instantiate(tunnel2, new Vector3(35.2f, tunnelYPosition, this.transform.position.z + (spawnDistance * numberFirstTunnelSpawn)), Quaternion.identity);
+                }
+
+            else if(arrQuestions[answerCount + (numberFirstTunnelSpawn +1)].type == "meerkeuzevragen") //4 possible answers
+                {
+                Instantiate(tunnel4, new Vector3(35.2f, tunnelYPosition, this.transform.position.z + (spawnDistance * 3)), Quaternion.identity);
+                 }
+
+                Instantiate(roadTrigger, new Vector3(35.13f, triggerYPosition, this.transform.position.z + spawnDistance), Quaternion.identity);
+          }
+        else //if no more questions show only road
         {
-            Instantiate(road, new Vector3(35.2f, 0.002f, this.transform.position.z + (spawnDistance * 3)), Quaternion.identity);
+            Instantiate(road, new Vector3(35.2f, roadYPosition, this.transform.position.z + (spawnDistance * numberFirstTunnelSpawn)), Quaternion.identity);
         }
     }
 

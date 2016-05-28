@@ -1,85 +1,69 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
-//JSON
-using System.Collections;
-using System.Collections.Generic;
-using LitJson;
 
 public class Player : MonoBehaviour {
+    //connection with other scripts
+    databaseConnection scriptDatabase;
 
     //variables used for swipe touch registration
     private Touch initialTouchSwipe = new Touch();
     private float distanceSwipe = 0;
     private bool hasSwiped = false;
-
+    private byte distanceToRegisterSwipe = 100;
     //rigidbody for movement with force
-     Rigidbody rb;
+    private Rigidbody rb;
 
     //lane in which player is running, only 5 lanes
-    private byte currentLane;
-    public byte maxLaneLeft = 0;
-    //force to move player
-    private short forceSide = 700; //7000 //590 600acceler
-    private short forceUp = 225; //7800 //290 impuls 250
+    public byte currentLane = 2;
+    public byte maxLaneLeft = 0; //lane left can be changed when less possible answers
+    public byte maxLaneRight = 4;
+    public byte maxLaneActualAnswers = 3;
+    //force and speed to move player
+    public short forceSide = 700;
+    public short forceUp = 225; 
     private float speed = 0.7f;
-    private float speedSlow = 0.7f;
-    private float speedFast = 1f;
-    private float playerOnGround = 1.30f;
+    public float speedSlow = 0.7f;
+    public float speedFast = 1f;
+    public float playerOnGround = 1.30f;
     //rigidbodys for turning on the townsquare
     public Rigidbody road1;
     //if player has chosen answer
     public bool hasSwipedUp = false;
     public bool isRunning = false;
 
-    //connection with other script
-    public GameObject otherScript;
-    databaseConnection scriptDatabase;
-
     //camera for lerp
     public Camera mainCam;
-    float distanceFromPlayer;
-
-
+    private float distanceFromPlayer;
+    public byte minimumDistanceFromPlayer = 4;
+    public float cameraFollowSpeed = 5.0f;
 
     void Start()
     {
         scriptDatabase = GetComponent<databaseConnection>();
-        
-
         rb = GetComponent<Rigidbody>();
-        rb.constraints = RigidbodyConstraints.FreezeRotation;
-        currentLane = 2; //0links, 1 midden,2 rechts
-        road1.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ | RigidbodyConstraints.FreezePosition ;
-        road1.centerOfMass = new Vector3(0, 0, 0);
-        //JSon 
-
+        rb.constraints = RigidbodyConstraints.FreezeRotation; 
+        road1.constraints = RigidbodyConstraints.FreezeAll;
     }
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "MoveToRight")
+        if (other.gameObject.tag == "MoveToRight") //when only 2 possible answers, player is forced to move to right
         {
-            speed = speedSlow;
+            speed = speedSlow; //player is slowed down
             rb.AddForce(forceSide, forceUp, 0, ForceMode.Impulse);
             currentLane++;
             hasSwipedUp = false;
         }
-        if (other.gameObject.tag == "Tunnel")
+        if (other.gameObject.tag == "Tunnel") //if user reached tunnel, and hasn't swiped up, character stops running
         {
             if (!hasSwipedUp)
             {
                 isRunning = false;
             }
         }
-        if (other.gameObject.tag == "StartGame")
+        if (other.gameObject.tag == "StartGame") 
         {
             hasSwipedUp = false;
             speed = speedSlow;
         }
-        if (other.gameObject.tag == "BuildingsTownSquare")
-        {
-
-        }
-        
     }
     void OnTriggerExit(Collider other)
     {
@@ -96,16 +80,19 @@ public class Player : MonoBehaviour {
     }
     void FixedUpdate() //always being called
     {
-        if (scriptDatabase.isPlaying) {
-            if(this.transform.position.z-mainCam.transform.position.z < 4)
+        if (scriptDatabase.isPlaying) { //when game is not paused
+
+            if(this.transform.position.z-mainCam.transform.position.z < minimumDistanceFromPlayer) //if the player stops running, camera stops as well
             {
                 distanceFromPlayer = mainCam.transform.position.z;
             }
-            else { distanceFromPlayer = this.transform.position.z; }
-            mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, new Vector3(this.transform.position.x, mainCam.transform.position.y, distanceFromPlayer), 5.0f * Time.deltaTime);
-            if (isRunning) { 
+            else { distanceFromPlayer = this.transform.position.z; } //else camera follows player
+            mainCam.transform.position = Vector3.Lerp(mainCam.transform.position, new Vector3(this.transform.position.x, mainCam.transform.position.y, distanceFromPlayer), cameraFollowSpeed * Time.deltaTime);
+
+            if (isRunning) { //when player is choosing answers
             this.transform.position = this.transform.position + new Vector3(0, 0, speed);
             }
+
             foreach (Touch t in Input.touches)
             {
                 if (t.phase == TouchPhase.Began)
@@ -118,48 +105,47 @@ public class Player : MonoBehaviour {
                     float deltaXSwipe = initialTouchSwipe.position.x - t.position.x;
                     float deltaYSwipe = initialTouchSwipe.position.y - t.position.y;
                     distanceSwipe = Mathf.Sqrt((deltaXSwipe * deltaXSwipe) + (deltaYSwipe * deltaYSwipe));
-                    //direction
-                    bool swipedSideways = Mathf.Abs(deltaXSwipe) > Mathf.Abs(deltaYSwipe); //swipe up and down or sideways
-                    if (distanceSwipe > 100 && this.transform.position.y < playerOnGround)//100
+
+                    //direction formula
+                    bool swipedSideways = Mathf.Abs(deltaXSwipe) > Mathf.Abs(deltaYSwipe); //check if player swiped sideways
+                    if (distanceSwipe > distanceToRegisterSwipe && this.transform.position.y < playerOnGround)
                     {
-                        if (swipedSideways && deltaXSwipe > 0) //swiped left
+                        if (swipedSideways && deltaXSwipe > 0) //user swiped left
                         {
-                            Debug.Log("currentlane:" + currentLane + "max lane" + maxLaneLeft);
-                                if (currentLane <= maxLaneLeft) // player not on left lane
+                                if (currentLane <= maxLaneLeft) // if player is on left lane, do nothing
                             {
                             }
-                                else if(currentLane == 4)
+                                else if(currentLane == maxLaneRight)
                             {
-                                rb.AddForce(-(forceSide*1.5f), forceUp, 0, ForceMode.Impulse); //force
+                                rb.AddForce(-(forceSide+(forceSide/2)), forceUp, 0, ForceMode.Impulse); //when player is on no-answer lane
                                 currentLane--;
                             }
                             else
                             {
-                                rb.AddForce(-forceSide, forceUp, 0, ForceMode.Impulse);
+                                rb.AddForce(-forceSide, forceUp, 0, ForceMode.Impulse); //when player is on normal lanes
                                 currentLane--;
                             }
                             
                         }
 
-                        else if (swipedSideways && deltaXSwipe <= 0) //swiped right
+                        else if (swipedSideways && deltaXSwipe <= 0) //user swiped right
                         {
-                                if (currentLane == 4)// player not on right lane
+                                if (currentLane == maxLaneRight)// player is on right lane
                                 {
                                 //do nothing
                                 }
-                                else if(currentLane == 3)
+                                else if(currentLane == maxLaneActualAnswers) //player is going to no answer lane, needs more force
                                {
-                                rb.AddForce(forceSide * 1.5f, forceUp, 0, ForceMode.Impulse);
+                                rb.AddForce(forceSide + (forceSide/2), forceUp, 0, ForceMode.Impulse);
                                 currentLane++;
                             }
-                               else
+                               else //player is on middle answer lanes
                                {
                                 rb.AddForce(forceSide, forceUp, 0, ForceMode.Impulse);
                                 currentLane++;
                                 }
-                           
                         }
-                        else if (!swipedSideways && deltaYSwipe <= 0) //swiped up
+                        else if (!swipedSideways && deltaYSwipe <= 0) //user swiped up
                         {
                             isRunning = true;
                             hasSwipedUp = true;
