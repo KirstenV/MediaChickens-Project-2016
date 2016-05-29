@@ -6,4 +6,9 @@ public class BtnRestart : MonoBehaviour {
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene("scene_AntwerpRunner");
     }
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
+    }
 }
