@@ -10,6 +10,9 @@ public class databaseConnection : MonoBehaviour {
     //game is not paused
     public bool isPlaying = false;
 
+    //animator for character
+    private Animator characterAnimator;
+
     //variables for swipe
     private Touch initialTouchSwipe = new Touch();
     private float distanceSwipe = 0;
@@ -61,7 +64,7 @@ public class databaseConnection : MonoBehaviour {
     public GameObject tunnel2Option2;
 
     //spawning roads and text object
-   public float spawnDistance = 200;
+   public float spawnDistance = 243.68f;
 
     //maximum lane player can run on (to be send to player)
     private byte maxLaneLeftClosedQuestion = 2;
@@ -77,9 +80,10 @@ public class databaseConnection : MonoBehaviour {
     void Start () {
         txtHowTo.gameObject.SetActive(false);
         StartCoroutine(getProjectsFromURL(urlProjects)); //Get projects from URL
+        txtProjectName.text = "veeg naar links \n en rechts \n om een project \n te kiezen";
+        characterAnimator = this.GetComponent<Animator>();
         playerScript = GetComponent<Player>();
         scriptCanvas = GetComponent<canvasScript>();
-        txtProjectName.text = "veeg naar links \n en rechts \n om een project \n te kiezen";
 
     }
     void OnTriggerEnter(Collider other)
@@ -236,9 +240,9 @@ public class databaseConnection : MonoBehaviour {
                             txtHowTo.gameObject.SetActive(true);
                         isPlaying = true;
                         StartCoroutine(getQuestionsFromURL(getQuestionsUrl(arrProjects[currentProject].id.ToString()))); //getting questions once player has chosen project
-                        playerScript.isRunning = true;
                         playerScript.hasSwipedUp = true;
-                    }
+                        characterAnimator.SetBool("isRunning", true);
+                        }
                         hasSwiped = true;
                     }
                 }
@@ -251,8 +255,25 @@ public class databaseConnection : MonoBehaviour {
         }
 
     }
-    
-     
+
+    public void BtnPauseClicked() //the pause button is clicked
+    {
+        //scriptCanvas = GetComponent<canvasScript>();
+       // Debug.Log(playerScript.cameraFollowSpeed);
+        Debug.Log(isPlaying);
+        scriptCanvas.showPauseScreen(isPlaying);
+        if (isPlaying)
+        {
+            isPlaying = false;
+        }
+    }
+
+    public void BtnContinueClicked() //continue button is clicked, game continues
+    {
+        isPlaying = true;
+        scriptCanvas.hideAllPaused();
+    }
+
     public class ObjectJSONProjects //objects with info for projects
     {
         string jID;
@@ -544,23 +565,10 @@ public class databaseConnection : MonoBehaviour {
         }
     }
 
-   public void BtnPauseClicked() //the pause button is clicked
-    {
-        scriptCanvas.showPauseScreen(isPlaying);
-        if (isPlaying) { 
-        isPlaying = false;
-        }
-    }
-
-    public void BtnContinueClicked() //continue button is clicked, game continues
-    {
-        isPlaying = true;
-        scriptCanvas.hideAllPaused();
-    }
 
     void RoadSpawn() //automatically spawns the road when reached roadtrigger
     {
-        if(answerCount+2 < arrQuestions.Length && arrQuestions[answerCount+2] != null) { //if there are questions left show tunnel and new trigger
+        if(answerCount+2 < arrQuestions.Length && arrQuestions[answerCount+2] != null) { //if there are questions left, show tunnel and new trigger
 
             if(arrQuestions[answerCount + (numberFirstTunnelSpawn-1)].type == "Gesloten vragen") { //2 possible answers
         Instantiate(tunnel2, new Vector3(35.2f, tunnelYPosition, this.transform.position.z + (spawnDistance * numberFirstTunnelSpawn)), Quaternion.identity);

@@ -84,6 +84,7 @@ public class canvasScript : MonoBehaviour {
     } //shows the elements all paused screens have (background, logo) and hides the game interface
     public void showPauseScreen(bool isPlaying)
     {
+        Debug.Log("paused");
         txtPauseTitle.text = "pauze".ToUpper(); 
         showPauseAll();
         //overlap Pause and Login, not finished -> finished is when all questions of project are answered, and player gets and end screen
