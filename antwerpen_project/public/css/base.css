@@ -798,6 +798,7 @@ h5.title-font {
     border: 1px dashed;
     padding: 15px;
     margin-bottom: 10px;
+    overflow: auto;
 }
 
 #edit-fase-content ul li {

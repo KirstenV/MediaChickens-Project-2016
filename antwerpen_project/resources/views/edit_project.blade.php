@@ -274,7 +274,7 @@
                                         <p class='vraag project titel' ng-class="{'invalid': toon_fout_melding('vraag',vraag.id)}" data-update_status='init' data-titel='vraag' data-tabel='vragen' data-id='@{{vraag.id}}' contenteditable='true' placeholder="">@{{vraag.vraag}}</p>
 
                                         <!--feedback validatie-->
-                                        <div class="invalid" ng-show="toon_fout_melding('vraag',vraag.id)">@{{ server_controle_fout[0] }}
+                                        <div class="invalid error-message" ng-show="toon_fout_melding('vraag',vraag.id)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{ server_controle_fout[0] }}
                                         </div>
                                         <br>
                                         <!--end feedback-->
@@ -285,7 +285,7 @@
                                     </div>
 
                                     <div id="edit-vraag-content" ng-show="vraag.choices == 'meerkeuzevragen'">
-                                        <h5 class="title_red title-font">Vraag @{{ $index+1 }}: @{{vraag.choices}} <br class="visible-xs"> <small>max 1000 karakters per veld</small></h5>
+                                        <h5 class="title_red title-font">Vraag @{{ $index+1 }}: @{{vraag.choices}} <br class="visible-xs"> <small>max 250 karakters per veld</small></h5>
                                         <a href="" title="verwijder">
                                             <i class="fa fa-times" aria-hidden="true" ng-click="delete_elemets_on_edit_page_vragen(vraag.id,$index,'vragen')"></i>
                                         </a>
@@ -293,7 +293,7 @@
                                         <p ng-class="{'invalid': toon_fout_melding('vraag',vraag.id)}" class='vraag project titel' data-update_status='init' data-titel='vraag' data-tabel='vragen' data-id='@{{vraag.id}}' contenteditable='true'>@{{vraag.vraag}}</p>
 
                                         <!--feedback validatie-->
-                                        <div class="invalid" ng-show="toon_fout_melding('vraag',vraag.id)">@{{ server_controle_fout[0] }}
+                                        <div class="invalid error-message" ng-show="toon_fout_melding('vraag',vraag.id)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{ server_controle_fout[0] }}
                                         </div>
 
                                         <!--end feedback-->
@@ -314,14 +314,14 @@
                                     </div>
                                     <div id="edit-vraag-content" ng-show="vraag.choices == 'Gesloten vragen'">
 
-                                        <h5 class="title_red title-font">Vraag @{{ $index+1 }}: @{{vraag.choices}} <br class="visible-xs"> <small>max 1000 karakters per veld</small></h5>
+                                        <h5 class="title_red title-font">Vraag @{{ $index+1 }}: @{{vraag.choices}} <br class="visible-xs"> <small>max 250 karakters per veld</small></h5>
                                         <a href="" title="verwijder">
                                             <i class="fa fa-times" aria-hidden="true" ng-click="delete_elemets_on_edit_page_vragen(vraag.id,$index,'vragen')"></i>
                                         </a>
 
                                         <p ng-class="{'invalid': toon_fout_melding('vraag',vraag.id)}" class='vraag project titel' data-update_status='init' data-titel='vraag' data-tabel='vragen' data-id='@{{vraag.id}}' contenteditable='true'>@{{vraag.vraag}}</p>
                                         <!--feedback validatie-->
-                                        <div class="invalid" ng-show="toon_fout_melding('vraag',vraag.id)">@{{ server_controle_fout[0] }}
+                                        <div class="invalid error-message" ng-show="toon_fout_melding('vraag',vraag.id)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{ server_controle_fout[0] }}
                                         </div>
 
                                         <!--end feedback-->
@@ -396,29 +396,29 @@
 
 
                                                     <p ng-class="{'invalid': toon_fout_melding('fase_titel',fase.id)}" class='project titel' data-update_status='init' data-titel='fase_titel' data-tabel='fases' data-id='@{{fase.id}}' contenteditable='true'>@{{ fase.fase_titel}}</p>
-                                                    <p class="invalid" ng-show="toon_fout_melding('fase_titel',fase.id)">@{{ server_controle_fout[0] }}</p>
+                                                    <p class="invalid error-message" ng-show="toon_fout_melding('fase_titel',fase.id)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{ server_controle_fout[0] }}</p>
 
                                                     <p ng-class="{'invalid': toon_fout_melding('fase_beschrijving',fase.id)}" class='project titel' data-update_status='init' data-titel='fase_beschrijving' data-tabel='fases' data-id='@{{fase.id}}' contenteditable='true'>@{{ fase.fase_beschrijving}}</p>
 
-                                                    <p class="invalid" ng-show="toon_fout_melding('fase_beschrijving',fase.id)">@{{ server_controle_fout[0] }}
+                                                    <p class="invalid error-message" ng-show="toon_fout_melding('fase_beschrijving',fase.id)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{ server_controle_fout[0] }}
                                                     </p>
 
 
 
+                                                    <p>Status:
+                                                        <select class="form-control inline" ng-change="fase_update($index,fase.id);" ng-model="fase_choice[$index]">
 
-                                                    <select class="form-control" ng-change="fase_update($index,fase.id);" ng-model="fase_choice[$index]">
-                                                        <option selected="true" disabled>Status</option>
-                                                        <option ng-selected="'open fase'=== show_fases[$index].fases" value="open fase">Open
-                                                        </option>
-                                                        <option ng-selected="'in progress' === show_fases[$index].fases" value="in progress">Bezig
-                                                        </option>
-                                                        <option ng-selected="'fase afgesloten' === show_fases[$index].fases" value="fase afgesloten">Afgesloten
-                                                        </option>
-                                                    </select>
+                                                            <option ng-selected="'open fase'=== show_fases[$index].fases" value="open fase">Open
+                                                            </option>
+                                                            <option ng-selected="'in progress' === show_fases[$index].fases" value="in progress">Bezig
+                                                            </option>
+                                                            <option ng-selected="'fase afgesloten' === show_fases[$index].fases" value="fase afgesloten">Afgesloten
+                                                            </option>
+                                                        </select>
+                                                    </p>
 
 
-
-                                                    <div class="invalid" ng-show="toon_fout_melding('fases',fase.id)">@{{ server_controle_fout[0] }}
+                                                    <div class="invalid error-message" ng-show="toon_fout_melding('fases',fase.id)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{ server_controle_fout[0] }}
                                                     </div>
 
                                                 </div>
@@ -441,7 +441,7 @@
                                                 <li class="error-message" ng-repeat="f in errFiles">
                                                     <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{f.name}}, @{{f.$error}}: @{{f.$errorParam}}
                                                 </li>
-                                                <li class="error-message" ng-show="errorMsg">@{{errorMsg}}</li>
+                                                <li class="error-message" ng-show="errorMsg"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{errorMsg}}</li>
                                             </ul>
                                         </div>
                                     </div>
