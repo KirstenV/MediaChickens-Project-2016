@@ -44,7 +44,7 @@
                                 <h4 class="title_red title-font">Titel <br class="visible-xs"> <small>max 250 karakters</small></h4>
 
 
-                                <p ng-class="{'invalid': toon_fout_melding('titel',project.id)}" class="no-padding col-md-12 project titel" ng-model="inhoud" data-update_status='init' data-titel='titel' data-tabel='projecten' data-id='{{$id}}' contenteditable='true' >@{{project.titel}}</p>
+                                <p ng-class="{'invalid': toon_fout_melding('titel',project.id)}" class="no-padding col-md-12 project titel" ng-model="inhoud" data-update_status='init' data-titel='titel' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.titel}}</p>
                                 <!--ng-show="toon_succes_melding('titel',project.id)"-->
 
                                 <div class="invalid error-message" ng-show="toon_fout_melding('titel',project.id)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{ server_controle_fout[0] }}</div>
@@ -219,7 +219,7 @@
 
                                 <div class="col-md-6" id="edit-foto-big" ng-hide="show_fotos.length">
 
-                                    <img ng-src="{{Request::root()}}/img/project/default.png" alt="default" />
+                                    <img ng-src="{{Request::root()}}/img/project/default.png" alt="default" ngf-select="uploadFiles($files, $invalidFiles)" multiple accept="image/*" ngf-max-height="1000" ngf-accept="'image/*'" ngf-max-size="1MB" />
 
                                 </div>
 
@@ -428,7 +428,7 @@
                                                 <div id="fase-img" class="col-md-6">
 
                                                     <a href="" id="fase-img-del" title="Verwijder foto" ng-click="delete_elemets_on_edit_page_fotos(foto.id,$index,'foto','show_fotos')">
-                                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                                        <i class="fa fa-times" aria-hidden="true" ng-click="delete_update_fase_img(fase.id,$index)"></i>
                                                     </a>
                                                     <img ng-click="get_fase_id($index)" ngf-select="uploadFiles($files, $invalidFiles, fase.id,$index )" accept="image/*" ngf-max-height="1000" ngf-accept="'image/*'" ngf-max-size="1MB" ng-src="{{Request::root()}}/img/fase/@{{ fase.fases_picture }}" alt="@{{ fase.fases_picture }}">
 
