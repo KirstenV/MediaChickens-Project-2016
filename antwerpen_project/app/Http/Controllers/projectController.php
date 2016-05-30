@@ -17,7 +17,6 @@ use Validator;
 use Intervention\Image\ImageManagerStatic as Image;
 
 
-
 use App\Http\Requests;
 use Carbon\Carbon;
 
@@ -149,7 +148,7 @@ class projectController extends Controller
         }
 
         DB::table($table)->where('id', $id)->update(array($request->input('rij_naam') => $request->input('invul_veld')));
-        if($request->rij_naam=='fases_picture'){
+        if ($request->rij_naam == 'fases_picture') {
             $project_information = array_add($project_information, 'fases_picture', Fase::find($id)->fases_picture);
         }
 
@@ -192,8 +191,8 @@ class projectController extends Controller
 
         $project = new Projecten;
         $project->titel = $request->row_content;
-        $project->begin_datum =  Carbon::now();
-        $project->eind_datum =  Carbon::now();
+        $project->begin_datum = Carbon::now();
+        $project->eind_datum = Carbon::now();
         $project->beschrijving = "klick op mij en pas mij aan voor de beschrijving";
         $project->project_picture = "proef_proef.jpg";
         $project->user_id = $request->admin;
@@ -285,12 +284,13 @@ class projectController extends Controller
 
     }
 
-    public function delete_review(Request $request){
+    public function delete_review(Request $request)
+    {
 
 
         $review = Reactie::find($request->review_id);
-        if($review->delete()){
-            return  array('succes' => true);
+        if ($review->delete()) {
+            return array('succes' => true);
         }
 
 
@@ -317,7 +317,7 @@ class projectController extends Controller
             $project->delete();
             $massege = " fase is succes vol verwijderd";
         }
-        if($tabele == "locations"){
+        if ($tabele == "locations") {
             $project = Locatie::find($id);
             $project->delete();
             $massege = " fase is succes vol verwijderd";
@@ -353,6 +353,22 @@ class projectController extends Controller
 
     public function update_fase_img(Request $request)
     {
+
+        if ($request->fase_id) {
+            DB::table('fases')->where('id', $request->fase_id)->update(array('fases_picture' => 'fases_picture_default.jpg'));
+            $fase_img_url=Fase::find($request->fase_id)->fases_picture;
+            return array('succes'=>true,"fase_img_url"=>$fase_img_url);
+        }else{
+            return array("error"=>"fase id dosent set");
+        }
+        /* $fase = new Fase;
+         $fase->fase_titel = "Voer hier titel in van de fase";
+         $fase->fase_beschrijving = "Voer hier je vraag in van de fase";
+         $fase->fases = "open fase";
+         $fase->fases_picture = "fases_picture_default.jpg";
+         $fase->projecten_id = $request->project_id;
+         $fase->save();*/
+
 
     }
 
@@ -399,8 +415,8 @@ class projectController extends Controller
             'lat' => 'required|max: 250',
             'lng' => 'required|max: 250',
         ]);
-        if(!$project_id){
-            $project_information = array_add($project_information, '$errors',"Oeps, er ging iets fout! Refresh je pagina!");
+        if (!$project_id) {
+            $project_information = array_add($project_information, '$errors', "Oeps, er ging iets fout! Refresh je pagina!");
             return $project_information;
         }
 
@@ -423,60 +439,63 @@ class projectController extends Controller
         $bridge_locatie_project->projecten_id = $project_id;
         $bridge_locatie_project->locatie_id = $locatie->id;
         $bridge_locatie_project->save();
-        $project_information = array_add($project_information, '$succes',"alles is opgeslagen" );
-        $project_information = array_add($project_information, '$location',$locatie );
+        $project_information = array_add($project_information, '$succes', "alles is opgeslagen");
+        $project_information = array_add($project_information, '$location', $locatie);
 
-        return  $project_information;
+        return $project_information;
     }
 
-    public function json_locaties($project_id){
+    public function json_locaties($project_id)
+    {
         $locaties = Projecten::find($project_id)->show_locaties;
         return $locaties;
     }
 
-    public  function get_user_json(){
+    public function get_user_json()
+    {
 
         $users = DB::table('users')->select('name')->whereNull('deleted_at')
             ->orderBy('name');
-        $is_adm = $users->addSelect('is_adm','id','email')->get();
+        $is_adm = $users->addSelect('is_adm', 'id', 'email')->get();
 
-        if(!$is_adm){
-            return  array('$error' => "Fout met her server");
+        if (!$is_adm) {
+            return array('$error' => "Fout met her server");
         }
         return $is_adm;
     }
 
-    public function manag_users(Request $request){
-        if($request->action === "delete"){
+    public function manag_users(Request $request)
+    {
+        if ($request->action === "delete") {
             $users = User::find($request->id);
             $users->delete();
-            $massege =  array('succes' =>true, "delete"=>true);
+            $massege = array('succes' => true, "delete" => true);
             return $massege;
-        }else{
+        } else {
             $id = $request->id;
-            if($request->action == "0"){
+            if ($request->action == "0") {
                 DB::table('users')->where('id', $id)->update(array('is_adm' => "1"));
 
 
-                $users = DB::table('users')->select('name')->where('id',$id)->whereNull('deleted_at')
+                $users = DB::table('users')->select('name')->where('id', $id)->whereNull('deleted_at')
                     ->orderBy('name');;
-                $is_adm = $users->addSelect('is_adm','id','email')->get();
+                $is_adm = $users->addSelect('is_adm', 'id', 'email')->get();
 
-                return array('succes' => true,"id"=>$id,"is_adm"=> '1',"update"=>true,"user"=>$is_adm);
+                return array('succes' => true, "id" => $id, "is_adm" => '1', "update" => true, "user" => $is_adm);
             }
-            if($request->action == "1"){
+            if ($request->action == "1") {
                 DB::table('users')->where('id', $id)->update(array('is_adm' => "0"));
-                
-                $users = DB::table('users')->select('name')->where('id',$id)->whereNull('deleted_at')
-                    ->orderBy('name');;
-                $is_adm = $users->addSelect('is_adm','id','email')->get();
 
-                return array('succes' => true,"id"=>$id,"is_adm"=> '0',"update"=>true,"user"=>$is_adm);
+                $users = DB::table('users')->select('name')->where('id', $id)->whereNull('deleted_at')
+                    ->orderBy('name');;
+                $is_adm = $users->addSelect('is_adm', 'id', 'email')->get();
+
+                return array('succes' => true, "id" => $id, "is_adm" => '0', "update" => true, "user" => $is_adm);
             }
 
         }
         return array('$error' => "Fout met her server");
     }
-   
+
 
 }

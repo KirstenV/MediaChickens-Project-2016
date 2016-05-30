@@ -214,7 +214,8 @@
 
                         <!------------------------------start User management-->
 
-
+                        @if(Auth::check())
+                            @if(Auth::user()->is_adm)
                         <div ng-controller="UsersController" class="col-md-12">
                             <div class="row">
                                 <div class="col-md-12">
@@ -246,13 +247,15 @@
                                     </tr>
                                 </tbody>
                             </table>
-
+@endif
+                            @endif
 
 
 
                             <div ng-show="error_users_management">@{{ error_users_management }}</div>
 
                         </div>
+
 
                         <!------------------------------end User management-->
 

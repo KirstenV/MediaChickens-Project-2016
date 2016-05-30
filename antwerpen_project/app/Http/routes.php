@@ -100,7 +100,8 @@ Route::post('question/answer','PagesController@save_answers');
 Route::get('fase/get_fase/{id}/api',"projectController@get_fase");
 Route::post('fase/add_fase/api',"projectController@add_fase");
 Route::post('Project_fase/update_fase_img/api',"projectController@post_fase_img");
-Route::put('Project_fase/update_fase_img/api', 'projectController@update_fase_img');
+Route::post('project_fase/update_fase_img/api', 'projectController@update_fase_img');
+//Route::put('update_fase_img/api','projectController@update_fase_img');
 
 
 

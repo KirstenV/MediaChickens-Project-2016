@@ -246,7 +246,7 @@
                             <div id="project-side-container" class="col-md-2 col-xs-2">
                                 <div id="project-side-location" class="col-md-12 col-xs-12">
                                     <h4 class="title_red title-font">Waar?</h4> Meir, 15, Antwerpen, Belgium
-
+                                    @{{ project.review_rating_sum }}
 
                                 </div>
 
