@@ -41,13 +41,13 @@
                             </div>
                             <div id="edit-title" class="col-md-12 edit-white-box" data-toggle="tooltip" data-placement="top" title="Klik op de tekst om aan te passen">
 
-                                <h4 class="title_red title-font">Titel <small>max 250 karakters</small></h4>
+                                <h4 class="title_red title-font">Titel <br class="visible-xs"> <small>max 250 karakters</small></h4>
 
 
-                                <p ng-class="{'invalid': toon_fout_melding('titel',project.id)}" class="no-padding col-md-12 project titel" ng-model="inhoud" data-update_status='init' data-titel='titel' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.titel}}</p>
+                                <p ng-class="{'invalid': toon_fout_melding('titel',project.id)}" class="no-padding col-md-12 project titel" ng-model="inhoud" data-update_status='init' data-titel='titel' data-tabel='projecten' data-id='{{$id}}' contenteditable='true' >@{{project.titel}}</p>
                                 <!--ng-show="toon_succes_melding('titel',project.id)"-->
 
-                                <div class="invalid" ng-show="toon_fout_melding('titel',project.id)">@{{ server_controle_fout[0] }}</div>
+                                <div class="invalid error-message" ng-show="toon_fout_melding('titel',project.id)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{ server_controle_fout[0] }}</div>
 
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                                 <h4 class="title_red title-font">Begindatum</h4>
                                 <input data-update_status='init' data-titel='begin_datum' data-tabel='projecten' data-id='{{$id}}' type="text" class="inline  begin_datum datum form-control text-center" name="start" ng-model="project.begin_datum" />
 
-                                <div class="invalid" ng-show="toon_fout_melding('begin_datum',project.id)">@{{ server_controle_fout[0] }}
+                                <div class="invalid error-message" ng-show="toon_fout_melding('begin_datum',project.id)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{ server_controle_fout[0] }}
                                 </div>
 
                             </div>
@@ -74,7 +74,7 @@
 
                                 <h4 class="title_red title-font">Einddatum</h4>
                                 <input data-update_status='init' data-titel='eind_datum' data-tabel='projecten' data-id='{{$id}}' type="text" class="inline  begin_datum datum form-control text-center" name="end" ng-model="project.eind_datum" />
-                                <div class="invalid" ng-show="toon_fout_melding('eind_datum',project.id)">@{{ server_controle_fout[0] }}
+                                <div class="invalid error-message" ng-show="toon_fout_melding('eind_datum',project.id)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{ server_controle_fout[0] }}
                                 </div>
 
                             </div>
@@ -91,9 +91,9 @@
                                 <i class="fa fa-check" aria-hidden="true"></i> Opgeslagen!
                             </div>
                             <div id="edit-beschrijving" class="edit-white-box" data-toggle="tooltip" data-placement="top" title="Klik op de tekst om aan te passen">
-                                <h4 class="title_red  title-font">Beschrijving <small>max 5000 karakters</small></h4>
+                                <h4 class="title_red  title-font">Beschrijving <br class="visible-xs"> <small>max 5000 karakters</small></h4>
                                 <p ng-class="{'invalid': toon_fout_melding('beschrijving',project.id)}" class="no-padding col-md-12 project beschrijving" data-update_status='init' data-titel='beschrijving' data-tabel='projecten' data-id='{{$id}}' contenteditable='true'>@{{project.beschrijving}}</p>
-                                <div class="col-md-12 invalid" ng-show="toon_fout_melding('beschrijving',project.id)">@{{ server_controle_fout[0] }}</div>
+                                <div class="col-md-12 invalid error-message" ng-show="toon_fout_melding('beschrijving',project.id)"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{ server_controle_fout[0] }}</div>
                             </div>
                         </div>
 
@@ -105,37 +105,37 @@
                                 <div class="row">
                                     <div class="col-md-6">
 
-                                        <div class="title_red" ng-show="locations_errors">
-                                            @{{ locations_errors }}
+                                        <div class="error-message" ng-show="locations_errors">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{ locations_errors }}
                                         </div>
 
 
 
-                                        <div ng-show="$scope.locations_errors">@{{ $scope.locations_errors }}</div>
-                                        <form ng-submit="add_location_on_enter(input_loc)">
-                                            <div class="no-padding col-md-10">
+                                        <div class="error-message" ng-show="$scope.locations_errors"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{ $scope.locations_errors }}</div>
+                                        <form id="location-form" ng-submit="add_location_on_enter(input_loc)">
+                                            <div class="no-padding col-md-10 col-xs-10">
                                                 <input id="autocomplete" type="text" class="form-control " placeholder="Zoeken" ng-model="input_loc" googleplace/>
                                             </div>
-                                            <div class="no-padding col-md-2">
+                                            <div class="no-padding col-md-2 col-xs-2">
                                                 <button class="fa fa-plus form-control" type="submit"></button>
                                             </div>
 
                                         </form>
 
 
-                                        <br>
-                                        <div ng-repeat="location in locations">
 
-                                            <br>
-                                            <p class="inline" id="map-locatie">@{{ location.address }}</p>
+                                        <div id="locations" ng-repeat="location in locations">
                                             <a class="map_delete" href="" title="verwijder">
-                                                <i class="fa fa-times inline" aria-hidden="true" ng-click="delete_elemets_on_edit_page_locatie(location.id,$index,'locations')"></i>
+                                                <i class="fa fa-times" aria-hidden="true" ng-click="delete_elemets_on_edit_page_locatie(location.id,$index,'locations')"></i>
                                             </a>
-                                            <br>
+                                            <div>
+                                                <p class="inline" id="map-locatie">@{{ location.address }}</p>
+                                            </div>
+
 
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div id="map-mobile" class="col-md-6 col-xs-12">
                                         <div class="" id="map-container-editpage" ng-init="map_initializetion({{$id}})">
                                             <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events">
                                                 <ui-gmap-markers models="locations" coords="'location'" idkey="'id'" events="map.marker_events">
@@ -168,18 +168,18 @@
 
 
 
-                                    <div class="show_fotos" ng-repeat="foto in show_fotos">
+                                    <div id="thumbs" class="show_fotos col-md-3 col-xs-6" ng-repeat="foto in show_fotos">
 
 
-                                        <div id="thumbs" class="col-xs-6 col-md-3">
 
-                                            <a href="" id="foto-delete" data-toggle="tooltip" data-placement="top" title="Verwijder foto">
-                                                <i class="fa fa-times" aria-hidden="true" ng-click="delete_elemets_on_edit_page_fotos(foto.id,$index,'foto','show_fotos')"></i>
-                                            </a>
-                                            <a href="" class="thumbnail">
-                                                <img ng-src="{{Request::root()}}/img/project/@{{ foto.project_picture }}" alt="@{{ foto.project_picture }}" />
-                                            </a>
-                                        </div>
+
+                                        <a href="" id="foto-delete" data-toggle="tooltip" data-placement="top" title="Verwijder foto">
+                                            <i class="fa fa-times" aria-hidden="true" ng-click="delete_elemets_on_edit_page_fotos(foto.id,$index,'foto','show_fotos')"></i>
+                                        </a>
+                                        <a href="" class="thumbnail">
+                                            <img ng-src="{{Request::root()}}/img/project/@{{ foto.project_picture }}" alt="@{{ foto.project_picture }}" />
+                                        </a>
+
 
 
                                     </div>
@@ -194,15 +194,15 @@
 
                                     <br>
                                     <br>
-                                    <ul>
+                                    <ul class="no-padding">
                                         <!-- START OF ERRORS -->
                                         <!--front end erors-->
-                                        <li ng-repeat="f in errFiles_fase" style="font:smaller">
-                                            @{{f.name}} @{{f.$error}} @{{f.$errorParam}}
+                                        <li class="error-message" ng-repeat="f in errFiles_fase">
+                                            <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{f.name}}, @{{f.$error}}: @{{f.$errorParam}}
 
                                         </li>
                                         <!--back end end erors -> deze moet nog goed testen zo dat er geen secuirity issius zijn-->
-                                        <li ng-show="errorMsg">@{{errorMsg}}</li>
+                                        <li class="error-message" ng-show="errorMsg"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{errorMsg}}</li>
                                     </ul>
                                     <!-- END OF ERRORS -->
 
@@ -211,14 +211,14 @@
                                 </div>
                                 <!--end of file_upload Conroller-->
 
-                                <div class="col-md-6" id="edit-foto-big" ng-show="show_fotos.length" ng-repeat="foto in show_fotos" ng-if="$first">
-                                    
+                                <div class="col-md-6 hidden-xs" id="edit-foto-big" ng-show="show_fotos.length" ng-repeat="foto in show_fotos" ng-if="$first">
+
                                     <img ng-src="{{Request::root()}}/img/project/@{{ foto.project_picture }}" alt="@{{ foto.project_picture }}" />
 
                                 </div>
-                                
+
                                 <div class="col-md-6" id="edit-foto-big" ng-hide="show_fotos.length">
-                                    
+
                                     <img ng-src="{{Request::root()}}/img/project/default.png" alt="default" />
 
                                 </div>
@@ -265,7 +265,7 @@
                                     <div id="edit-vraag-content" ng-show="vraag.choices == 'open vragen'">
 
 
-                                        <h5 class="title_red title-font">Vraag @{{ $index+1 }}: @{{vraag.choices}} <small>max 250 karakters per veld</small></h5>
+                                        <h5 class="title_red title-font">Vraag @{{ $index+1 }}: @{{vraag.choices}} <br class="visible-xs"> <small>max 250 karakters per veld</small></h5>
                                         <a href="" title="verwijder">
                                             <i class="fa fa-times" aria-hidden="true" ng-click="delete_elemets_on_edit_page_vragen(vraag.id,$index,'vragen')"></i>
                                         </a>
@@ -285,7 +285,7 @@
                                     </div>
 
                                     <div id="edit-vraag-content" ng-show="vraag.choices == 'meerkeuzevragen'">
-                                        <h5 class="title_red title-font">Vraag @{{ $index+1 }}: @{{vraag.choices}} <small>max 1000 karakters per veld</small></h5>
+                                        <h5 class="title_red title-font">Vraag @{{ $index+1 }}: @{{vraag.choices}} <br class="visible-xs"> <small>max 1000 karakters per veld</small></h5>
                                         <a href="" title="verwijder">
                                             <i class="fa fa-times" aria-hidden="true" ng-click="delete_elemets_on_edit_page_vragen(vraag.id,$index,'vragen')"></i>
                                         </a>
@@ -314,7 +314,7 @@
                                     </div>
                                     <div id="edit-vraag-content" ng-show="vraag.choices == 'Gesloten vragen'">
 
-                                        <h5 class="title_red title-font">Vraag @{{ $index+1 }}: @{{vraag.choices}} <small>max 1000 karakters per veld</small></h5>
+                                        <h5 class="title_red title-font">Vraag @{{ $index+1 }}: @{{vraag.choices}} <br class="visible-xs"> <small>max 1000 karakters per veld</small></h5>
                                         <a href="" title="verwijder">
                                             <i class="fa fa-times" aria-hidden="true" ng-click="delete_elemets_on_edit_page_vragen(vraag.id,$index,'vragen')"></i>
                                         </a>
@@ -338,18 +338,20 @@
 
 
                                 <div class="vraag_add_button">
-                                    <h6>Voeg vraag toe:</h6>
-                                    <div class="btn-group " role="group" aria-label="...">
+                                    <small>Voeg vraag toe:</small>
+                                    <div class="row" role="group" aria-label="...">
+                                        <div class="col-md-12">
 
-                                        <button type="button" class="btn btn-default mybutton" ng-click="add_question('open vragen')">open vraag
-                                        </button>
+                                            <button type="button" class="btn btn-default vraag-btn" ng-click="add_question('open vragen')">open vraag
+                                            </button>
 
 
-                                        <button type="button" class="btn btn-default" ng-click="add_question('meerkeuzevragen')">meerkeuzevraag
-                                        </button>
+                                            <button type="button" class="btn btn-default vraag-btn" ng-click="add_question('meerkeuzevragen')">meerkeuzevraag
+                                            </button>
 
-                                        <button type="button" class="btn btn-default" ng-click="add_question('Gesloten vragen')">gesloten vraag
-                                        </button>
+                                            <button type="button" class="btn btn-default vraag-btn" ng-click="add_question('Gesloten vragen')">gesloten vraag
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -434,12 +436,12 @@
 
                                             </div>
 
-                                            <ul>
+                                            <ul class="no-padding">
                                                 <!--verander deze errors met  errors van boven het zijn twee verschilende conrollers-->
-                                                <li ng-repeat="f in errFiles">
-                                                    @{{f.name}} @{{f.$error}} @{{f.$errorParam}}
+                                                <li class="error-message" ng-repeat="f in errFiles">
+                                                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{f.name}}, @{{f.$error}}: @{{f.$errorParam}}
                                                 </li>
-                                                <li ng-show="errorMsg">@{{errorMsg}}</li>
+                                                <li class="error-message" ng-show="errorMsg">@{{errorMsg}}</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -447,7 +449,7 @@
 
 
                                     <div id="fase-add-button" class="add_fase" ng-click="add_fase()">
-                                        <div class="glyphicon glyphicon-plus col-md-12"></div>
+                                        <div class="glyphicon glyphicon-plus col-md-12 col-xs-12"></div>
                                         <small class="edit_foto_add_button_small">Voeg fase toe</small>
                                     </div>
 

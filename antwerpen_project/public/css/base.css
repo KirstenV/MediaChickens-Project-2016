@@ -105,18 +105,26 @@ hr {
     transform: scale(1.7);
 }
 
-.title_red.error-message {
+.error-message {
     list-style-type: none;
     border: 1px solid;
-    border-radius: 8px;
     padding: 10px;
     color: white;
     background-color: #DA291C;
+    display: inline-block;
+    width: 100%;
 }
 
 #error-messages {
     text-align: left;
 }
+@media(max-width:767px){
+    #map-mobile{
+    margin-left: 15px;
+    width: calc(100% - 20px);
+}
+}
+
 
 .no-padding {
     padding: 0px;
@@ -128,8 +136,8 @@ hr {
 
 #foto-delete {
     position: absolute;
-    right: 20%;
-    top: 20%;
+    right: 15px;
+    top: 10px;
 }
 
 [contenteditable]:focus {
@@ -154,10 +162,16 @@ hr {
     overflow-y: scroll;
 }
 
+@media (min-width: 1200px) {
+    #editContainer {
+        position: absolute;
+        right: 178px;
+        width: calc(100% - 356px);
+        padding-top: 60px;
+    }
+}
+
 #editContainer {
-    position: absolute;
-    right: 178px;
-    width: calc(100% - 356px);
     padding-top: 60px;
 }
 
@@ -206,6 +220,28 @@ hr {
     min-height: 115px;
 }
 
+#location-form {
+    height: 35px;
+}
+
+#locations {
+    border: 1px dashed;
+    padding: 10px;
+    margin: 10px 0px;
+}
+
+#locations div {
+    padding-right: 25px;
+}
+
+a.map_delete {
+    float: right;
+}
+
+#edit_header {
+    margin-bottom: 15px;
+}
+
 #beschrijving div.edit-white-box,
 #locatie div.edit-white-box {
     min-height: 405px;
@@ -217,8 +253,6 @@ hr {
 #fase-full div h5 small {
     opacity: 0.5;
 }
-
-#edit_foto {}
 
 .datum {
     padding-left: 0px;
@@ -444,9 +478,13 @@ hr {
     color: #DA291C;
 }
 
-.fa-sign-out,
 .fa-user-plus {
     transform: scale(2) translateY(-50%);
+    color: #DA291C;
+}
+
+.fa-power-off {
+    transform: scale(1.8) translateY(-50%);
     color: #DA291C;
 }
 
@@ -631,9 +669,12 @@ hr {
 }
 
 #thumbs {
-    display: block;
+    display: inline-block;
     overflow: hidden;
     padding: 0px;
+    height: 150px;
+    width: 150px;
+    margin: 0px 10px 10px 0px;
 }
 
 #edit_foto div.edit-white-box {
@@ -642,21 +683,22 @@ hr {
 }
 
 .edit_foto_add_button {
+    display: inline-block;
+    overflow: hidden;
     height: 150px;
     width: 150px;
-    background-color: lightgrey;
-    opacity: 0.7;
+    margin: 0px 10px 10px 0px;
     font-size: 2.5em;
-    border: 1px dashed;
+    border: 1px dashed #DA291C;
+    color: #DA291C;
     text-align: center;
     padding-top: 50px;
-    margin-top: 20px;
 }
 
 .edit_foto_add_button:hover {
-    border: 1px dashed #DA291C;
-    color: #DA291C;
-    opacity: 1;
+    border: 1px dashed white;
+    color: white;
+    background-color: #DA291C;
     cursor: hand;
     cursor: pointer;
 }
@@ -667,20 +709,18 @@ hr {
 
 .add_fase {
     height: 150px;
-    width: 150px;
-    background-color: lightgrey;
-    opacity: 0.7;
     font-size: 2.5em;
-    border: 1px dashed;
+    border: 1px dashed #DA291C;
     text-align: center;
     padding-top: 50px;
+    color: #DA291C;
 }
 
 .add_fase:hover {
-    border: 1px dashed #DA291C;
-    color: #DA291C;
-    opacity: 1;
+    border: 1px dashed white;
+    color: white;
     cursor: pointer;
+    background-color: #DA291C;
 }
 
 .add_fase:active {
@@ -700,7 +740,7 @@ hr {
 #fase-img-del {
     position: absolute;
     text-decoration: none;
-    right: 40%;
+    left: 135px;
     top: 25px;
 }
 
@@ -716,31 +756,28 @@ hr {
 
 .vraag_add_button {
     height: 150px;
-    width: 150px;
-    background-color: lightgrey;
-    opacity: 0.7;
     font-size: 2.5em;
-    border: 1px dashed;
+    border: 1px dashed #DA291C;
     text-align: center;
     margin: 0 auto;
     padding: 0;
-}
-
-.btn-group .btn + .btn {
-    width: 100%;
-    margin-left: 0px;
-}
-
-.mybutton {
-    width: 100%;
-}
-
-.vraag_add_button:hover {
-    border: 1px dashed #DA291C;
     color: #DA291C;
-    opacity: 1;
-    cursor: hand;
+}
+
+.vraag_add_button small {
+    font-size: 0.5em;
+}
+
+.vraag-btn {
+    padding: 35px 0px;
+    width: calc(35% - 20px);
+}
+
+.vraag-btn:hover {
+    background-color: #DA291C;
+    border-color: #DA291C;
     cursor: pointer;
+    color: white;
 }
 
 .table tr td#pointer {
@@ -775,14 +812,14 @@ h5.title-font {
     text-decoration: none;
     position: absolute;
     top: 20px;
-    right: 3%;
+    right: 20px;
 }
 
 #fase-del {
     text-decoration: none;
     position: absolute;
     top: 5px;
-    right: 0%;
+    right: 0px;
     z-index: 999;
 }
 
@@ -804,13 +841,8 @@ h5.title-font {
 }
 
 .thumbnail {
-    margin-top: 20px;
-    width: 150px;
-    height: 150px;
-}
-
-#edit-foto-big {
-    margin-top: 20px;
+    width: inherit;
+    height: inherit;
 }
 
 #edit-foto-big img {

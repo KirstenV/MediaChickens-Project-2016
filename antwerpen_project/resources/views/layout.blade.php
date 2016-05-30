@@ -97,7 +97,7 @@
                         <div id="error-messages">
 
                             @foreach ($errors->all() as $error)
-                            <li class="title_red error-message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ $error }}</li>
+                            <li class=" error-message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> {{ $error }}</li>
 
                             @if(isset($message)) {{$message}} @endif @endforeach @if ($errors->all() || isset($message))
                             <script>
@@ -171,7 +171,7 @@
 
                         <div id="error-messages" ng-show="register_errors">
 
-                            <li ng-repeat="error in register_errors" class="title_red error-message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{ error[0] }}</li>
+                            <li ng-repeat="error in register_errors" class=" error-message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{ error[0] }}</li>
 
                         </div>
 
@@ -259,7 +259,7 @@
 
                         <div id="error-messages" ng-show="register_errors">
 
-                            <li ng-repeat="error in register_errors" class="title_red error-message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{ error[0] }}</li>
+                            <li ng-repeat="error in register_errors" class=" error-message"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> @{{ error[0] }}</li>
 
                         </div>
 
@@ -327,7 +327,7 @@
                 @endif
                 <li>
                     <a href="{{Request::root()}}/auth/logout" title="log uit">
-                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        <i class="fa fa-power-off" aria-hidden="true"></i>
                     </a>
                 </li>
                 @else

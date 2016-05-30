@@ -432,5 +432,9 @@ $(document).on("click", '#thumbs', function () {
         $('#edit-foto-big').html(img);
 });
 
+    
+    
+
+
 
 });
