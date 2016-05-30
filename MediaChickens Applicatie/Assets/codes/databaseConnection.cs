@@ -75,9 +75,8 @@ public class databaseConnection : MonoBehaviour {
     public byte maxLettersOnLineQuestions = 8;
 
     void Start () {
-       // txtHowTo.gameObject.SetActive(false);
         StartCoroutine(getProjectsFromURL(urlProjects)); //Get projects from URL
-        txtProjectName.text = " veeg naar links \n en rechts \n om een project \n te kiezen";
+        txtProjectName.text = " veeg naar links \n en rechts \n om project \n te kiezen";
         txtProjectDescription.text = " veeg omhoog om het \n project te kiezen \n \n veeg hierna links \n en rechts  om het \n juiste antwoord \n te selecteren \n en veeg omhoog \n om je antwoord \n te bevestigen";
         characterAnimator = this.GetComponent<Animator>();
         playerScript = GetComponent<Player>();

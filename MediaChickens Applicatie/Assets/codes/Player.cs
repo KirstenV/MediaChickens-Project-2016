@@ -46,23 +46,28 @@ public class Player : MonoBehaviour {
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation; 
         characterAnimator = this.GetComponent<Animator>();
-       // characterAnimator.SetBool("isRunning", true);
-    }
+     }
     void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "MoveToRight") //when only 2 possible answers, player is forced to move to right
         {
+            characterAnimator.SetBool("jumpedRight", true);
             speed = speedSlow; //player is slowed down
             rb.AddForce(forceSide, forceUp, 0, ForceMode.Impulse);
             currentLane++;
             hasSwipedUp = false;
-           // characterAnimator.SetBool("jumpedRight", true);
+            if(this.transform.position.y > playerOnGround)
+            {
+                characterAnimator.SetBool("jumpedRight", false);
+            }
         }
         if (other.gameObject.tag == "Tunnel") //if user reached tunnel, and hasn't swiped up, character stops running
         {
             if (!hasSwipedUp)
             {
                characterAnimator.SetBool("isRunning",false);
+                characterAnimator.SetBool("jumpedRight", false);
+                characterAnimator.SetBool("jumpedLeft", false);
             }
         }
         if (other.gameObject.tag == "StartGame") 
@@ -77,6 +82,8 @@ public class Player : MonoBehaviour {
         {
             hasSwipedUp = false;
             speed = speedSlow;
+            characterAnimator.SetBool("isRunning", true);
+
         }
         if (other.gameObject.tag == "BuildingsTownSquare")
         {
