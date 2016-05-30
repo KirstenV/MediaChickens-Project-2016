@@ -44,9 +44,6 @@ public class databaseConnection : MonoBehaviour {
     public TextMesh txtProjectDescription;
     public TextMesh txtProjectDates;
 
-    //how to text
-    public TextMesh txtHowTo;
-
     //show possible answers, counts number of answers already given
     private byte answerCount = 0;
 
@@ -78,9 +75,10 @@ public class databaseConnection : MonoBehaviour {
     public byte maxLettersOnLineQuestions = 8;
 
     void Start () {
-        txtHowTo.gameObject.SetActive(false);
+       // txtHowTo.gameObject.SetActive(false);
         StartCoroutine(getProjectsFromURL(urlProjects)); //Get projects from URL
-        txtProjectName.text = "veeg naar links \n en rechts \n om een project \n te kiezen";
+        txtProjectName.text = " veeg naar links \n en rechts \n om een project \n te kiezen";
+        txtProjectDescription.text = " veeg omhoog om het \n project te kiezen \n \n veeg hierna links \n en rechts  om het \n juiste antwoord \n te selecteren \n en veeg omhoog \n om je antwoord \n te bevestigen";
         characterAnimator = this.GetComponent<Animator>();
         playerScript = GetComponent<Player>();
         scriptCanvas = GetComponent<canvasScript>();
@@ -112,7 +110,6 @@ public class databaseConnection : MonoBehaviour {
 
         if (other.gameObject.tag == "StartGame")
         {
-            txtHowTo.gameObject.SetActive(false);
             if (arrQuestions.Length < 1 || arrQuestions[0] == null) //stop game if there aren't any questions
             {
                 isPlaying = false;
@@ -237,7 +234,6 @@ public class databaseConnection : MonoBehaviour {
                         }
                         else if (!swipedSideways && deltaYSwipe <= 0) //swiped up, start game/answering questions
                         {
-                            txtHowTo.gameObject.SetActive(true);
                         isPlaying = true;
                         StartCoroutine(getQuestionsFromURL(getQuestionsUrl(arrProjects[currentProject].id.ToString()))); //getting questions once player has chosen project
                         playerScript.hasSwipedUp = true;
@@ -258,9 +254,6 @@ public class databaseConnection : MonoBehaviour {
 
     public void BtnPauseClicked() //the pause button is clicked
     {
-        //scriptCanvas = GetComponent<canvasScript>();
-       // Debug.Log(playerScript.cameraFollowSpeed);
-        Debug.Log(isPlaying);
         scriptCanvas.showPauseScreen(isPlaying);
         if (isPlaying)
         {
@@ -569,13 +562,14 @@ public class databaseConnection : MonoBehaviour {
     void RoadSpawn() //automatically spawns the road when reached roadtrigger
     {
         if(answerCount+2 < arrQuestions.Length && arrQuestions[answerCount+2] != null) { //if there are questions left, show tunnel and new trigger
-
+            Debug.Log( answerCount + 2);
             if(arrQuestions[answerCount + (numberFirstTunnelSpawn-1)].type == "Gesloten vragen") { //2 possible answers
         Instantiate(tunnel2, new Vector3(35.2f, tunnelYPosition, this.transform.position.z + (spawnDistance * numberFirstTunnelSpawn)), Quaternion.identity);
                 }
 
-            else if(arrQuestions[answerCount + (numberFirstTunnelSpawn +1)].type == "meerkeuzevragen") //4 possible answers
+            else if(arrQuestions[answerCount + (numberFirstTunnelSpawn-1)].type == "meerkeuzevragen") //4 possible answers
                 {
+                Debug.Log("inside spawn");
                 Instantiate(tunnel4, new Vector3(35.2f, tunnelYPosition, this.transform.position.z + (spawnDistance * 3)), Quaternion.identity);
                  }
 

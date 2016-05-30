@@ -15,11 +15,13 @@ public class Player : MonoBehaviour {
 
     //animator for character
     private Animator characterAnimator;
+
     //lane in which player is running, only 5 lanes
     public byte currentLane = 2;
     public byte maxLaneLeft = 0; //lane left can be changed when less possible answers
     public byte maxLaneRight = 4;
     public byte maxLaneActualAnswers = 3;
+
     //force and speed to move player
     public short forceSide = 700;
     public short forceUp = 225;  //225
@@ -27,8 +29,7 @@ public class Player : MonoBehaviour {
     public float speedSlow = 0.7f;
     public float speedFast = 1f;
     public float playerOnGround = 1.30f;
-    //rigidbodys for turning on the townsquare
-    public Rigidbody road1;
+
     //if player has chosen answer
     public bool hasSwipedUp = false;
    // public bool isRunning = false;
@@ -44,7 +45,6 @@ public class Player : MonoBehaviour {
         scriptDatabase = GetComponent<databaseConnection>();
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation; 
-        road1.constraints = RigidbodyConstraints.FreezeAll;
         characterAnimator = this.GetComponent<Animator>();
        // characterAnimator.SetBool("isRunning", true);
     }
@@ -92,7 +92,6 @@ public class Player : MonoBehaviour {
            if (this.transform.position.y > playerOnGround)
             {
                 characterAnimator.SetBool("jumpedLeft", false);
-                Debug.Log("jumped left" + characterAnimator.GetBool("jumpedLeft"));
                 characterAnimator.SetBool("jumpedRight", false);
             }
             if (this.transform.position.z-mainCam.transform.position.z < minimumDistanceFromPlayer) //if the player stops running, camera stops as well
