@@ -217,7 +217,7 @@
 
                                 </div>
 
-                                <div class="col-md-6" id="edit-foto-big" ng-hide="show_fotos.length">
+                                <div class="col-md-6 hidden-xs" id="edit-foto-big" ng-hide="show_fotos.length">
 
                                     <img ng-src="{{Request::root()}}/img/project/default.png" alt="default" ngf-select="uploadFiles($files, $invalidFiles)" multiple accept="image/*" ngf-max-height="1000" ngf-accept="'image/*'" ngf-max-size="1MB" />
 
