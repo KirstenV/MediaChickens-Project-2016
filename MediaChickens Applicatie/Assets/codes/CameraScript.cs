@@ -6,24 +6,27 @@ public class CameraScript : MonoBehaviour
 
     //variables for turning camera to projects screen
     public float startPositionCameraZ;
-
+    public float positionCameraTurnStart = -70;
+    public float rotationCameraStop = 0.05f;
+    public float speedRotationX = 0.1f;
+    public float speedRotationY = -0.15f;
 
     void OnTriggerExit(Collider other)
     {
-        if(other.gameObject.tag == "Environment")
+        if(other.gameObject.tag == "Environment") //delete the gameobjects out of sight
         {
             Destroy(other.gameObject);
         }
     }
     void Start()
     {
-        startPositionCameraZ = transform.position.z;
+        startPositionCameraZ = transform.position.z; //fills in the start position from the camera
     }
     void Update()
     {
-        if(transform.position.z > -70 && transform.rotation.y > 0.05)// 
+        if(transform.position.z > positionCameraTurnStart && transform.rotation.y > rotationCameraStop)//position to start turning camera, ratation to stop camera from turning when right angle reached
         {
-            transform.rotation *= Quaternion.Euler(0.1f, -0.15f, 0);
+            transform.rotation *= Quaternion.Euler(speedRotationX, speedRotationY, 0); //rotates camera
         }
     }
 }

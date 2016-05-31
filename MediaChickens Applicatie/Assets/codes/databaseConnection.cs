@@ -30,7 +30,7 @@ public class databaseConnection : MonoBehaviour {
     public float tunnelYPosition = 0.002f;
     public float tunnelXposition = 35.2f;
     public float triggerYPosition = 10;
-    public float triggerXPosition = 35.13f;
+    public float triggerXPosition = 35.13f; 
     private byte numberFirstTunnelSpawn = 3;
 
     //variables for database connection
@@ -81,7 +81,6 @@ public class databaseConnection : MonoBehaviour {
         characterAnimator = this.GetComponent<Animator>();
         playerScript = GetComponent<Player>();
         scriptCanvas = GetComponent<canvasScript>();
-
     }
     void OnTriggerEnter(Collider other)
     {
@@ -563,20 +562,20 @@ public class databaseConnection : MonoBehaviour {
         if(answerCount+2 < arrQuestions.Length && arrQuestions[answerCount+2] != null) { //if there are questions left, show tunnel and new trigger
             Debug.Log( answerCount + 2);
             if(arrQuestions[answerCount + (numberFirstTunnelSpawn-1)].type == "Gesloten vragen") { //2 possible answers
-        Instantiate(tunnel2, new Vector3(35.2f, tunnelYPosition, this.transform.position.z + (spawnDistance * numberFirstTunnelSpawn)), Quaternion.identity);
+        Instantiate(tunnel2, new Vector3(tunnelXposition, tunnelYPosition, this.transform.position.z + (spawnDistance * numberFirstTunnelSpawn)), Quaternion.identity);
                 }
 
             else if(arrQuestions[answerCount + (numberFirstTunnelSpawn-1)].type == "meerkeuzevragen") //4 possible answers
                 {
                 Debug.Log("inside spawn");
-                Instantiate(tunnel4, new Vector3(35.2f, tunnelYPosition, this.transform.position.z + (spawnDistance * 3)), Quaternion.identity);
+                Instantiate(tunnel4, new Vector3(tunnelXposition, tunnelYPosition, this.transform.position.z + (spawnDistance * 3)), Quaternion.identity);
                  }
 
-                Instantiate(roadTrigger, new Vector3(35.13f, triggerYPosition, this.transform.position.z + spawnDistance), Quaternion.identity);
+                Instantiate(roadTrigger, new Vector3(triggerXPosition, triggerYPosition, this.transform.position.z + spawnDistance), Quaternion.identity);
           }
         else //if no more questions show only road
         {
-            Instantiate(road, new Vector3(35.2f, roadYPosition, this.transform.position.z + (spawnDistance * numberFirstTunnelSpawn)), Quaternion.identity);
+            Instantiate(road, new Vector3(roadXPosition, roadYPosition, this.transform.position.z + (spawnDistance * numberFirstTunnelSpawn)), Quaternion.identity);
         }
     }
 

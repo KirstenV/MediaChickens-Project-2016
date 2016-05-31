@@ -24,14 +24,15 @@ public class Player : MonoBehaviour {
 
     //force and speed to move player
     public short forceSide = 700;
-    public short forceUp = 225;  //225
+    public short forceUp = 225; 
     private float speed = 0.7f;
     public float speedSlow = 0.7f;
     public float speedFast = 1f;
     public float playerOnGround = 1.30f;
 
-    //if player has chosen answer
+    //if player has chosen answer or jumped
     public bool hasSwipedUp = false;
+
    // public bool isRunning = false;
 
     //camera for lerp
@@ -56,18 +57,12 @@ public class Player : MonoBehaviour {
             rb.AddForce(forceSide, forceUp, 0, ForceMode.Impulse);
             currentLane++;
             hasSwipedUp = false;
-            if(this.transform.position.y > playerOnGround)
-            {
-                characterAnimator.SetBool("jumpedRight", false);
-            }
         }
         if (other.gameObject.tag == "Tunnel") //if user reached tunnel, and hasn't swiped up, character stops running
         {
             if (!hasSwipedUp)
             {
                characterAnimator.SetBool("isRunning",false);
-                characterAnimator.SetBool("jumpedRight", false);
-                characterAnimator.SetBool("jumpedLeft", false);
             }
         }
         if (other.gameObject.tag == "StartGame") 
@@ -96,7 +91,7 @@ public class Player : MonoBehaviour {
         if (scriptDatabase.isPlaying)
         { //when game is not paused
 
-           if (this.transform.position.y > playerOnGround)
+           if (characterAnimator.GetBool("jumpedLeft") || characterAnimator.GetBool("jumpedRight"))
             {
                 characterAnimator.SetBool("jumpedLeft", false);
                 characterAnimator.SetBool("jumpedRight", false);
