@@ -1,8 +1,6 @@
 ﻿using UnityEngine;
 
 public class Player : MonoBehaviour {
-    //connection with other scripts
-    databaseConnection scriptDatabase;
 
     //rigidbody for movement with force
     private Rigidbody rb;
@@ -37,7 +35,6 @@ public class Player : MonoBehaviour {
 
     void Start()
     {
-        scriptDatabase = GetComponent<databaseConnection>();
         rb = GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezeRotation; 
         characterAnimator = this.GetComponent<Animator>();
@@ -106,6 +103,7 @@ public class Player : MonoBehaviour {
     
     public void swipedLeft()
     {
+        if (!hasSwipedUp && (characterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Run") || characterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))) { 
     if (currentLane <= maxLaneLeft) // if player is on left lane, do nothing
     {
     }
@@ -123,33 +121,39 @@ public class Player : MonoBehaviour {
         currentLane--;
 
     }
-}
+        }
+    }
     public void swipedRight()
     {
-        if (currentLane == maxLaneRight)// player is on right lane
+        if (!hasSwipedUp && (characterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Run") || characterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle")))
         {
-            //do nothing
-        }
-        else if (currentLane == maxLaneActualAnswers) //player is going to no answer lane, needs more force
-        {
-            characterAnimator.SetBool("jumpedRight", true);
-            rb.AddForce(forceSide + (forceSide / 2), forceUp, 0, ForceMode.Impulse);
-            currentLane++;
-        }
-        else //player is on middle answer lanes
-        {
-            characterAnimator.SetBool("jumpedRight", true);
-            rb.AddForce(forceSide, forceUp, 0, ForceMode.Impulse);
-            currentLane++;
+            if (currentLane == maxLaneRight)// player is on right lane
+            {
+                //do nothing
+            }
+            else if (currentLane == maxLaneActualAnswers) //player is going to no answer lane, needs more force
+            {
+                characterAnimator.SetBool("jumpedRight", true);
+                rb.AddForce(forceSide + (forceSide / 2), forceUp, 0, ForceMode.Impulse);
+                currentLane++;
+            }
+            else //player is on middle answer lanes
+            {
+                characterAnimator.SetBool("jumpedRight", true);
+                rb.AddForce(forceSide, forceUp, 0, ForceMode.Impulse);
+                currentLane++;
+            }
         }
     }
     public void swipedUp()
     {
+        if (characterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Run") || characterAnimator.GetCurrentAnimatorStateInfo(0).IsName("Idle")) { 
+        hasSwipedUp = true;
         characterAnimator.SetBool("isRunning", true);
         hasSwipedUp = true;
         speed = speedFast;
     }
-
+    }
 } 
 
     

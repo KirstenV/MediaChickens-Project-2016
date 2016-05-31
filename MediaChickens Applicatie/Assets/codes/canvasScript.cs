@@ -41,11 +41,11 @@ public class canvasScript : MonoBehaviour {
     swipeControls scriptSwipe;
 
     void Start () {
+        scriptSwipe = GetComponent<swipeControls>();
         hideAllPaused(); //hides the pause screen and shows the game interface
         toggleLoginLogoutButton(); //shows the right text on the login/logout button in the pause screen
         changePlayerName(); //fills the text with the right player name
         txtAnswered.text = "alle vragen zijn beantwoord".ToUpper();
-        scriptSwipe.GetComponent<swipeControls>();
     }
 
     public void showLoginScreen()

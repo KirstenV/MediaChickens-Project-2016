@@ -8,6 +8,7 @@ public class swipeControls : MonoBehaviour {
     private bool hasSwiped = false;
     private byte distanceToRegisterSwipe = 100;
     public bool gamePaused = false;
+    public bool choosingProject = true;
 
     //other scripts for calling swipe methods
     private Player playerScript;
@@ -42,35 +43,36 @@ public class swipeControls : MonoBehaviour {
                     {
                         if (swipedSideways && deltaXSwipe > 0) //swiped left
                         {
-                            if (characterAnimator.GetBool("isRunning"))
+                            if (choosingProject)
                             {
-                                playerScript.swipedLeft();
+                                databaseScript.swipedLeft();
                             }
                             else
                             {
-                                databaseScript.swipedLeft();
+                                playerScript.swipedLeft();
                             }
                         }
                         else if (swipedSideways && deltaXSwipe <= 0) //swiped right, change project
                         {
-                            if (characterAnimator.GetBool("isRunning"))
+                            if (choosingProject)
                             {
-                                playerScript.swipedRight();
+                                databaseScript.swipedRight();
                             }
                             else
                             {
-                                databaseScript.swipedRight();
+                                playerScript.swipedRight();
                             }
                         }
                         else if (!swipedSideways && deltaYSwipe <= 0) //swiped up, start game/answering questions
                         {
-                            if (characterAnimator.GetBool("isRunning"))
+                            if (choosingProject)
                             {
-                                playerScript.swipedUp(); 
+                                choosingProject = false;
+                                databaseScript.swipedUp();
                             }
                             else
                             {
-                                databaseScript.swipedUp();
+                                playerScript.swipedUp();
                             }
                         }
                         hasSwiped = true;

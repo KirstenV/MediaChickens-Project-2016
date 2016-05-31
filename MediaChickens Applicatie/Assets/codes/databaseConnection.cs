@@ -69,8 +69,8 @@ public class databaseConnection : MonoBehaviour {
 
     void Start () {
         StartCoroutine(getProjectsFromURL(urlProjects)); //Get projects from URL
-        txtProjectName.text = " veeg naar links \n en rechts \n om project \n te kiezen";
-        txtProjectDescription.text = " veeg omhoog om het \n project te kiezen \n \n veeg hierna links \n en rechts  om het \n juiste antwoord \n te selecteren \n en veeg omhoog \n om je antwoord \n te bevestigen";
+        txtProjectName.text = " veeg naar links \n en rechts \n om project \n te zien";
+        txtProjectDescription.text = " veeg omhoog om \n project te kiezen \n \n veeg hierna links \n en rechts  om het \n juiste antwoord \n te selecteren \n en veeg omhoog \n om je antwoord \n te bevestigen";
         characterAnimator = this.GetComponent<Animator>();
         playerScript = GetComponent<Player>();
         scriptCanvas = GetComponent<canvasScript>();
@@ -536,7 +536,7 @@ public class databaseConnection : MonoBehaviour {
                 Instantiate(tunnel4, new Vector3(tunnelXposition, tunnelYPosition, this.transform.position.z + (spawnDistance * 3)), Quaternion.identity);
                  }
 
-                Instantiate(roadTrigger, new Vector3(triggerXPosition, triggerYPosition, this.transform.position.z + spawnDistance), Quaternion.identity);
+            Instantiate(roadTrigger, new Vector3(triggerXPosition, triggerYPosition, this.transform.position.z + spawnDistance), Quaternion.identity);
           }
         else //if no more questions show only road
         {
