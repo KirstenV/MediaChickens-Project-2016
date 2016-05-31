@@ -37,12 +37,15 @@ public class canvasScript : MonoBehaviour {
     public Image headerAnswered;
     public Text txtAnswered;
 
+    //swipeControl script so swipe is not registered when game is paused
+    swipeControls scriptSwipe;
 
     void Start () {
         hideAllPaused(); //hides the pause screen and shows the game interface
         toggleLoginLogoutButton(); //shows the right text on the login/logout button in the pause screen
         changePlayerName(); //fills the text with the right player name
         txtAnswered.text = "alle vragen zijn beantwoord".ToUpper();
+        scriptSwipe.GetComponent<swipeControls>();
     }
 
     public void showLoginScreen()
@@ -78,6 +81,7 @@ public class canvasScript : MonoBehaviour {
     } //hides the login errors
     void showPauseAll()
     {
+        scriptSwipe.gamePaused = true;
         background.gameObject.SetActive(true);
         logoEndScreen.gameObject.SetActive(true);
         hideAllPlaying();
@@ -110,6 +114,7 @@ public class canvasScript : MonoBehaviour {
     } //shows the screen when all questions are answered
     public void hideAllPaused()
     {
+
     //UI for overall use during pause
     background.gameObject.SetActive(false);
     btnRestart.gameObject.SetActive(false);
@@ -137,8 +142,12 @@ public class canvasScript : MonoBehaviour {
     //UI project finished 
      headerAnswered.gameObject.SetActive(false);
      txtAnswered.gameObject.SetActive(false);
-        showAllPlaying();
-} //hides all components used during pause screens (end screen, paused and login)
+     showAllPlaying();
+
+    //activate swipe controls 
+     scriptSwipe.gamePaused = false;
+
+    } //hides all components used during pause screens (end screen, paused and login)
     public void changePlayerName()
     {
         txtName.text = PlayerPrefs.GetString("userName");

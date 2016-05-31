@@ -13,13 +13,6 @@ public class databaseConnection : MonoBehaviour {
     //animator for character
     private Animator characterAnimator;
 
-    //variables for swipe
-    private Touch initialTouchSwipe = new Touch();
-    private float distanceSwipe = 0;
-    private bool hasSwiped = false;
-    private byte distanceToRegisterSwipe = 100;
-
-
     //roadSpawn
     public GameObject tunnel4;
     public GameObject tunnel2;
@@ -182,74 +175,46 @@ public class databaseConnection : MonoBehaviour {
 
     void FixedUpdate() //always being called
     {
-        if (!isPlaying) {
-            foreach (Touch t in Input.touches)
-            {
-                if (t.phase == TouchPhase.Began)
-                {
-                    initialTouchSwipe = t;
-                }
-                else if (t.phase == TouchPhase.Moved && !hasSwiped)
-                {
-                    //distance formula
-                    float deltaXSwipe = initialTouchSwipe.position.x - t.position.x;
-                    float deltaYSwipe = initialTouchSwipe.position.y - t.position.y;
-                    distanceSwipe = Mathf.Sqrt((deltaXSwipe * deltaXSwipe) + (deltaYSwipe * deltaYSwipe));
-
-                    //direction formula
-                    bool swipedSideways = Mathf.Abs(deltaXSwipe) > Mathf.Abs(deltaYSwipe); //swipe up and down or sideways
-                    if (distanceSwipe > distanceToRegisterSwipe)
-                    {
-                        if (swipedSideways && deltaXSwipe > 0) //swiped left, change project
-                        {
-                            
-                            if (currentProject == 0) //go to end of project line
-                                {
-                                    currentProject = (byte)(arrProjects.Length - 1);
-                                }
-                                else
-                                {
-                                    currentProject--;
-                                }
-
-                                txtProjectName.text = arrProjects[currentProject].title;
-                                txtProjectDescription.text = arrProjects[currentProject].description;
-                                txtProjectDates.text = arrProjects[currentProject].date;
-                        }
-                        else if (swipedSideways && deltaXSwipe <= 0) //swiped right, change project
-                        {
-                                if (currentProject == (byte)(arrProjects.Length - 1)) //go to begin of project line
-                                {
-                                    currentProject = 0;
-                                }
-                                else
-                                {
-                                    currentProject++;
-                                }
-                                txtProjectName.text = arrProjects[currentProject].title;
-                                txtProjectDescription.text = arrProjects[currentProject].description;
-                                txtProjectDates.text = arrProjects[currentProject].date;
-                        }
-                        else if (!swipedSideways && deltaYSwipe <= 0) //swiped up, start game/answering questions
-                        {
-                        isPlaying = true;
-                        StartCoroutine(getQuestionsFromURL(getQuestionsUrl(arrProjects[currentProject].id.ToString()))); //getting questions once player has chosen project
-                        playerScript.hasSwipedUp = true;
-                        characterAnimator.SetBool("isRunning", true);
-                        }
-                        hasSwiped = true;
-                    }
-                }
-                else if (t.phase == TouchPhase.Ended)
-                {
-                    initialTouchSwipe = new Touch(); //reset touch
-                    hasSwiped = false;
-                }
-            }
-        }
+   
 
     }
+    public void swipedLeft()
+{
+    if (currentProject == 0) //go to end of project line
+    {
+        currentProject = (byte)(arrProjects.Length - 1);
+    }
+    else
+    {
+        currentProject--;
+    }
 
+    txtProjectName.text = arrProjects[currentProject].title;
+    txtProjectDescription.text = arrProjects[currentProject].description;
+    txtProjectDates.text = arrProjects[currentProject].date;
+
+}
+    public void swipedRight()
+    {
+    if (currentProject == (byte)(arrProjects.Length - 1)) //go to begin of project line
+    {
+        currentProject = 0;
+    }
+    else
+    {
+        currentProject++;
+    }
+    txtProjectName.text = arrProjects[currentProject].title;
+    txtProjectDescription.text = arrProjects[currentProject].description;
+    txtProjectDates.text = arrProjects[currentProject].date;
+}
+    public void swipedUp()
+    {
+    isPlaying = true;
+    StartCoroutine(getQuestionsFromURL(getQuestionsUrl(arrProjects[currentProject].id.ToString()))); //getting questions once player has chosen project
+    playerScript.hasSwipedUp = true;
+    characterAnimator.SetBool("isRunning", true);
+}
     public void BtnPauseClicked() //the pause button is clicked
     {
         scriptCanvas.showPauseScreen(isPlaying);

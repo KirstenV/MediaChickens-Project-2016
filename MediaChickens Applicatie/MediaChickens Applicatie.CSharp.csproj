@@ -78,6 +78,7 @@
     <Compile Include="Assets\codes\canvasScript.cs" />
     <Compile Include="Assets\codes\databaseConnection.cs" />
     <Compile Include="Assets\codes\login.cs" />
+    <Compile Include="Assets\codes\swipeControls.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
 </Project>
