@@ -31,7 +31,7 @@
     <script src="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
 
-    <script src="{{Request::root()}}/js/star-rating.js"></script>
+    
     <script src="{{Request::root()}}/js/ng_file_upload/ng-file-upload-shim.min.js"></script>
     <script src="{{Request::root()}}/js/ng_file_upload/ng-file-upload.min.js"></script>
     <script src="{{Request::root()}}/js/edit.js"></script>
@@ -40,6 +40,7 @@
     <script src="{{Request::root()}}/js/bootstrap-datepicker.min.js"></script>
     <script src="{{Request::root()}}/js/bootstrap-datepicker.nl-BE.min.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrmTkGoBzp--pRgO5vRXIsbXPrk3VMp_w&libraries=places&language=nl&region=BE" type="text/javascript"></script>
+    <script src="{{Request::root()}}/js/star-rating.js"></script>
     <!-- <script src="http://maps.google.com/maps/api/js?sensor=false" type="text/javascript"></script>-->
     <!--<script>
         angular.module("app").constant("CSRF_TOKEN",{csrf_token: '<?php echo csrf_token();?>'})
@@ -289,7 +290,7 @@
 
     <nav class="navbar navbar-default col-xs-12 col-md-12 navbar-fixed-top" role="navigation">
 
-        <div class="navbar-header col-md-6 col-xs-11 h100 no-padding">
+        <div class="navbar-header col-md-6 col-sm-6 col-xs-11 h100 no-padding">
             <a class="navbar-brand" href="{{Request::root()}}/" title="home">
 
                 <img src="{{Request::root()}}/img/A_logo_485_RGB_POS.png" alt="logo" />
@@ -299,7 +300,7 @@
         </div>
 
 
-        <div class="h100 col-md-6 col-xs-1 no-padding">
+        <div class="h100 col-md-6 col-sm-6 col-xs-1 no-padding">
             <ul id="nav-right" class="pull-right vert-center h100 hidden-xs">
 
 

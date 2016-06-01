@@ -118,13 +118,13 @@ hr {
 #error-messages {
     text-align: left;
 }
-@media(max-width:767px){
-    #map-mobile{
-    margin-left: 15px;
-    width: calc(100% - 20px);
-}
-}
 
+@media(max-width:767px) {
+    #map-mobile {
+        margin-left: 15px;
+        width: calc(100% - 20px);
+    }
+}
 
 .no-padding {
     padding: 0px;
@@ -156,9 +156,9 @@ hr {
 #projectContainer {
     position: fixed;
     width: inherit;
-    top: 0;
+    top: 76px;
     bottom: 0;
-    padding: 70px 0px 50px 0px;
+    padding: 58px 0px 50px 0px;
     overflow-y: scroll;
 }
 
@@ -197,12 +197,6 @@ hr {
     color: #fff;
     height: 70px;
     padding-top: 25px;
-}
-
-.edit_header_icon_pencil {
-    position: absolute;
-    right: 15%;
-    top: 90px;
 }
 
 .edit_header_icon_back {
@@ -268,11 +262,6 @@ a.map_delete {
     display: inline-block;
 }
 
-.fa-pencil-square {
-    color: #fff;
-    transform: scale(3);
-}
-
 #edit-back a {
     color: #fff;
     opacity: 0.5;
@@ -293,10 +282,9 @@ a.map_delete {
 #homeContainer {
     top: 0%;
     position: absolute;
-    padding-top: 70px;
-    padding-bottom: 50px;
-    padding-left: 0px;
     right: 0%;
+    height: 100%;
+    background-color: white;
 }
 
 .navbar-default {
@@ -320,27 +308,15 @@ a.map_delete {
     text-align: center;
     margin: 0 auto;
     z-index: 999;
-    top: 70px;
-    background-color: #fff;
+    top: 74px;
+    background-color: #DA291C;
     height: 60px;
+    color: white;
+    padding: 10px;
 }
 
 .fa-plus {
-    position: relative;
-    top: 30%;
-    color: #DA291C;
-    margin-right: 5px;
-}
-
-#add_project {
-    color: #888888;
-    position: relative;
-    width: 70%;
-    height: 35px;
-    margin: 0 auto;
-    top: 30%;
-    padding: 5px;
-    right: 1%;
+    color: white;
 }
 
 #home-titel {
@@ -380,6 +356,160 @@ a.map_delete {
     padding-top: 15px;
 }
 
+.bubble {
+    position: absolute;
+    width: 250px;
+    height: 205px;
+    padding: 0px;
+    background: #FFFFFF;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    border-radius: 0px;
+    top: -223px;
+    z-index: 99;
+    left: 0%;
+    display: none;
+    border: #000000 solid 3px;
+}
+
+.bubble:after {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 15px 15px 0;
+    border-color: #FFFFFF transparent;
+    display: block;
+    width: 0;
+    z-index: 1;
+    bottom: -15px;
+    left: 110px;
+}
+
+.bubble:before {
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 17px 17px 0;
+    border-color: #000000 transparent;
+    display: block;
+    width: 0;
+    z-index: 0;
+    bottom: -20px;
+    left: 108px;
+}
+
+#project-fase {
+    position: fixed;
+    margin: 0 auto;
+    z-index: 999;
+    bottom: 0px;
+    background-color: grey;
+    padding: 0px;
+    display: table;
+    max-height: 45px;
+    overflow: auto;
+    border: 2px solid #DA291C;
+}
+
+#project-fase p {
+    margin: 0px;
+    color: #DA291C;
+}
+
+.arrow-box,
+.arrow-box-first {
+    position: relative;
+    background: white;
+    display: table-cell;
+    padding: 6px;
+    padding-left: 36px;
+    color: white;
+}
+
+.arrow-box:hover,
+.arrow-box-first:hover {
+    background: #DA291C;
+    color: #DA291C;
+}
+
+.arrow-box:hover .bubble,
+.arrow-box-first:hover .bubble {
+    display: inline;
+}
+
+#project-fase .arrow-box:hover p,
+#project-fase .arrow-box-first:hover p {
+    color: white;
+}
+
+#project-fase .arrow-box:hover:before,
+#project-fase .arrow-box-first:hover:before {
+    border-left-color: white;
+}
+
+#project-fase .arrow-box.active p,
+#project-fase .arrow-box-first.active p {
+    color: white;
+}
+
+#project-fase .arrow-box.active:before,
+#project-fase .arrow-box-first.active:before {
+    border-left-color: #DA291C;
+}
+
+.active {
+    background: #DA291C;
+    color: #DA291C;
+}
+
+#project-fase .arrow-box.closed p,
+#project-fase .arrow-box-first.closed p {
+    color: white;
+}
+
+#project-fase .arrow-box.closed:before,
+#project-fase .arrow-box-first.closed:before {
+    border-left-color: #DA291C;
+}
+
+.closed {
+    background: rgb(247, 156, 149);
+    color: rgb(247, 156, 149);
+}
+
+.arrow-box:after,
+.arrow-box-first:after {
+    left: 100%;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(218, 41, 28, 0);
+    border-left-color: inherit;
+    border-width: 16px;
+    margin-top: -16px;
+    z-index: 2;
+}
+
+.arrow-box:before {
+    left: 0px;
+    top: 50%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-color: rgba(218, 41, 28, 0);
+    border-left-color: #DA291C;
+    border-width: 18px;
+    margin-top: -18px;
+    z-index: 1;
+}
+
 #project-back {
     position: absolute;
     z-index: 1000;
@@ -387,6 +517,7 @@ a.map_delete {
     color: white;
     font-size: 1.2em;
     opacity: 0.4;
+    width: 100px;
 }
 
 #project-back-text {
@@ -434,12 +565,6 @@ a.map_delete {
     height: 100%;
     right: 10%;
     top: 10%;
-}
-
-.panel-body {
-    padding: 10px 10px 0px 40px;
-    position: relative;
-    width: 100%;
 }
 
 .panel-body hr {
@@ -493,20 +618,6 @@ a.map_delete {
     color: #DA291C;
 }
 
-.fa-pencil {
-    transform: scale(1.5);
-    color: #3498db;
-    opacity: 0.7;
-}
-
-.fa-pencil:hover {
-    opacity: 1;
-}
-
-.fa-pencil:active {
-    transform: scale(1.3);
-}
-
 .navbar-header img {
     height: 100%;
     position: absolute;
@@ -554,11 +665,14 @@ a.map_delete {
     list-style-type: none;
 }
 
-.project_icons {
-    position: absolute;
-    width: 77px;
-    right: 3%;
-    padding-top: 6px;
+.panel-body {
+    border-bottom: 1px solid lightgrey;
+}
+
+#panel-body-text,
+.delete_home_page,
+.edit_home_page {
+    padding: 15px;
 }
 
 .navbar-search {
@@ -598,17 +712,6 @@ a.map_delete {
     outline: none;
 }
 
-#accordion {
-    position: absolute;
-    top: 130px;
-    width: 100%;
-}
-
-#collapse1 {
-    padding-top: 20px;
-    padding-bottom: 50px;
-}
-
 #accordion a:hover {
     color: #DA291C;
     text-decoration: none;
@@ -640,19 +743,49 @@ a.map_delete {
     text-align: left;
 }
 
+#show-project {
+    margin-left: 15px;
+}
+
 .fa-trash {
     color: #DA291C;
-    transform: scale(1.5);
-    opacity: 0.7;
+    transform: scale(1.8);
     outline: none;
 }
 
-.fa-trash:hover {
-    opacity: 1;
+.fa-pencil {
+    transform: scale(1.7);
+    color: #3498db;
 }
 
-.fa-trash:active {
-    transform: scale(1.3);
+#panel-body-icons,
+.edit_home_page,
+.delete_home_page {
+    height: 51px;
+}
+
+.edit_home_page:hover {
+    background-color: #3498db;
+}
+
+.edit_home_page:hover .fa-pencil {
+    color: white;
+}
+
+.edit_home_page:active .fa-pencil {
+    transform: scale(1.4);
+}
+
+.delete_home_page:hover {
+    background-color: #DA291C;
+}
+
+.delete_home_page:hover .fa-trash {
+    color: white;
+}
+
+.delete_home_page:active .fa-trash {
+    transform: scale(1.5);
 }
 
 #map {
@@ -876,11 +1009,42 @@ h5.title-font {
 
 #carousel-container {
     margin-top: 20px;
-    height: 350px;
+    height: 500px;
     background-color: white;
     width: 100%;
     padding-bottom: 20px;
     padding-top: 28px;
+}
+
+@media(min-width:1400px) {
+    #carousel-container {
+        height: 800px;
+    }
+}
+
+@media(min-width:992px) {
+    .project-wat {
+        display: flex;
+    }
+    .project-wanneer {
+        margin-bottom: 15px;
+    }
+}
+
+@media(max-width:767px) {
+    .project-wanneer {
+        margin-bottom: 15px;
+    }
+}
+
+#project-beschrijving.vraag-success,
+#project-beschrijving.vraag-cont {
+    min-height: 1px;
+}
+
+#project-side-date,
+#project-side-location {
+    min-height: 150px;
 }
 
 #thumb-container {
@@ -895,7 +1059,6 @@ h5.title-font {
     background-color: white;
     z-index: 99;
     opacity: 0.8;
-    top: 0%;
     text-align: center;
     cursor: pointer;
 }
@@ -922,6 +1085,7 @@ h5.title-font {
 #thumb-pic img {
     height: 100%;
     width: 100%;
+    border: 1px solid;
 }
 
 #thumb-pic:hover {
@@ -938,6 +1102,7 @@ h5.title-font {
 #main-pic img {
     height: 100%;
     width: 100%;
+    border: 1px solid;
 }
 
 .fa-caret-down,
@@ -960,10 +1125,18 @@ h5.title-font {
     padding-left: 0px;
 }
 
+@media(max-width:767px) {
+    #project-beschrijving-container.mobile {
+        padding: 0px;
+        margin-bottom: 15px;
+    }
+}
+
 #project-beschrijving {
     background-color: white;
     padding: 15px 15px 15px 15px;
     overflow: auto;
+    min-height: 300px;
 }
 
 #project-side-date,
@@ -978,7 +1151,6 @@ h5.title-font {
     height: inherit;
     background-color: lightgrey;
     z-index: 3;
-    margin-bottom: 15px;
 }
 
 #vraag-container {
@@ -1040,13 +1212,48 @@ h5.title-font {
 }
 
 #user-reactie {
-    padding-right: 0px;
+    border: 1px solid;
+    min-height: 80px;
+}
+
+.arrow {
+    border-style: solid;
+    position: absolute;
+    border-color: black transparent transparent transparent;
+    border-width: 10px 0px 8px 10px;
+    top: -1px;
+    left: -10px;
+}
+
+#toon-reactie {
+    border: 1px solid;
+    display: inline-block;
+    padding: 15px;
+    margin-bottom: 15px;
+    color: #DA291C;
+    cursor: pointer;
+}
+
+#toon-reactie .fa-plus {
+    color: #DA291C;
+}
+
+#toon-reactie:hover {
+    background-color: #DA291C;
+    color: white;
+}
+
+#toon-reactie:hover .fa-plus {
+    color: white;
+    transform: rotate(180deg);
+    transition: transform 1s;
 }
 
 #user-reactie a {
     color: #DA291C;
     float: right;
     opacity: 0.5;
+    margin-left: 15px;
 }
 
 #user-reactie a:hover {
@@ -1063,10 +1270,6 @@ h5.title-font {
     max-width: 100%;
 }
 
-#user-info {
-    padding-top: 5px;
-}
-
 #reactie-submit {
     padding-top: 5px;
     padding-right: 0px;
@@ -1075,7 +1278,7 @@ h5.title-font {
 #reactie-container {
     overflow: auto;
     overflow-x: hidden;
-    margin-bottom: 20px;
+    margin: 20px 0px;
 }
 
 .pad-left {
@@ -1097,6 +1300,10 @@ span.filled-stars span {
 #vraag-btn-submit button {
     width: 50%;
     margin: 0px auto;
+}
+
+#vraag-btn-submit {
+    margin-top: 10px;
 }
 
 #btn-sign-in,
