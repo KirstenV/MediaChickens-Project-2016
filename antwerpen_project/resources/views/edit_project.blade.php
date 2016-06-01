@@ -117,7 +117,7 @@
                                                 <input id="autocomplete" type="text" class="form-control " placeholder="Zoeken" ng-model="input_loc" googleplace/>
                                             </div>
                                             <div class="no-padding col-md-2 col-xs-2">
-                                                <button class="fa fa-plus form-control" type="submit"></button>
+                                                <button id="location-btn" class="fa fa-plus form-control" type="submit"></button>
                                             </div>
 
                                         </form>
@@ -138,7 +138,7 @@
                                     <div id="map-mobile" class="col-md-6 col-xs-12">
                                         <div class="" id="map-container-editpage" ng-init="map_initializetion({{$id}})">
                                             <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events">
-                                                <ui-gmap-markers models="locations" coords="'location'" idkey="'id'" events="map.marker_events">
+                                                <ui-gmap-markers models="locations" options="map.options" coords="'location'" idkey="'id'" events="map.marker_events">
                                                     <ui-gmap-windows show="'show'">
                                                         <p ng-non-bindable> @{{ address }}</p>
                                                     </ui-gmap-windows>

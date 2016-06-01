@@ -356,6 +356,10 @@ a.map_delete {
     padding-top: 15px;
 }
 
+#location-btn.fa-plus{
+    color: #DA291C;
+}
+
 .bubble {
     position: absolute;
     width: 250px;

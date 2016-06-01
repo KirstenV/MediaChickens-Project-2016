@@ -8,25 +8,25 @@ use App\Vragen;
 use App\Antwoorden;
 class export extends Controller
 {
-    public function get_export (){
-       $export= Excel::create('Inspraak', function($excel) {
-            $excel->sheet('Projecten', function ($sheet) {
-                $sheet->fromArray(Projecten::all());
-            });
-           
-           $excel->sheet('Reacties', function ($sheet) {
-                $sheet->fromArray(Reactie::all());
-            });
-           
-           $excel->sheet('Vragen', function ($sheet) {
-                $sheet->fromArray(Vragen::all());
-            });
-           
-           $excel->sheet('Antwoorden', function ($sheet) {
-                $sheet->fromArray(Antwoorden::all());
-            });
-        })->export('xls');
-
-        return print_r($export);
-    }
+//    public function get_export (){
+//       $export= Excel::create('Inspraak', function($excel) {
+//            $excel->sheet('Projecten', function ($sheet) {
+//                $sheet->fromArray(Projecten::all());
+//            });
+//           
+//           $excel->sheet('Reacties', function ($sheet) {
+//                $sheet->fromArray(Reactie::all());
+//            });
+//           
+//           $excel->sheet('Vragen', function ($sheet) {
+//                $sheet->fromArray(Vragen::all());
+//            });
+//           
+//           $excel->sheet('Antwoorden', function ($sheet) {
+//                $sheet->fromArray(Antwoorden::all());
+//            });
+//        })->export('xls');
+//
+//        return print_r($export);
+//    }
 }

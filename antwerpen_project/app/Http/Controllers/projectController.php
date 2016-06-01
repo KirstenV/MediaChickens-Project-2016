@@ -6,10 +6,12 @@ use DB;
 use App\Projecten;
 use App\User;
 use App\Fase;
-Use App\Project_foto;
+use Excel;
+use App\Project_foto;
 use App\Vragen;
 use App\Locatie;
 use App\Reactie;
+use App\Antwoorden;
 use App\Locatie_projecten;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
@@ -497,5 +499,27 @@ class projectController extends Controller
         return array('$error' => "Fout met her server");
     }
 
+    
+    public function get_export (){
+       $export= Excel::create('Inspraak', function($excel) {
+            $excel->sheet('Projecten', function ($sheet) {
+                $sheet->fromArray(Projecten::all());
+            });
+           
+           $excel->sheet('Reacties', function ($sheet) {
+                $sheet->fromArray(Reactie::all());
+            });
+           
+           $excel->sheet('Vragen', function ($sheet) {
+                $sheet->fromArray(Vragen::all());
+            });
+           
+           $excel->sheet('Antwoorden', function ($sheet) {
+                $sheet->fromArray(Antwoorden::all());
+            });
+        })->export('xls');
+
+        return print_r($export);
+    }
 
 }
