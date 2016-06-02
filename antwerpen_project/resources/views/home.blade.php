@@ -2,7 +2,56 @@
 
 
 <div id="homeContainer" class=" col-xs-12 col-sm-6 col-md-6 width-transition no-padding" ng-class='whatClassIsIt(project, "col-md-8", "col-md-6")'>
+
+
+    <div ng-controller="projectController">
+        <div id="project-fase" class="col-md-8 col-xs-12" ng-show="project">
+
+            <div class="arrow-box-cell">
+                <div class="arrow-box closed">
+
+                    <p>sdqfd</p>
+                </div>
+            </div>
+
+
+            <div class="arrow-box-cell">
+                <div class="arrow-box closed">
+                    <p>sdqfd</p>
+                </div>
+            </div>
+            <div class="arrow-box-cell">
+                <div class="arrow-box active">
+                    <p>sdqfd</p>
+                </div>
+            </div>
+            <div class="arrow-box-cell">
+                <div class="arrow-box">
+                    <p>sdqfd</p>
+                </div>
+            </div>
+            <div class="arrow-box-cell">
+                <div class="arrow-box">
+                    <p>sdqfd</p>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+
+
     <div id="projectContainer" ng-controller="projectController">
+
+
+
+
         @if(Auth::check()) @if(Auth::user()->is_adm)
         <div id="editable" class="col-md-6 col-xs-12 col-sm-6" ng-hide="project">
             <div class="row">
@@ -313,31 +362,6 @@
                             <div id="project-beschrijving" class=" col-md-12 col-xs-12">
 
                                 <h4 class="title_red title-font">Commentaar</h4>
-
-
-                                <div id="reactie-container" class="col-md-12 no-padding" ng-repeat="reaction in project.reactions">
-                                    <div id="user-info" class="col-md-1">
-                                        <img id="user-pic" src="{{Request::root()}}/img/userpic.gif" alt="user-pic" />
-                                    </div>
-
-                                    <div id="user-reactie" class="col-md-11">
-                                        <div class="arrow"> </div>
-                                        @if(Auth::check()) @if(Auth::user()->is_adm)
-                                        <a href="" ng-click="delete_review(reaction.reaction.id,$index)"><i
-                                                            class="fa fa-times" aria-hidden="true"></i> verwijder</a> @endif @endif
-                                        <div class="pull-right"> <strong>Beoordeling:</strong> @{{ reaction.reaction.rating }} op 5</div>
-                                        <strong ng-show="reaction.user.name"> @{{ reaction.user.name }}</strong>
-                                        <strong ng-hide="reaction.user.name"> Anoniem</strong> zei:
-                                        <p>"@{{ reaction.reaction.reactie_masseg }}"</p>
-                                    </div>
-
-
-                                </div>
-                                <div class="row text-center">
-                                    <div id="toon-reactie" class="text-center" ng-click="get_more_reviews()" ng-hide="get_mor_reviews">
-                                        <i class="fa fa-plus" aria-hidden="true"></i> Laad meer reacties
-                                    </div>
-                                </div>
                                 <form name="reviewForm" ng-submit="reviewForm.$valid && submit_reaction(<?php if (Auth::check()) {
                                               echo Auth::user()->id;
                                           } else {
@@ -368,6 +392,33 @@
 
                                 </form>
 
+                                <div id="reactie-container" class="col-md-12 no-padding" ng-repeat="reaction in project.reactions">
+                                    <div id="user-info" class="col-md-1">
+                                        <img id="user-pic" src="{{Request::root()}}/img/userpic.gif" alt="user-pic" />
+                                    </div>
+
+                                    <div id="user-reactie" class="col-md-11">
+                                        <div class="arrow"> </div>
+                                        @if(Auth::check()) @if(Auth::user()->is_adm)
+                                        <a href="" ng-click="delete_review(reaction.reaction.id,$index)"><i
+                                                            class="fa fa-times" aria-hidden="true"></i> verwijder</a> @endif @endif
+                                        <div class="pull-right">
+                                            <img src="{{Request::root()}}/img/project/@{{ reaction.reaction.rating }}-rating.png" />
+                                        </div>
+                                        <strong ng-show="reaction.user.name"> @{{ reaction.user.name }}</strong>
+                                        <strong ng-hide="reaction.user.name"> Anoniem</strong>
+                                        <p>"@{{ reaction.reaction.reactie_masseg }}"</p>
+                                    </div>
+
+
+                                </div>
+                                <div class="row text-center">
+                                    <div id="toon-reactie" class="text-center" ng-click="get_more_reviews()" ng-hide="get_mor_reviews">
+                                        <i class="fa fa-plus" aria-hidden="true"></i> Laad meer reacties
+                                    </div>
+                                </div>
+
+
                             </div>
 
 
@@ -377,37 +428,7 @@
                     </div>
 
 
-                    <div id="project-fase" class="col-md-8 col-xs-12" ng-show="project">
 
-                        
-                        <div class="arrow-box-first closed">
-                            <div class="bubble"></div>
-                            <p>sdqfd</p>
-                        </div>
-
-
-                        <div class="arrow-box closed">
-                            <div class="bubble"></div>
-                            <p>sdqfd</p>
-                        </div>
-
-                        <div class="arrow-box active">
-                            <div class="bubble"></div>
-                            <p>sdqfd</p>
-                        </div>
-
-                        <div class="arrow-box">
-                            <div class="bubble"></div>
-                            <p>sdqfd</p>
-                        </div>
-                        
-                        <div class="arrow-box">
-                            <div class="bubble"></div>
-                            <p>sdqfd</p>
-                        </div>
-
-
-                    </div>
 
                 </div>
                 <!--end div evreting obout project-->

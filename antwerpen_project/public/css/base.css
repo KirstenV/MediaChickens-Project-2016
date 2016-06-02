@@ -356,63 +356,21 @@ a.map_delete {
     padding-top: 15px;
 }
 
-#location-btn.fa-plus{
+#location-btn.fa-plus {
     color: #DA291C;
 }
 
-.bubble {
-    position: absolute;
-    width: 250px;
-    height: 205px;
-    padding: 0px;
-    background: #FFFFFF;
-    -webkit-border-radius: 0px;
-    -moz-border-radius: 0px;
-    border-radius: 0px;
-    top: -223px;
-    z-index: 99;
-    left: 0%;
-    display: none;
-    border: #000000 solid 3px;
-}
-
-.bubble:after {
-    content: '';
-    position: absolute;
-    border-style: solid;
-    border-width: 15px 15px 0;
-    border-color: #FFFFFF transparent;
-    display: block;
-    width: 0;
-    z-index: 1;
-    bottom: -15px;
-    left: 110px;
-}
-
-.bubble:before {
-    content: '';
-    position: absolute;
-    border-style: solid;
-    border-width: 17px 17px 0;
-    border-color: #000000 transparent;
-    display: block;
-    width: 0;
-    z-index: 0;
-    bottom: -20px;
-    left: 108px;
-}
-
 #project-fase {
-    position: fixed;
+    position: absolute;
     margin: 0 auto;
     z-index: 999;
-    bottom: 0px;
-    background-color: grey;
+    top: 135px;
+    background-color: white;
     padding: 0px;
     display: table;
-    max-height: 45px;
     overflow: auto;
-    border: 2px solid #DA291C;
+    left: -50px;
+    width: 50px;
 }
 
 #project-fase p {
@@ -420,98 +378,50 @@ a.map_delete {
     color: #DA291C;
 }
 
-.arrow-box,
-.arrow-box-first {
+.arrow-box {
     position: relative;
     background: white;
-    display: table-cell;
+    display: table-row;
     padding: 6px;
     padding-left: 36px;
     color: white;
+    height: 50px;
+    opacity: 0.5;
 }
 
-.arrow-box:hover,
-.arrow-box-first:hover {
+.arrow-box-cell {
+    display: table;
+    border: 1px solid black;
+    width: 50px;
+}
+
+.arrow-box:hover {
     background: #DA291C;
-    color: #DA291C;
-}
-
-.arrow-box:hover .bubble,
-.arrow-box-first:hover .bubble {
-    display: inline;
+    color: white;
+    opacity: 1;
 }
 
 #project-fase .arrow-box:hover p,
-#project-fase .arrow-box-first:hover p {
+#project-fase .arrow-box.closed:hover p {
     color: white;
 }
 
-#project-fase .arrow-box:hover:before,
-#project-fase .arrow-box-first:hover:before {
-    border-left-color: white;
-}
-
-#project-fase .arrow-box.active p,
-#project-fase .arrow-box-first.active p {
+#project-fase .arrow-box.active p {
     color: white;
-}
-
-#project-fase .arrow-box.active:before,
-#project-fase .arrow-box-first.active:before {
-    border-left-color: #DA291C;
 }
 
 .active {
     background: #DA291C;
-    color: #DA291C;
+    opacity: 1;
 }
 
-#project-fase .arrow-box.closed p,
-#project-fase .arrow-box-first.closed p {
-    color: white;
-}
-
-#project-fase .arrow-box.closed:before,
-#project-fase .arrow-box-first.closed:before {
-    border-left-color: #DA291C;
+#project-fase .arrow-box.closed p {
+    color: black;
 }
 
 .closed {
-    background: rgb(247, 156, 149);
-    color: rgb(247, 156, 149);
-}
-
-.arrow-box:after,
-.arrow-box-first:after {
-    left: 100%;
-    top: 50%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-color: rgba(218, 41, 28, 0);
-    border-left-color: inherit;
-    border-width: 16px;
-    margin-top: -16px;
-    z-index: 2;
-}
-
-.arrow-box:before {
-    left: 0px;
-    top: 50%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-color: rgba(218, 41, 28, 0);
-    border-left-color: #DA291C;
-    border-width: 18px;
-    margin-top: -18px;
-    z-index: 1;
+    background: lightgrey;
+    opacity: 1;
 }
 
 #project-back {
@@ -1218,6 +1128,10 @@ h5.title-font {
 #user-reactie {
     border: 1px solid;
     min-height: 80px;
+}
+
+#user-reactie div img {
+    height: 15px;
 }
 
 .arrow {
