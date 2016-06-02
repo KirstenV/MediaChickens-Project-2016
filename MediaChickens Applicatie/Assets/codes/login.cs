@@ -12,7 +12,7 @@ public class login : MonoBehaviour {
     private string passWord;
 
     //variables for anonymous login
-    private string emailAnonymous = "unknown@anonymous.anonymous";
+    private string emailAnonymous = "Unknown@anonymous.anonymous";
     private string passwordAnonymous = "123456";
     //string with errors to be showed when login failed
     private string stringError;
@@ -81,7 +81,6 @@ public class login : MonoBehaviour {
         answerID = scriptDatabaseConnection.arrQuestions[answerCount].id;
         answerCount++;
         fillAnswerForm(currentAnswer, answerID);
-        Debug.Log(currentAnswer); 
     } //the user has given his answer, variables are filled in and sent to database
     private void fillAnswerForm(string playerAnswered, string questionID)
     {
@@ -132,7 +131,8 @@ public class login : MonoBehaviour {
                 idPlayer = dataProjects["User"]["id"].ToString();
                 PlayerPrefs.SetString("userID", idPlayer);
                 namePlayer = dataProjects["User"]["name"].ToString();
-                if(namePlayer == "Anonymous")
+             //   Debug.Log(dataProjects["User"][1].ToString());
+                if(namePlayer == emailAnonymous)
                 {
                     PlayerPrefs.SetString("userName", "");
                     PlayerPrefs.SetString("loggedIn", "false");
@@ -185,6 +185,7 @@ public class login : MonoBehaviour {
     } //user clicked the login, check user in database
     public void btnLogoutClicked() 
     {
+        Debug.Log("button logout clicked");
         scriptCanvas.hideAllPaused();
         if (PlayerPrefs.GetString("loggedIn") == "true") { //log out
             btnAnonymousClicked();

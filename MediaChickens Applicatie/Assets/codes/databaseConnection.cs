@@ -61,8 +61,8 @@ public class databaseConnection : MonoBehaviour {
 
     //project object variables
     public byte lengthStringSplitProject = 15;
-    public byte maxLettersOnLineProject = 7;
-
+    public byte maxLettersOnLineProject = 50;
+    public byte maxEntersProject = 20;
     //question object variables
     public byte lengthStringSplitQuestions = 15;
     public byte maxLettersOnLineQuestions = 8;
@@ -173,16 +173,19 @@ public class databaseConnection : MonoBehaviour {
         }
     }
 
-    void FixedUpdate() //always being called
-    {
-   
-
-    }
     public void swipedLeft()
 {
+        if(txtProjectDates.text == "")
+        {
+            txtProjectName.characterSize = txtProjectName.characterSize / 1.5f;
+            txtProjectDates.characterSize = txtProjectDates.characterSize / 1.5f;
+            txtProjectDescription.characterSize = txtProjectDescription.characterSize / 1.5f;
+            Debug.Log("firstScreen");
+        }
     if (currentProject == 0) //go to end of project line
     {
         currentProject = (byte)(arrProjects.Length - 1);
+            Debug.Log(currentProject);
     }
     else
     {
@@ -196,7 +199,14 @@ public class databaseConnection : MonoBehaviour {
 }
     public void swipedRight()
     {
-    if (currentProject == (byte)(arrProjects.Length - 1)) //go to begin of project line
+        if (txtProjectDates.text == "")
+        {
+            txtProjectName.characterSize = txtProjectName.characterSize / 1.5f;
+            txtProjectDates.characterSize = txtProjectDates.characterSize / 1.5f;
+            txtProjectDescription.characterSize = txtProjectDescription.characterSize / 1.5f;
+            Debug.Log("firstScreen");
+        }
+        if (currentProject == (byte)(arrProjects.Length - 1)) //go to begin of project line
     {
         currentProject = 0;
     }
@@ -215,6 +225,7 @@ public class databaseConnection : MonoBehaviour {
     playerScript.hasSwipedUp = true;
     characterAnimator.SetBool("isRunning", true);
 }
+
     public void BtnPauseClicked() //the pause button is clicked
     {
         scriptCanvas.showPauseScreen(isPlaying);
@@ -238,9 +249,11 @@ public class databaseConnection : MonoBehaviour {
         string projectDate;
         byte maxLettersOnLine;
         byte lengthStringSplit;
+        byte maxEnters;
         public ObjectJSONProjects() { } //empty for default
-        public ObjectJSONProjects(string tID, string tTitle, string tDescription, string startDate, string endDate, byte tLengthStringSplit, byte tMaxLettersOnLine)
+        public ObjectJSONProjects(string tID, string tTitle, string tDescription, string startDate, string endDate, byte tLengthStringSplit, byte tMaxLettersOnLine, byte tMaxEnters)
         {
+            maxEnters = tMaxEnters;
             maxLettersOnLine = tMaxLettersOnLine;
             lengthStringSplit = tLengthStringSplit;
             jID = tID;
@@ -281,6 +294,7 @@ public class databaseConnection : MonoBehaviour {
         {
             if (stringToSplit.Length > lengthStringSplit) // doesn't fit in screen any more
             {
+                byte entersCount = 0;
                 int lettersOnLine = 0;
                 string stringToReturn = "";
                 string[] wordsInString = stringToSplit.Split(' ');
@@ -289,14 +303,25 @@ public class databaseConnection : MonoBehaviour {
                     lettersOnLine += wordsInString[i].Length;
                     if (lettersOnLine >= maxLettersOnLine) // if the letters already added on a line are over the max, add an enter
                     {
+                        if(entersCount < maxEnters)
+                        { 
+                        entersCount ++;
+                        Debug.Log("enter");
                         stringToReturn += " " + wordsInString[i] + "\n";
                         lettersOnLine = 0;
+                        }
+                        else
+                        {
+                            stringToReturn += "\n ... meer info op website";
+                            return stringToReturn;
+                        }
                     }
                     else
                     {
                         stringToReturn += " " + wordsInString[i];
                     }
                 }
+                
                 return stringToReturn;
             }
             else
@@ -324,6 +349,10 @@ public class databaseConnection : MonoBehaviour {
             qID = tID;
             typeOfQuestion = tType;
             qQuestion = splitQuestionStrings(tQuestion);
+            if(tType == "Gesloten vragen")
+            {
+                qQuestion = splitQuestionStringTabs(tQuestion);
+            }
             possibleAnswers1 = splitQuestionStrings(tPossibleAnswers1);
             possibleAnswers2 = splitQuestionStrings(tPossibleAnswers2);
             possibleAnswers3 = splitQuestionStrings(tPossibleAnswers3);
@@ -439,8 +468,37 @@ public class databaseConnection : MonoBehaviour {
                 return stringToSplit;
             }
         }
-    }
+    
 
+    private string splitQuestionStringTabs(string stringToSplit)
+    {
+        if (stringToSplit.Length > lengthStringSplit) // doesn't fit in screen any more
+        {
+            int lettersOnLine = 0;
+            string stringToReturn = "";
+            string[] wordsInString = stringToSplit.Split(' ');
+            stringToReturn += "\t \t";
+            for (int i = 0; i < wordsInString.Length; i++)
+            {
+                lettersOnLine += wordsInString[i].Length;
+                if (lettersOnLine >= maxLettersOnLine)
+                {
+                    stringToReturn += " " + wordsInString[i] + "\n" + "\t \t";
+                    lettersOnLine = 0;
+                }
+                else
+                {
+                    stringToReturn += " " + wordsInString[i];
+                }
+            }
+            return stringToReturn;
+        }
+        else
+        {
+            return stringToSplit;
+        }
+    }
+}
     private string getQuestionsUrl(string projectID) //makes an url from chosen project
     {
         string urlPart1 = "http://mediachickens.multimediatechnology.be/unity/vragen/";
@@ -484,11 +542,12 @@ public class databaseConnection : MonoBehaviour {
 
     private void addProjectsToArray(string jsonString) // add all projects to the projectArray
     {
+        
         JsonData dataProjects = JsonMapper.ToObject(jsonString);
         arrProjects = new ObjectJSONProjects[dataProjects.Count];
         for (int i = 0; i < dataProjects.Count; i++)
         {
-            arrProjects[i] = new ObjectJSONProjects(dataProjects[i]["id"].ToString(), dataProjects[i]["titel"].ToString(), dataProjects[i]["beschrijving"].ToString(), dataProjects[i]["begin_datum"].ToString(), dataProjects[i]["eind_datum"].ToString(), lengthStringSplitProject, maxLettersOnLineProject); // json object oproepen door (id)
+            arrProjects[i] = new ObjectJSONProjects(dataProjects[i]["id"].ToString(), dataProjects[i]["titel"].ToString(), dataProjects[i]["beschrijving"].ToString(), dataProjects[i]["begin_datum"].ToString(), dataProjects[i]["eind_datum"].ToString(), lengthStringSplitProject, maxLettersOnLineProject, maxEntersProject); // json object oproepen door (id)
         }
     }
 
@@ -525,14 +584,12 @@ public class databaseConnection : MonoBehaviour {
     void RoadSpawn() //automatically spawns the road when reached roadtrigger
     {
         if(answerCount+2 < arrQuestions.Length && arrQuestions[answerCount+2] != null) { //if there are questions left, show tunnel and new trigger
-            Debug.Log( answerCount + 2);
             if(arrQuestions[answerCount + (numberFirstTunnelSpawn-1)].type == "Gesloten vragen") { //2 possible answers
         Instantiate(tunnel2, new Vector3(tunnelXposition, tunnelYPosition, this.transform.position.z + (spawnDistance * numberFirstTunnelSpawn)), Quaternion.identity);
                 }
 
             else if(arrQuestions[answerCount + (numberFirstTunnelSpawn-1)].type == "meerkeuzevragen") //4 possible answers
                 {
-                Debug.Log("inside spawn");
                 Instantiate(tunnel4, new Vector3(tunnelXposition, tunnelYPosition, this.transform.position.z + (spawnDistance * 3)), Quaternion.identity);
                  }
 

@@ -13,13 +13,11 @@ public class swipeControls : MonoBehaviour {
     //other scripts for calling swipe methods
     private Player playerScript;
     private databaseConnection databaseScript;
-    private Animator characterAnimator;
    
     // Use this for initialization
     void Start () {
         playerScript = GetComponent<Player>();
         databaseScript = GetComponent<databaseConnection>();
-        characterAnimator = GetComponent<Animator>();
     }
     void FixedUpdate() //always being called
     {
