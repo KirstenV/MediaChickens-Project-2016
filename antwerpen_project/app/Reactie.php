@@ -15,6 +15,10 @@ class Reactie extends Model
     {
         return $this->belongsToMany('App\Projecten');
     }
+    public function show_answer()
+    {
+        return $this->hasMany('App\reaction_on_review');
+    }
 
     protected $dates = ['deleted_at'];
     //
