@@ -436,11 +436,7 @@ $(document).ready(function () {
     
     $('#rating-total').attr("value" ,"2");
     
-//    $("#project-titel-content .rating-container").css("display", "inline");
-//    $("#project-titel-content .rating-container .rating .empty-stars .star .fa-star-o").css("transform", "scale(0.5)");
-//    $("#project-titel-content .rating-container .rating .filled-stars .star .fa-star").css("transform", "scale(0.5)");
-//    $("#project-titel-content .rating-container .rating .filled-stars .star .fa-star").css("color", "white");
-//    $("#project-titel-content .rating-container .rating .empty-stars .star").css("display", "inline");
+    
     
 
 
@@ -453,6 +449,14 @@ $(document).ready(function () {
 
 
 
+    
+    
+    $(".arrow-box").on("click", function(){
+        
+        $("#project-fase").toggleClass("open-fase");
+        $("#project-fase").toggleClass("closed-fase");
+        
+    });
 
 
 

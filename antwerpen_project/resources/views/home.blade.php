@@ -5,7 +5,7 @@
 
 
     <div ng-controller="projectController">
-        <div id="project-fase" class="text-center" ng-show="project">
+        <div id="project-fase" class="text-center closed-fase" ng-show="project">
 
             <div class="arrow-box-cell first">
                 <div class="arrow-box closed">
@@ -22,7 +22,7 @@
                     <p class="lrg"><strong>2</strong></p>
                 </div>
             </div>
-            <div class="arrow-box-cell">
+            <div class="arrow-box-cell active">
                 <div class="arrow-box active">
                     <p>fase</p>
                     <p class="lrg"><strong>3</strong></p>
@@ -41,6 +41,10 @@
                 </div>
             </div>
 
+            
+            
+            <div class="arrow-box-right"></div>
+            
         </div>
 
     </div>
