@@ -375,24 +375,29 @@ a.map_delete {
 
 #project-fase p {
     margin: 0px;
-    color: #DA291C;
+    color: black;
 }
 
 .arrow-box {
     position: relative;
-    background: white;
+    background: lightgrey;
     display: table-row;
     padding: 6px;
     padding-left: 36px;
-    color: white;
+    color: black;
     height: 50px;
     opacity: 0.5;
 }
 
+p.lrg{
+    font-size: 1.5em;
+}
 .arrow-box-cell {
     display: table;
-    border: 1px solid black;
+    
     width: 50px;
+    border-left: 1px solid;
+border-bottom: 1px solid;
 }
 
 .arrow-box:hover {
@@ -406,13 +411,22 @@ a.map_delete {
     color: white;
 }
 
+.first{
+    border-top: 1px solid;
+}
+
 #project-fase .arrow-box.active p {
+    color: black;
+}
+
+#project-fase .arrow-box.active:hover p {
     color: white;
 }
 
 .active {
-    background: #DA291C;
+    background: white;
     opacity: 1;
+    border-right: 0px;
 }
 
 #project-fase .arrow-box.closed p {
