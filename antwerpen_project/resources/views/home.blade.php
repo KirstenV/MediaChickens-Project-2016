@@ -7,13 +7,16 @@
     <div ng-controller="projectController">
         <div id="project-fase" class="text-center closed-fase" ng-show="project">
 
-            <div class="arrow-box-cell first" ng-repeat="fase in project.fases" ng-if="$first">
-                <div ng-class="" class="arrow-box">
+            <div class="arrow-box-cell first" ng-repeat="fase in project.fases">
+                <div ng-class="fase_classes(fase.fases)" class="arrow-box">
 
                     <p>fase</p>
                     <p class="lrg"><strong>@{{$index+1}}</strong></p>
                 </div>
             </div>
+            
+            
+        
 
 
 <!--
@@ -45,7 +48,7 @@
 
             
             
-            <div class="arrow-box-right">
+            <div class="arrow-box-right"  ng-repeat="fase in project.fases">
             <h4>@{{fase.fase_titel}}</h4>
             
             </div>
@@ -265,9 +268,9 @@
                                 <div id="project-side-location" class="col-md-12 col-xs-12">
                                     <h4 class="title_red title-font">Waar?</h4>
 
-                                    <div ng-repeat="locaties in project">
-                                        <p> @{{ project.locaties[$index]["straat_naam"] }}
-                                            <hr>
+                                    <div ng-repeat="locatie in project.locaties">
+                                        <p> @{{ locatie.straat_naam }}
+                                            <hr ng-if="!$last">
                                         </p>
                                     </div>
 
@@ -289,7 +292,7 @@
                     </div>
 
 
-                    <div id="project-info-container" class="col-md-12 col-xs-12" ng-hide="answer_post_succes">
+                    <div ng-show="project.vragen.length" id="project-info-container" class="col-md-12 col-xs-12" ng-hide="answer_post_succes">
                         <div id="project-beschrijving-container" class="col-md-12 col-xs-12 no-padding">
                             <div id="project-beschrijving" class="col-md-12 col-xs-12 vraag-cont">
 

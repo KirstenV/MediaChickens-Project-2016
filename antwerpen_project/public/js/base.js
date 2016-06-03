@@ -366,9 +366,9 @@ console.log("--home page-- --aswers feadback-- server answer:0",response.data);
 
                 $scope.fase_classes = function($fase_status){
                     
-                    if($fase_status == "open"){
+                    if($fase_status == "open fase"){
                         return "";
-                    }else if($fase_status == "bezig"){
+                    }else if($fase_status == "in progress"){
                         
                         return "active";
                         

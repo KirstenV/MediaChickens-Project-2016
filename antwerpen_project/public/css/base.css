@@ -393,9 +393,6 @@ a.map_delete {
     left: 49px;
     min-height: 200px;
     width: 300px;
-    border-top: 1px solid;
-    border-bottom: 1px solid;
-    border-right: 1px solid;
     height: 100%;
 }
 
@@ -411,7 +408,7 @@ a.map_delete {
 
 .arrow-box {
     position: relative;
-    background: lightgrey;
+    background: #DA291C;
     display: table-row;
     padding: 6px;
     padding-left: 36px;
@@ -428,9 +425,6 @@ p.lrg {
 .arrow-box-cell {
     display: table;
     width: 50px;
-    border-left: 1px solid;
-    border-bottom: 1px solid;
-    border-right: 1px solid;
     z-index: 2;
 }
 
@@ -445,9 +439,7 @@ p.lrg {
     color: white;
 }
 
-.first {
-    border-top: 1px solid;
-}
+
 
 #project-fase .arrow-box.active p {
     color: black;
@@ -468,7 +460,7 @@ p.lrg {
 }
 
 .closed {
-    background: lightgrey;
+    background: #E45D53;
     opacity: 1;
 }
 
