@@ -7,7 +7,7 @@
     <div ng-controller="projectController">
         <div id="project-fase" class="text-center closed-fase" ng-show="project">
 
-            <div class="arrow-box-cell" ng-repeat="fase in project.fases">
+            <div class="arrow-box-cell first" ng-repeat="fase in project.fases" ng-if="$first">
                 <div ng-class="" class="arrow-box">
 
                     <p>fase</p>

@@ -451,8 +451,8 @@ $(document).ready(function () {
 
     
     
-    $(".arrow-box").on("click", function(){
-        
+    $("#project-fase").on("click", function(){
+        console.log("hello");
         $("#project-fase").toggleClass("open-fase");
         $("#project-fase").toggleClass("closed-fase");
         
