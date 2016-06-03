@@ -364,7 +364,20 @@ console.log("--home page-- --aswers feadback-- server answer:0",response.data);
                 }
 
 
-
+                $scope.fase_classes = function($fase_status){
+                    
+                    if($fase_status == "open"){
+                        return "";
+                    }else if($fase_status == "bezig"){
+                        
+                        return "active";
+                        
+                    }else{
+                        return "closed";
+                    }
+                    
+                    
+                }
 
 
                 $scope.show_project_info = function ($id_project) {

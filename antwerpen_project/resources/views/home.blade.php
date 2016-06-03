@@ -7,15 +7,16 @@
     <div ng-controller="projectController">
         <div id="project-fase" class="text-center closed-fase" ng-show="project">
 
-            <div class="arrow-box-cell first">
-                <div class="arrow-box closed">
+            <div class="arrow-box-cell" ng-repeat="fase in project.fases">
+                <div ng-class="" class="arrow-box">
 
                     <p>fase</p>
-                    <p class="lrg"><strong>1</strong></p>
+                    <p class="lrg"><strong>@{{$index+1}}</strong></p>
                 </div>
             </div>
 
 
+<!--
             <div class="arrow-box-cell">
                 <div class="arrow-box closed">
                     <p>fase</p>
@@ -40,10 +41,14 @@
                     <p class="lrg"><strong>5</strong></p>
                 </div>
             </div>
+-->
 
             
             
-            <div class="arrow-box-right"></div>
+            <div class="arrow-box-right">
+            <h4>@{{fase.fase_titel}}</h4>
+            
+            </div>
             
         </div>
 
