@@ -139,7 +139,16 @@ class projectController extends Controller
                 ]);
 
                 break;
+            case "fases" :
+                $validator = Validator::make($request->all(), [
+                    'invul_veld' => 'required|max:250',
+                ]);
+
+                break;
             default:
+               /* $validator = Validator::make($request->all(), [
+                    'invul_veld' => 'required|max:250',
+                ]);*/
                 return array("error", "Er ging iets fout");
         }
 
