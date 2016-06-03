@@ -40,7 +40,7 @@ class projectController extends Controller
 //Carbon::createFromFormat('Y-m-d');
         $project = new Projecten;
         $project->titel = $request->titel;
-        $project->beschrijving = "klick op mij en pas mij aan voor de beschrijving";
+        $project->beschrijving = "Beschrijving";
         $project->project_picture = "proef_proef.jpg";
         $project->user_id = $request->admin;
         $project->save();
@@ -165,7 +165,7 @@ class projectController extends Controller
 
         $usser_updatet = Projecten::find($id);
 
-        $project_information = array_add($project_information, '$succes', "alles s opgeslagen");
+        $project_information = array_add($project_information, '$succes', "alles is opgeslagen");
 
         return $project_information;
     }
@@ -204,7 +204,7 @@ class projectController extends Controller
         $project->titel = $request->row_content;
         $project->begin_datum = Carbon::now();
         $project->eind_datum = Carbon::now();
-        $project->beschrijving = "klick op mij en pas mij aan voor de beschrijving";
+        $project->beschrijving = "Beschrijving";
         $project->project_picture = "proef_proef.jpg";
         $project->user_id = $request->admin;
         $project->save();
@@ -220,11 +220,11 @@ class projectController extends Controller
         if ($tabel == "Vragen") {
             $question = new Vragen;
             $question->choices = $request->question_type;
-            $question->vraag = "Voer hier je vraag in";
-            $question->mogelijke_antwoorden_1 = "geef hier mogelijke aantwoord";
-            $question->mogelijke_antwoorden_2 = "geef hier mogelijke aantwoord";
-            $question->mogelijke_antwoorden_3 = "geef hier mogelijke aantwoord";
-            $question->mogelijke_antwoorden_4 = "geef hier mogelijke aantwoord";
+            $question->vraag = "Vraag";
+            $question->mogelijke_antwoorden_1 = "Antwoord";
+            $question->mogelijke_antwoorden_2 = "Antwoord";
+            $question->mogelijke_antwoorden_3 = "Antwoord";
+            $question->mogelijke_antwoorden_4 = "Antwoord";
             $question->projecten_id = $request->project_id;
             $question->save();
 
@@ -244,14 +244,14 @@ class projectController extends Controller
         $validator = Validator::make([$image], ['mimes:gif,jpg,jpeg,bmp,png', 'image.required']);
 
         if ($validator->fails()) {
-            return response()->json(['error' => 'bestan moet een extensie :gif,jpg,jpeg,bmp,png hebben '], 200);
+            return response()->json(['error' => 'Bestand moet als extensie gif, jpg, jpeg, bmp of png hebben '], 200);
         }
         $destinationPath = 'img/original';
 
 
         if (!$image->move($destinationPath, $image->getClientOriginalName())) {
 
-            return $validator->errors(['message' => 'Error saving the file.', 'code' => 400]);
+            return $validator->errors(['message' => 'Opslaan mislukt.', 'code' => 400]);
         }
 
         $image_name = $image->getClientOriginalName();
@@ -305,7 +305,7 @@ class projectController extends Controller
         }
 
 
-        return array('error' => "Er ging iets fout met verwijderen van commentaar");
+        return array('error' => "Er ging iets fout met het verwijderen van commentaar");
     }
 
     public function delte_edit_page($tabele, $id)
@@ -314,24 +314,24 @@ class projectController extends Controller
         if ($tabele == 'foto') {
             $project = Project_foto::find($id);
             $project->delete();
-            $massege = " foto is succes vol verwijderd";
+            $massege = " foto is succesvol verwijderd";
         }
 
         if ($tabele == 'vragen') {
             $project = Vragen::find($id);
             $project->delete();
-            $massege = " vraag is succes vol verwijderd";
+            $massege = " vraag is succesvol verwijderd";
         }
 
         if ($tabele == 'fases') {
             $project = Fase::find($id);
             $project->delete();
-            $massege = " fase is succes vol verwijderd";
+            $massege = " fase is succesvol verwijderd";
         }
         if ($tabele == "locations") {
             $project = Locatie::find($id);
             $project->delete();
-            $massege = " fase is succes vol verwijderd";
+            $massege = " fase is succesvol verwijderd";
         }
 
         //$deleted_item = Projecten::withTrashed()->where('id', $id)->get();
@@ -344,8 +344,8 @@ class projectController extends Controller
     {
 
         $fase = new Fase;
-        $fase->fase_titel = "Voer hier titel in van de fase";
-        $fase->fase_beschrijving = "Voer hier je vraag in van de fase";
+        $fase->fase_titel = "Titel";
+        $fase->fase_beschrijving = "Beschrijving";
         $fase->fases = "open fase";
         $fase->fases_picture = "fases_picture_default.jpg";
         $fase->projecten_id = $request->project_id;
@@ -470,7 +470,7 @@ class projectController extends Controller
         $is_adm = $users->addSelect('is_adm', 'id', 'email')->get();
 
         if (!$is_adm) {
-            return array('$error' => "Fout met her server");
+            return array('$error' => "Fout met de server");
         }
         return $is_adm;
     }
@@ -505,7 +505,7 @@ class projectController extends Controller
             }
 
         }
-        return array('$error' => "Fout met her server");
+        return array('$error' => "Fout met de server");
     }
 
     
