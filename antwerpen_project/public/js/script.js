@@ -16,7 +16,7 @@ $(document).ready(function () {
                 scrollTop: $('#accordion').height()
             }, 'slow');
         }
-        $(this).text("Nieuw project");
+        $(this).text("Nieuw project toevoegen");
 
 
     });
@@ -231,7 +231,6 @@ $(document).ready(function () {
     //        $('#mapContainer').removeClass("col-md-4").addClass("col-md-6");
     //
     //    });
-
     $("#nav-right li").each(function () {
 
         $(this).on("mouseover", function () {
@@ -249,6 +248,7 @@ $(document).ready(function () {
 
         });
     });
+
 
 
     $("#project-back").on("mouseover", function () {
@@ -396,21 +396,22 @@ $(document).ready(function () {
 
 
 
-    
+
     $("#star-rating").on('rating.change', function (event, value, caption) {
         angular.element(document.getElementById('rating')).scope().select_rating(value);
 
 
         console.log("--home page-- --rating chenge-- stars given: ", value);
     })
-    
+
     $('#rating').rating({
         clearCaption: "Geen beoordeling"
         , defaultCaption: "Geen beoordeling"
         , emptyStar: "<i class='fa fa-star-o'></i>"
         , filledStar: "<i class='fa fa-star'></i>"
         , clearButton: "<i class='fa fa-minus-circle'></i>"
-        , clearButtonTitle: "verwijder",
+        , clearButtonTitle: "verwijder"
+        , showClear: false,
 
         starCaptions: {
 
@@ -425,19 +426,11 @@ $(document).ready(function () {
             5: '5 sterren'
         }
     });
-    
-    $('#rating-total').rating({
-        displayOnly:true,
-        emptyStar: "<i class='fa fa-star-o'></i>",
-        filledStar: "<i class='fa fa-star'></i>"
-        
-    });
-    
-    
-    $('#rating-total').attr("value" ,"2");
-    
-    
-    
+
+
+
+
+
 
 
     $(document).on("click", '#thumbs', function () {
@@ -449,14 +442,50 @@ $(document).ready(function () {
 
 
 
-    
-    
-    $("#project-fase").on("click", function(){
+
+
+    $("#project-fase").on("click", function () {
         console.log("hello");
         $("#project-fase").toggleClass("open-fase");
         $("#project-fase").toggleClass("closed-fase");
-        
+
     });
+
+
+
+
+    $(document).on("mouseover", "#project-fase div.arrow-box-cell", function () {
+
+
+
+        $(".arrow-box-cell .arrow-box-right").removeClass("active");
+        $(this).find("div.arrow-box-right").addClass("show");
+
+
+    });
+
+    $(document).on("mouseout", "#project-fase div.arrow-box-cell", function () {
+
+
+
+        $(".arrow-box-cell .arrow-box-right").removeClass("show");
+
+
+        $("#project-fase div.arrow-box-cell").each(function () {
+
+            if ($(this).find("div.arrow-box").hasClass("active")) {
+
+                $(this).find("div.arrow-box-right").addClass("active");
+            }
+
+
+        });
+
+
+
+
+    });
+
 
 
 

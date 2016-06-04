@@ -7,52 +7,35 @@
     <div ng-controller="projectController">
         <div id="project-fase" class="text-center closed-fase" ng-show="project">
 
-            <div class="arrow-box-cell first" ng-repeat="fase in project.fases">
+            <div class="arrow-box-cell" ng-repeat="fase in project.fases">
                 <div ng-class="fase_classes(fase.fases)" class="arrow-box">
 
                     <p>fase</p>
                     <p class="lrg"><strong>@{{$index+1}}</strong></p>
                 </div>
-            </div>
-            
-            
-        
 
 
-<!--
-            <div class="arrow-box-cell">
-                <div class="arrow-box closed">
-                    <p>fase</p>
-                    <p class="lrg"><strong>2</strong></p>
-                </div>
-            </div>
-            <div class="arrow-box-cell active">
-                <div class="arrow-box active">
-                    <p>fase</p>
-                    <p class="lrg"><strong>3</strong></p>
-                </div>
-            </div>
-            <div class="arrow-box-cell">
-                <div class="arrow-box">
-                    <p>fase</p>
-                    <p class="lrg"><strong>4</strong></p>
-                </div>
-            </div>
-            <div class="arrow-box-cell">
-                <div class="arrow-box">
-                    <p>fase</p>
-                    <p class="lrg"><strong>5</strong></p>
-                </div>
-            </div>
--->
+                <div class="arrow-box-right" ng-class="fase_classes(fase.fases)">
 
-            
-            
-            <div class="arrow-box-right"  ng-repeat="fase in project.fases">
-            <h4>@{{fase.fase_titel}}</h4>
-            
+
+                    <h4 class="title-font title_red">@{{fase.fase_titel}}</h4>
+
+
+                    <img ng-if="fase.fases_picture != 'fases_picture_default.jpg'" src="{{Request::root()}}/img/fase/@{{fase.fases_picture}}" />
+
+
+                    <p>@{{fase.fase_beschrijving}} </p>
+                </div>
+
             </div>
-            
+
+
+
+
+
+
+
+
         </div>
 
     </div>
@@ -123,9 +106,11 @@
                         <div id="project-back-text" class="inline vert-center">TERUG</div>
                     </div>
 
-                    <h1 id="project-titel-content"><strong>@{{ project.project.titel }}</strong>
+                    <h1 id="project-titel-content">
+                        <strong>@{{ project.project.titel }}</strong>
                     
                     </h1>
+                    <img ng-if="project.review_rating_sum" src="{{Request::root()}}/img/project/@{{ project.review_rating_sum | number : 0 }}-rating-total.png" />
 
                 </div>
 
@@ -227,7 +212,13 @@
 
 
                             <img ng-src="{{Request::root()}}/img/project/@{{ foto.project_picture }}">
+
                         </div>
+                        <div id="main-pic" ng-show="!project.fotos.length" class="col-md-10 col-xs-10">
+                            <img src="{{Request::root()}}/img/project/default-project-img.png">
+                        </div>
+                        
+                        
                         <div id="thumb-container">
                             <div id="thumb-scroll-up" class="col-md-2 col-xs-2 no-padding">
                                 <i class="fa fa-caret-up" aria-hidden="true"></i>
@@ -274,7 +265,8 @@
                                         </p>
                                     </div>
 
-                                    <!-- @{{ project.review_rating_sum }} -->
+
+
 
                                 </div>
 
@@ -402,7 +394,7 @@
 
 
                                         <!--hire we gat error maseg if there somting went wrong with reviewing-->
-                                        <div ng-show="project.post_error">@{{ project.post_error }}</div>
+                                        <div class="error-message" ng-show="project.post_error">@{{ project.post_error }}</div>
 
 
                                     </div>
@@ -480,13 +472,27 @@
                 @else
                 <ui-gmap-windows show="'show'">
 
-                    <div ng-non-bindable>
-                        <diV>
-                            <img src="img/project/small_@{{ image }}" width="64" height="64">
-                            <h4 class="title_red">@{{ titel}}...</h4>
-                            <h5>@{{ discription }}...</h5>
-                            <p>@{{address }}</p>
-                        </diV>
+                    <div id="maps-infowindow" ng-non-bindable>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4 class="title_red title-font">@{{ titel}}...</h4>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <diV class="col-md-6">
+
+
+                                <p><strong>@{{address }}</strong></p>
+
+                                <p>@{{ discription }}...</p>
+
+                            </diV>
+                            <div class="col-md-6">
+                                <img src="img/project/small_@{{ image }}" width="200px">
+                            </div>
+                        </div>
                     </div>
                 </ui-gmap-windows>
                 @endif
