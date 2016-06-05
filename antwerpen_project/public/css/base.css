@@ -465,14 +465,20 @@ p.lrg {
 }
 
 .arrow-box:hover {
-    background: #DA291C;
-    color: white;
+    background: white;
+    color: black;
     opacity: 1;
+}
+
+.arrow-box-cell .arrow-box:hover ~ #project-fase  .arrow-box-cell  .arrow-box.active,
+.arrow-box-cell .arrow-box.closed:hover ~ #project-fase  .arrow-box-cell  .arrow-box.active{
+    background-color: #E45D53;
+    
 }
 
 #project-fase .arrow-box:hover p,
 #project-fase .arrow-box.closed:hover p {
-    color: white;
+    color: black;
 }
 
 #project-fase .arrow-box.active p {
@@ -480,7 +486,7 @@ p.lrg {
 }
 
 #project-fase .arrow-box.active:hover p {
-    color: white;
+    color: black;
 }
 
 .active {

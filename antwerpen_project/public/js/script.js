@@ -462,6 +462,7 @@ $(document).ready(function () {
         $(this).find("div.arrow-box-right").addClass("show");
 
 
+
     });
 
     $(document).on("mouseout", "#project-fase div.arrow-box-cell", function () {
@@ -486,6 +487,7 @@ $(document).ready(function () {
 
     });
 
+    
 
 
 
