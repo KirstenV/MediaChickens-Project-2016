@@ -93,12 +93,12 @@ class unityController extends Controller
         $errors = array('success' => "false");
 
         $userData = array(
-            'email' => $request["email"],
-            'password' => $request["password"],
+            'e-mail' => $request["e-mail"],
+            'wachtwoord' => $request["wachtwoord"],
         );
         $rules = array(
-            'email' => 'required|email',
-            'password' => 'required|min:6',
+            'e-mail' => 'required|email',
+            'wachtwoord' => 'required|min:6',
         );
 
         $validator = Validator::make($userData, $rules);
@@ -107,9 +107,9 @@ class unityController extends Controller
                 'success' => false, 'errors' => $validator->getMessageBag()->toArray(),
             ));
         } else {
-            if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            if (Auth::attempt(['email' => $request["e-mail"], 'password' => $request->wachtwoord])) {
                 // Authentication passed...
-                return response()->json(['success' => true, 'User' => User::where('email', $request->email)->first()]);
+                return response()->json(['success' => true, 'User' => User::where('email', $request["e-mail"])->first()]);
             }
 
             return $errors = array('success' => "false", 'User' => "Gebruiker bestaat niet");
