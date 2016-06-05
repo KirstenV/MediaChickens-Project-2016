@@ -813,7 +813,7 @@ console.log("--home page-- --aswers feadback-- server answer:0",response.data);
             $scope.files = files;
             $scope.errFiles_fase = errFiles;
             //console.log("debug error files upload van fotos: ", $scope.errFiles_fase);
-            $scope.errorMsg = " ";
+            $scope.errorMsg = "";
             angular.forEach(files, function (file) {
 
                 if ($scope.errFiles_fase.length == 0) {
@@ -853,6 +853,7 @@ console.log("--home page-- --aswers feadback-- server answer:0",response.data);
                         //console.log("respons functie");
                        // console.log(response);
                         if (response.status > 0) {
+                            console.log("-rror-- eroor variabel is :", $scope.errorMsg,response.status );
                             $scope.errorMsg = "Oeps, er ging iets verkeerd";
                             //$scope.errorMsg = response.status + ': ' + response.data;
                         }
@@ -984,7 +985,7 @@ console.log("--home page-- --aswers feadback-- server answer:0",response.data);
             //$scope.files = files;
             $scope.errFiles = errFiles;
 
-            $scope.errorMsg = " ";
+            $scope.errorMsg = "";
             if ($scope.errFiles.length == 0) {
                 angular.forEach(files, function (file) {
                     file.upload = Upload.upload({
