@@ -7,8 +7,20 @@
     <div ng-controller="projectController">
         <div id="project-fase" class="text-center closed-fase" ng-show="project">
 
+            <div id="arrow-box-top">
+                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+
+            </div>
+
+
             <div class="arrow-box-cell" ng-repeat="fase in project.fases">
-                <div ng-class="fase_classes(fase.fases)" class="arrow-box">
+                <div ng-class="fase_classes(fase.fases)" class="arrow-box first" ng-if="$first">
+
+                    <p>fase</p>
+                    <p class="lrg"><strong>@{{$index+1}}</strong></p>
+                </div>
+
+                <div ng-class="fase_classes(fase.fases)" class="arrow-box" ng-if="!$first">
 
                     <p>fase</p>
                     <p class="lrg"><strong>@{{$index+1}}</strong></p>
@@ -21,16 +33,13 @@
                     <h4 class="title-font title_red">@{{fase.fase_titel}}</h4>
 
 
-                    <img ng-if="fase.fases_picture != 'fases_picture_default.jpg'" src="{{Request::root()}}/img/fase/@{{fase.fases_picture}}" />
+                    <img ng-if="fase.fases_picture != 'fases_picture_default.jpg'" ng-src="{{Request::root()}}/img/fase/@{{fase.fases_picture}}" />
 
 
                     <p>@{{fase.fase_beschrijving}} </p>
                 </div>
 
             </div>
-
-
-
 
 
 
@@ -110,7 +119,7 @@
                         <strong>@{{ project.project.titel }}</strong>
                     
                     </h1>
-                    <img ng-if="project.review_rating_sum" src="{{Request::root()}}/img/project/@{{ project.review_rating_sum | number : 0 }}-rating-total.png" />
+                    <img ng-if="project.review_rating_sum" ng-src="{{Request::root()}}/img/project/@{{ project.review_rating_sum | number : 0 }}-rating-total.png" />
 
                 </div>
 
@@ -217,8 +226,8 @@
                         <div id="main-pic" ng-show="!project.fotos.length" class="col-md-10 col-xs-10">
                             <img src="{{Request::root()}}/img/project/default-project-img.png">
                         </div>
-                        
-                        
+
+
                         <div id="thumb-container">
                             <div id="thumb-scroll-up" class="col-md-2 col-xs-2 no-padding">
                                 <i class="fa fa-caret-up" aria-hidden="true"></i>
@@ -367,7 +376,7 @@
 
 
                     <div id="project-info-container" class=" col-md-12 col-xs-12">
-                        <div id="project-beschrijving-container" class="col-md-12 col-xs-12 no-padding">
+                        <div id="project-beschrijving-container" class="col-md-12 col-xs-12 no-padding marg-bottom">
                             <div id="project-beschrijving" class=" col-md-12 col-xs-12">
 
                                 <h4 class="title_red title-font">Commentaar</h4>
@@ -412,7 +421,7 @@
                                         <a href="" ng-click="delete_review(reaction.reaction.id,$index)"><i
                                                             class="fa fa-times" aria-hidden="true"></i> verwijder</a> @endif @endif
                                         <div class="pull-right">
-                                            <img src="{{Request::root()}}/img/project/@{{ reaction.reaction.rating }}-rating.png" />
+                                            <img ng-src="{{Request::root()}}/img/project/@{{ reaction.reaction.rating }}-rating.png" />
                                         </div>
                                         <strong ng-show="reaction.user.name"> @{{ reaction.user.name }}</strong>
                                         <strong ng-hide="reaction.user.name"> Anoniem</strong>
@@ -473,9 +482,9 @@
                 <ui-gmap-windows show="'show'">
 
                     <div id="maps-infowindow" ng-non-bindable>
-                        <div class="row">
+                        <div class="row text-center" id="maps-infowindow-title">
                             <div class="col-md-12">
-                                <h4 class="title_red title-font">@{{ titel}}...</h4>
+                                <h4 class="title-font">@{{ titel}}...</h4>
                             </div>
 
 

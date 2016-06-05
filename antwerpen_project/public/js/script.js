@@ -405,26 +405,10 @@ $(document).ready(function () {
     })
 
     $('#rating').rating({
-        clearCaption: "Geen beoordeling"
-        , defaultCaption: "Geen beoordeling"
-        , emptyStar: "<i class='fa fa-star-o'></i>"
-        , filledStar: "<i class='fa fa-star'></i>"
-        , clearButton: "<i class='fa fa-minus-circle'></i>"
-        , clearButtonTitle: "verwijder"
-        , showClear: false,
-
-        starCaptions: {
-
-            1: '1 ster',
-
-            2: '2 sterren',
-
-            3: '3 sterren',
-
-            4: '4 sterren',
-
-            5: '5 sterren'
-        }
+        emptyStar: "<i class='fa fa-star-o'></i>",
+        filledStar: "<i class='fa fa-star'></i>",
+        showClear: false,
+        showCaption: false
     });
 
 
@@ -448,6 +432,9 @@ $(document).ready(function () {
         console.log("hello");
         $("#project-fase").toggleClass("open-fase");
         $("#project-fase").toggleClass("closed-fase");
+        
+        $("#arrow-box-top i").toggleClass("fa-chevron-left");
+        $("#arrow-box-top i").toggleClass("fa-chevron-right");
 
     });
 
@@ -476,6 +463,10 @@ $(document).ready(function () {
 
             if ($(this).find("div.arrow-box").hasClass("active")) {
 
+                $(this).find("div.arrow-box-right").addClass("active");
+                
+            }else if($(this).find("div.arrow-box").hasClass("first")){
+                
                 $(this).find("div.arrow-box-right").addClass("active");
             }
 
