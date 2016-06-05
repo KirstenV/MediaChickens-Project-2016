@@ -405,10 +405,10 @@ $(document).ready(function () {
     })
 
     $('#rating').rating({
-        emptyStar: "<i class='fa fa-star-o'></i>",
-        filledStar: "<i class='fa fa-star'></i>",
-        showClear: false,
-        showCaption: false
+        emptyStar: "<i class='fa fa-star-o'></i>"
+        , filledStar: "<i class='fa fa-star'></i>"
+        , showClear: false
+        , showCaption: false
     });
 
 
@@ -432,9 +432,19 @@ $(document).ready(function () {
         console.log("hello");
         $("#project-fase").toggleClass("open-fase");
         $("#project-fase").toggleClass("closed-fase");
-        
+
         $("#arrow-box-top i").toggleClass("fa-chevron-left");
         $("#arrow-box-top i").toggleClass("fa-chevron-right");
+
+
+        $("#project-fase div.arrow-box-cell").each(function () {
+
+            if (!$(this).find("div.arrow-box").hasClass("active")) {
+
+                $(this).show();
+                $("#arrow-box-bottom").hide();
+            }
+        });
 
     });
 
@@ -464,9 +474,9 @@ $(document).ready(function () {
             if ($(this).find("div.arrow-box").hasClass("active")) {
 
                 $(this).find("div.arrow-box-right").addClass("active");
-                
-            }else if($(this).find("div.arrow-box").hasClass("first")){
-                
+
+            } else if ($(this).find("div.arrow-box").hasClass("first")) {
+
                 $(this).find("div.arrow-box-right").addClass("active");
             }
 
@@ -478,7 +488,65 @@ $(document).ready(function () {
 
     });
 
-    
+
+    $("#projectContainer").scroll(function (e) {
+
+        var scrolltop = $(this).scrollTop();
+        console.log(scrolltop);
+        if (scrolltop > 150) {
+
+            $("#project-titel").removeClass("col-md-8");
+            $("#project-titel").addClass("animate-scroll");
+            $("#project-titel img").hide();
+            e.stopPropagation();
+            $("#project-titel-content").hide();
+            $("#project-back-text").hide();
+
+            $("#project-fase div.arrow-box-cell").each(function () {
+
+                if (!$(this).find("div.arrow-box").hasClass("active")) {
+
+                    $(this).hide();
+                    $("#arrow-box-bottom").show();
+
+
+
+                }
+            });
+            
+
+        } else {
+
+            $("#project-titel").addClass("col-md-8");
+            $("#project-titel").removeClass("animate-scroll");
+            $("#project-titel img").show();
+            
+
+            
+            $("#project-titel-content").show();
+            
+            $("#project-back-text").show();
+
+            $("#project-fase div.arrow-box-cell").each(function () {
+
+                if (!$(this).find("div.arrow-box").hasClass("active")) {
+
+                    $(this).show();
+                    $("#arrow-box-bottom").hide();
+                }
+            });
+
+
+        }
+
+
+
+    });
+
+
+
+
+
 
 
 

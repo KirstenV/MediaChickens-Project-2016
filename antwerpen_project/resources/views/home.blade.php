@@ -7,7 +7,8 @@
     <div ng-controller="projectController">
         <div id="project-fase" class="text-center closed-fase" ng-show="project">
 
-            <div id="arrow-box-top">
+            <div id="arrow-box-top" ng-repeat="fase in project.fases" ng-if="$first">
+                
                 <i class="fa fa-chevron-left" aria-hidden="true"></i>
 
             </div>
@@ -41,7 +42,10 @@
 
             </div>
 
+            <div id="arrow-box-bottom" hidden="true">
+                <i class="fa fa-chevron-down" aria-hidden="true"></i>
 
+            </div>
 
 
 
@@ -51,7 +55,18 @@
 
 
 
+    <div id="project-titel" class="col-md-12 col-xs-12" ng-show="project">
+        <div id="project-back" class="vert-center div-left" ng-click="show_projects()"><i class="fa fa-chevron-right inline vert-center" aria-hidden="true"></i>
+            <div id="project-back-text" class="inline vert-center">TERUG</div>
+        </div>
 
+        <h1 id="project-titel-content">
+                        <strong>@{{ project.project.titel }}</strong>
+                    
+                    </h1>
+        <img ng-if="project.review_rating_sum" ng-src="{{Request::root()}}/img/project/@{{ project.review_rating_sum | number : 0 }}-rating-total.png" />
+
+    </div>
 
 
 
@@ -110,18 +125,7 @@
                                 </div>
                             </a>
                         -->
-                <div id="project-titel" class="col-md-8 col-xs-12" ng-show="project">
-                    <div id="project-back" class="vert-center div-left" ng-click="show_projects()"><i class="fa fa-chevron-right inline vert-center" aria-hidden="true"></i>
-                        <div id="project-back-text" class="inline vert-center">TERUG</div>
-                    </div>
 
-                    <h1 id="project-titel-content">
-                        <strong>@{{ project.project.titel }}</strong>
-                    
-                    </h1>
-                    <img ng-if="project.review_rating_sum" ng-src="{{Request::root()}}/img/project/@{{ project.review_rating_sum | number : 0 }}-rating-total.png" />
-
-                </div>
 
 
                 <div id="collapse1" class="panel-collapse collapse in" ng-hide="project">
@@ -386,17 +390,17 @@
                                               echo " null ";
                                           }?>)" data-toggle="validator">
 
-                                    <div id="reactie-container" class="col-md-11 no-padding pull-right">
+                                    <div id="reactie-container" class="col-md-11 col-xs-11 no-padding pull-right">
 
-                                        <div class="col-md-12 inline no-padding">
+                                        <div class="col-md-12 col-xs-12 inline no-padding">
 
                                             <textarea class="w100 form-control" rows="5" name="naam" ng-model="reaction_post.massage" required></textarea>
                                         </div>
-                                        <div id="star-rating" class="col-md-9 no-padding">
+                                        <div id="star-rating" class="col-md-9 col-xs-9 no-padding">
                                             <input id="rating" class="rating" data-size="xs" data-min="0" data-max="5" data-step="1">
                                         </div>
 
-                                        <div id="reactie-submit" class="pull-right col-md-3">
+                                        <div id="reactie-submit" class="pull-right col-md-3 col-xs-3">
                                             <button type="submit" class="form-control" name="submit">Verzend
                                             </button>
                                         </div>
@@ -410,12 +414,12 @@
 
                                 </form>
 
-                                <div id="reactie-container" class="col-md-12 no-padding" ng-repeat="reaction in project.reactions">
-                                    <div id="user-info" class="col-md-1">
+                                <div id="reactie-container" class="col-md-12 col-xs-12 no-padding" ng-repeat="reaction in project.reactions">
+                                    <div id="user-info" class="col-md-1 col-xs-1">
                                         <img id="user-pic" src="{{Request::root()}}/img/userpic.gif" alt="user-pic" />
                                     </div>
 
-                                    <div id="user-reactie" class="col-md-11">
+                                    <div id="user-reactie" class="col-md-11 col-xs-11">
                                         <div class="arrow"> </div>
                                         @if(Auth::check()) @if(Auth::user()->is_adm)
                                         <a href="" ng-click="delete_review(reaction.reaction.id,$index)"><i
@@ -464,6 +468,16 @@
 
         </div>
         <!-- END DIV ACCORDION -->
+
+
+
+
+
+        <div id="footer" ng-show="project">
+            <p>© 2016 Mediachickens™. Alle rechten voorbehouden</p>
+            <p><a href="">Download de app!</a></p>
+
+        </div>
 
     </div>
     @stop @section("map")
